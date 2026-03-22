@@ -46,6 +46,22 @@ cp -r stop-slop-zh/SKILL.md stop-slop-zh/references/ ~/.claude/skills/stop-slop-
 
 详见 [install/claude-code.md](install/claude-code.md)。
 
+### OpenClaw
+
+```bash
+# 将 skill 复制到 workspace/skills/
+cp -r stop-slop-zh/SKILL.md stop-slop-zh/references/ workspace/skills/stop-slop/
+```
+
+然后在 `workspace/SOUL.md` 中添加引用：
+
+```markdown
+## 去 AI 味
+所有对外文本（消息、文档、摘要、公开写作）遵循 `skills/stop-slop/SKILL.md` 的反模式规则。
+```
+
+同步到运行时后即生效（`git push` → VM 上 `git pull`）。
+
 ### Cursor / Windsurf
 
 ```bash
