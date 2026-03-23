@@ -62,6 +62,19 @@ cp -r stop-slop-zh/SKILL.md stop-slop-zh/references/ workspace/skills/stop-slop/
 
 同步到运行时后即生效（`git push` → VM 上 `git pull`）。
 
+### Codex CLI
+
+```bash
+# 方式 1：放入项目 + AGENTS.md 引用
+mkdir -p stop-slop-zh
+cp -r stop-slop-zh/SKILL.md stop-slop-zh/references/ stop-slop-zh/
+
+# 方式 2：直接传入
+codex --system-prompt "$(cat stop-slop-zh/SKILL.md)" "改写以下文本：..."
+```
+
+详见 [install/codex.md](install/codex.md)。
+
 ### Cursor / Windsurf
 
 ```bash
@@ -145,6 +158,7 @@ stop-slop-zh/
 │   └── benchmark.md        # 评测集：该改的 + 不该误杀的
 ├── install/                # 各平台安装说明
 │   ├── claude-code.md
+│   ├── codex.md
 │   ├── cursor.md
 │   └── chatgpt.md
 ├── CONTRIBUTING.md         # 贡献指南

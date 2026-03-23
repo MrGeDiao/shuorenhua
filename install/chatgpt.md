@@ -23,12 +23,6 @@ messages = [
 ]
 ```
 
-## Codex CLI
-
-```bash
-codex --system-prompt "$(cat SKILL.md)" "改写以下文本：..."
-```
-
 ## 注意
 
 受 token 限制，通用 LLM 可能无法一次加载全部参考文件。建议只加载 `SKILL.md`（核心规则自包含），需要深度改写时再手动引用具体的 `references/` 文件。

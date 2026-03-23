@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.2.0] - 2026-03-23
+
+### Added
+- Codex CLI installation guide (`install/codex.md`) with AGENTS.md, system prompt, and global instructions methods
+- Codex quick start section in README
+
+### Changed
+- Moved Codex CLI content from `install/chatgpt.md` to dedicated `install/codex.md`
+
 ## [1.1.0] - 2026-03-23
 
 ### Added
