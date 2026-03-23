@@ -75,11 +75,66 @@ AI 模仿爆款文风也很容易穿帮：
 
 ## 安装
 
-### 下载
-
 ```bash
 git clone https://github.com/MrGeDiao/shuorenhua.git
 ```
+
+### Codex CLI
+
+最快的方式——一行命令直接用：
+
+```bash
+codex --system-prompt "$(cat shuorenhua/SKILL.md)" "改写以下文本：..."
+```
+
+想让规则跟着项目走，在项目根目录建 `AGENTS.md`：
+
+```markdown
+## 写作风格
+对外文本遵循 `shuorenhua/SKILL.md` 的规则。
+```
+
+然后把文件放进去：
+
+```bash
+mkdir -p shuorenhua
+cp SKILL.md shuorenhua/
+cp -r references/ shuorenhua/
+```
+
+Codex 会自动读取 `AGENTS.md`，后续每次对话都生效。
+
+详见 [install/codex.md](install/codex.md)。
+
+### OpenClaw
+
+把 skill 复制到 workspace：
+
+```bash
+mkdir -p workspace/skills/shuorenhua
+cp SKILL.md workspace/skills/shuorenhua/
+cp -r references/ workspace/skills/shuorenhua/
+```
+
+在 `workspace/SOUL.md` 里加一段：
+
+```markdown
+## 说人话
+所有对外文本（消息、文档、摘要、公开写作）遵循 `skills/shuorenhua/SKILL.md` 的规则。
+内部技术输出（代码、日志、配置）不受约束。
+```
+
+推到 VM 上就生效了：
+
+```bash
+git add workspace/skills/shuorenhua workspace/SOUL.md
+git commit -m "feat: add shuorenhua skill"
+git push  # VM 上 git pull 后即生效
+```
+
+OpenClaw 的 skill 加载是自动的——只要 `SOUL.md` 里引用了路径，运行时会把整个 skill 目录读进上下文。如果 token 预算紧张，只放 `SKILL.md` 就够（核心规则自包含），需要深度改写再引用 `references/` 下的词表。
+
+详见 [install/openclaw.md](install/openclaw.md)。
 
 ### Claude Code
 
@@ -94,14 +149,6 @@ cp -r shuorenhua/SKILL.md shuorenhua/references/ ~/.claude/skills/shuorenhua/
 ```
 
 详见 [install/claude-code.md](install/claude-code.md)。
-
-### Codex CLI
-
-```bash
-codex --system-prompt "$(cat shuorenhua/SKILL.md)" "改写以下文本：..."
-```
-
-详见 [install/codex.md](install/codex.md)。
 
 ### Cursor / Windsurf
 
@@ -160,7 +207,7 @@ shuorenhua/
 │   ├── benchmark.md        # 评测集（28 条）
 │   ├── run-eval.md         # Codex 评测指令
 │   └── results-v1.3.0.md   # v1.3 评测结果
-├── install/                # 各平台安装说明
+├── install/                # 各平台安装说明（Codex/OpenClaw/Claude Code/Cursor/ChatGPT）
 ├── CONTRIBUTING.md
 ├── LICENSE                 # MIT
 └── CHANGELOG.md
