@@ -1,6 +1,6 @@
 ---
 name: stop-slop-zh
-version: 1.1.0
+version: 1.2.0
 description: |
   Detect and remove AI-generated writing patterns from Chinese and English text.
   Scene-based routing with 3 intensity levels to prevent over-correction.
