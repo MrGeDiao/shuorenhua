@@ -1,52 +1,50 @@
 # 说人话
 
-让 AI 写出来的东西像人写的。中英文都管。
-
-你肯定见过这种文字:
-
-> 在当今快速发展的人工智能时代，如何打造一个真正赋能开发者的工具，已经成为业界不容忽视的关键议题。
-
-一眼 AI。本项目就是干掉这种味道的。
-
-## ChatGPT 5.4 又发明了一套新黑话
-
-最近社区发现 ChatGPT 5.4 / Codex 开始说一种奇怪的"工程师中文"，像在写 postmortem，但其实只是在聊天：
-
 > 我已经把差异**收窄**了，**根因**基本**坐实**，和我刚**抓到的现象**也**对上了**。接下来做一个**更硬的排除法**，**稳稳兜住**，**落盘**之后就能**收口**了。
 
-说人话版本：
+这是 ChatGPT 5.4 跟你说的"人话"。没有一个正常人会这么聊天。
 
-> 原因找到了：是缓存过期导致的。我把可能性排查了一遍，现在就剩这一个。
+这个项目干的事：让 AI 输出的中文读起来像人写的。英文也管。
 
-这些词:**砍一刀、兜住、落盘、收口、收窄、打掉问题、根因、偏硬、拆开看、接住、对上了、坐实等等**没有一个是正常人会在聊天里用的。本项目 v1.3 已经全部收录。
+## GPT-5.x 的新一波口癖
 
-## 还有小红书 AI 腔
+旧的 AI 味你认识——"赋能""闭环""在当今快速发展的时代"。这些已经被骂了一年，新模型学乖了，换了一套。
 
-AI 模仿爆款文风也很容易穿帮：
+GPT-5.4 和 Codex 开始说一种"SRE 中文"，把 debug 术语塞进日常对话。"兜底""压实""收敛""收束""锁住""口径""能吃""硬写"——像在写 incident report，但其实只是在帮你改个按钮颜色。
 
-> 姐妹们！今天给大家**拆解**一个**保姆级干货**！真的**绝绝子**！**谁懂啊**，这个工具**狠狠**提升了我的效率！**强烈建议收藏**！
+还学会了暴力表演执行力：**补一刀、狠狠干、拍脑门、揪出来**。你让它改个 CSS，它说"我先狠狠干一把"。
 
-真人用这些词是随机的，AI 是批量的。一眼就能看出来。
+最让人血压升高的是这类：
 
-## 这个项目做了什么
+> **要不要我**帮你把剩下的也改了？**只要你回复我**，**我立马开始**。**你就确认一点**，**你一回复我就**上手。
 
-12 条规则，200+ 中文禁用短语，130+ 英文禁用短语，18 种结构反模式，7 维评分。按场景自动调节强度，不会矫枉过正。
+没人问你。做就做，别推销。这批新口癖已经全部收录。
 
-英文的去 AI 味工具已经有了（[stop-slop](https://github.com/hardikpandya/stop-slop)、[humanizer](https://github.com/blader/humanizer)），但中文一直是空白。这个项目补上了：
+## 小红书 AI 腔也没放过
+
+> 姐妹们！今天给大家**拆解**一个**保姆级干货**！**谁懂啊**，这个工具**狠狠**提升了我的效率！**建议收藏**！
+
+真人用这些词是随机蹦一两个，AI 是六个连发。一眼机器。
+
+## 规模
+
+12 条规则。210+ 中文禁用短语。96 英文禁用短语。18 种结构反模式。7 维评分。按场景自动调强度，聊天时只动套话，写博客时全规则扫描，不会把正常的技术报告改得面目全非。
+
+英文去 AI 味已经有 [stop-slop](https://github.com/hardikpandya/stop-slop) 和 [humanizer](https://github.com/blader/humanizer)，中文一直没有。这个项目补上了。
 
 | 能力 | stop-slop | humanizer | **说人话** |
 |------|-----------|-----------|-----------|
-| 中文禁用短语 | - | - | ✅ 200+ 条 |
-| 互联网黑话（赋能/闭环/抓手） | - | - | ✅ |
-| 工程师腔（兜住/落盘/根因） | - | - | ✅ |
-| 小红书 AI 腔（保姆级/绝绝子） | - | - | ✅ |
+| 中文禁用短语 | - | - | 210+ 条 |
+| 互联网黑话 | - | - | ✅ |
+| 工程师腔 / SRE 腔 | - | - | ✅ |
+| 小红书 AI 腔 | - | - | ✅ |
 | 翻译腔 | - | - | ✅ |
 | 语域混搭检测 | - | - | ✅ |
 | 节奏量化 | - | - | ✅ |
-| 场景分档 | - | - | ✅ 4 × 3 |
-| 严重度分级 + 误杀防护 | - | - | ✅ |
-| 英文禁用短语 | ✅ | ✅ | ✅ |
-| 结构反模式 | ✅ | 部分 | ✅ 18 种 |
+| 场景分档 | - | - | 4 × 3 |
+| 误杀防护 | - | - | ✅ |
+| 英文禁用短语 | ✅ | ✅ | 96 条 |
+| 结构反模式 | ✅ | 部分 | 18 种 |
 
 ## 效果
 
@@ -60,16 +58,16 @@ AI 模仿爆款文风也很容易穿帮：
 
 ## 评测
 
-用 GPT-5.4 Codex 跑了 28 条测试用例（15 条该改的 + 13 条不该误杀的）：
+用 GPT-5.4 Codex 跑了 29 条测试用例（16 条该改 + 13 条不该误杀）：
 
 | 指标 | 结果 | 目标 |
 |------|------|------|
-| 该改的改了 | 14/15 (93%) | > 90% ✅ |
+| 该改的改了 | 14/15 (93%)，SF-16 待测 | > 90% ✅ |
 | 不该改的没动 | 13/13 (100%) | 误杀 < 10% ✅ |
 
-唯一的 ⚠️ 是"研究表明……"那条——规则正确标记了需要补来源，但原文本身就没有真实来源可补，不算规则失效。
+唯一的 ⚠️ 是"研究表明……"那条——规则正确标记了需要补来源，但原文本身没有真实来源可补，不算规则失效。
 
-新增的 5 条测试（工程师腔、小红书腔、正能量收尾、语域混搭、句长均匀）全部一次通过。新增的 3 条误杀防护测试（真人 debug 对话、真人博主网络用语、纯技术报告）零误杀。
+新增的 5 条测试（工程师腔、小红书腔、正能量收尾、语域混搭、句长均匀）全部通过。3 条误杀防护测试（真人 debug 对话、真人博主网络用语、纯技术报告）零误杀。
 
 详见 [evals/results-v1.3.0.md](evals/results-v1.3.0.md)。
 
@@ -79,94 +77,17 @@ AI 模仿爆款文风也很容易穿帮：
 git clone https://github.com/MrGeDiao/shuorenhua.git
 ```
 
-### Codex CLI
-
-最快的方式——一行命令直接用：
+最快的用法——Codex 一行命令：
 
 ```bash
 codex --system-prompt "$(cat shuorenhua/SKILL.md)" "改写以下文本：..."
 ```
 
-想让规则跟着项目走，在项目根目录建 `AGENTS.md`：
-
-```markdown
-## 写作风格
-对外文本遵循 `shuorenhua/SKILL.md` 的规则。
-```
-
-然后把文件放进去：
-
-```bash
-mkdir -p shuorenhua
-cp SKILL.md shuorenhua/
-cp -r references/ shuorenhua/
-```
-
-Codex 会自动读取 `AGENTS.md`，后续每次对话都生效。
-
-详见 [install/codex.md](install/codex.md)。
-
-### OpenClaw
-
-把 skill 复制到 workspace：
-
-```bash
-mkdir -p workspace/skills/shuorenhua
-cp SKILL.md workspace/skills/shuorenhua/
-cp -r references/ workspace/skills/shuorenhua/
-```
-
-在 `workspace/SOUL.md` 里加一段：
-
-```markdown
-## 说人话
-所有对外文本（消息、文档、摘要、公开写作）遵循 `skills/shuorenhua/SKILL.md` 的规则。
-内部技术输出（代码、日志、配置）不受约束。
-```
-
-推到 VM 上就生效了：
-
-```bash
-git add workspace/skills/shuorenhua workspace/SOUL.md
-git commit -m "feat: add shuorenhua skill"
-git push  # VM 上 git pull 后即生效
-```
-
-OpenClaw 的 skill 加载是自动的——只要 `SOUL.md` 里引用了路径，运行时会把整个 skill 目录读进上下文。如果 token 预算紧张，只放 `SKILL.md` 也能覆盖高频基础套路；但 `references/` 会显著提高中文词表覆盖率，建议一并放入。
-
-详见 [install/openclaw.md](install/openclaw.md)。
-
-### Claude Code
-
-```bash
-# 项目级
-mkdir -p .claude/skills/shuorenhua
-cp -r shuorenhua/SKILL.md shuorenhua/references/ .claude/skills/shuorenhua/
-
-# 全局
-mkdir -p ~/.claude/skills/shuorenhua
-cp -r shuorenhua/SKILL.md shuorenhua/references/ ~/.claude/skills/shuorenhua/
-```
-
-详见 [install/claude-code.md](install/claude-code.md)。
-
-### Cursor / Windsurf
-
-```bash
-cp shuorenhua/SKILL.md .cursor/rules/shuorenhua.md
-```
-
-详见 [install/cursor.md](install/cursor.md)。
-
-### ChatGPT / 其他
-
-把 `SKILL.md` 的内容粘贴到 System Prompt 或 Custom Instructions 里。
-
-详见 [install/chatgpt.md](install/chatgpt.md)。
+其他平台的安装说明：[Codex](install/codex.md) · [OpenClaw](install/openclaw.md) · [Claude Code](install/claude-code.md) · [Cursor / Windsurf](install/cursor.md) · [ChatGPT / 其他](install/chatgpt.md)
 
 ## 设计
 
-**4 种场景，3 种强度：**
+四种场景，三种强度：
 
 | 场景 | 强度 | 干什么 |
 |------|------|--------|
@@ -175,22 +96,9 @@ cp shuorenhua/SKILL.md .cursor/rules/shuorenhua.md
 | 文档 | 中 | 技术表达优先 |
 | 博客/社交 | 重 | 全规则 + 两遍制 |
 
-**12 条规则：**
+12 条规则：砍开场废话、打破公式结构、用具体主语、要具体不要渲染、适时对读者说话、调节节奏、信任读者、砍金句感、砍谄媚、用简单动词、语域别混搭、句长别均匀。
 
-1. 砍开场废话
-2. 打破公式结构
-3. 用具体主语
-4. 要具体，不要渲染
-5. 适时对读者说话
-6. 调节节奏
-7. 信任读者
-8. 砍金句感
-9. 砍谄媚
-10. 用简单动词
-11. 语域别混搭
-12. 句长别均匀
-
-**3 级严重度：** Tier 1 默认替换，Tier 2 聚集时改，Tier 3 密度高时改。附误杀防护——技术术语、引用原文、行业标准用语不改。
+三级严重度——Tier 1 默认替换，Tier 2 聚集时改，Tier 3 密度高时改。附误杀防护：技术术语、引用原文、行业标准用语不动。
 
 ## 文件结构
 
@@ -198,16 +106,16 @@ cp shuorenhua/SKILL.md .cursor/rules/shuorenhua.md
 shuorenhua/
 ├── SKILL.md               # 规则 + 工作流 + 评分
 ├── references/
-│   ├── phrases-zh.md       # 中文禁用短语（200+ 条）
-│   ├── phrases-en.md       # 英文禁用短语（130+ 条）
+│   ├── phrases-zh.md       # 中文禁用短语（210+ 条）
+│   ├── phrases-en.md       # 英文禁用短语（96 条）
 │   ├── structures.md       # 18 种结构反模式
 │   ├── examples.md         # 改写示例
 │   └── severity.md         # 严重度 + 误杀防护
 ├── evals/
-│   ├── benchmark.md        # 评测集（28 条）
+│   ├── benchmark.md        # 评测集（29 条）
 │   ├── run-eval.md         # Codex 评测指令
 │   └── results-v1.3.0.md   # v1.3 评测结果
-├── install/                # 各平台安装说明（Codex/OpenClaw/Claude Code/Cursor/ChatGPT）
+├── install/                # 各平台安装说明
 ├── CONTRIBUTING.md
 ├── LICENSE                 # MIT
 └── CHANGELOG.md
@@ -218,8 +126,6 @@ shuorenhua/
 想加新词、新结构、新评测用例？看 [CONTRIBUTING.md](CONTRIBUTING.md)。
 
 ## 致谢
-
-站在这些项目的肩膀上：
 
 - [humanizer](https://github.com/blader/humanizer) — AI 模式分类
 - [stop-slop](https://github.com/hardikpandya/stop-slop) — 规则 + 评分框架

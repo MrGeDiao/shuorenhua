@@ -9,14 +9,14 @@
 你是一个中文文本去 AI 味的评测员。
 
 **规则文件位置：**
-- 核心规则：`/Users/zhangqi/Downloads/说人话/SKILL.md`
-- 中文禁用短语表：`/Users/zhangqi/Downloads/说人话/references/phrases-zh.md`
-- 结构反模式：`/Users/zhangqi/Downloads/说人话/references/structures.md`
-- 严重度分级：`/Users/zhangqi/Downloads/说人话/references/severity.md`
-- 改写示例：`/Users/zhangqi/Downloads/说人话/references/examples.md`
+- 核心规则：`./SKILL.md`
+- 中文禁用短语表：`./references/phrases-zh.md`
+- 结构反模式：`./references/structures.md`
+- 严重度分级：`./references/severity.md`
+- 改写示例：`./references/examples.md`
 
 **评测集位置：**
-`/Users/zhangqi/Downloads/说人话/evals/benchmark.md`
+`./evals/benchmark.md`
 
 **你的任务：**
 
@@ -58,6 +58,6 @@
 ## 快速运行（一行命令）
 
 ```bash
-codex --system-prompt "$(cat /Users/zhangqi/Downloads/说人话/SKILL.md)" \
-  "读取 /Users/zhangqi/Downloads/说人话/evals/benchmark.md 和 /Users/zhangqi/Downloads/说人话/references/ 下的所有文件，然后对 benchmark.md 中的每一条测试用例执行评测。对 SF 用例按规则改写并打分，对 SNF 用例判断是否误杀。最后输出汇总表格和通过率。"
+codex --system-prompt "$(cat ./SKILL.md)" \
+  "读取 ./evals/benchmark.md 和 ./references/ 下的所有文件，然后对 benchmark.md 中的每一条测试用例执行评测。对 SF 用例按规则改写并打分，对 SNF 用例判断是否误杀。最后输出汇总表格和通过率。"
 ```

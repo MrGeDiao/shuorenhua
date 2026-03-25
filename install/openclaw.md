@@ -34,7 +34,7 @@ OpenClaw 启动时会读 `SOUL.md`，发现里面引用了 `skills/shuorenhua/SK
 
 ## token 预算紧张时
 
-只放 `SKILL.md` 就够，核心规则是自包含的。`references/` 下的词表（phrases-zh.md 约 200 条、phrases-en.md 约 130 条）会占额外 token，但能让深度改写更准。按需取舍：
+只放 `SKILL.md` 就够，核心规则是自包含的。`references/` 下的词表（phrases-zh.md 210+ 条、phrases-en.md 96 条）会占额外 token，但能让深度改写更准。按需取舍：
 
 - **只要基本去味**：只放 `SKILL.md`
 - **要精细改写**：放 `SKILL.md` + `references/`

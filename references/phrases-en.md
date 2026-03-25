@@ -116,7 +116,7 @@ Legitimate individually, clustering signals AI.
 
 ## Tier 3: Flag at high density only
 
-Common words, only problematic when saturating the text (>3% of total).
+Common words, only problematic at high density. Thresholds: 3+ in short text (<200 words), 5+ in medium text (200–1000 words), >0.5% in long text (>1000 words). See `severity.md` for details.
 
 - significant, innovative, effective, dynamic
 - scalable, compelling, unprecedented, exceptional

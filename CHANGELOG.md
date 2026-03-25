@@ -7,7 +7,8 @@
 - README 全文重写，去掉 AI 味，加入 ChatGPT 5.4 工程师腔黑话作为传播亮点
 
 ### Tested
-- GPT-5.4 Codex 评测：SF 通过率 14/15 (93%)，SNF 误杀率 0/13 (0%)
+- GPT-5.4 Codex 评测：SF 通过率 14/15 (93%)，SF-16 待测；SNF 误杀率 0/13 (0%)
+- 评测集扩展至 29 条（16 SF + 13 SNF）
 - 评测结果归档：`evals/results-v1.3.0.md`
 
 ### Added
