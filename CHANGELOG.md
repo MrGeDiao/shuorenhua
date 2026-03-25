@@ -1,5 +1,24 @@
 # Changelog
 
+## [1.4.0] - 2026-03-25 — GPT-5.x 新词入库 + Codex review 修复
+
+### Added
+- GPT-5.x / Codex 新口癖大批入库：庸医问诊腔（抠出来/揪出来、不靠猜）、暴力动作腔（补一刀、狠狠干、拍脑门、拍板）、AI 主动出击腔（要不要我、我立马开始、只要你回复我、顺手）等 30+ 条
+- Tier 2 新增单音节命令词类别：补/接/核/进/顺/落/坏/跑
+- SKILL.md 加入 repo 根目录，此前只在 Claude Code skill 目录
+- SKILL.md v2.0.0：按处理方式分组（直接删除类 vs 替换为具体表达类），不按来源分类
+
+### Changed
+- README 全文重写：GPT-5.4 荒谬引文开头、血压升高类和暴力动词类专门示例
+- 安装部分从 80 行缩到 13 行，详情推到 install/ 目录
+- 短语计数统一为 bullet 数：中文 210+、英文 96（此前各文件数法不一致）
+- phrases-en.md Tier 3 阈值对齐 severity.md（分段阈值替代 >3%）
+
+### Fixed
+- run-eval.md 硬编码本地路径改为相对路径
+- 评测数据更新为 29 条（16 SF + 13 SNF），此前漏计 SF-16
+- CHANGELOG、README、results、openclaw.md 数据全部对齐
+
 ## [1.3.0] - 2026-03-24 — 项目更名为「说人话」(shuorenhua)
 
 ### Renamed
