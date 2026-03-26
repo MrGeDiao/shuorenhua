@@ -1,4 +1,4 @@
-# v1.5 Todo
+# v1.5 Todo (next milestone)
 
 - [x] 备份旧版 `SKILL.md` 和 `tasks/todo.md` 到 `/tmp/stop-slop-zh-backup`
 - [x] 重写 `SKILL.md`，把主文档收敛为入口决策、流程、档位、Tier、输出合同和导航

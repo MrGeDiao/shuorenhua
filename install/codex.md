@@ -1,47 +1,121 @@
 # Codex CLI 安装
 
-## 方式 1：AGENTS.md（推荐）
+## 先判断你想怎么用
 
-在项目根目录创建或编辑 `AGENTS.md`，添加以下内容：
+### 方案 A：项目内长期使用（推荐）
 
-```markdown
-## 写作风格
-对外文本遵循 `shuorenhua/SKILL.md` 的反模式规则。
-```
+适合：
+- 这个仓库里经常要写对外文案
+- 希望规则跟代码一起版本管理
+- 团队成员也能复用同一套风格
 
-然后将 skill 文件放到项目中：
+### 方案 B：单次改写
+
+适合：
+- 只是临时拿它改一段文案
+- 不想改项目文件
+- 想先试效果
+
+---
+
+## 方案 A：项目内长期使用
+
+### 1. 把 skill 放进项目
 
 ```bash
 mkdir -p shuorenhua
 cp SKILL.md shuorenhua/
-cp -r references/ shuorenhua/
+cp -r references shuorenhua/
 ```
 
-Codex 会自动读取 `AGENTS.md` 并在需要时引用规则文件。
+### 2. 在 `AGENTS.md` 里写清楚使用意图
 
-## 方式 2：System Prompt
+不要只写“反模式规则”这种太虚的描述，最好直接写触发条件和适用范围。
 
-直接通过 `--system-prompt` 传入规则：
+示例：
+
+```markdown
+## 写作风格
+当任务涉及“去 AI 味”“说人话”“自然一点”“别像模板”这类改写时，优先遵循 `shuorenhua/SKILL.md`。
+对外文本优先按它处理；代码、日志、配置和命令输出默认不套这个 skill。
+```
+
+这样做的意义是：
+- 把触发词写清楚
+- 把适用边界写清楚
+- 避免 Codex 把它误用到技术内容上
+
+### 3. 需要时再让模型补读 `references/`
+
+`SKILL.md` 现在是入口型主文档，负责：
+- 场景判断
+- Tier 判断
+- 改写档位
+- 输出合同
+
+`references/` 负责补细节：
+- 短语表
+- 结构反模式
+- 场景禁改
+- 微操作手册
+- 边界案例
+
+所以更合理的使用方式不是“一上来把所有文件全塞进去”，而是：
+- 默认先用 `SKILL.md`
+- 碰到重写、误杀边界、风格分歧时，再补读具体 `references/` 文件
+
+---
+
+## 方案 B：单次改写
+
+如果你只是临时改一段文本，直接把 `SKILL.md` 当 system prompt 即可：
 
 ```bash
 codex --system-prompt "$(cat SKILL.md)" "改写以下文本：..."
 ```
 
-适合一次性使用，不需要修改项目文件。
+如果这次任务需要更重的清理，再把相关 `references/` 内容一并给进去，而不是默认整包灌入。
 
-## 方式 3：全局 Instructions
+---
 
-在 `~/.codex/instructions.md` 中添加规则：
+## 全局使用
+
+如果你确定自己希望所有 Codex 会话都默认带这套风格，可以把规则写进全局 instructions。
+
+但不建议直接把完整 `references/` 全部拼进去，更稳的做法是：
+- 全局只放 `SKILL.md`
+- 需要深改时，再在具体任务里引用 `references/`
+
+示例：
 
 ```bash
 mkdir -p ~/.codex
 cat SKILL.md >> ~/.codex/instructions.md
 ```
 
-这样所有 Codex 会话都会自动加载去 AI 味规则。
+---
 
-## 注意
+## 怎么判断装得对不对
 
-- 推荐方式 1，让规则跟随项目版本控制
-- 如果 token 预算紧张，可以只放 `SKILL.md`；但 `references/` 会补足大量中文词表，想要更稳的过滤效果建议一起放
-- 需要深度改写时再手动引用 `references/` 下的禁用短语表
+拿一段明显 AI 腔的文本测试：
+
+```text
+用说人话规则改写：在当今快速发展的人工智能时代，如何打造一个真正赋能开发者的工具，已经成为业界不容忽视的关键议题。
+```
+
+如果结果：
+- 去掉了 `打造 / 赋能 / 不容忽视 / 关键议题`
+- 但没有把信息改空
+
+说明这套 skill 基本接上了。
+
+---
+
+## 一个容易踩的坑
+
+不要把“装了 skill”理解成“Codex 会无条件自动套用全部规则”。
+
+更准确的理解是：
+- 你需要给它一个清楚的触发入口（如 `AGENTS.md`、system prompt、instructions）
+- `SKILL.md` 负责主判断
+- 具体要不要补读 `references/`，取决于当前任务复杂度
