@@ -133,6 +133,10 @@ shuorenhua/
 - [avoid-ai-writing](https://github.com/conorbronsdon/avoid-ai-writing) — 严重度分级
 - [beautiful_prose](https://github.com/SHADOWPR0/beautiful_prose) — 正面风格契约
 
+## 社区
+
+在 [Linux.do](https://linux.do) 发现这个项目？欢迎来聊。
+
 ## 许可
 
 [MIT](LICENSE)
