@@ -19,6 +19,7 @@
 - 为学术或实验语体中的正常英文被动语态增加误杀防护
 - 为带具体参数、操作和结果的真人工程师 debug 对话增加误杀防护
 - 静态 benchmark 风险点补强：覆盖 SF-08、SF-16、SNF-05、SNF-09、SNF-11
+- 发布口径补齐：`SKILL.md` 名称统一为 `shuorenhua`，install 文档修正触发模型描述，`evals/run-eval.md` 补全 reference 文件列表
 
 ## [1.4.0] - 2026-03-25 — GPT-5.x 新词入库 + Codex review 修复
 

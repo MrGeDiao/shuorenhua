@@ -2,17 +2,25 @@
 
 ## 方式 1：项目 Rules
 
-将 `SKILL.md` 内容复制到项目规则文件：
-
 ```bash
 # Cursor
+mkdir -p .cursor/rules
 cp SKILL.md .cursor/rules/shuorenhua.md
 
 # Windsurf
+mkdir -p .windsurf/rules
 cp SKILL.md .windsurf/rules/shuorenhua.md
 ```
 
-如果需要参考文件（禁用短语表等），在同目录下创建 `references/` 并复制进去。
+如果需要参考文件（词表、结构反模式等），在对应目录下创建 `references/` 并复制进去：
+
+```bash
+# Cursor
+cp -r references .cursor/rules/
+
+# Windsurf
+cp -r references .windsurf/rules/
+```
 
 ## 方式 2：全局 Rules
 
@@ -20,4 +28,18 @@ cp SKILL.md .windsurf/rules/shuorenhua.md
 
 ## 注意
 
-Cursor 的 rules 文件会自动加载到上下文中。如果参考文件太大影响性能，可以只放 `SKILL.md`，核心规则已经自包含。需要深度改写时再手动引用具体的 `references/` 文件。
+Rules 文件会加载到上下文，但不等于会自动对所有输出套用。触发时建议明确说：
+
+```text
+用说人话规则改写这段文本。
+```
+
+token 紧张时只放 `SKILL.md`，核心规则已经自包含；需要精细改写时再补 `references/` 文件。
+
+## 验证
+
+```text
+用说人话规则改写这段文本：在当今快速发展的人工智能时代，如何打造一个真正赋能开发者的工具，已经成为业界不容忽视的关键议题。
+```
+
+输出不再保留 `打造 / 赋能 / 不容忽视 / 关键议题`，且信息没有改散，说明接好了。

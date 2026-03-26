@@ -1,20 +1,22 @@
 # ChatGPT / 通用 LLM 安装
 
+默认只放 `SKILL.md`，不要一上来就把整个 `references/` 全塞进去。`SKILL.md` 已经负责主判断（场景、Tier、档位、禁改边界），`references/` 是按需补细节用的，不需要每次常驻。
+
 ## ChatGPT
 
 1. 打开 ChatGPT Settings > Personalization > Custom Instructions
 2. 将 `SKILL.md` 的内容粘贴到 "How would you like ChatGPT to respond?" 中
 3. 保存
 
-## Claude (Web / API)
+如果只是偶尔使用，不必写进 Custom Instructions，直接在对话里贴 `SKILL.md` 内容更灵活。
+
+## Claude（Web / Project）
 
 1. 创建一个 Project
 2. 将 `SKILL.md` 内容添加到 Project Instructions
-3. 如果需要完整词表，将 `references/` 下的文件也加到 Project Knowledge
+3. 需要更稳的误杀防护时，再把相关 `references/` 文件加入 Project Knowledge
 
 ## API / System Prompt
-
-将 `SKILL.md` 内容作为 system prompt 的一部分传入：
 
 ```python
 messages = [
@@ -23,6 +25,13 @@ messages = [
 ]
 ```
 
-## 注意
+如果已有主 system prompt，把 `SKILL.md` 当成一个风格模块拼进去，不要整段覆盖。
 
-受 token 限制，通用 LLM 可能无法一次加载全部参考文件。建议只加载 `SKILL.md`（核心规则自包含），需要深度改写时再手动引用具体的 `references/` 文件。
+## 什么时候需要补 `references/`
+
+- AI 腔很重，普通去词表改写效果不够
+- 中英文混合，需要精细场景判断
+- 技术文案，担心误杀术语
+- 需要处理结构问题，不只是删词
+
+优先补：`structures.md` / `severity.md` / `operation-manual.md` / `boundary-cases.md`
