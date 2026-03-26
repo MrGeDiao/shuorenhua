@@ -1,5 +1,25 @@
 # Changelog
 
+## [1.4.1] - 2026-03-26 — Skill workflow 修复 + benchmark 边界加固
+
+### Added
+- 新增 `references/operation-manual.md`，把二元对比、总结收尾、工程师腔、商业黑话、narrator 腔、语域混搭等问题写成可执行的微操作协议
+- 新增 `references/scene-guardrails.md`，补齐 `chat / status / docs / public-writing` 的禁改项
+- 新增 `references/boundary-cases.md`，加入系统主语、英文图算法字面动词、学术被动语态、具体证据支撑的真人 debug 对话等边界案例
+- 新增“价值拔高骨架”规则，明确覆盖 `这不仅仅是……更是……`、`真正的 X 不是……而是……`、`最后比拼的是……`
+
+### Changed
+- `SKILL.md` 重写为入口型主文档：先做场景 / Tier / 档位判断，再按问题类型补读 `references/`
+- 单文件模式改成明确兜底路径，不再暗示 `SKILL.md` 单独加载就等于完整模式
+- `SKILL.md` frontmatter 恢复中文触发描述，降低 skill 自动触发失配风险
+
+### Fixed
+- 修正 `references/operation-manual.md` 中把 `对上了` 替换成 `对齐` 的规则冲突，改为 `核对`
+- 为 `navigate` 在图算法 / 网络拓扑语境中的字面用法增加误杀防护
+- 为学术或实验语体中的正常英文被动语态增加误杀防护
+- 为带具体参数、操作和结果的真人工程师 debug 对话增加误杀防护
+- 静态 benchmark 风险点补强：覆盖 SF-08、SF-16、SNF-05、SNF-09、SNF-11
+
 ## [1.4.0] - 2026-03-25 — GPT-5.x 新词入库 + Codex review 修复
 
 ### Added

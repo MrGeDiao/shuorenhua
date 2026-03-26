@@ -30,3 +30,11 @@
 - [x] 复读 `evals/benchmark.md`，按 SF / SNF 梳理当前规则需要覆盖的能力点
 - [x] 对照 `SKILL.md` 和 `references/` 静态判断每条 benchmark 的覆盖状态与风险
 - [x] 汇总静态通过率、残余风险和建议修补点
+
+## v1.4.1 hardening and release
+
+- [x] 补齐 5 个静态风险点：SF-08、SF-16、SNF-05、SNF-09、SNF-11
+- [x] 复核规则间的一致性，避免新增误杀或自相矛盾
+- [x] 更新 `CHANGELOG.md`，整理 v1.4.1 发布说明
+- [ ] 提交修复并推送 `main`
+- [ ] 创建并推送 `v1.4.1` tag

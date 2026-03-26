@@ -47,6 +47,8 @@ These words appear 5–20x more often in AI text than human text. Replace by def
 - best practices → good practices
 - holistic → complete, whole
 
+Keep literal technical uses in graph, network, routing, or pathfinding contexts. Example: `The system navigates the network topology using Dijkstra's algorithm.`
+
 ### Inflated verbs (use simpler alternatives)
 - utilize → use
 - commence → start

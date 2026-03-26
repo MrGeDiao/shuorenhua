@@ -101,3 +101,63 @@
 
 - 不要把“系统”硬改成人
 - 不要把条件从句改成口语解释
+
+## 6. 英文图算法里的字面动词
+
+### 原文
+
+The system navigates the network topology using Dijkstra's algorithm, traversing each node to find the shortest path.
+
+### 推荐改法
+
+The system navigates the network topology using Dijkstra's algorithm, traversing each node to find the shortest path.
+
+### 为什么这样改
+
+- 不改。这里的 `navigates` 和 `traversing` 是字面技术动作，不是商业黑话
+- 去 AI 味不应该把算法描述改得更含糊
+
+### 不该改的点
+
+- 不要把 `navigates` 机械替换成 `handles`
+- 不要把算法路径搜索写散
+
+## 7. 学术语体中的正常被动
+
+### 原文
+
+The experiment was conducted by researchers at MIT. Results were published in Nature in 2024.
+
+### 推荐改法
+
+The experiment was conducted by researchers at MIT. Results were published in Nature in 2024.
+
+### 为什么这样改
+
+- 不改。这里是标准学术语体，信息也没有被被动语态掩盖
+- 去 AI 味不是强制把所有英文句子都改成主动语态
+
+### 不该改的点
+
+- 不要把学术摘要硬改成口语句
+- 不要为了“更直接”删掉发表来源
+
+## 8. 具备具体证据的真人 debug 对话
+
+### 原文
+
+刚查了下，root cause 是连接池打满了，max_connections 才 20，高峰期不够用。我把它调到 100，观察了半小时，没再报错。
+
+### 推荐改法
+
+刚查了下，root cause 是连接池打满了，max_connections 才 20，高峰期不够用。我把它调到 100，观察了半小时，没再报错。
+
+### 为什么这样改
+
+- 不改。这里有具体参数、操作和结果，是正常工程沟通，不是表演性调试腔
+- 这类对话的关键是信息密度，不是强行去口头技术词
+
+### 不该改的点
+
+- 不要把 `root cause` 机械改成更书面或更口语的词
+- 不要删掉 `20 -> 100` 和 `观察了半小时` 这些关键证据
