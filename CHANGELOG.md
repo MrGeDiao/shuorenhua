@@ -1,5 +1,20 @@
 # Changelog
 
+## [Unreleased]
+
+### Added
+- 新增“模式变体归并”规则：遇到 `扒开 / 拽出来` 这类未逐词收录的说法，先并入现有问题族，不把词表当成穷举清单
+- `evals/benchmark.md` 新增 2 条用例：`SF-17` 验证现有模式对未收录变体的吸收能力，`SNF-14` 验证讨论词条维护策略时不误杀被引用词
+- 新增自动化 intake 方案文档，定义社区样本的收集、归类、建议输出和人工确认流程
+- 新增 `tasks/automation-intake-prompt.md`，提供可直接复用的 automation prompt 模板
+
+### Changed
+- `SKILL.md`、`references/operation-manual.md`、`references/phrases-zh.md`、`CONTRIBUTING.md` 全部对齐为“模式优先、词条兜底”的维护策略
+- `evals/run-eval.md` 和 README 的 benchmark 口径同步到最新用例数量
+
+### Tested
+- 2026-03-28 用 GPT-5.4 Codex 重新跑 `benchmark.md`（31 条）：SF 通过率 `16/17 (94.1%)`，SNF 误杀率 `0/14 (0%)`
+
 ## [1.4.2] - 2026-03-26 — 发布口径对齐 + 文档修正
 
 ### Changed

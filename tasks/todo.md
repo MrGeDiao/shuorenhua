@@ -38,3 +38,19 @@
 - [x] 更新 `CHANGELOG.md`，整理 v1.4.1 发布说明
 - [x] 提交修复并推送 `main`
 - [x] 创建并推送 `v1.4.1` tag
+
+## v1.4.3 pattern-first intake hardening
+
+- [x] 把“模式优先、词条兜底、变体归并”的原则写进主规则和参考文档
+- [x] 补充“调试腔 / 暴力动作腔 / 主动出击腔 / 总结提示腔”的变体归并说明
+- [x] 新增 benchmark，用例覆盖“现有模式变体不必逐词入库”和“真人语境不误杀”
+- [x] 增加一份自动化 intake 方案文档，定义样本收集、归类、入库建议和人工确认流程
+- [x] 运行相关检查并复核 diff
+
+## v1.4.4 eval sync and automation prompt
+
+- [x] 运行最新 `benchmark.md` 评测，并归档新结果
+- [x] 同步 README / CHANGELOG / 结果文件的评测口径
+- [x] 把 intake 方案落成可直接复用的 automation prompt 模板
+- [x] 新增 `.gitignore` 忽略 `.DS_Store`
+- [x] 复核 diff 和仓库状态
