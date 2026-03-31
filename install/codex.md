@@ -30,6 +30,18 @@ codex --system-prompt "$(cat SKILL.md)" "改写以下文本：..."
 
 不需要修改项目文件，适合临时使用。
 
+如果你想先判断“哪里像 AI”，不要直接改稿，可以这样用：
+
+```bash
+codex --system-prompt "$(cat SKILL.md)" "先不要改写，只按 annotation mode 标出下面这段文字里的问题：..."
+```
+
+适合这几类场景：
+
+- 你想先看这段话该不该改
+- 你要做审稿或 review，不想直接替作者重写
+- 你怀疑有无源引用、语域混搭或工程师腔，但还不想动正文
+
 ## 方式 3：全局 Instructions
 
 ```bash

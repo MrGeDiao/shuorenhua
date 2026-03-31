@@ -1,5 +1,28 @@
 # Changelog
 
+## [1.5.0] - 2026-03-30 — Benchmark matrix + unsourced citation policy + annotation mode
+
+### Added
+- `evals/benchmark.md` 扩到 37 条：新增 `long / mixed / unsourced citation focus` 三类样本，补上 `SF-18`、`SF-19`、`SF-20`、`SF-21`、`SNF-15`、`SNF-16`
+- `SKILL.md` 新增 `annotation mode` 输出合同，固定最小字段为 `问题族 / 触发点 / 建议动作 / 是否建议改写`
+- `references/examples.md` 新增 3 组 `annotation mode` 对照示例
+- 新增 `evals/results-v1.5.0.md`，归档本轮 benchmark 复核结果
+
+### Changed
+- `SKILL.md`、`references/operation-manual.md`、`references/scene-guardrails.md` 全部对齐为 3 种无源引用策略：`rewrite-safe`、`audit-only`、`rewrite-with-placeholder`
+- `evals/run-eval.md` 从 Codex 专用改为平台无关，新增 Claude Code 快速运行和通用 LLM / API 评测说明
+- `install/codex.md` 增加 `annotation mode` 的最小可复制用法
+- `install/claude-code.md` 增加 `annotation mode` 用法和无源引用模式说明
+- `install/openclaw.md` 增加 `annotation mode` 用法和无源引用模式说明
+- `install/cursor.md` 增加 `annotation mode` 用法和无源引用模式说明
+- `install/chatgpt.md` 增加 `annotation mode` 用法和无源引用模式说明
+- `README.md` 安装部分新增 Claude Code 快速用法，annotation mode 示例覆盖 Codex 和 Claude Code；平台链接顺序调整为 Codex > Claude Code > OpenClaw > Cursor > ChatGPT
+- `CONTRIBUTING.md` 更新到 `v1.5.0` 的 benchmark 规模、标注模式和维护策略
+
+### Tested
+- 2026-03-30 静态 benchmark 复核 `benchmark.md`（37 条）：SF 通过率 `21/21 (100%)`，SNF 误杀率 `0/16 (0%)`
+- 2026-03-30 用 GPT-5.4 Codex 对 `SF-05`、`SF-21`、`SNF-01`、`SNF-16` 做 `annotation mode` 抽样验证，结果与新规则一致
+
 ## [1.4.3] - 2026-03-28 — Pattern-first intake hardening + eval sync
 
 ### Added

@@ -27,6 +27,28 @@ messages = [
 
 如果已有主 system prompt，把 `SKILL.md` 当成一个风格模块拼进去，不要整段覆盖。
 
+## 使用提示
+
+如果你想先判断"哪里像 AI"，不要直接改稿，在对话里说：
+
+```text
+先不要改写，只按 annotation mode 标出下面这段文字里的问题：...
+```
+
+适合这几类场景：
+
+- 你想先看这段话该不该改
+- 你要做审稿或 review，不想直接替作者重写
+- 你怀疑有无源引用、语域混搭或工程师腔，但还不想动正文
+
+处理无源引用时，可以指定模式：
+
+```text
+用说人话规则改写这段文本，无源引用按 audit-only 处理。
+```
+
+三种模式：`rewrite-safe`（默认用于 chat/public-writing，直接删无证据权威铺垫）、`audit-only`（默认用于 docs/status，只标缺来源）、`rewrite-with-placeholder`（保留结构但暴露缺来源）。不指定时按场景默认值走。
+
 ## 什么时候需要补 `references/`
 
 - AI 腔很重，普通去词表改写效果不够
