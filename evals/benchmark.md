@@ -13,13 +13,14 @@
 - `short`：单段、单轮、短文本
 - `long`：长段落或多句连续文本
 - `mixed`：带引用、对话、上下文依赖，或同段混合多类病灶
+- `code-context`：代码注释、docstring、commit message 等代码编辑器场景
 
-| 场景 | short | long | mixed |
-|------|-------|------|-------|
-| chat | SF-01, SF-06, SF-11, SF-17, SNF-07, SNF-11 | - | SF-19, SNF-16 |
-| status | SF-02, SF-09, SF-15, SF-21, SNF-03, SNF-06, SNF-10, SNF-13 | - | - |
-| docs | SF-04, SF-07, SNF-01, SNF-02, SNF-04, SNF-05, SNF-08, SNF-09, SNF-14 | SF-18, SNF-15 | - |
-| public-writing | SF-03, SF-05, SF-08, SF-10, SF-12, SF-13, SF-16, SF-20, SNF-12 | - | SF-14 |
+| 场景 | short | long | mixed | code-context |
+|------|-------|------|-------|-------------|
+| chat | SF-01, SF-06, SF-11, SF-17, SNF-07, SNF-11 | - | SF-19, SNF-16 | - |
+| status | SF-02, SF-09, SF-15, SF-21, SNF-03, SNF-06, SNF-10, SNF-13 | - | - | SF-23, SNF-18 |
+| docs | SF-04, SF-07, SNF-01, SNF-02, SNF-04, SNF-05, SNF-08, SNF-09, SNF-14 | SF-18, SNF-15 | - | SF-22, SF-24, SNF-17 |
+| public-writing | SF-03, SF-05, SF-08, SF-10, SF-12, SF-13, SF-16, SF-20, SNF-12 | - | SF-14 | - |
 
 ---
 
@@ -127,7 +128,35 @@
 
 **预期**：只处理引号里的正文，不改用户指令本身；删掉 `结论先说`、二元对比骨架、`扒开 / 补一刀 / 稳稳兜住` 等姿态词和 `质的跃迁` 这类拔高表达，改成正常发布说明语气。
 
-### D. Unsourced Citation Focus
+### D. Code Context
+
+### SF-22 | docs | docstring 里的 AI 腔
+> ```python
+> def refresh_cache(self):
+>     """通过全面优化缓存刷新策略，显著提升系统整体性能，为用户提供更加流畅、高效的使用体验。"""
+>     self.cache.clear()
+>     self.cache.load()
+> ```
+
+**预期**：只改 docstring 正文，不动代码。删掉"全面优化""显著提升""整体性能""更加流畅、高效的使用体验"，改成描述函数实际行为的说明，例如"清空并重新加载缓存"。
+
+### SF-23 | status | commit message 里的 AI 腔
+> ```
+> feat: 打造全新缓存方案，赋能高并发场景，实现降本增效闭环，显著提升系统整体性能与用户体验
+> ```
+
+**预期**：删掉"打造""赋能""降本增效""闭环""显著提升"，改成说清楚做了什么，例如 `feat: 缓存从本地 LRU 换成 Redis，支撑 10k QPS`。
+
+### SF-24 | docs (English) | Code comment with AI slop
+> ```javascript
+> // This groundbreaking utility serves as a testament to modern engineering,
+> // leveraging cutting-edge algorithms to deliver unprecedented performance.
+> function sort(arr) { return arr.sort((a, b) => a - b); }
+> ```
+
+**Expected**: Only fix the comment, not the code. Remove "groundbreaking", "serves as a testament", "leveraging", "cutting-edge", "unprecedented". Replace with what the function actually does, e.g. `// Sort array ascending`.
+
+### E. Unsourced Citation Focus
 
 ### SF-20 | public-writing (English) | Unsourced authority claim
 > Studies show that teams using AI pair programming ship features 40% faster. Experts say this shift will redefine software delivery over the next decade.
@@ -215,6 +244,23 @@
 
 **理由**：这里是在讨论词条维护策略，不是在使用这些词制造 AI 腔。被讨论的词应保留原样。
 
+### SNF-17 | docs | 正常的技术注释
+> ```python
+> # 缓存过期后回源查询，TTL 默认 300 秒
+> # 如果 Redis 挂了，fallback 到本地 LRU cache
+> def get_user(user_id: str) -> User:
+>     ...
+> ```
+
+**理由**：正常的代码注释，有具体参数（TTL 300 秒）和具体降级策略（Redis → 本地 LRU），不是 AI 腔。
+
+### SNF-18 | status | 正常的 commit message
+> ```
+> fix: 连接池上限从 20 调到 100，解决高峰期 504
+> ```
+
+**理由**：具体、事实性的 commit message，有数据（20→100）和问题（504），不需要改写。
+
 ### B. Long
 
 ### SNF-15 | docs | 长段技术复盘中的工程术语
@@ -239,6 +285,7 @@
 | Should Fix (SF) | 改写后命中项被消除，原意保留，不过度改写 |
 | Should NOT Fix (SNF) | 文本保持原样或仅做最小调整，不误杀合理表达 |
 
+- `code-context` 样本额外要求：只处理注释 / docstring / commit message 中的文字，不改动代码本身
 - `必须改写`：能直接消除问题且不损失事实时，应输出改写结果
 - `允许只标注风险`：遇到无源引用、缺上下文或不能安全补全事实的样本，允许明确指出风险并不给虚构改写；这种情况记为 `⚠️`，不直接算规则失效
 - `mixed` 样本额外要求：只处理真正有问题的正文，不误改引用、用户指令、命令、字段名和被讨论词

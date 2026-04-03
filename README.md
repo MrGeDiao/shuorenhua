@@ -89,14 +89,14 @@ codex --system-prompt "$(cat shuorenhua/SKILL.md)" "改写以下文本：..."
 
 ## 评测
 
-37 条 benchmark（21 条该改 + 16 条不该动）：
+42 条 benchmark（24 条该改 + 18 条不该动）：
 
-| 指标 | 结果 | 目标 |
-|------|------|------|
+| 指标 | v1.5.0 结果 | 目标 |
+|------|------------|------|
 | 该改的改了 | 21/21 (100%) | > 90% ✅ |
 | 不该改的没动 | 16/16 (0% 误杀) | < 10% ✅ |
 
-覆盖 `short / long / mixed` 三类长度，含无源引用、annotation mode 抽样验证。详见 [evals/results-v1.5.0.md](evals/results-v1.5.0.md)。
+覆盖 `short / long / mixed / code-context` 四类场景，含无源引用、annotation mode 抽样验证。v1.6.0 新增的 5 条 code-context 用例待下轮评测归档。详见 [evals/results-v1.5.0.md](evals/results-v1.5.0.md)。
 
 ## 对比
 

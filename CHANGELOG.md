@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.6.0] - 2026-04-03 — Code-context benchmark + rule boundary hardening
+
+### Added
+- `evals/benchmark.md` 扩到 42 条：新增 `code-context` 维度，补上 `SF-22`（docstring AI 腔）、`SF-23`（commit message AI 腔）、`SF-24`（英文代码注释 AI 腔）、`SNF-17`（正常技术注释）、`SNF-18`（正常 commit message）
+- 覆盖矩阵新增 `code-context` 列，评测标准补 code-context 样本约束
+- `references/boundary-cases.md` 新增案例 9：混合场景 worked example（技术博客嵌事故复盘），完整展示判主场景、识别次场景、分区处理的决策过程
+- `references/severity.md` 误杀防护新增第 11 条：中英混排句中的英文词按实际语义判断，不机械套词表
+- `SKILL.md` 单文件兜底规则同步补中英混排指引
+
+### Changed
+- `references/severity.md` Tier 2 新增长度归一化：短段落（< 100 字/词）同段 2+ 即标记，长段落（≥ 100 字/词）同段 3+ 再标记；决策流程图同步更新
+- `SKILL.md` Tier 2 描述同步加长度参考
+- `references/severity.md` Tier 2 定义段去掉写死的"2 个以上"，改为指向长度参考，数字来源收敛为一处
+- `evals/run-eval.md` 更新 SF/SNF 范围、总 case 数（42）、评测提示词补 code-context 说明
+
 ## [1.5.0] - 2026-03-30 — Benchmark matrix + unsourced citation policy + annotation mode
 
 ### Added
