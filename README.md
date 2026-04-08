@@ -46,7 +46,7 @@ codex --system-prompt "$(cat shuorenhua/SKILL.md)" "改写以下文本：..."
 先不要改写，只按 annotation mode 标出下面这段文字里的问题：...
 ```
 
-**ChatGPT 用户？** 推荐用 [Custom GPT](install/chatgpt.md#方案一custom-gpt推荐) 加载完整规则，不受 1,500 字符限制。
+**ChatGPT 用户？** 直接用 [说人话 GPT](https://chatgpt.com/g/g-69d5d86a32608191b523efd7a4048736-shuo-ren-hua)，完整规则已内置。也可以 [自建 Custom GPT](install/chatgpt.md#方案一custom-gpt推荐)。
 
 更多平台：[Codex](install/codex.md) · [Claude Code](install/claude-code.md) · [OpenClaw](install/openclaw.md) · [Cursor / Windsurf](install/cursor.md) · [ChatGPT / Custom GPT](install/chatgpt.md)
 

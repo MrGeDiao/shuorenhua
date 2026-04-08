@@ -8,7 +8,9 @@
 
 `SKILL.md` 有 12,000+ 字符，超过 Custom Instructions 的 1,500 字限制。用 Custom GPT 可以绕过这个限制，规则完整加载，不用删减。
 
-创建步骤：
+**直接使用：** [说人话 GPT](https://chatgpt.com/g/g-69d5d86a32608191b523efd7a4048736-shuo-ren-hua)（需要 ChatGPT Plus / Pro）
+
+如果你想自建一个，步骤如下：
 
 1. 打开 [ChatGPT GPT Editor](https://chatgpt.com/gpts/editor)，新建一个 GPT
 2. 名称填"说人话"，描述填"去 AI 味的中英文改写助手"
