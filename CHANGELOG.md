@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.6.1] - 2026-04-08 — ChatGPT Custom GPT 支持
+
+### Added
+- 新增 `install/chatgpt-gpt-instructions.md`，提供 Custom GPT 的 Instructions 文本，用户自建 GPT 时直接复制
+- `install/chatgpt.md` 新增 Custom GPT 方案（推荐）和 Projects 方案，解决 Custom Instructions 1,500 字符放不下 `SKILL.md` 的问题（[#3](https://github.com/MrGeDiao/shuorenhua/issues/3)）
+
+### Changed
+- `install/chatgpt.md` 原有的 Custom Instructions 方案降级为备选，注明字符限制
+- `README.md` 快速开始部分新增 ChatGPT Custom GPT 入口提示，平台链接更新为"ChatGPT / Custom GPT"
+
 ## [1.6.0] - 2026-04-03 — Code-context benchmark + rule boundary hardening
 
 ### Added

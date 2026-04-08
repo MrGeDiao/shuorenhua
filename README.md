@@ -46,7 +46,9 @@ codex --system-prompt "$(cat shuorenhua/SKILL.md)" "改写以下文本：..."
 先不要改写，只按 annotation mode 标出下面这段文字里的问题：...
 ```
 
-更多平台：[Codex](install/codex.md) · [Claude Code](install/claude-code.md) · [OpenClaw](install/openclaw.md) · [Cursor / Windsurf](install/cursor.md) · [ChatGPT / 其他](install/chatgpt.md)
+**ChatGPT 用户？** 推荐用 [Custom GPT](install/chatgpt.md#方案一custom-gpt推荐) 加载完整规则，不受 1,500 字符限制。
+
+更多平台：[Codex](install/codex.md) · [Claude Code](install/claude-code.md) · [OpenClaw](install/openclaw.md) · [Cursor / Windsurf](install/cursor.md) · [ChatGPT / Custom GPT](install/chatgpt.md)
 
 ## 它管什么
 
@@ -139,7 +141,7 @@ shuorenhua/
 │   ├── boundary-cases.md   # 边界案例集
 │   └── examples.md         # 改写示例 + annotation mode 示例
 ├── evals/                  # 评测
-├── install/                # 各平台安装说明
+├── install/                # 各平台安装说明（含 Custom GPT Instructions）
 ├── CONTRIBUTING.md
 ├── CHANGELOG.md
 └── LICENSE                 # MIT

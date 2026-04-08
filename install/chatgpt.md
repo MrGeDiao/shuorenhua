@@ -4,11 +4,35 @@
 
 ## ChatGPT
 
-1. 打开 ChatGPT Settings > Personalization > Custom Instructions
-2. 将 `SKILL.md` 的内容粘贴到 "How would you like ChatGPT to respond?" 中
-3. 保存
+### 方案一：Custom GPT（推荐）
 
-如果只是偶尔使用，不必写进 Custom Instructions，直接在对话里贴 `SKILL.md` 内容更灵活。
+`SKILL.md` 有 12,000+ 字符，超过 Custom Instructions 的 1,500 字限制。用 Custom GPT 可以绕过这个限制，规则完整加载，不用删减。
+
+创建步骤：
+
+1. 打开 [ChatGPT GPT Editor](https://chatgpt.com/gpts/editor)，新建一个 GPT
+2. 名称填"说人话"，描述填"去 AI 味的中英文改写助手"
+3. 将 [`install/chatgpt-gpt-instructions.md`](chatgpt-gpt-instructions.md) 中分隔线以下的内容粘贴到 Instructions
+4. 上传 Knowledge Files：`SKILL.md` + `references/` 目录下所有 `.md` 文件（共 9 个文件）
+5. 保存，发布为 "Only me" 或 "Anyone with a link"
+
+用的时候直接打开这个 GPT 对话就行。
+
+### 方案二：Projects
+
+如果你有 ChatGPT Plus / Pro，也可以用 Projects：
+
+1. 新建一个 Project
+2. 把 `SKILL.md` 和需要的 `references/` 文件上传到 Project Files
+3. Project Instructions 里写一句：`按照项目文件中 SKILL.md 的规则改写用户提供的文本。`
+
+Projects 的文件没有严格字符限制，效果和 Custom GPT 类似。
+
+### 方案三：直接贴对话（轻量用法）
+
+不想建 GPT 也不想建 Project，直接在对话开头贴 `SKILL.md` 内容也能用。适合偶尔用一次的场景。
+
+> **注意：** Custom Instructions（Settings > Personalization）有 1,500 字符上限，放不下完整的 `SKILL.md`。不建议用这个方式。
 
 ## Claude（Web / Project）
 
