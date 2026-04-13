@@ -38,11 +38,11 @@ metadata:
 按固定顺序做，不要跳步：
 
 1. 判场景：`chat / status / docs / public-writing`
-2. 查禁改项：先看有没有必须保留的术语、系统主语、引用原文、命令或正式语体
+2. 查禁改项：先划 `protected spans`，看有没有必须保留的术语、系统主语、引用原文、命令或正式语体
 3. 判 Tier：`Tier 1 / Tier 2 / Tier 3`，按问题命中强度判断，不要把 Tier 当作改写力度
 4. 再判档位：`minimal / standard / aggressive`
-5. 先执行本文件里的最小规则；只要环境里能读 `references/`，默认继续按问题类型补看 [微操作手册](./references/operation-manual.md)、[结构反模式](./references/structures.md) 和相关短语表
-6. 回读：检查信息、语域、术语、断裂感
+5. 先执行本文件里的最小规则；只要环境里能读 `references/`，默认继续按问题类型补看 [Protected Spans](./references/protected-spans.md)、[Positive Style Contract](./references/positive-style.md)、[微操作手册](./references/operation-manual.md)、[结构反模式](./references/structures.md) 和相关短语表
+6. 回读：检查 protected spans、信息、语域、术语、断裂感
 7. 输出：默认只给单一推荐版本；用户明确要求“先标问题，不改写”时切到 `annotation mode`
 
 执行第 5 步时，先按“模式”处理，再按“词条”兜底：
@@ -204,6 +204,8 @@ Tier 表示问题命中强度，与 [严重度分级](./references/severity.md) 
 
 不要为了“像人”把文本改得更假。专业文本可以专业，关键是别模板化、别表演化。
 
+完整的保护清单见 [Protected Spans](./references/protected-spans.md)。
+
 ## 6. Positive style targets
 
 改写后的文本应尽量满足：
@@ -213,6 +215,8 @@ Tier 表示问题命中强度，与 [严重度分级](./references/severity.md) 
 - 有统一语域，不在技术腔、商业腔、自媒体腔之间跳
 - 有节奏，但节奏来自删冗余和保留重点，不来自硬造金句
 - 有立场，但立场来自判断或事实，不来自“故作洞见”
+
+更完整的正向目标、分场景校准和“cleaner vs more human”对照见 [Positive Style Contract](./references/positive-style.md)。
 
 ## 7. Output contract
 
@@ -256,18 +260,21 @@ Tier 表示问题命中强度，与 [严重度分级](./references/severity.md) 
 
 ## 8. Required reread checks
 
-提交改写前，至少回读这 4 项：
+提交改写前，至少回读这 5 项：
 
-1. 信息是否丢失
-2. 语域是否统一
-3. 术语是否失真
-4. 删改后是否出现生硬断裂
+1. protected spans 是否漂了
+2. 信息是否丢失
+3. 语域是否统一
+4. 术语是否失真
+5. 删改后是否出现生硬断裂
 
 如果删掉一句后段落突然没了落点，就补一条事实句，不要补口号句。
 
 ## Reference navigation
 
 - 本文件可以单独兜底；完整模式默认是 `SKILL.md` + `references/` 一起工作
+- 想先看“改成什么样才算更像人”：看 [Positive Style Contract](./references/positive-style.md)
+- 想先看哪些数字、引用、命令、参数不能漂：看 [Protected Spans](./references/protected-spans.md)
 - 想看中文高频短语：看 [中文禁用短语表](./references/phrases-zh.md)
 - 想看英文高频短语：看 [English Banned Phrases](./references/phrases-en.md)
 - 想看句子和段落层面的结构问题：看 [结构反模式](./references/structures.md)

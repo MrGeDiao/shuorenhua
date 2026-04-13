@@ -152,6 +152,25 @@
 - 参数名
 - 报错信息
 
+### 7. Protected spans
+
+会先保护这些承载事实的片段，再决定怎么改写周围句子：
+
+- 数字、日期、区间、单位、版本号
+- 人名、组织名、责任归属
+- 引号内原文
+- 命令、代码、路径、参数、字段、配置项
+- 报错、状态码、指标和度量关系
+
+### 8. Positive Style Contract
+
+不只删套话，也定义“更像人”的正向目标：
+
+- 具体动作优先于抽象拔高
+- 真主语和真动作优先于姿态层
+- 允许轻微不对称，不把每句都抛光成同一种腔
+- 按 `chat / status / docs / public-writing` 分场景校准
+
 ---
 
 ## 快速开始
@@ -212,7 +231,7 @@ codex --system-prompt "$(cat SKILL.md)" "先不要改写，只按 annotation mod
 
 - AI 味比较重
 - 中英文混写
-- 需要更稳的误杀防护
+- 需要更稳的误杀防护和事实保真
 - docs / status / code-context
 - 你想要更细的场景判断
 
@@ -226,11 +245,11 @@ codex --system-prompt "$(cat SKILL.md)" "先不要改写，只按 annotation mod
 `说人话` 不是见词就替换，而是按下面的顺序处理：
 
 1. 先判场景
-2. 再查禁改项
+2. 再划 protected spans，确认哪些内容不能漂
 3. 再判问题强度（Tier）
 4. 再决定改写档位
-5. 先按模式处理，再按词条兜底
-6. 最后回读：检查保真、语域、术语和断裂感
+5. 先按模式处理，再按正向目标和词条兜底
+6. 最后回读：检查 protected spans、保真、语域、术语和断裂感
 
 核心原则只有一句话：
 
@@ -288,10 +307,11 @@ codex --system-prompt "$(cat SKILL.md)" "先不要改写，只按 annotation mod
 - 工程师腔
 - 小红书 AI 腔
 - 无源引用
+- fact preservation / protected spans
 - 代码上下文保护
 - 真实技术文本误杀防护
 
-当前仓库里的 benchmark 矩阵共有 `42` 条。  
+当前仓库里的 benchmark 矩阵共有 `46` 条。
 最新归档结果见：
 
 - `evals/results-v1.5.0.md`
@@ -361,28 +381,28 @@ shuorenhua/
 └── references/
     ├── examples.md
     ├── operation-manual.md
+    ├── positive-style.md
     ├── phrases-en.md
     ├── phrases-zh.md
+    ├── protected-spans.md
     ├── scene-guardrails.md
     ├── severity.md
     ├── structures.md
     └── boundary-cases.md
 ```
 
-核心只需要 `SKILL.md` 一个文件。`references/` 让场景判断和误杀防护更准，按需加载。
+核心只需要 `SKILL.md` 一个文件。`references/` 让场景判断、正向改写目标和事实保真更稳，按需加载。
 
 ---
 
-## 路线图
+## v1.7.0 基础层
 
-接下来优先做的不是继续无限加词，而是：
+这一版先把两件基础工作补齐：
 
-- `Positive Style Contract`
-- `Protected Spans`
-- `Residual Audit / Two-pass`
-- `Real Sample Eval Pack`
+- `Positive Style Contract`：不只说“别写得像 AI”，也定义“更像人”该往哪里靠
+- `Protected Spans`：先保护数字、日期、引用、命令、参数、报错和责任归属，再决定怎么改句子
 
-也就是从“规则清理器”，往“中文自然表达协议”继续推进。
+这一步还是基础层，不等于已经做了 voice 拟合或 second pass 抛光。
 
 ---
 

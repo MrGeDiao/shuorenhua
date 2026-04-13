@@ -18,8 +18,8 @@
 | 场景 | short | long | mixed | code-context |
 |------|-------|------|-------|-------------|
 | chat | SF-01, SF-06, SF-11, SF-17, SNF-07, SNF-11 | - | SF-19, SNF-16 | - |
-| status | SF-02, SF-09, SF-15, SF-21, SNF-03, SNF-06, SNF-10, SNF-13 | - | - | SF-23, SNF-18 |
-| docs | SF-04, SF-07, SNF-01, SNF-02, SNF-04, SNF-05, SNF-08, SNF-09, SNF-14 | SF-18, SNF-15 | - | SF-22, SF-24, SNF-17 |
+| status | SF-02, SF-09, SF-15, SF-21, SF-25, SNF-03, SNF-06, SNF-10, SNF-13, SNF-19 | - | - | SF-23, SNF-18 |
+| docs | SF-04, SF-07, SF-26, SNF-01, SNF-02, SNF-04, SNF-05, SNF-08, SNF-09, SNF-14 | SF-18, SNF-15 | - | SF-22, SF-24, SF-27, SNF-17 |
 | public-writing | SF-03, SF-05, SF-08, SF-10, SF-12, SF-13, SF-16, SF-20, SNF-12 | - | SF-14 | - |
 
 ---
@@ -168,6 +168,28 @@
 
 **预期**：对 `status` 场景应优先走 `audit-only`：明确指出缺少数据来源和归属，而不是把这两句改写成像是已经证实的事实。不能编造图表、报表、分析师或外部来源。
 
+### F. Fact Preservation Focus
+
+### SF-25 | status | 指标、归属和时间点不能漂
+> 截至 4 月 12 日，iOS 次日留存从 31.4% 涨到 34.1%，但这次修复不是一次简单 patch，而是对 onboarding 链路的系统性重塑。王宁今天会把漏掉的 `source=campaign` 维度补回去，明天下午 3 点前再同步一次结果。
+
+**预期**：可以去掉 `不是一次简单 patch`、`系统性重塑` 这类姿态层，但必须保留 `4 月 12 日`、`iOS 次日留存`、`31.4%`、`34.1%`、`王宁`、`source=campaign`、`明天下午 3 点前`。不能把“今天会补回去”改成“已经补回去了”。
+
+### SF-26 | docs | 命令、报错、版本号和配置值保留
+> 在 `v2.3.1` 中，运行 `bin/migrate --tenant=prod --dry-run` 后，如果日志出现 `schema mismatch on orders_v2`，说明迁移前置检查没有通过。不要试图通过“系统性治理”把问题稳稳兜住；先确认 `DB_SCHEMA_VERSION=20260412` 和线上一致，再继续。
+
+**预期**：可以清掉 `系统性治理`、`稳稳兜住` 这类 AI 腔，但必须保留 `v2.3.1`、`bin/migrate --tenant=prod --dry-run`、`schema mismatch on orders_v2`、`DB_SCHEMA_VERSION=20260412` 原样。不能改命令、报错、配置值，也不能把“前置检查没有通过”写成别的错误类型。
+
+### SF-27 | docs | code comment 里的 fact-bearing spans
+> ```go
+> // 截至 2026-04-12，这个 fallback 逻辑已经把 504 从 3.8% 压到 0.6%，
+> // 通过系统性治理稳稳兜住高峰期流量。
+> // If `ENABLE_EDGE_CACHE=false`, keep header `x-cache-bypass: 1`.
+> func handleRequest(req *Request) {}
+> ```
+
+**预期**：只改注释，不动代码；可以清掉 `系统性治理`、`稳稳兜住`，但必须保留 `2026-04-12`、`504`、`3.8%`、`0.6%`、`ENABLE_EDGE_CACHE=false`、`x-cache-bypass: 1`。不能把 header 名、配置值或比较关系写错。
+
 ---
 
 ## 第二部分：不该误杀的（Should NOT Fix）
@@ -261,6 +283,11 @@
 
 **理由**：具体、事实性的 commit message，有数据（20→100）和问题（504），不需要改写。
 
+### SNF-19 | status | 已经直接的事实同步
+> 4 月 12 日把连接池上限从 20 调到 100 后，504 错误率从 3.8% 降到 0.6%。今天继续观察 24 小时，再决定是否全量。
+
+**理由**：这段已经是直接的状态同步，重点全在时间、动作、数值和下一步上。即使 protected spans 很密，也不应该为了“更像人”再抛光一遍。
+
 ### B. Long
 
 ### SNF-15 | docs | 长段技术复盘中的工程术语
@@ -286,6 +313,7 @@
 | Should NOT Fix (SNF) | 文本保持原样或仅做最小调整，不误杀合理表达 |
 
 - `code-context` 样本额外要求：只处理注释 / docstring / commit message 中的文字，不改动代码本身
+- `fact-preservation` 样本额外要求：数字、日期、责任主体、引用、命令、代码、参数、路径、报错、指标和比较关系都必须保真；为了“更自然”补进原文没有的事实，一律记 `❌`
 - `必须改写`：能直接消除问题且不损失事实时，应输出改写结果
 - `允许只标注风险`：遇到无源引用、缺上下文或不能安全补全事实的样本，允许明确指出风险并不给虚构改写；这种情况记为 `⚠️`，不直接算规则失效
 - `mixed` 样本额外要求：只处理真正有问题的正文，不误改引用、用户指令、命令、字段名和被讨论词

@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.7.0] - 2026-04-13 — Positive Style Contract + Protected Spans
+
+### Added
+- 新增 `references/positive-style.md`，把“更像人”写成正向合同：强调具体动作、真实主语、轻微不对称节奏和分场景校准，不再只停留在“删套话”
+- 新增 `references/protected-spans.md`，把数字、日期、名字、引用、命令、代码、参数、路径、报错、指标和责任归属整理成预检清单
+- `evals/benchmark.md` 新增 4 条 fact-preservation 相关用例：`SF-25`、`SF-26`、`SF-27`、`SNF-19`
+
+### Changed
+- `references/scene-guardrails.md` 接入 `Protected Spans` 入口，按场景补充优先保留项
+- `SKILL.md` 执行顺序改为先划 `protected spans` 再改写，回读项补 protected spans 检查，并加入 `Positive Style Contract` / `Protected Spans` 导航
+- `README.md` 同步新增 `Protected spans` 和 `Positive Style Contract` 能力说明，更新 benchmark 数量和 `v1.7.0` 口径
+
+### Notes
+- 本次只落 `v1.7.0` 的基础层，不包含 `Residual Audit / Two-pass`、voice 拟合、real-sample pack 或 scene packs
 ## [1.6.1] - 2026-04-08 — ChatGPT Custom GPT 支持
 
 ### Added
