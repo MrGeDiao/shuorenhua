@@ -95,6 +95,29 @@ Required deliverables:
 - add bad-case intake templates
 - patch misfires discovered during `v1.7.0`
 
+### Recommended release train inside `v1.7`
+
+- `v1.7.0`
+  - framing/scoring
+  - `Positive Style Contract`
+  - `Protected Spans`
+- `v1.7.1`
+  - `Residual Audit / Two-pass`
+- `v1.7.2`
+  - `Real Sample Eval Pack` pilot
+  - release calibration based on real samples
+- `v1.7.3`
+  - `lite` vs `full` wording pass
+  - bad-case intake template
+  - real-sample expansion
+
+This split keeps each release coherent:
+
+- `v1.7.0` raises the floor
+- `v1.7.1` improves polish
+- `v1.7.2` checks reality
+- `v1.7.3` opens the loop for wider use
+
 ## Horizon C — v1.8 workflow
 
 Goal:
