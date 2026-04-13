@@ -291,20 +291,10 @@ codex --system-prompt "$(cat SKILL.md)" "先不要改写，只按 annotation mod
 - 代码上下文保护
 - 真实技术文本误杀防护
 
-当前仓库里的 benchmark 矩阵共有 `42` 条。  
-最新归档结果见：
-
-- `evals/results-v1.5.0.md`
-
-这个结果对应的是 `v1.5.0` 时的 `37` 条矩阵，记录为：
-
-- SF 通过率：`21/21 (100%)`
-- SNF 误杀率：`0/16 (0%)`
-
 评测文件见：
 
 - `evals/benchmark.md`
-- `evals/run-eval.md`
+- `evals/results-v1.5.0.md`
 
 ---
 
@@ -337,6 +327,30 @@ codex --system-prompt "$(cat SKILL.md)" "先不要改写，只按 annotation mod
 
 ---
 
+## 适合搭配的使用方式
+
+如果你想要更稳，推荐这样用：
+
+### 先诊断
+
+```text
+先不要改写，只按 annotation mode 标出下面这段文字里的问题：...
+```
+
+### 再改写
+
+```text
+用说人话规则改写这段文本，保留术语，不要口号式收尾。
+```
+
+### 如果有无源引用
+
+```text
+用说人话规则改写这段文本，无源引用按 audit-only 处理。
+```
+
+---
+
 ## 项目结构
 
 ```text
@@ -347,17 +361,10 @@ shuorenhua/
 ├── CONTRIBUTING.md
 ├── evals/
 │   ├── benchmark.md
-│   ├── results-v1.3.0.md
-│   ├── results-v1.4.3.md
-│   ├── results-v1.5.0.md
-│   └── run-eval.md
+│   └── results-v1.5.0.md
 ├── install/
 │   ├── codex.md
-│   ├── claude-code.md
-│   ├── cursor.md
-│   ├── openclaw.md
-│   ├── chatgpt.md
-│   └── chatgpt-gpt-instructions.md
+│   └── chatgpt.md
 └── references/
     ├── examples.md
     ├── operation-manual.md
@@ -365,11 +372,8 @@ shuorenhua/
     ├── phrases-zh.md
     ├── scene-guardrails.md
     ├── severity.md
-    ├── structures.md
-    └── boundary-cases.md
+    └── structures.md
 ```
-
-核心只需要 `SKILL.md` 一个文件。`references/` 让场景判断和误杀防护更准，按需加载。
 
 ---
 
@@ -377,9 +381,10 @@ shuorenhua/
 
 接下来优先做的不是继续无限加词，而是：
 
-- `Positive Style Contract`
-- `Protected Spans`
+- `Voice Calibration Lite`
 - `Residual Audit / Two-pass`
+- `Protected Spans`
+- `Positive Style Contract`
 - `Real Sample Eval Pack`
 
 也就是从“规则清理器”，往“中文自然表达协议”继续推进。
