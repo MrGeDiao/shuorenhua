@@ -366,7 +366,6 @@ shuorenhua/
 - [stop-slop](https://github.com/hardikpandya/stop-slop) — 规则 + 评分框架
 - [awesome-ai-research-writing](https://github.com/Leey21/awesome-ai-research-writing) — 中文去 AI 味
 - [avoid-ai-writing](https://github.com/conorbronsdon/avoid-ai-writing) — 严重度分级
-- [beautiful_prose](https://github.com/SHADOWPR0/beautiful_prose) — 正面风格契约
 
 ## 社区
 
