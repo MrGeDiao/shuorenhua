@@ -148,19 +148,55 @@
 > The landscape of remote work has undergone a profound transformation. It's not just about working from home — it's about reimagining the very fabric of how we collaborate. Companies that fail to navigate this paradigm shift risk being left behind in an increasingly competitive ecosystem.
 
 **First pass:**
-> More companies went remote after 2020. Some did it well, some didn't. The ones that kept async communication and cut meetings kept their engineers longer.
+> Remote work changed how teams collaborate. The teams that leaned into async communication and cut meetings adapted faster.
 
 **Audit — what still feels AI?**
-- "Some did it well, some didn't" is vague
-- The structure is still a bit too clean
+- "changed how teams collaborate" is still broad
+- "adapted faster" is vague and a bit polished
 
 **Final:**
-> After 2020, companies that switched to async-first communication and cut recurring meetings below 10 hours/week saw 23% lower attrition among engineers (State of Remote Work Survey, 2023). The ones that just moved their 9-to-5 schedule to Zoom lost people faster than before.
+> Remote work changed how teams collaborated, but not every company adjusted in the same way. Some changed how they communicated and worked together. Others just kept the same habits in a different setting.
 
 **What changed in second pass:**
-- Added specific data source
-- Added specific number (10 hours/week, 23%)
-- Made the contrast concrete instead of vague
+- Replaced the broad opener with a clearer contrast that stays inside the original claim
+- Removed the vague "adapted faster"
+- Broke the rhythm a bit without inventing new facts
+
+---
+
+## Two-pass examples | Residual Audit
+
+### 示例 A：公开写作里的一遍 vs 两遍
+
+**原文：**
+> 这次把 onboarding 流程改了一遍，新用户从注册到完成首次导入少走了两步。更重要的是，这也说明我们开始真正理解用户在第一天最容易卡住的地方。
+
+**第一遍：**
+> 这次把 onboarding 流程改了一遍，新用户从注册到完成首次导入少走了两步。我们也更清楚用户第一天最容易卡在哪里。
+
+**第二遍：**
+> 这次把 onboarding 流程改了一遍，新用户从注册到完成首次导入少走了两步。用户第一天最容易卡的地方，就是首次导入。
+
+**第二遍改了什么：**
+- 去掉了 `更重要的是 / 这也说明我们开始真正理解` 这层 narrator 话术
+- 保留原文已有判断，只把它压回更直接的句子
+- 没有补新事实，也没有重写整段
+
+### 示例 B：status 场景里的克制 second pass
+
+**原文：**
+> 4 月 13 日把重试次数从 2 次调到 5 次。支付超时从 1.9% 降到 0.7%。这次调整也进一步验证了我们的优化方向是正确的。明天继续看晚高峰数据。
+
+**第一遍：**
+> 4 月 13 日把重试次数从 2 次调到 5 次后，支付超时从 1.9% 降到 0.7%。这次调整说明方向是对的。明天继续看晚高峰数据。
+
+**第二遍：**
+> 4 月 13 日把重试次数从 2 次调到 5 次后，支付超时从 1.9% 降到 0.7%。明天继续看晚高峰数据。
+
+**第二遍改了什么：**
+- 只删掉 `方向是对的` 这种空判断
+- 保留日期、数字和下一步，不往更口语的方向抛光
+- `status` 场景如果第一遍已经够直接，第二遍就到这里停
 
 ---
 

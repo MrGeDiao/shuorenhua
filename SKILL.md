@@ -1,8 +1,6 @@
 ---
 name: shuorenhua
 description: 检查和清理中英文文本里的 AI 套路，适用于”去 AI 味””说人话””自然一点””别像模板”这类改写需求；按场景控制力度，同时保留事实、术语和语域。
-metadata:
-  short-description: 去模板感的中英文改写协议
 ---
 
 # 说人话
@@ -42,7 +40,7 @@ metadata:
 3. 判 Tier：`Tier 1 / Tier 2 / Tier 3`，按问题命中强度判断，不要把 Tier 当作改写力度
 4. 再判档位：`minimal / standard / aggressive`
 5. 先执行本文件里的最小规则；只要环境里能读 `references/`，默认继续按问题类型补看 [Protected Spans](./references/protected-spans.md)、[Positive Style Contract](./references/positive-style.md)、[微操作手册](./references/operation-manual.md)、[结构反模式](./references/structures.md) 和相关短语表
-6. 回读：检查 protected spans、信息、语域、术语、断裂感
+6. 回读拆成两步：先做保真回读，再按需做残留味回读
 7. 输出：默认只给单一推荐版本；用户明确要求“先标问题，不改写”时切到 `annotation mode`
 
 执行第 5 步时，先按“模式”处理，再按“词条”兜底：
@@ -260,7 +258,11 @@ Tier 表示问题命中强度，与 [严重度分级](./references/severity.md) 
 
 ## 8. Required reread checks
 
-提交改写前，至少回读这 5 项：
+提交改写前，把回读固定拆成两步，不要混着做：
+
+### Pass 1 | 保真回读
+
+先检查这 5 项：
 
 1. protected spans 是否漂了
 2. 信息是否丢失
@@ -269,6 +271,33 @@ Tier 表示问题命中强度，与 [严重度分级](./references/severity.md) 
 5. 删改后是否出现生硬断裂
 
 如果删掉一句后段落突然没了落点，就补一条事实句，不要补口号句。
+
+### Pass 2 | Residual Audit
+
+只有在第一遍已经保住事实、但读起来还有轻微 AI 味时，才做第二遍。第二遍固定只查这 5 件事：
+
+1. 开场残留：还在用 `结论先说 / 直接说结论 / 值得注意的是` 这类提示层
+2. 总结残留：还在用 `总的来说 / 归根结底 / 最终来看` 这类空收尾
+3. narrator 残留：还在解释“这说明了什么”，而不是直接说事实或判断
+4. 空泛判断残留：还在写 `方向是对的 / 意义重大 / 真正理解了用户`
+5. 句长过匀：每句都差不多长、差不多整齐，像被统一抛光过
+
+第二遍只允许做轻量修正：
+
+- 删一个残留开场或收尾
+- 合并两句过匀的事实句，或拆一处过满的句子
+- 把一句 narrator / 空泛判断压回直接表达
+
+第二遍不要做的事：
+
+- 不重写全文
+- 不补原文没有的事实
+- 不为了“更像人”改掉术语、参数、命令、报错或责任归属
+
+场景保守策略：
+
+- `public-writing` 和 AI 味偏重的 `chat`，第二遍更常需要
+- `docs / status / code-context` 默认更保守；如果第二遍会让语气变口语、变广告、或影响保真，就停在第一遍
 
 ## Reference navigation
 

@@ -1,5 +1,25 @@
 # Changelog
 
+## [1.7.1] - 2026-04-14 — Residual Audit / Two-pass
+
+### Added
+- `references/operation-manual.md` 新增 `Residual Audit / 二次审稿` 条目，固定第二遍只查 5 类残留：开场、总结、narrator、空泛判断、句长过匀
+- `references/examples.md` 新增 2 组一遍 vs 两遍示例，并把英文 `two-pass demo` 改成不补新事实的版本
+- `evals/benchmark.md` 新增 5 条二次审稿相关用例：`SF-28`、`SF-29`、`SF-30`、`SNF-20`、`SNF-21`
+
+### Changed
+- `SKILL.md` 把回读正式拆成两步：`保真回读 + Residual Audit`，并明确第二遍只允许轻量修正
+- `SKILL.md` 补充场景保守策略：`docs / status / code-context` 的第二遍默认更克制，宁可停在第一遍也不为了“更像人”改失真
+- `evals/run-eval.md` 同步评测口径：纳入 `Positive Style Contract` / `Protected Spans`，SF/SNF 范围更新到 `30 / 21`
+- `README.md` 同步工作流和 benchmark 数量到 `51` 条
+
+### Fixed
+- `SKILL.md` frontmatter 去掉远端同步带来的 `metadata` 字段，收口成当前本地 skill 规范可稳定使用的形式
+
+### Tested
+- 2026-04-14 用 GPT-5.4 Codex 静态复核 `benchmark.md`（51 条）：SF 通过率 `30/30 (100%)`，SNF 误杀率 `0/21 (0%)`
+- `Residual Audit` 新增 3 条正例（`SF-28`、`SF-29`、`SF-30`）和 2 条反误杀样本（`SNF-20`、`SNF-21`）全部通过
+
 ## [1.7.0] - 2026-04-13 — Positive Style Contract + Protected Spans
 
 ### Added

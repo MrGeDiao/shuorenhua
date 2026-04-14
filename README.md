@@ -130,7 +130,8 @@
 3. 再判问题强度（Tier）
 4. 再决定改写档位
 5. 先按模式处理，再按正向目标和词条兜底
-6. 最后回读：检查 protected spans、保真、语域、术语和断裂感
+6. 先做保真回读：检查 protected spans、保真、语域、术语和断裂感
+7. 再按需做 Residual Audit：只查开场残留、总结残留、narrator 残留、空泛判断残留、句长过匀
 
 核心原则只有一句话：
 
@@ -141,9 +142,9 @@
 | 场景 | 强度 | 干什么 |
 |------|------|--------|
 | 聊天 | 轻 | 只砍套话，保留口语感 |
-| 技术摘要 | 中 | 砍套话 + 渲染词，允许系统主语 |
-| 文档 | 中 | 技术表达优先 |
-| 博客/社交 | 重 | 全规则 + 两遍制 |
+| 技术摘要 | 中 | 砍套话 + 渲染词，默认先保真，再决定要不要 second pass |
+| 文档 | 中 | 技术表达优先，second pass 更保守 |
+| 博客/社交 | 重 | 全规则 + Residual Audit |
 
 ### Protected Spans
 
@@ -168,16 +169,11 @@
 
 ## 评测
 
-46 条测试用例（21 条该改 + 16 条不该误杀 + 9 条新增边界），用 benchmark 跑：
+当前 benchmark 共 51 条（30 条该改 + 21 条不该误杀）。
 
-| 指标 | 结果 | 目标 |
-|------|------|------|
-| 该改的改了 (SF) | 21/21 (100%) | > 90% ✅ |
-| 不该改的没动 (SNF) | 0/16 误杀 (0%) | < 10% ✅ |
+覆盖：套话清理、工程师腔、小红书 AI 腔、无源引用、fact preservation、protected spans、代码上下文保护、Residual Audit / 二次审稿，以及真实技术文本误杀防护。
 
-覆盖：套话清理、工程师腔、小红书 AI 腔、无源引用、fact preservation、protected spans、代码上下文保护、真实技术文本误杀防护。
-
-详见 [evals/results-v1.5.0.md](evals/results-v1.5.0.md) · [evals/benchmark.md](evals/benchmark.md)。
+当前用例集见 [evals/benchmark.md](evals/benchmark.md)。本轮结果见 [evals/results-v1.7.1.md](evals/results-v1.7.1.md)，历史归档可参考 [evals/results-v1.5.0.md](evals/results-v1.5.0.md)。
 
 ---
 
@@ -294,7 +290,7 @@ shuorenhua/
 ├── CHANGELOG.md
 ├── CONTRIBUTING.md
 ├── evals/
-│   ├── benchmark.md        # 评测集（46 条）
+│   ├── benchmark.md        # 评测集（51 条）
 │   ├── run-eval.md         # 评测指令
 │   ├── results-v1.3.0.md
 │   ├── results-v1.4.3.md
