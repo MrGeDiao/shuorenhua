@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.7.2] - 2026-04-17 — Real Sample Eval Pack
+
+### Added
+- 新增 `evals/real-samples.md`，首批 12 条整段样本，覆盖 README 简介、release note、X 短帖、Linux.do 长帖、GitHub issue 回复、commit message、Python docstring、开发进度同步、技术博客开头、微信对话、知乎长回答、混合场景
+- 每条样本按统一模板记录：原文、场景、为什么像 AI、不该改坏什么、推荐改法、原文 3 维评分
+- 新增 3 维评分体系：`自然 / 保真 / 可直接发`（5 分制），以"可直接发"为最终指标，`保真` 掉到 < 4 分即算退步
+- 新增"高频 AI 句式分布"区块：汇总 2026-04 中文用户被吐槽最多的 AI 味句式（`要不要我顺手帮你`、`掰开揉碎`、`先说结论`、`直接封神`、`核心逻辑是` 等），用来指导样本构造
+- `README.md` 示例 2 换成 `RS-11`（微信工程师腔溢出），还原"程序员一开口像在写工程报告"的尴尬瞬间
+
+### Changed
+- `README.md` 评测区补充 `real-samples.md` 12 条整段样本的说明，和 51 条 benchmark 并列
+- `tasks/roadmap-v1.7-v2.0.md` v1.7.2 条目全部打勾
+
+### Notes
+- 首批为"观察归纳 + 合成"样本，不指向任何真人或真项目。之所以不直接引用真实帖子到公开仓库：未授权转录有归属和合规问题
+- 真实样本收集机制留给 v1.7.3，届时通过 `.github/ISSUE_TEMPLATE/bad-case.md` 征集，追加到本文件（目标 20+ 条）
+
 ## [1.7.1] - 2026-04-14 — Residual Audit / Two-pass
 
 ### Added
