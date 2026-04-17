@@ -30,7 +30,7 @@
 2. 再按需读取 `references/` 下的文件，补齐短语、结构、边界和误杀防护
 3. 然后读取 `./evals/benchmark.md`，对其中每一条测试用例执行评测
 
-### 对 Should Fix（SF-01 到 SF-30）：
+### 对 Should Fix（SF-01 到 SF-31）：
 - 先判断主场景（chat / status / docs / public-writing）和问题类型
 - 判断改写档位（minimal / standard / aggressive）
 - 回读先做保真回读；只有第一遍已经保住事实、但仍有明显残留味时，才再做 `Residual Audit`
@@ -59,7 +59,7 @@
 ```
 
 并给出：
-- SF 通过率：X/30
+- SF 通过率：X/31
 - SNF 误杀率：X/21
 - 是否达到目标：SF > 90%，SNF 误杀率 < 10%
 
@@ -92,4 +92,4 @@ codex --system-prompt "$(cat ./SKILL.md)" \
 2. 把 `SKILL.md`、`references/` 下的文件和 `evals/benchmark.md` 的内容一起贴给模型
 3. token 不够时，优先保留 `SKILL.md` + `benchmark.md` + `severity.md` + `boundary-cases.md`
 
-注意：token 窗口较短的模型可能无法一次跑完 51 条，可以分批（先跑 SF，再跑 SNF）。
+注意：token 窗口较短的模型可能无法一次跑完 52 条，可以分批（先跑 SF，再跑 SNF）。

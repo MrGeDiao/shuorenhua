@@ -65,6 +65,8 @@
 
 没人问你。做就做，别推销。这批新口癖已经全部收录。
 
+社区最近集中吐槽的，往往也不是某一个具体词，而是一整套姿态链：先宣告“我在这里”，再承诺“我接住你”，再替你下定义，最后顺手继续推任务。`说人话` 对这类问题优先按模式处理，不追着热词逐条打补丁。
+
 ## 效果
 
 ### 示例 1：公开介绍
@@ -171,11 +173,11 @@
 
 ## 评测
 
-当前 benchmark 共 51 条（30 条该改 + 21 条不该误杀），另有 [`evals/real-samples.md`](evals/real-samples.md) 12 条整段样本，专门评测"改完能不能直接发"。
+当前 benchmark 共 52 条（31 条该改 + 21 条不该误杀），另有 [`evals/real-samples.md`](evals/real-samples.md) 14 条整段样本，专门评测"改完能不能直接发"。
 
 覆盖：套话清理、工程师腔、小红书 AI 腔、无源引用、fact preservation、protected spans、代码上下文保护、Residual Audit / 二次审稿，以及真实技术文本误杀防护。
 
-当前用例集见 [evals/benchmark.md](evals/benchmark.md)。本轮结果见 [evals/results-v1.7.1.md](evals/results-v1.7.1.md)，历史归档可参考 [evals/results-v1.5.0.md](evals/results-v1.5.0.md)。
+当前用例集见 [evals/benchmark.md](evals/benchmark.md)。最近一次公开归档结果见 [evals/results-v1.7.1.md](evals/results-v1.7.1.md)，历史结果可参考 [evals/results-v1.5.0.md](evals/results-v1.5.0.md)。
 
 ---
 
@@ -292,7 +294,7 @@ shuorenhua/
 ├── CHANGELOG.md
 ├── CONTRIBUTING.md
 ├── evals/
-│   ├── benchmark.md        # 评测集（51 条）
+│   ├── benchmark.md        # 评测集（52 条）
 │   ├── run-eval.md         # 评测指令
 │   ├── results-v1.3.0.md
 │   ├── results-v1.4.3.md

@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.7.3] - 2026-04-17 — Community Intake / 接住体
+
+### Added
+- `evals/real-samples.md` 新增“社区观察：为什么‘接住体’一眼像 AI”区块，提炼 Linux.do / V2EX 公开讨论里的高频方法信号，并附公开链接作观察来源
+- `references/boundary-cases.md` 新增案例 10：技术语境里的“接住请求”，明确 `接住` 不能按字面一刀切
+- `evals/real-samples.md` 新增 `RS-14`（社区标题 / 宣言腔），覆盖 `稳稳地接住所有人` 这类标题式承接承诺
+
+### Changed
+- `references/phrases-zh.md`、`references/operation-manual.md` 把“接住”从单词命中升级为按宾语和场景判断：人/情绪/关系默认更可疑，请求/流量/峰值先回技术语境判断
+- `SKILL.md` 的 Lite 模式兜底同步覆盖“过度接住 / 心理判断 / 身份认证式夸奖”，避免单文件模式和 Full 模式行为分裂
+- `README.md` 同步补“姿态链优先”的解释，明确这类问题按模式处理，不按社区热词逐条追打
+- `evals/real-samples.md` 数量从 12 条更新为 14 条，`README.md` 评测口径同步对齐
+
+### Tested
+- 2026-04-17 做一轮“接住体”静态 smoke test：私聊安抚、社区标题、推销式结尾应命中；技术语境里的“接住峰值请求 / 流量”应放行
+- `git diff --check` 通过
+
 ## [1.7.2] - 2026-04-17 — Real Sample Eval Pack
 
 ### Added
@@ -15,7 +32,7 @@
 
 ### Notes
 - 首批为"观察归纳 + 合成"样本，不指向任何真人或真项目。之所以不直接引用真实帖子到公开仓库：未授权转录有归属和合规问题
-- 真实样本收集机制留给 v1.7.3，届时通过 `.github/ISSUE_TEMPLATE/bad-case.md` 征集，追加到本文件（目标 20+ 条）
+- 真实样本收集机制留给后续版本，届时会补单独的提交流程和授权模板，再追加到本文件（目标 20+ 条）
 
 ## [1.7.1] - 2026-04-14 — Residual Audit / Two-pass
 
