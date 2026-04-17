@@ -1,6 +1,6 @@
 ---
 name: shuorenhua
-description: 检查和清理中英文文本里的 AI 套路，适用于”去 AI 味””说人话””自然一点””别像模板”这类改写需求；按场景控制力度，同时保留事实、术语和语域。
+description: 检查和清理中英文文本里的 AI 套路，适用于“去 AI 味”“说人话”“自然一点”“别像模板”“先标问题”这类改写和审稿需求；按场景控制力度，同时保留事实、术语、语域和责任主体。
 ---
 
 # 说人话
@@ -39,7 +39,7 @@ description: 检查和清理中英文文本里的 AI 套路，适用于”去 AI
 2. 查禁改项：先划 `protected spans`，看有没有必须保留的术语、系统主语、引用原文、命令或正式语体
 3. 判 Tier：`Tier 1 / Tier 2 / Tier 3`，按问题命中强度判断，不要把 Tier 当作改写力度
 4. 再判档位：`minimal / standard / aggressive`
-5. 先执行本文件里的最小规则；只要环境里能读 `references/`，默认继续按问题类型补看 [Protected Spans](./references/protected-spans.md)、[Positive Style Contract](./references/positive-style.md)、[微操作手册](./references/operation-manual.md)、[结构反模式](./references/structures.md) 和相关短语表
+5. 先执行本文件里的最小规则；只要环境里能读 `references/`，默认继续按问题类型补看 [Protected Spans](./references/protected-spans.md)、[Positive Style Contract](./references/positive-style.md)、[微操作手册](./references/operation-manual.md)、[结构反模式](./references/structures.md) 和相关短语表；如果目标是“改完能直接发”，再补看 [真实样本评测](./evals/real-samples.md) 和 [改写示例](./references/examples.md)
 6. 回读拆成两步：先做保真回读，再按需做残留味回读
 7. 输出：默认只给单一推荐版本；用户明确要求“先标问题，不改写”时切到 `annotation mode`
 
@@ -213,6 +213,7 @@ Tier 表示问题命中强度，与 [严重度分级](./references/severity.md) 
 - 有具体信息，不靠空洞总括撑气势
 - 有主语和动作，不靠虚假主体兜底
 - 有统一语域，不在技术腔、商业腔、自媒体腔之间跳
+- 以“可直接发”为终点，不为了更像人继续抛光到失真
 - 有节奏，但节奏来自删冗余和保留重点，不来自硬造金句
 - 有立场，但立场来自判断或事实，不来自“故作洞见”
 - 有边界，没把握就直说，不替对方做心理判断，也不硬演“我懂了”
@@ -314,6 +315,8 @@ Tier 表示问题命中强度，与 [严重度分级](./references/severity.md) 
 - 遇到具体病灶怎么动手：看 [微操作手册](./references/operation-manual.md)
 - 想确认某个场景什么不能乱动：看 [场景禁改表](./references/scene-guardrails.md)
 - 想校准误杀边界或做静态回归：看 [边界案例集](./references/boundary-cases.md)
+- 想看真实样本评测：看 [真实样本评测](./evals/real-samples.md)
+- 想看默认改写和 `annotation mode` 的对照：看 [改写示例](./references/examples.md)
 - 想处理没收录进词表的同类变体：先看 [微操作手册](./references/operation-manual.md) 里的“变体归并”规则，再决定要不要补词
 
 默认做法是：先用本文件完成“场景、Tier、档位、输出合同”的主判断，再按问题类型补读 `references/`；只有在单文件安装场景里，才停留在本文件的兜底规则。
