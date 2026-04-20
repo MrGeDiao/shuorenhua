@@ -49,7 +49,7 @@
 | 执行力表演 | `狠狠干` `补一刀` `拍脑门` `揪出来` | 改成具体动作，不演 |
 | 推销式助手腔 | `只要你回复我我立马开始` | 去掉无效催促，直接办事 |
 | 小红书 AI 腔 | `姐妹们` `保姆级` `谁懂啊` `狠狠` | 降低密度，保留场景需要的口语 |
-| 翻译腔 / narrator 腔 | `基于……来……` `通过……进行……` | 改成更直接的中文句式 |
+| 翻译腔 / 旁白腔 | `基于……来……` `通过……进行……` | 改成更直接的中文句式 |
 
 最让人血压升高的是这类：
 
@@ -100,10 +100,10 @@
 ### 示例 4：只做诊断
 
 ```text
-先不要改写，只按 annotation mode 标出下面这段文字里的问题：...
+先不要改写，只按 annotation mode（只标注不改写）标出下面这段文字里的问题：...
 ```
 
-适合审稿、review，或者你还不想让 AI 直接替你改稿的时候。
+适合审稿、代码审查，或者你还不想让 AI 直接替你改稿的时候。
 
 更多示例见 [references/examples.md](references/examples.md)。
 
@@ -122,12 +122,12 @@
 `说人话` 不是见词就替换，而是先判断场景和风险，再决定改写力度。
 
 1. 先判场景
-2. 再划 protected spans，确认哪些内容不能动
-3. 再判问题强度（Tier）
+2. 再划保护片段，确认哪些内容不能动
+3. 再判问题强度等级（Tier）
 4. 再决定改写档位
 5. 先按模式处理，再按正向目标和词条兜底
-6. 先做保真回读：检查 protected spans、保真、语域、术语和断裂感
-7. 再按需做 Residual Audit：只查开场残留、总结残留、narrator 残留、空泛判断残留、句长过匀
+6. 先做保真回读：检查保护片段、保真、语域、术语和断裂感
+7. 再按需做残留复查：只查开场残留、总结残留、旁白腔残留、空泛判断残留、句长过匀
 
 核心原则只有一句话：
 
@@ -138,11 +138,11 @@
 | 场景 | 强度 | 干什么 |
 |------|------|--------|
 | 聊天 | 轻 | 只砍套话，保留口语感 |
-| 技术摘要 | 中 | 砍套话 + 渲染词，默认先保真，再决定要不要 second pass |
-| 文档 | 中 | 技术表达优先，second pass 更保守 |
-| 博客/社交 | 重 | 全规则 + Residual Audit |
+| 技术摘要 | 中 | 砍套话 + 渲染词，默认先保真，再决定要不要二次回读 |
+| 文档 | 中 | 技术表达优先，二次回读更保守 |
+| 博客/社交 | 重 | 全规则 + 残留复查 |
 
-### Protected Spans
+### 保护片段
 
 改写前先保护这些不能乱动的内容：
 
@@ -152,24 +152,24 @@
 - 命令、代码、路径、参数、字段、配置项
 - 报错、状态码、指标和度量关系
 
-### Positive Style Contract
+### 正向风格目标
 
 不只删套话，也定义“更像人”的正向目标：
 
 - 具体动作优先于抽象拔高
 - 真主语和真动作优先于姿态层
 - 允许轻微不对称，不把每句都抛光成同一种腔
-- 按 `chat / status / docs / public-writing` 分场景校准
+- 按 `chat / status / docs / public-writing` 这几个场景标签分别校准
 
 ---
 
 ## 评测
 
-当前 benchmark 共 52 条（31 条该改 + 21 条不该误杀），另有 [`evals/real-samples.md`](evals/real-samples.md) 14 条整段样本，专门评测"改完能不能直接发"。
+当前评测集共 54 条（31 条该改 + 23 条不该误杀），另有 [`evals/real-samples.md`](evals/real-samples.md) 14 条整段样本，专门评测"改完能不能直接发"。
 
-覆盖：套话清理、工程师腔、小红书 AI 腔、无源引用、fact preservation、protected spans、代码上下文保护、Residual Audit / 二次审稿，以及真实技术文本误杀防护。
+覆盖：套话清理、工程师腔、小红书 AI 腔、无源引用、事实保真、保护片段、代码上下文保护、残留复查 / 二次审稿，以及真实技术文本误杀防护。
 
-当前用例集见 [evals/benchmark.md](evals/benchmark.md)。最近一次公开归档结果见 [evals/results-v1.7.1.md](evals/results-v1.7.1.md)，历史结果可参考 [evals/results-v1.5.0.md](evals/results-v1.5.0.md)。
+当前用例集见 [evals/benchmark.md](evals/benchmark.md)。最近一次公开归档结果见 [evals/results-v1.7.4.md](evals/results-v1.7.4.md)，历史结果可参考 [evals/results-v1.7.1.md](evals/results-v1.7.1.md) 和 [evals/results-v1.5.0.md](evals/results-v1.5.0.md)。
 
 ---
 
@@ -188,7 +188,7 @@ codex --system-prompt "$(cat SKILL.md)" "改写以下文本：..."
 只做诊断：
 
 ```bash
-codex --system-prompt "$(cat SKILL.md)" "先不要改写，只按 annotation mode 标出下面这段文字里的问题：..."
+codex --system-prompt "$(cat SKILL.md)" "先不要改写，只按 annotation mode（只标注不改写）标出下面这段文字里的问题：..."
 ```
 
 ### 方式 2：项目内长期使用（推荐）
@@ -201,15 +201,15 @@ codex --system-prompt "$(cat SKILL.md)" "先不要改写，只按 annotation mod
 对外文本优先按它处理；代码、日志、配置和命令输出不套这个 skill。
 ```
 
-### 方式 3：ChatGPT / Custom GPT / Projects
+### 方式 3：ChatGPT / 自建 GPT / 项目
 
-可以直接使用已有 GPT，也可以自建 Custom GPT，或者在 Project 里上传 `SKILL.md` + `references/`。详见 [install/chatgpt.md](install/chatgpt.md)。
+可以直接使用已有 GPT，也可以自建 GPT，或者在项目里上传 `SKILL.md` + `references/`。详见 [install/chatgpt.md](install/chatgpt.md)。
 
 ### 其他平台
 
 [Codex](install/codex.md) · [Claude Code](install/claude-code.md) · [Cursor / Windsurf](install/cursor.md) · [OpenClaw](install/openclaw.md) · [ChatGPT](install/chatgpt.md)
 
-> **Lite vs Full**：只放 `SKILL.md` 是 Lite 模式，适合临时改一段；同时放 `references/` 是 Full 模式，适合 AI 味重、中英混写、docs / status 这类需要更稳误杀防护的场景。单文件效果会明显弱于完整模式。
+> **精简模式 vs 完整模式**：只放 `SKILL.md` 是精简模式，适合临时改一段；同时放 `references/` 是完整模式，适合 AI 味重、中英混写、文档或状态同步这类需要更稳误杀防护的场景。单文件效果会明显弱于完整模式。
 
 ---
 
@@ -249,7 +249,7 @@ codex --system-prompt "$(cat SKILL.md)" "先不要改写，只按 annotation mod
 
 ### 3. 你在非常保守的场景里用它
 
-技术文档、status、code-context 这些场景默认更克制，结果可能"更干净"但不一定"更活"。
+技术文档、状态同步、代码上下文这些场景默认更克制，结果可能"更干净"但不一定"更活"。
 
 ### 4. 原文本身就太空
 
@@ -276,7 +276,7 @@ shuorenhua/
 ├── CHANGELOG.md
 ├── CONTRIBUTING.md
 ├── evals/
-│   ├── benchmark.md        # 评测集（52 条）
+│   ├── benchmark.md        # 评测集（54 条）
 │   ├── real-samples.md     # 14 条整段真实样本
 │   ├── run-eval.md         # 评测指令
 │   └── results-*.md        # 历次版本归档
@@ -305,9 +305,9 @@ shuorenhua/
 
 ---
 
-## FAQ
+## 常见问题
 
-### 这是不是拿来骗 AI detector 的？
+### 这是不是拿来骗 AI 检测器的？
 
 不是。目标是减少模板感、表演感和语域漂移，让文本更自然、更可发布，不是绕过检测。
 
@@ -317,13 +317,13 @@ shuorenhua/
 
 ### 为什么改完有时还是有 AI 味？
 
-"去掉明显套路"不等于"拥有具体作者的 voice"。当前版本更擅长清理，不够擅长拟合你的个人表达，这也是后续迭代重点。
+"去掉明显套路"不等于"拥有具体作者的个人表达"。当前版本更擅长清理，不够擅长拟合你的个人表达，这也是后续迭代重点。
 
 ---
 
 ## 贡献
 
-欢迎提交新 benchmark、边界案例、真实 bad case、改写前后样本、新的误杀防护。
+欢迎提交新的评测样本、边界案例、真实问题案例、改写前后样本和新的误杀防护。
 
 在提交新词之前，先想一件事：
 

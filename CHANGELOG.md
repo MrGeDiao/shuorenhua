@@ -1,5 +1,26 @@
 # Changelog
 
+## [1.7.4] - 2026-04-20 — Guardrails & Retro
+
+### Added
+- `evals/benchmark.md` 新增 `SNF-22`（code-context：技术语境里的接住突发请求）和 `SNF-23`（docs：限流网关稳稳接住上游峰值请求），作为 v1.7.3"接住"语境判断的**回归护栏**——防止未来改规则时把"接住请求 / 接住流量 / 稳稳接住上游峰值请求"一起误杀
+- `evals/results-v1.7.4.md` 新增评测归档：追溯覆盖 v1.7.1 → v1.7.4 的 benchmark 增量（`SF-31`、`SNF-22`、`SNF-23`），补上 v1.7.2 / v1.7.3 当时没做的结果归档
+- `CONTRIBUTING.md` 新增"维护者：Community Observation Intake"小节，把 v1.7.3 用过的"公开讨论 → 姿态链抽象 → 判宾语 / 判场景 → 双向补样本 → 升级规则"五步流程沉淀为可复用协议
+
+### Changed
+- benchmark 总数从 52 条（31 SF + 21 SNF）扩到 54 条（31 SF + 23 SNF）
+- `README.md` 的评测口径（54 条）、最新归档链接（`results-v1.7.4.md`）、文件树里的 benchmark 条数（54）同步对齐
+- `evals/real-samples.md` 顶部版本标记从"v1.7.2 新增"升级为"v1.7.2 新增（首批 12 条），v1.7.3 扩到 14 条"；内部 benchmark 对比表条数同步为 54
+
+### Tested
+- 2026-04-20 对 `SNF-22` / `SNF-23` 做静态复核：在 v1.7.3 现有规则下（`phrases-zh.md:88-90, 240-243`、`operation-manual.md:201, 213, 219`）两条 SNF 都按预期放行，**不需要修改规则文件**——这正是"先写回归测试再看规则"的 TDD 收尾
+- 复核方式、通过率和用例详情见 `evals/results-v1.7.4.md`
+
+### Notes
+- v1.7.4 是 v1.7.x 的收尾版本，主旨是 **Guardrails（回归护栏）** + **Retro（追溯归档和方法论沉淀）**，不引入新能力也不扩词表
+- 原 v1.7.3 roadmap 规划的"入口打通 + bad-case 收集"整体推迟到 v2.0，等项目有曝光后再配合分发一起做
+- 下一版（v1.8）回到规划主线：Voice Calibration Lite + Scene Packs
+
 ## [1.7.3] - 2026-04-17 — Community Intake / 接住体
 
 ### Added
