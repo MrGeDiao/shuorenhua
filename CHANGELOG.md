@@ -1,5 +1,29 @@
 # Changelog
 
+## [1.8.0] - 2026-04-24 — Scene Packs / 可直接发场景包
+
+### Added
+- 新增 `references/scene-packs.md`，把 `public-writing` 细分为 `README`、`release-note`、`forum-post`、`issue-reply` 四个可发布场景
+- `evals/benchmark.md` 新增 8 条 scene pack 回归用例：`SF-32` ~ `SF-35` 覆盖该改场景，`SNF-24` ~ `SNF-27` 覆盖误杀防护
+- `evals/real-samples.md` 新增 `RS-15` ~ `RS-18` 四条整段样本，分别覆盖 README intro、release note、forum post 和 issue reply
+- 新增 `evals/results-v1.8.0.md`，归档本轮 TDD 静态复核结果
+
+### Changed
+- `SKILL.md` 在大场景判定后增加 Scene Packs 入口：先判 `public-writing`，再按发布目的细分
+- `references/scene-guardrails.md` 明确分工：大场景边界仍由 guardrails 控制，scene packs 只做更细的落地策略
+- benchmark 总数从 54 条（31 SF + 23 SNF）扩到 62 条（35 SF + 27 SNF）
+- `README.md` 重构为正式项目首页：新增状态徽章、快速导航、v1.8.0 场景能力入口和 Star History
+- 新增 `assets/icon-hd.png` 和 `assets/readme-logo.png`，在保留原 icon 元素的基础上补齐 README 横向品牌图
+
+### Tested
+- 2026-04-24 按 TDD 做静态复核：先补 `SF-32` ~ `SF-35` / `SNF-24` ~ `SNF-27`，再写最小 Scene Packs 和接入点
+- 静态复核结果：SF 通过率 `35/35 (100%)`，SNF 误杀率 `0/27 (0%)`，Scene Packs `8/8 (100%)`
+- 复核方式、用例详情和 real samples 评分口径见 `evals/results-v1.8.0.md`
+
+### Notes
+- v1.8.0 不做 Voice Calibration / Voice Hints，不模仿名人、品牌或公众人物
+- 公开 bad-case 征集入口继续留到 v2.0，等项目有更多外部流量后再和分发一起做
+
 ## [1.7.4] - 2026-04-20 — Guardrails & Retro
 
 ### Added
@@ -19,7 +43,7 @@
 ### Notes
 - v1.7.4 是 v1.7.x 的收尾版本，主旨是 **Guardrails（回归护栏）** + **Retro（追溯归档和方法论沉淀）**，不引入新能力也不扩词表
 - 原 v1.7.3 roadmap 规划的"入口打通 + bad-case 收集"整体推迟到 v2.0，等项目有曝光后再配合分发一起做
-- 下一版（v1.8）回到规划主线：Voice Calibration Lite + Scene Packs
+- 后续路线已调整：v1.8.0 先做 Scene Packs / 可直接发场景包，Voice Hints Lite 推迟到 v1.9 评估
 
 ## [1.7.3] - 2026-04-17 — Community Intake / 接住体
 

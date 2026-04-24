@@ -4,6 +4,8 @@
 
 只要环境里能读 `references/`，默认先用 [Protected Spans](./protected-spans.md) 划出不能漂的片段，再按这里的场景禁改项收窄改写范围。
 
+本文件只定义大场景边界。README、release note、forum post、issue reply 这类更细的发布场景，即使初判像 `docs` 或 `status`，也要补看 [Scene Packs](./scene-packs.md)，同时保留这里更保守的事实和术语边界。
+
 ## `chat`
 
 目标：

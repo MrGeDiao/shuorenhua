@@ -39,7 +39,7 @@ description: 检查和清理中英文文本里的 AI 套路，适用于“去 AI
 2. 查禁改项：先划 `protected spans`，看有没有必须保留的术语、系统主语、引用原文、命令或正式语体
 3. 判 Tier：`Tier 1 / Tier 2 / Tier 3`，按问题命中强度判断，不要把 Tier 当作改写力度
 4. 再判档位：`minimal / standard / aggressive`
-5. 先执行本文件里的最小规则；只要环境里能读 `references/`，默认继续按问题类型补看 [Protected Spans](./references/protected-spans.md)、[Positive Style Contract](./references/positive-style.md)、[微操作手册](./references/operation-manual.md)、[结构反模式](./references/structures.md) 和相关短语表；如果目标是“改完能直接发”，再补看 [真实样本评测](./evals/real-samples.md) 和 [改写示例](./references/examples.md)
+5. 先执行本文件里的最小规则；只要环境里能读 `references/`，默认继续按问题类型补看 [Protected Spans](./references/protected-spans.md)、[Positive Style Contract](./references/positive-style.md)、[微操作手册](./references/operation-manual.md)、[结构反模式](./references/structures.md) 和相关短语表；如果目标是“改完能直接发”，或文本明显属于 README、release note、论坛帖、issue 回复，再补看 [Scene Packs](./references/scene-packs.md)、[真实样本评测](./evals/real-samples.md) 和 [改写示例](./references/examples.md)
 6. 回读拆成两步：先做保真回读，再按需做残留味回读
 7. 输出：默认只给单一推荐版本；用户明确要求“先标问题，不改写”时切到 `annotation mode`
 
@@ -74,7 +74,7 @@ description: 检查和清理中英文文本里的 AI 套路，适用于“去 AI
 
 信号：
 
-- 操作文档、技术说明、接口说明、FAQ、事故复盘、发布说明
+- 操作文档、技术说明、接口说明、FAQ、事故复盘
 - 重点是可检索、可复现、术语稳定
 
 默认档位：`minimal`
@@ -89,6 +89,17 @@ description: 检查和清理中英文文本里的 AI 套路，适用于“去 AI
 默认档位：`standard`
 
 更细的下限限制见 [场景禁改表](./references/scene-guardrails.md)。
+
+### Scene Packs
+
+如果文本本身命中下面任一子场景，不依赖用户是否明说，也不受主场景初判限制，都要补看 Scene Packs：
+
+- `README`：出现项目介绍、快速开始、安装方式、功能列表、README intro 等信号时，第一屏要说清“这是什么、给谁用、解决什么问题”
+- `release-note`：出现版本标题、`Release Highlights`、`Added / Changed / Fixed / Tested`、changelog 列表等信号时，列清本版变更、验证和限制，不写发布宣言
+- `forum-post`：出现 Linux.do / V2EX / 社区帖 / 发帖复盘等信号时，保留维护者的真实观察和社区语气，不改成公告
+- `issue-reply`：出现 issue / PR 回复、bad case、复现、下一版补 benchmark 等信号时，先确认问题和下一步，不做客服式安抚
+
+子场景只负责发布目的和语气收束，不覆盖 protected spans、Tier、档位和回读规则。完整策略见 [Scene Packs](./references/scene-packs.md)。
 
 ## 2. Single-file fallback rules
 

@@ -20,7 +20,7 @@
 | chat | SF-01, SF-06, SF-11, SF-17, SF-29, SF-31, SNF-07, SNF-11 | - | SF-19, SNF-16 | - |
 | status | SF-02, SF-09, SF-15, SF-21, SF-25, SF-30, SNF-03, SNF-06, SNF-10, SNF-13, SNF-19, SNF-21 | - | - | SF-23, SNF-18 |
 | docs | SF-04, SF-07, SF-26, SNF-01, SNF-02, SNF-04, SNF-05, SNF-08, SNF-09, SNF-14, SNF-20 | SF-18, SNF-15, SNF-23 | - | SF-22, SF-24, SF-27, SNF-17 |
-| public-writing | SF-03, SF-05, SF-08, SF-10, SF-12, SF-13, SF-16, SF-20, SF-28, SNF-12 | - | SF-14 | - |
+| public-writing | SF-03, SF-05, SF-08, SF-10, SF-12, SF-13, SF-16, SF-20, SF-28, SF-32, SF-33, SF-35, SNF-12, SNF-24, SNF-25, SNF-27 | SF-34, SNF-26 | SF-14 | - |
 | code-context | - | - | - | SNF-22 |
 
 ---
@@ -213,6 +213,30 @@
 
 **预期**：删掉 `我就在这里 / 不躲不藏 / 稳稳接住 / 你不是……你只是…… / 你问到了问题的核心 / 我必须很认真地说一句 / 顶刊作者的素养` 这整层姿态和认证式夸奖，改成基于原话能证实的低承诺回应。不能继续替对方下心理结论，也不要凭空保留“顶刊作者”这类身份判断。
 
+### H. Scene Packs / 可直接发场景包
+
+### SF-32 | public-writing / README | README intro 不能只写价值口号
+> 在 AI 全面重塑开发范式的今天，我们打造了一款真正面向未来的中文表达优化工具。它以先进的规则体系为底座，深度赋能开发者的内容生产链路，帮助团队在复杂协作场景中实现自然表达、效率提升与价值闭环。
+
+**预期**：按 `README` scene pack 处理。第一段必须直接说清“这是什么、给谁用、解决什么问题”，删掉 `全面重塑开发范式 / 面向未来 / 先进的规则体系 / 深度赋能 / 内容生产链路 / 价值闭环` 这类口号。不能把 README intro 改成社交媒体口吻，也不能漏掉项目定位。
+
+### SF-33 | public-writing / release-note | Release note 应列变更，不写发布宣言
+> ## v1.8.0 Release Highlights
+>
+> 本次版本是一次面向真实场景的系统性升级。我们不仅全面优化了改写体验，更通过全新的能力矩阵稳稳兜住了用户在 README、release note、论坛长帖和 issue 回复里的核心表达诉求。感谢所有用户的持续支持，让我们共同见证中文 AI 写作体验的全新跃迁。
+
+**预期**：按 `release-note` scene pack 处理。保留版本号 `v1.8.0`，删掉发布宣言、感谢鸡汤和空泛升级叙事，改成可扫描的变更列表；如果原文没有具体变更，应提示缺少 changelog 项，而不是编造性能数据或用户反馈。
+
+### SF-34 | public-writing / forum-post | 社区帖要像人复盘，不像项目发布稿
+> 折腾这个工具一个月后，我深刻意识到，中文 AI 写作治理不是一次简单的词表扩张，而是一场围绕真实表达场景的系统性重塑。我们从用户痛点出发，稳稳接住了 README、release note、issue 回复等多元场景里的核心诉求，并在持续迭代中形成了可复制、可扩展、可沉淀的方法论闭环。
+
+**预期**：按 `forum-post` scene pack 处理。保留“做了一个月后的复盘”和“下一步关注场景”的核心，但删掉项目发布稿语气、系统性重塑、痛点、稳稳接住、多元场景、方法论闭环等姿态层。改写后应像社区里一个维护者在分享观察，不像公司对外稿。
+
+### SF-35 | public-writing / issue-reply | Issue 回复应先回答问题，不做客服式安抚
+> 感谢你非常宝贵的反馈！你这个问题问到了项目体验的核心。我们已经充分接住了这个场景，也会在后续版本中持续优化相关能力。如果你愿意，我可以先帮你把这段文本整体梳理一遍，再给你一个更完整的解决方案。
+
+**预期**：按 `issue-reply` scene pack 处理。删掉感谢套话、认证式夸奖、`接住场景`、持续优化空话和推销式助手腔；回复应先确认问题是否成立，再给具体下一步（例如需要复现样本、已归类为某个规则缺口、会补 benchmark）。不要替维护者承诺未排期能力。
+
 ---
 
 ## 第二部分：不该误杀的（Should NOT Fix）
@@ -341,6 +365,30 @@
 
 **理由**：整段是具体的限流架构说明，`稳稳接住` 的宾语是 `上游峰值请求`，承载的是限流网关的技术动作，不是姿态层。配置值、阈值、指标名都是受保护片段。v1.7.3 起 `接住` 已按宾语判断：宾语是请求 / 流量 / 峰值时，`docs / code-context` 场景应放行，不应因 `稳稳接住` 短语命中把整段技术说明改平。
 
+### SNF-24 | public-writing / README | 已经直接的 README intro
+> `cache-diff` 是一个检查 Redis 缓存差异的 CLI。它会读取两份 key dump，列出新增、删除和 TTL 变化，适合上线前做缓存迁移复核。
+
+**理由**：这段 README intro 已经说清楚“是什么、做什么、给谁用”，没有价值口号或发布宣言。`CLI`、`Redis`、`key dump`、`TTL` 都是必要术语，不应为了更口语而改掉。
+
+### SNF-25 | public-writing / release-note | 已经可扫描的 release note
+> ## v1.8.0
+>
+> - 新增 `references/scene-packs.md`，覆盖 README、release note、forum post 和 issue reply
+> - `evals/benchmark.md` 增加 8 条 scene pack 回归用例
+> - 修复 README 里 benchmark 数量未同步的问题
+
+**理由**：这段 release note 已经按变更列表呈现，有版本号、文件名和具体动作。不要为了“更像人”改成叙事段落，也不要删掉路径、版本号或 case 数量。
+
+### SNF-26 | public-writing / forum-post | 有具体经历支撑的社区帖
+> 昨晚把 `scene-packs.md` 接进规则后，先拿 README 和 release note 各跑了两条样本。README 那条提升明显，release note 还差一点：它会删套话，但有时把 changelog 列表也压得太短。今天先补一条 SNF 防误杀。
+
+**理由**：这是正常社区复盘，有时间、文件名、样本范围、发现的问题和下一步。即使语气口语，也有具体经历支撑，不应改成正式公告或删掉 `scene-packs.md`、README、release note、SNF 等关键信息。
+
+### SNF-27 | public-writing / issue-reply | 已经具体的 issue 回复
+> 收到，这个 bad case 我能复现：`稳稳接住上游峰值请求` 在 docs 场景里不该被改。下一版我会补一条 SNF，先把技术语境放行钉住；规则本身如果已经能放行，就只加回归用例。
+
+**理由**：这条 issue 回复已经先确认问题、说明复现结果和下一步，没有客服式安抚。`bad case`、`docs`、`SNF` 都是 issue 语境里的必要术语，不应误杀。
+
 ### C. Mixed
 
 ### SNF-16 | chat | 多轮讨论中引用待收录词
@@ -361,6 +409,7 @@
 - `code-context` 样本额外要求：只处理注释 / docstring / commit message 中的文字，不改动代码本身
 - `fact-preservation` 样本额外要求：数字、日期、责任主体、引用、命令、代码、参数、路径、报错、指标和比较关系都必须保真；为了“更自然”补进原文没有的事实，一律记 `❌`
 - `Residual Audit` 样本额外要求：第二遍只允许轻量修正；如果为了抛光而重写全文、补新事实，或把 `docs / status / code-context` 写得更口语，记 `❌`
+- `Scene Packs` 样本额外要求：先保留大场景边界和 protected spans，再按 `README / release-note / forum-post / issue-reply` 的发布目的收束语气；如果把 release note 写成营销稿、把 forum post 写成公告、把 issue reply 写成客服话术，或删掉版本号、路径、链接、编号和责任归属，记 `❌`
 - `必须改写`：能直接消除问题且不损失事实时，应输出改写结果
 - `允许只标注风险`：遇到无源引用、缺上下文或不能安全补全事实的样本，允许明确指出风险并不给虚构改写；这种情况记为 `⚠️`，不直接算规则失效
 - `mixed` 样本额外要求：只处理真正有问题的正文，不误改引用、用户指令、命令、字段名和被讨论词
