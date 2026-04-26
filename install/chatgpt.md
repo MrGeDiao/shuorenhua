@@ -15,7 +15,7 @@
 1. 打开 [ChatGPT GPT Editor](https://chatgpt.com/gpts/editor)，新建一个 GPT
 2. 名称填"说人话"，描述填"去 AI 味的中英文改写助手"
 3. 将 [`install/chatgpt-gpt-instructions.md`](chatgpt-gpt-instructions.md) 中分隔线以下的内容粘贴到 Instructions
-4. 上传 Knowledge Files：`SKILL.md` + `references/` 目录下所有 `.md` 文件（共 9 个文件）
+4. 上传 Knowledge Files：`SKILL.md` + `references/` 目录下所有 `.md` 文件
 5. 保存，发布为 "Only me" 或 "Anyone with a link"
 
 用的时候直接打开这个 GPT 对话就行。

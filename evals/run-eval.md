@@ -76,7 +76,7 @@
 ## Codex 快速运行
 
 ```bash
-codex --system-prompt "$(cat ./SKILL.md)" \
+codex exec -C . --sandbox read-only \
   "先读取 ./SKILL.md，再结合 ./references/ 下的相关文件，评测 ./evals/benchmark.md 中的所有用例。对 SF 用例先判断场景、Tier 和改写档位，再按规则处理并判断是否通过；如果是 README、release note、forum post、issue reply，补看 ./references/scene-packs.md 并按对应子场景处理。回读先做保真回读，只有第一遍已经保住事实、但仍有明显残留味时，才再做 Residual Audit。Residual Audit 只查开场残留、总结残留、narrator 残留、空泛判断残留、句长过匀，且只允许轻量修正。默认输出改写结果，但对按 audit-only 通过的无源引用样本，允许只输出缺来源或缺归属的风险说明，不强行整段重写。无源引用类 SF 需要按场景判定：public-writing/chat 默认删掉无证据权威铺垫算通过，docs/status 默认明确标注缺来源且不伪装成已证实算通过。对 SNF 用例判断是否误杀。注意 mixed 样本只处理真正有问题的正文，不要改用户指令、引用和被讨论词。code-context 样本只改注释/docstring/commit message，不动代码。Scene Packs 样本不能删版本号、路径、链接、编号和责任归属。最后输出汇总表格、SF 通过率和 SNF 误杀率。"
 ```
 

@@ -47,7 +47,7 @@
 
 | 项 | 当前状态 |
 |----|----------|
-| 最新版本 | `v1.8.0`，新增 Scene Packs / 可直接发场景包 |
+| 最新版本 | `v1.8.1`，收口项目知识架构和使用入口 |
 | 规则覆盖 | 210+ 中文短语、96 条英文短语、19 类结构反模式 |
 | 评测集 | 62 条 benchmark：35 条该改，27 条不该误杀 |
 | 真实样本 | 18 条整段样本，评估自然、保真、可直接发 |
@@ -67,13 +67,13 @@ cd shuorenhua
 Codex 单次使用：
 
 ```bash
-codex --system-prompt "$(cat SKILL.md)" "改写以下文本：..."
+codex exec -C . "读取 ./SKILL.md，按其中规则改写以下文本：..."
 ```
 
 只做诊断，不直接改写：
 
 ```bash
-codex --system-prompt "$(cat SKILL.md)" "先不要改写，只按 annotation mode（只标注不改写）标出下面这段文字里的问题：..."
+codex exec -C . "读取 ./SKILL.md，只按 annotation mode（只标注不改写）标出下面这段文字里的问题：..."
 ```
 
 长期使用建议加载完整包：`SKILL.md` + `references/`。只加载 `SKILL.md` 可以临时用，但场景判断、误杀防护和 v1.8.0 的 Scene Packs 都会弱很多。

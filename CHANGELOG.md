@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.8.1] - 2026-04-27 — Knowledge Architecture / 项目知识架构收口
+
+### Changed
+- `README.md` 更新项目状态和快速开始入口，把公开信息架构收口到当前已发布能力
+- `install/codex.md` 和 `evals/run-eval.md` 切换到当前 Codex CLI 的 `codex exec` 用法，避免旧命令继续作为主入口传播
+- `install/chatgpt.md` 去掉易漂移的 reference 文件数量，改为按目录上传完整知识文件
+
+### Framing
+- 本版定位为项目知识架构收口：让新用户能从 README 进入使用路径，让评测和安装入口保持同一套事实基线
+- 不改变 `SKILL.md`、`references/`、benchmark 判分口径或 Scene Packs 行为；`v1.8.1` 是采用路径和维护表面的升级，不是规则能力扩张
+
 ## [1.8.0] - 2026-04-24 — Scene Packs / 可直接发场景包
 
 ### Added
