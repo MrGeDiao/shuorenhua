@@ -1,5 +1,30 @@
 # Changelog
 
+## [1.8.2] - 2026-05-01 — Intake Automation / 维护者侧反馈闭环
+
+### Added
+- 顶层新增 `automation/` 目录，作为维护者工具入口（committed）：
+  - `automation/intake.md` — 协议规范
+  - `automation/intake-prompt.md` — Codex prompt 本体
+  - `automation/README.md` — 运行入口，含可复制粘贴的 `codex exec -C . -s read-only --ephemeral -o ...` 命令、文件命名约定、强约束说明
+- 运行实例继续放在 `tasks/current/intake/inbox/` 和 `reports/`（`.gitignore` 内，本地工作目录），第一次用前 `mkdir -p` 即可
+- dryrun 验证集（本地）：6 条合成样本覆盖三档结论 + 两类陷阱（被讨论词、技术语境放行），expected baseline 钉在 inbox 同目录下
+- 真实样本 smoke（本地）：用 `evals/real-samples.md` 的 RS-14 接住体跑了一次，验证工具守住"已覆盖 → 无动作"边界
+
+### Changed
+- `CONTRIBUTING.md`「维护者：Community Observation Intake」末尾新增"自动化运行（v1.8.2 起）"小节，明确自动化只覆盖原 5 步里的第 2-3 步（抽象姿态链、判宾语 / 判场景），第 1、4、5 步仍需人工
+- 公开路线图把原 v1.8.2「Feedback Loop / 反馈闭环」拆成两半：维护者侧 intake automation（本版）+ 外部 issue 模板 / pinned issue / bad-case 公开征集（顺延到 v2.0，理由和 v1.7.3 retro 一致）
+
+### Tested
+- 2026-05-01 跑了两轮 codex exec：第一轮 dryrun 6/6 命中 expected（已覆盖 3、变体归并 2、候选新模式 1），无误判被讨论词或技术语境放行；第二轮真实样本 smoke 1/1 标"已覆盖 → 无动作"
+- 报告格式两轮都符合 spec 的 6 段：本轮样本数 / 已覆盖 / 变体归并 / 候选新模式 / 建议动作 / 一句总判断
+- prompt 一轮通过，没有进入预设的"最多 2 轮微调"分支
+
+### Notes
+- 本版只动 intake 工具链 + 维护者文档，**没有改** `SKILL.md`、`references/*`、`evals/benchmark.md`、`evals/real-samples.md`、`README.md`，benchmark 总数仍为 62 条（35 SF + 27 SNF）
+- 强约束遵循 spec 已固定的口径：报告默认不建议加词条、不自动改仓库；`-s read-only` 沙箱在 codex 层再保一道
+- 不做 Codex Automation 调度（每周自动跑、自动开 issue）和外部 bad-case 征集入口，等 v2.0 配合分发一起做
+
 ## [1.8.1] - 2026-04-27 — Knowledge Architecture / 项目知识架构收口
 
 ### Changed

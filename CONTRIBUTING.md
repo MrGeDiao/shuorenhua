@@ -120,6 +120,14 @@
 - `v1.7.3 Community Intake / 接住体` 是第一个完整走完这套 intake 的版本；观察来源见 CHANGELOG 的 v1.7.3 区块和 `evals/real-samples.md` 的"社区观察：为什么'接住体'一眼像 AI"
 - `v1.7.4` 新增的 `SNF-22 / SNF-23` 是第 3 步"判宾语"的回归护栏，用来保护技术语境里的"接住请求 / 接住流量"不被误杀
 
+### 自动化运行（v1.8.2 起）
+
+`automation/` 顶层目录里有一套 intake automation 工具：把一批样本扔进 `tasks/current/intake/inbox/<日期>.md`（本地工作目录），跑一条 `codex exec` 命令，得到一份 `tasks/current/intake/reports/<日期>-intake.md`，按"已覆盖 / 变体归并 / 候选新模式"三档归类，并给出最多四类建议动作（`无动作 / 补 benchmark / 补 operation-manual / 考虑新增词条或结构`）。
+
+具体命令、文件约定和强约束见 `automation/README.md`；prompt 本体见 `automation/intake-prompt.md`；协议规范见 `automation/intake.md`。
+
+边界：自动化只覆盖上面"Intake 五步"里的第 2-3 步（抽象姿态链、判宾语 / 判场景），且只输出建议；第 1 步溯源、第 4 步双向补样本、第 5 步升级规则仍需人工评估和操作。**Intake 报告默认不会、也不应该自动改 `benchmark.md` / `phrases-zh.md` / `structures.md` / `operation-manual.md`。**
+
 ## 不接受的贡献
 
 - 纯粹基于个人偏好的词汇增删（需要有 AI 文本频率依据或多人共识）
