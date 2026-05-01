@@ -25,15 +25,15 @@
 - 强约束遵循 spec 已固定的口径：报告默认不建议加词条、不自动改仓库；`-s read-only` 沙箱在 codex 层再保一道
 - 不做 Codex Automation 调度（每周自动跑、自动开 issue）和外部 bad-case 征集入口，等 v2.0 配合分发一起做
 
-## [1.8.1] - 2026-04-27 — Knowledge Architecture / 项目知识架构收口
+## [1.8.1] - 2026-04-27 — Knowledge Architecture / 项目知识架构对齐
 
 ### Changed
-- `README.md` 更新项目状态和快速开始入口，把公开信息架构收口到当前已发布能力
+- `README.md` 更新项目状态和快速开始入口，把公开信息架构对齐到当前已发布能力
 - `install/codex.md` 和 `evals/run-eval.md` 切换到当前 Codex CLI 的 `codex exec` 用法，避免旧命令继续作为主入口传播
 - `install/chatgpt.md` 去掉易漂移的 reference 文件数量，改为按目录上传完整知识文件
 
 ### Framing
-- 本版定位为项目知识架构收口：让新用户能从 README 进入使用路径，让评测和安装入口保持同一套事实基线
+- 本版定位为项目知识架构对齐：让新用户能从 README 进入使用路径，让评测和安装入口保持同一套事实基线
 - 不改变 `SKILL.md`、`references/`、benchmark 判分口径或 Scene Packs 行为；`v1.8.1` 是采用路径和维护表面的升级，不是规则能力扩张
 
 ## [1.8.0] - 2026-04-24 — Scene Packs / 可直接发场景包
@@ -130,7 +130,7 @@
 - `README.md` 同步工作流和 benchmark 数量到 `51` 条
 
 ### Fixed
-- `SKILL.md` frontmatter 去掉远端同步带来的 `metadata` 字段，收口成当前本地 skill 规范可稳定使用的形式
+- `SKILL.md` frontmatter 去掉远端同步带来的 `metadata` 字段，调整为当前本地 skill 规范可稳定使用的形式
 
 ### Tested
 - 2026-04-14 用 GPT-5.4 Codex 静态复核 `benchmark.md`（51 条）：SF 通过率 `30/30 (100%)`，SNF 误杀率 `0/21 (0%)`
