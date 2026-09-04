@@ -28,9 +28,11 @@
   <a href="#常见问题">FAQ</a>
 </p>
 
-`说人话` 是一个面向中文文本的改写 skill。主要用于清理 AI 起草内容中的模板套话、商业包装、工程师姿态腔、翻译腔和无依据的定性断言。适用于日常编写 README、Release Notes、工作同步、Issue 回复、论坛讨论及技术长文的开发者、维护者与写作者。
+`说人话`（shuorenhua）是一个清理中文 AI 味的改写 skill。
 
-核心逻辑是**改写前先锁定事实**：原文中的数字指标、版本编号、命令参数、文件路径、因果条件与责任归属一律保留，只剔除多余的渲染与空洞铺垫。支持接入 Claude Code、Codex、Cursor、ChatGPT 及各类自建 Agent。
+大模型起草的中文常有模板套话、商业包装、工程师姿态腔、翻译腔和无依据的定性断言。本项目适合经常编写 README、Release Notes、工作同步、Issue 回复、论坛讨论和技术长文的开发者、维护者与写作者，支持接入 Claude Code、Codex、Cursor、ChatGPT 及各类自建 Agent。
+
+改写前先锁定事实：原文中的数字指标、版本编号、命令参数、文件路径、因果条件与责任归属一律保留，只剔除多余的渲染与空洞铺垫。
 
 ## 快速上手
 
@@ -113,7 +115,7 @@
 针对篇幅较长的文本，可通过 `scope` 参数控制结构与句式的删改幅度：
 
 - `structural`：允许跨句合并、删除与重排结构，适用于短文或明确要求大修的文稿。
-- `bounded`（长文默认）：保留核心段落节奏，将疑似空话归入「建议删除（待确认）」清单，避免破坏结构。
+- `bounded`（长文默认）：保留核心段落节奏，把整句空话归入「建议删除（待确认）」清单交用户确认，不直接删。
 - `in-place`：不删除整句，仅在句内做词汇替换与语气微调，严格保留原文排版。
 
 演进记录与讨论见 [issue #4](https://github.com/MrGeDiao/shuorenhua/issues/4)，评测记录见 [evals/results-v1.8.6.md](evals/results-v1.8.6.md) 与 [evals/run-manifest.md](evals/run-manifest.md)。
