@@ -693,5 +693,52 @@ class HumanCorpusTests(unittest.TestCase):
         self.assertNotIn("B-02", blocks["B-01"])
 
 
+class ParagraphMetricsTests(unittest.TestCase):
+    def test_counts_paragraphs_and_reports_longest(self):
+        text = "第一段写了两句话。这是第二句。\n\n第二段只有一句。"
+
+        m = hard_metrics.paragraph_metrics(text)
+
+        self.assertEqual(m["paragraphs"], 2)
+        self.assertEqual(m["max_paragraph_han"], hard_metrics.han_count("第一段写了两句话这是第二句"))
+        self.assertEqual(m["sentences_per_paragraph"], 1.5)
+
+    def test_single_dense_paragraph_is_one_paragraph(self):
+        text = "".join(f"这是第{i}句话，写得不算短，但中间没有任何空行。" for i in range(12))
+
+        m = hard_metrics.paragraph_metrics(text)
+
+        self.assertEqual(m["paragraphs"], 1)
+        self.assertEqual(m["han_per_paragraph"], float(m["max_paragraph_han"]))
+
+    def test_blocks_without_han_are_not_paragraphs(self):
+        text = "正文一段。\n\n   \n\n又一段正文。"
+
+        self.assertEqual(hard_metrics.paragraph_metrics(text)["paragraphs"], 2)
+
+    def test_empty_text_reports_zero_without_crashing(self):
+        m = hard_metrics.paragraph_metrics("\n\n   \n")
+
+        self.assertEqual(m["paragraphs"], 0)
+        self.assertIsNone(m["han_per_paragraph"])
+        self.assertIsNone(m["max_paragraph_han"])
+
+    def test_list_lines_are_counted_separately(self):
+        text = "开头一段。\n\n- 第一条\n- 第二条\n3. 第三条\n"
+
+        m = hard_metrics.paragraph_metrics(text)
+
+        self.assertEqual(m["list_lines"], 3)
+        self.assertEqual(m["paragraphs"], 2)
+
+    def test_residual_metrics_masks_code_block_out_of_paragraph_count(self):
+        text = "说明文字一段。\n\n```\ncode_line_without_han()\n```\n\n收尾一段。"
+
+        res = hard_metrics.residual_metrics(text)
+
+        self.assertEqual(res["paragraphs"], 2)
+        self.assertEqual(res["list_lines"], 0)
+
+
 if __name__ == "__main__":
     unittest.main()

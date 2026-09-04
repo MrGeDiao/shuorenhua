@@ -111,7 +111,8 @@ python3 automation/eval/hard_metrics.py --calibrate --benchmark-only
 python3 automation/eval/hard_metrics.py --human-stats evals/human-corpus.jsonl
 ```
 
-- `--residual` 输出句长变异系数、连词密度（每千字）、动词名词化命中、800 字窗口内借喻场数量，以及 `「」/『』` 括起的短语候选数。代码块、URL、frontmatter 等先用等长空格屏蔽，行号和字符偏移不漂。
+- `--residual` 输出句长变异系数、段落形状、连词密度（每千字）、动词名词化命中、800 字窗口内借喻场数量，以及 `「」/『』` 括起的短语候选数。代码块、URL、frontmatter 等先用等长空格屏蔽，行号和字符偏移不漂。
+- 段落形状（2026-09-04 加）报段数、每段平均汉字与句数、最长段汉字数，另单列列表行数。抓的是「少分段 / 段落过长」，方向与 `structures.md` 第 13、14 条的过度格式化相反；来源是 Anthropic 对新一代模型「sentences run longer and there are fewer paragraph breaks」的观察。**只报数，不设阈值**：中文段落长度的正常分布还没实测过，不照搬英文来源的判据。连续列表行之间没有空行，会并进同一段计数，所以列表行数要一起看——列表多的文本，段落数字会偏低偏长。
 - `--calibrate` 在 `benchmark.md` 的 SF / SNF 与 HUMAN 对照组上实测分布，自动排除 B-xx 盲测副本；HUMAN manifest 缺失、不足 8 篇或来源不全时退出 2。采集期只想复看 benchmark，可显式加 `--benchmark-only`；这不是发布标定结果。
 - `--human-stats` 严格校验 JSONL、逐篇许可/许可证据与归属元数据、固定 revision/UTC 时间、正文目录/SHA256、去重、隐私检查、AI 辅助状态及其依据、1,000 汉字、12 句、8–12 篇公开来源、至少 3 个作者组、历史/现代各至少 3 篇及翻译稿不超过三分之一，再按总体、场景和长度桶报告 HUMAN 分布，并单列时代、原始语言、direct/proxy 及缺失 direct 场景。`check_repo.py` 的发布代表性门禁只把 direct 计入 `docs / public-writing / status` 覆盖；proxy 仍可作 residual，但不能顶数。自动化能验证的是元数据合同，归属内容与授权证据真实性仍由维护者人工确认。HUMAN 不进 benchmark rewrite/judge；格式或授权元数据不完整退出 2。
 - 五项目前都只报数、不判死、不影响退出码。v2.3.0 的 95 条标定给出一个明确负结论：连词密度不能设全局线——SNF 最高 81.08/千字，反而高于 SF 的 80.00；`docs` / `status` 里的连词常常承担真实条件和因果。规则侧因此只在 `public-writing` 叙事中按分布判断，见 `references/structures.md` 第 23 条。

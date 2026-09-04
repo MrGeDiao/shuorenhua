@@ -495,9 +495,43 @@ def highlight_quote_hits(text):
     return sorted(hits)
 
 
+def paragraph_metrics(text):
+    """段落形状：段数、每段汉字数、每段句数。
+
+    抓的是「少分段 / 段落过长」，方向与 structures 第 13、14 条的过度格式化相反。
+    只报数，不设阈值：中文段落长度的正常分布还没实测过，不照搬英文来源的判据。
+
+    连续的列表行之间没有空行，会并进同一段计数，因此另报 list_lines，
+    让读数的人自己判断段落数字在这份文本上可不可信。
+    """
+    blocks = [b for b in re.split(r"\n\s*\n", text) if han_count(b) > 0]
+    list_lines = sum(
+        1 for line in text.splitlines()
+        if re.match(r"\s*(?:[-*+]|\d+[.)])\s", line)
+    )
+    if not blocks:
+        return {
+            "paragraphs": 0,
+            "han_per_paragraph": None,
+            "max_paragraph_han": None,
+            "sentences_per_paragraph": None,
+            "list_lines": list_lines,
+        }
+    hans = [han_count(b) for b in blocks]
+    counts = [len(re.findall(r"[^。！？!?\n]+[。！？!?]", b)) for b in blocks]
+    return {
+        "paragraphs": len(blocks),
+        "han_per_paragraph": round(sum(hans) / len(blocks), 1),
+        "max_paragraph_han": max(hans),
+        "sentences_per_paragraph": round(sum(counts) / len(blocks), 2),
+        "list_lines": list_lines,
+    }
+
+
 def residual_metrics(text):
     """一段文本的残留统计量。输入应为正文（调用方负责剥 blockquote）。"""
     prose = mask_non_prose(text)
+    paras = paragraph_metrics(prose)
     cv, sentences = sentence_length_cv(prose)
     density, conj_hits, han = conjunction_density(prose)
     noms = nominalization_hits(prose)
@@ -507,6 +541,11 @@ def residual_metrics(text):
     return {
         "han": han,
         "sentences": sentences,
+        "paragraphs": paras["paragraphs"],
+        "han_per_paragraph": paras["han_per_paragraph"],
+        "max_paragraph_han": paras["max_paragraph_han"],
+        "sentences_per_paragraph": paras["sentences_per_paragraph"],
+        "list_lines": paras["list_lines"],
         "sentence_cv": None if cv is None else round(cv, 4),
         "conjunction_per_1k": None if density is None else round(density, 2),
         "conjunction_hits": conj_hits,
@@ -1661,6 +1700,11 @@ def main():
             print(f"汉字数 {res['han']}，可计句数 {res['sentences']}")
             cv = res["sentence_cv"]
             print(f"- 句长变异系数：{'句数不足 12，不判' if cv is None else cv}")
+            print(
+                f"- 段落：{res['paragraphs']} 段，平均 {res['han_per_paragraph']} 字 / "
+                f"{res['sentences_per_paragraph']} 句，最长 {res['max_paragraph_han']} 字"
+                f"（列表行 {res['list_lines']}）"
+            )
             print(f"- 连词密度：{res['conjunction_per_1k']} /千字（命中 {res['conjunction_hits']} 处）")
             print(f"- 名词化：{res['nominalization']} 处 {res['nominalization_samples']}")
             print(f"- 借喻场：{res['metaphor_fields']} 套 {res['metaphor_samples']}")
