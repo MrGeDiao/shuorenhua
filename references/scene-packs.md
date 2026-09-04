@@ -49,7 +49,7 @@ Scene Packs 是面向可发布文本的子场景策略。它不替代 [场景禁
 
 Before:
 
-> 在 AI 全面重塑开发范式的今天，我们打造了一款真正面向未来的中文表达优化工具，深度赋能开发者的内容生产链路。
+> 在 AI 全面重塑开发范式的今天，我们打造了 `说人话` 这款真正面向未来的中文优先 rewrite skill，深度赋能 README、release note、issue 回复和日常协作文本的内容生产链路，全面清理 AI 套话、表演感与工程师腔。
 
 After:
 
@@ -90,13 +90,15 @@ After:
 
 Before:
 
-> 本次版本是一次面向真实场景的系统性升级，感谢所有用户的持续支持，让我们共同见证中文 AI 写作体验的全新跃迁。
+> 本次版本是一次面向真实场景的系统性升级，感谢所有用户的持续支持，让我们共同见证中文 AI 写作体验的全新跃迁。本次升级带来了全新的 `references/scene-packs.md`，覆盖 README、release note、forum post 和 issue reply 四大场景；`evals/benchmark.md` 同步增加 8 条 scene pack 回归用例；并以 `evals/results-v1.8.0.md` 完整记录本轮复核结果。
 
 After:
 
 > - 新增 `references/scene-packs.md`，覆盖 README、release note、forum post 和 issue reply
 > - `evals/benchmark.md` 增加 8 条 scene pack 回归用例
 > - 新增 `evals/results-v1.8.0.md` 记录本轮复核结果
+
+原文真的没有任何变更信息时，按上面「优先删除」和默认力度的规定改成提示补具体变更，不编。
 
 ## `forum-post`
 
@@ -137,7 +139,7 @@ Before:
 
 After:
 
-> 做这个工具一个月后，我发现光删词表不够。README、release note、issue 回复和论坛帖看起来都是“公开文本”，但改法其实不一样。
+> 折腾这个工具一个月后，我发现光扩词表不够，不同场景的改法不一样。
 
 ## `issue-reply`
 
@@ -173,11 +175,11 @@ After:
 
 Before:
 
-> 感谢你非常宝贵的反馈！你这个问题问到了项目体验的核心。我们已经充分接住了这个场景，也会在后续版本中持续优化相关能力。
+> 感谢你非常宝贵的反馈！你这个问题问到了项目体验的核心。我们已经在 `docs` 场景复现了这个误杀，也会在后续版本中持续优化相关能力，下一版会补一条回归用例。
 
 After:
 
-> 收到，这个 case 我能复现。它属于 `docs` 场景里的误杀，下一版先补一条 SNF；如果现有规则已经能放行，就只加回归用例。
+> 这个误杀我在 `docs` 场景复现了，下一版补一条回归用例。
 
 ## `api-reference`
 

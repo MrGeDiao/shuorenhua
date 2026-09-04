@@ -147,7 +147,7 @@
 
 评测通过匿名乱序的 [evals/benchmark-blind.md](evals/benchmark-blind.md) 配合硬指标校验脚本 `python3 automation/eval/hard_metrics.py --run <批次目录>/`（详见 [automation/eval/README.md](automation/eval/README.md)）运行。
 
-最新发布验收数据见 [v2.4.0 评测记录](evals/results-v2.4.0.md)（聚焦术语放行与 FAQ 警告保护，双模型 L1 违规均为 0），全量基线数据见 [v2.3.1 评测记录](evals/results-v2.3.1.md)。
+最新发布验收数据见 [v2.4.1 评测记录](evals/results-v2.4.1.md)：全量 120 条双席位交叉判分，两席位 L1 违规均为 0，SNF 误杀 3.5% / 1.8%。上一版聚焦术语放行与 FAQ 警告保护的记录见 [v2.4.0 评测记录](evals/results-v2.4.0.md)，更早的全量基线见 [v2.3.1 评测记录](evals/results-v2.3.1.md)。
 
 ## 安装方式
 
@@ -179,7 +179,7 @@
 
 ## English
 
-**shuorenhua (说人话)** is a Chinese-first rewrite skill for Codex, Claude Code, Cursor, ChatGPT, and custom agents. It removes common AI writing patterns in Chinese while protecting numbers, commands, attribution, conditions, and factual relations. The repo includes a 120-case benchmark, false-positive guards, scene-specific rules, and long-form scopes. The latest release is `v2.4.0`.
+**shuorenhua (说人话)** is a Chinese-first rewrite skill for Codex, Claude Code, Cursor, ChatGPT, and custom agents. It removes common AI writing patterns in Chinese while protecting numbers, commands, attribution, conditions, and factual relations. The repo includes a 120-case benchmark, false-positive guards, scene-specific rules, and long-form scopes. The latest release is `v2.4.1`.
 
 - **Claude Code**: Run `/plugin marketplace add MrGeDiao/shuorenhua` followed by `/plugin install shuorenhua@shuorenhua`.
 - **Other Agents**: Run `npx skills add MrGeDiao/shuorenhua`.

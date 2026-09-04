@@ -2,45 +2,44 @@
 
 > 本文件是解释、示例与操作细则；行为合同的单源是 `SKILL.md`，两处表述不一致时以 `SKILL.md` 为准。
 
-> 每个示例展示同一段内容的 AI 版和人话版。
+> 每个示例展示同一段内容的 AI 版和人话版。人话版里的每个事实都能在 AI 版里找到；示例示范的是拎出被包装埋掉的信息，不示范补材料。
 
 ## 中文示例
 
 ### 示例 1：项目介绍
 
 **AI 版：**
-> 该项目是一个创新性的解决方案，旨在通过深度整合多种前沿技术，为用户提供全方位、一站式的智能化体验。它不仅能够显著提升工作效率，还能有效降低运营成本，实现真正的降本增效。
+> 该项目是一个创新性的解决方案，旨在通过深度整合语音识别与自动翻译等前沿技术，为用户提供全方位、一站式的智能化字幕体验，用户说中文即可直接生成英文字幕。上线两周以来，日活已达 1200，翻译准确率高达 94%，不仅能够显著提升工作效率，还能有效降低运营成本，实现真正的降本增效。
 
 **人话版：**
 > 这个项目把语音识别和自动翻译接到一起，用户说中文就能直接出英文字幕。上线两周日活 1200，翻译准确率 94%。
 
 **改了什么：**
 - 删掉"创新性""前沿技术""全方位""一站式""智能化"——全是空词
-- 删掉"不仅…还能…"的二元结构
-- 加了具体功能描述和数据
+- 删掉"不仅…还能…"的二元结构；"提升效率 / 降低成本 / 降本增效"是没有任何依据的效果宣称，剥掉包装后没有剩余命题，所以整个删
+- 功能描述和两个数字都是原文本来就有的，只是被包装埋住了，把它们拎出来直接说
 
 ---
 
 ### 示例 2：技术总结
 
 **AI 版：**
-> 综上所述，通过对系统架构的全面优化和持续迭代，我们在性能、安全性和可维护性等方面均取得了显著提升。这一成果充分体现了团队在技术创新方面的不懈追求和卓越实力。
+> 综上所述，通过对系统架构的全面优化和持续迭代，我们在性能（API 响应时间由 800ms 优化至 120ms）、安全性（修复 3 个 SQL 注入漏洞）和可维护性（6000 行的 God Class 已拆分为 12 个模块）等方面均取得了显著提升。这一成果充分体现了团队在技术创新方面的不懈追求和卓越实力。
 
 **人话版：**
 > 这轮改完之后：API 响应时间从 800ms 降到 120ms，修了 3 个 SQL 注入漏洞，把 6000 行的 God Class 拆成了 12 个模块。
 
 **改了什么：**
 - 删掉"综上所述"和整个总结式开头
-- "显著提升"换成具体数据
+- 三项改动原文都写在括号里，把它们从"显著提升"的壳里拎出来当正文，壳本身删掉
 - 删掉"充分体现""不懈追求""卓越实力"——自吹自擂
-- 用具体改动代替抽象描述
 
 ---
 
 ### 示例 3：消息回复
 
 **AI 版：**
-> 好问题！这确实是一个值得深入探讨的话题。让我来为你详细解释一下。首先，我们需要了解的是，这个问题的本质在于……
+> 好问题！这确实是一个值得深入探讨的话题。让我来为你详细解释一下。首先，我们需要了解的是，这个问题的本质在于缓存失效策略：用户更新头像后 CDN 仍返回旧文件，TTL 设置为 7 天过长，建议调整为 1 小时。
 
 **人话版：**
 > 核心原因是缓存没失效。用户改了头像但 CDN 还在用旧的，TTL 设了 7 天太长了。改成 1 小时就行。
@@ -54,14 +53,14 @@
 ### 示例 4：新闻摘要
 
 **AI 版：**
-> 在当今快速发展的人工智能领域，OpenAI 近日发布了其最新的大语言模型，引发了业界的广泛关注和热烈讨论。该模型在多个关键指标上实现了显著突破，标志着人工智能技术迈入了一个全新的发展阶段。
+> 在当今快速发展的人工智能领域，某实验室近日发布了其最新的大语言模型 X-2，引发了业界的广泛关注和热烈讨论。该模型 MMLU 跑分达到 92.3%，较上一代高出 7 个点，上下文窗口翻倍至 256K，API 价格维持不变，在多个关键指标上实现了显著突破，标志着人工智能技术迈入了一个全新的发展阶段。
 
 **人话版：**
-> OpenAI 发了 GPT-5。MMLU 跑分 92.3%，比上一代高 7 个点。上下文窗口翻倍到 256K。API 价格没涨。
+> 某实验室发了新模型 X-2。MMLU 跑分 92.3%，比上一代高 7 个点。上下文窗口翻倍到 256K。API 价格没涨。
 
 **改了什么：**
 - 删掉"在当今""快速发展""广泛关注""热烈讨论"——全是废话
-- "显著突破"换成具体跑分
+- 四项指标原文都写了，只是被"在多个关键指标上实现了显著突破"这句概括压住，删掉概括让指标自己说话
 - "全新的发展阶段"删掉——读者自己会判断
 
 ---
@@ -85,7 +84,7 @@
 ### 示例 6：小红书 AI 腔
 
 **AI 版：**
-> 姐妹们！今天给大家拆解一个保姆级避坑攻略！这个工具真的绝绝子，狠狠提升了效率！建议收藏！划重点：免费！
+> 姐妹们！今天给大家拆解一个保姆级避坑攻略！Raycast 真的绝绝子，免费版就够用，启动快插件多，从 Alfred 切过来之后，每天切窗口查文档狠狠省下十几分钟！建议收藏！划重点：免费！
 
 **人话版：**
 > 推荐一个工具：Raycast。免费版就够用，主要是启动快、插件多。我之前用 Alfred，切过来之后每天大概能省十几分钟，主要省在切窗口和查文档上。
@@ -93,21 +92,21 @@
 **改了什么：**
 - 删掉全部硬凹人设的网络语
 - "拆解""保姆级""避坑""绝绝子""狠狠""建议收藏""划重点"全删
-- 换成具体工具名、具体用法、具体省了多少时间
+- 工具名、用法和省下的时间原文都有，去掉网感包装后按正常语序说一遍
 
 ---
 
 ### 示例 7：语域混搭
 
 **AI 版：**
-> 诚然，这个 bug 的修复确实存在一定的技术复杂度。不过说白了就是绝绝子的体验！我们需要进一步深入探讨其底层逻辑，稳稳把核心链路兜住。综上所述，未来可期。
+> 诚然，这个 bug 的修复确实存在一定的技术复杂度，牵涉到三个服务之间的调用顺序。不过说白了就是绝绝子的体验！我们需要进一步深入探讨其底层逻辑，先把支付服务的超时时间从 3 秒调到 10 秒，稳稳把核心链路兜住，观察一周。综上所述，未来可期。
 
 **人话版：**
 > 这个 bug 不好修，涉及到三个服务之间的调用顺序。我先把支付服务的超时时间从 3 秒调到 10 秒，观察一周再说。
 
 **改了什么：**
 - 原文混搭了 5 种语域（学术/网络/商业/工程/鸡汤），统一成技术口语
-- 把空泛描述换成具体方案
+- 调用顺序、超时改动和观察周期原文都有，剥掉五种语域的包装后按事情本来的顺序排一遍
 
 ---
 
@@ -116,31 +115,29 @@
 ### Example 1: Product description
 
 **AI version:**
-> Our groundbreaking platform serves as a testament to the transformative potential of AI, empowering teams to navigate complex challenges and unlock unprecedented levels of productivity. Nestled at the intersection of innovation and practicality, it showcases how cutting-edge technology can foster meaningful collaboration.
+> Our groundbreaking platform serves as a testament to the transformative potential of AI, empowering teams to navigate complex challenges by auto-assigning each ticket to whoever fixed similar bugs before, and unlocking unprecedented levels of productivity — teams using it close issues 2 days faster on average. Nestled at the intersection of innovation and practicality, it showcases how cutting-edge technology can foster meaningful collaboration.
 
 **Human version:**
 > The platform auto-assigns tickets based on who fixed similar bugs before. Teams using it close issues 2 days faster on average.
 
 **What changed:**
 - Removed "groundbreaking", "testament", "empowering", "navigate", "unprecedented", "nestled", "showcases", "cutting-edge", "foster"
-- Replaced vague claims with specific functionality and data
+- The routing rule and the 2-day figure were already in the original, buried inside those claims; the human version just states them on their own
 
 ---
 
 ### Example 2: Technical update
 
 **AI version:**
-> We're excited to announce a comprehensive update that significantly enhances performance, bolsters security, and streamlines the developer experience. This pivotal release underscores our commitment to delivering robust, scalable solutions.
+> We're excited to announce a comprehensive update that significantly enhances performance by cutting cold start time by 60%, bolsters security by patching an injection vulnerability, and streamlines the developer experience by dropping the config from 200 lines to 40. This pivotal release underscores our commitment to delivering robust, scalable solutions. The upgrade guide is in the changelog.
 
 **Human version:**
-> This release cuts cold start time by 60%, patches CVE-2024-3891, and drops the config from 200 lines to 40. Upgrade guide is in the changelog.
+> This release cuts cold start time by 60%, patches an injection vulnerability, and drops the config from 200 lines to 40. Upgrade guide is in the changelog.
 
 **What changed:**
-- "Comprehensive update" → specific changes
-- "Significantly enhances" → "cuts by 60%"
-- "Bolsters security" → specific CVE
-- "Streamlines developer experience" → specific config reduction
+- Dropped the "comprehensive update / significantly enhances / bolsters / streamlines" wrappers; the three changes they wrapped were already spelled out in the original
 - Deleted "pivotal", "underscores", "commitment", "robust", "scalable"
+- The original names no CVE id, so the rewrite doesn't add one
 
 ---
 
@@ -230,7 +227,7 @@
 ### 示例 A：公开文案里的无源引用
 
 **原文：**
-> 研究表明，采用 AI 协作开发的团队交付效率显著提升。业内人士认为，这一趋势将在未来十年持续加速。
+> 我们组今年用 AI 协作开发后，需求交付周期从两周缩到一周。研究表明，采用 AI 协作开发的团队交付效率显著提升。业内人士认为，这一趋势将在未来十年持续加速。
 
 **Annotation mode：**
 - `问题族`：无源引用
@@ -239,7 +236,7 @@
 - `是否建议改写`：是
 
 **默认改写：**
-> 用 AI 协作开发的团队，交付速度可能会更快，但这段话没有给出具体来源。要么补研究出处，要么直接把结论改写得更克制。
+> 我们组今年用 AI 协作开发后，需求交付周期从两周缩到一周。
 
 ### 示例 B：status 场景里的保守处理
 

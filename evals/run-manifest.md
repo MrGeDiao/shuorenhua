@@ -271,3 +271,19 @@
 - 门槛：1 与 2 达成；4 已按模型分别记录；**门槛 3（新增或修订用例 targeted 双模型达标）待维护者判定**——Grok 通过，Claude 两次运行中一次通过、一次漏清 SF-62 的一处包装。
 - 已知问题不在本版修复范围，继续记录：SF-07、SF-39、SF-16、SF-37 四条在 v2.3.1 已存在；SNF-28 的误杀在 r4 与 r8 亦有记录。
 - 归档：[results-v2.4.0.md](./results-v2.4.0.md)。原始输出（未入库）：`tasks/current/v2.4.0-minimal-acceptance-20260829-{M1,M2,M3,M2RUN2}/`；冻结物与批次生成器在 `tasks/current/v2.4.0-minimal-freeze-20260829/`。
+
+
+## v2.4.1：全量 120 条双席位交叉判分（2026-09-04）
+
+- 候选：分支 `codex/v2.4.1`，基线 `d2d0ce27da295581c3cf87a30ab65deb7d0ddfb8`，候选 ID `61062b89c06a`（13 项被测源码 SHA256 摘要前 12 位）。改动只在 references 示例层（`examples.md` / `structures.md` / `scene-packs.md` / `positive-style.md`，+72 / −67 行），**规则正文一行未动**。
+- 评测集：benchmark 120 条不变，blind SHA256 `d91620417690e9d33d9722a341dc04aee2c6e403e6bcd9473dc1f8644d2dac19` 沿用同一冻结版本，未重新生成。v2.4.0 的验收数据因候选 ID 变化按设计作废，不迁移。
+- **实跑范围是全量 120 条，双席位，双向交叉判分。** 分 8 批 × 15 条（B01-15、B16-30、…、B106-120），批次标签用真实区间，`hard_metrics.batch_expected_ids()` 逐批做区间完整性校验。这轮同时充当 v2.2.1 起欠的全量基线与 v2.5.0 减法的「改造前」快照。
+- 被测模型：Claude Code 2.1.259，`opus → claude-opus-5` / firstParty；Grok CLI 1.0.13，`grok-4.6 → grok-4.6-build`，fingerprint 全部 `fp_08d0bc26c22b024e`。改写与判分均为双席位：Claude 判 Grok、Grok 判 Claude。
+- 调用：36 次（预算上限 40），有效 33 次。三次无效均与被测规则无关——子进程 provider 环境（已在生成器修复）、一次 judge 少输出一行（L0 归一化）、一次 Grok API 传输错误；后两类按 HARNESS 规矩新建 `-r2` 目录重跑，失败目录保留。逐次校验实际模型、单轮、零工具、显式输入逐字一致、输出与持久会话一致。
+- **Grok 隔离修复首次实跑验证通过**：r13 的 `--tools ''` + `--system-prompt-override` 此前从未实跑验证过（见 HARNESS「已知坑」）。本轮 16 次 Grok 调用全部通过 provenance 校验、零工具事件，该坑可销账。
+- 硬指标：**两席位 L1 硬约束失败均为 0/120**。8 批长文硬下限失败 0、目标下警告 0。protected spans 粗核仅 B61-75 批 Grok 席位报 6 条，逐条归因为「no-op 只写保留原文未复述正文」的 L0 形态假阳性。
+- 结果：SNF 误杀 Claude 2/57 = 3.5%（B-48 SNF-23、B-74 SNF-27）、Grok 1/56 = 1.8%（B-110 SNF-28），均为不涉编造或受保护片段破坏的普通误杀。SF 风格通过 Claude 53/63、Grok 51/63，22 条 ⚠️ 全部是「清理不彻底 / 动作不完整」，零保真类失败。
+- 四条锚点：B-76 / SF-39、B-86 / SF-16、B-89 / SF-37 两席位全部硬约束与风格双通过；B-104 / SF-07 两席位硬约束通过，Grok 风格列 ⚠️（未交改写稿）。
+- 门槛：本版无新增或修订用例，发布门槛只判受影响面子集 36 条——门槛 1（子集内 L1 = 0）与门槛 2（子集内 SNF 误杀 < 10%，两席位均 0/7）均达成；门槛 3 不适用；门槛 4 按席位报告，Claude 席位 SF 通过率较 v2.3.1 r4 低 9.3 个百分点，解释见结果页 §4（用例集 111→120、判官更换、单席位→双席位三个变量同时变化，且回退全部落在 ⚠️ 而非 ❌）。
+- HUMAN：不进 rewrite/judge，只跑脚本。10 篇 active，代表性门禁**通过**（direct 4 篇覆盖 `docs` / `public-writing` / `status`），此前的已知缺口已由 `1cb6238` 补齐。分布数字见结果页 §7。
+- 归档：[results-v2.4.1.md](./results-v2.4.1.md)。原始输出（未入库）：`tasks/current/v2.4.1-acceptance-20260904-*/`；冻结物、批次生成器与 HUMAN 统计在 `tasks/current/v2.4.1-freeze-20260904/`。
