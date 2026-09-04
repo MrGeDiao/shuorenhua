@@ -286,4 +286,6 @@
 - 四条锚点：B-76 / SF-39、B-86 / SF-16、B-89 / SF-37 两席位全部硬约束与风格双通过；B-104 / SF-07 两席位硬约束通过，Grok 风格列 ⚠️（未交改写稿）。
 - 门槛：本版无新增或修订用例，发布门槛只判受影响面子集 36 条——门槛 1（子集内 L1 = 0）与门槛 2（子集内 SNF 误杀 < 10%，两席位均 0/7）均达成；门槛 3 不适用；门槛 4 按席位报告，Claude 席位 SF 通过率较 v2.3.1 r4 低 9.3 个百分点，解释见结果页 §4（用例集 111→120、判官更换、单席位→双席位三个变量同时变化，且回退全部落在 ⚠️ 而非 ❌）。
 - HUMAN：不进 rewrite/judge，只跑脚本。10 篇 active，代表性门禁**通过**（direct 4 篇覆盖 `docs` / `public-writing` / `status`），此前的已知缺口已由 `1cb6238` 补齐。分布数字见结果页 §7。
+- 段落形状统计（`paragraph_metrics`，本版新增）：对已落盘的 16 份改写输出与 HUMAN / benchmark 原文做事后统计，四组分布见结果页 §8。该函数只接进 `residual_metrics`，硬判路径未改，且不在决定候选 ID 的 13 项被测源码内，不参与任何门槛判定。原始数据 `tasks/current/v2.4.1-freeze-20260904/paragraph-baseline.json`。
+- **口径更正**：`v2.4.0-minimal-freeze-20260829/HARNESS.md` 称「`hard_metrics.py` 是候选源码之一，改它候选 ID 就变、已有验收数据作废」——不成立。候选 ID 由 13 项算（`SKILL.md` + 11 个 `references/` + `rewrite-prompt.md`），`hard_metrics.py` 不在其中；含它的是批次目录里的 27 项判分资源清单，那份只用于 `verify_inputs()` 的事后完整性校验。本版据此并入段落统计，候选 ID 保持 `61062b89c06a` 未变（已实测验证）。
 - 归档：[results-v2.4.1.md](./results-v2.4.1.md)。原始输出（未入库）：`tasks/current/v2.4.1-acceptance-20260904-*/`；冻结物、批次生成器与 HUMAN 统计在 `tasks/current/v2.4.1-freeze-20260904/`。
