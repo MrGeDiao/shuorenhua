@@ -1,7 +1,7 @@
 {
   "name": "shuorenhua",
-  "version": "2.4.1",
-  "description": "中文 AI 味清理 skill：先保信息，再谈风格。清理过度承接、工程师腔、小红书 AI 腔、翻译腔和无源权威铺垫，保住事实、版本、命令和责任归属。",
+  "version": "2.5.0",
+  "description": "按用户要求审稿或去 AI 味，支持中英文，保留事实、关系与作者立场。",
   "author": {
     "name": "MrGeDiao"
   },

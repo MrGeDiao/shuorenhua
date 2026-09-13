@@ -1,0 +1,8 @@
+{
+  "files": [
+    "SKILL.md",
+    "references/editing-guide.md",
+    "references/examples.md"
+  ],
+  "description": "Only these files form the full runtime skill. evals and legacy snapshots are development-only."
+}

@@ -83,7 +83,7 @@ def render_outputs(root):
     blind = [
         "# 盲测输入 | Blind Benchmark Input",
         "",
-        f"> 共 {len(cases)} 条。按「说人话」规则处理每条用例的引用块文本：该改就改，按规则不该改的保持原文并说明理由。",
+        f"> 共 {len(cases)} 条。按「说人话」规则处理每条用例的引用块文本：该改就改，不改时返回完整原文。",
         "> 输出合同见 `automation/eval/rewrite-prompt.md`。",
         "",
     ]

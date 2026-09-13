@@ -4,14 +4,14 @@
     "name": "MrGeDiao"
   },
   "metadata": {
-    "description": "说人话：中文 AI 味清理 skill 的官方 marketplace。",
-    "version": "2.4.1"
+    "description": "说人话官方 marketplace。",
+    "version": "2.5.0"
   },
   "plugins": [
     {
       "name": "shuorenhua",
-      "description": "中文 AI 味清理 skill：先保信息，再谈风格。",
-      "version": "2.4.1",
+      "description": "按用户要求编辑中英文文本，保留事实与作者立场。",
+      "version": "2.5.0",
       "author": {
         "name": "MrGeDiao"
       },

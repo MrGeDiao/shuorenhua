@@ -2,13 +2,14 @@
 """检查仓库结构、计数、链接、用例编号和元数据是否同步。"""
 
 import html
+import hashlib
 import json
 import re
 import subprocess
 import sys
 import traceback
 import types
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 from urllib.parse import unquote
 
 
@@ -16,40 +17,19 @@ ROOT = Path(__file__).resolve().parents[1]
 SKIP_DIRS = {".git", "tasks", "assets"}
 SKIP_FILES = {"evals/run-manifest.md", "CHANGELOG.md"}
 
-# 每项依次为：文件、捕获计数的 regex、期望值来源、预期命中数。
-ANCHORS = (
-    ("README.md", r"benchmark-(\d+)%20cases", "total", 1),
-    ("README.md", r'alt="Benchmark: (\d+) cases"', "total", 1),
-    ("README.md", r"scenario%20samples-(\d+)", "rs", 1),
-    ("README.md", r'alt="Scenario samples: (\d+)"', "rs", 1),
-    ("README.md", r"^当前评测集共 (\d+) 条：$", "total", 1),
-    ("README.md", r"^\| SF \| (\d+) \|", "sf", 1),
-    ("README.md", r"^\| SNF \| (\d+) \|", "snf", 1),
-    ("README.md", r"^\| 场景样本 \| (\d+) \|", "rs", 1),
-    # 冠词随数字读音变（an 84-case / a 95-case），两种都要能匹配
-    ("README.md", r"\ban? (\d+)-case benchmark", "total", 1),
-    ("evals/run-eval.md", r"^### 对 Should Fix（SF-01 到 SF-(\d+)）：$", "sf", 1),
-    ("evals/run-eval.md", r"^### 对 Should NOT Fix（SNF-01 到 SNF-(\d+)）：$", "snf", 1),
-    ("evals/run-eval.md", r"^- SF 通过率：X/(\d+)$", "sf", 1),
-    ("evals/run-eval.md", r"^- SNF 误杀率：X/(\d+)$", "snf", 1),
-    ("evals/run-eval.md", r"^注意：token .*一次跑完 (\d+) 条", "total", 1),
-    # 贪婪匹配到最后一个「扩到 N 条。」，扩样本时只改正文不用改这条正则
-    ("evals/real-samples.md", r"^> v1\.7\.2 新增.*扩到 (\d+) 条。", "rs", 1),
-    ("evals/real-samples.md", r"^\| 数量 \| (\d+) 条，持续扩充 \|", "total", 1),
-    ("evals/real-samples.md", r"^\| 数量 \| \d+ 条，持续扩充 \| (\d+) 条，质量优先 \|", "rs", 1),
-    ("evals/real-samples.md", r"^> 现在覆盖 .*?(\d+) 条 benchmark。", "total", 1),
-    ("evals/real-samples.md", r"^### RS-(20)\b", "rs", 1),
-    ("evals/benchmark-blind.md", r"^> 共 (\d+) 条。", "total", 1),
-    ("evals/benchmark-map.md", r"^> 共 (\d+) 条 = \d+ SF \+ \d+ SNF。$", "total", 1),
-    ("evals/benchmark-map.md", r"^> 共 \d+ 条 = (\d+) SF \+ \d+ SNF。$", "sf", 1),
-    ("evals/benchmark-map.md", r"^> 共 \d+ 条 = \d+ SF \+ (\d+) SNF。$", "snf", 1),
-    ("automation/eval/README.md", r"^\| `B97-(\d+)` \| B-97 到 B-\1 \|$", "total", 1),
+# 展示形式不属于数据契约：README 可以删 badge；存在时数字须来自语料。
+BADGE_COUNTS = (
+    (r"benchmark-(\d+)%20cases", "total"),
+    (r'alt="Benchmark: (\d+) cases"', "total"),
+    (r"scenario%20samples-(\d+)", "rs"),
+    (r'alt="Scenario samples: (\d+)"', "rs"),
 )
 
 CN_NUM = {"一": 1, "二": 2, "三": 3, "四": 4, "五": 5, "六": 6, "七": 7, "八": 8, "九": 9, "十": 10}
 
 LINK_RE = re.compile(r"!?\[[^\]\n]*\]\(\s*(<[^>\n]+>|[^)\s]+)")
 HTML_LINK_RE = re.compile(r'(?:href|src)="([^"]+)"')
+REFERENCE_LINK_RE = re.compile(r"^\s*\[[^\]\n]+\]:\s*(<[^>\n]+>|\S+)")
 CASE_ID_RE = re.compile(r"\b(?:SF|SNF|RS)-\d+\b")
 FUTURE_ID_RE = re.compile(r"新增从\s+((?:SF|SNF|RS)-\d+)\s+起")
 
@@ -99,26 +79,19 @@ def check_counts(issues):
         add_issue(issues, "evals/benchmark.md", "-", "counts", "没有解析到 benchmark 用例标题")
     if not rs_matches:
         add_issue(issues, "evals/real-samples.md", "-", "counts", "没有解析到 RS 样本标题")
+    for relative, matches in (("evals/benchmark.md", case_matches), ("evals/real-samples.md", rs_matches)):
+        ids = [match.group(1) for match in matches]
+        if len(ids) != len(set(ids)):
+            add_issue(issues, relative, "-", "counts", "用例编号重复")
 
     sf = sum(match.group(2) == "SF" for match in case_matches)
     snf = len(case_matches) - sf
     expected = {"total": len(case_matches), "sf": sf, "snf": snf, "rs": len(rs_matches)}
     anchor_count = 0
-    for relative, pattern, source, expected_hits in ANCHORS:
-        text = read_text(relative, issues, "counts")
-        if text is None:
-            continue
-        matches = list(re.finditer(pattern, text, re.MULTILINE))
-        if len(matches) != expected_hits:
-            line = line_number(text, matches[0].start()) if matches else "-"
-            add_issue(
-                issues,
-                relative,
-                line,
-                "counts",
-                f"锚点失配：{pattern!r} 预期命中 {expected_hits} 次，实际 {len(matches)} 次",
-            )
-            continue
+    relative = "README.md"
+    text = read_text(relative, issues, "counts") or ""
+    for pattern, source in BADGE_COUNTS:
+        matches = list(re.finditer(pattern, text))
         anchor_count += len(matches)
         for match in matches:
             actual = int(match.group(1))
@@ -159,7 +132,7 @@ def local_target(target):
     target = html.unescape(target.strip())
     if target.startswith("<") and target.endswith(">"):
         target = target[1:-1]
-    if target.startswith(("http://", "https://", "mailto:", "data:", "#")):
+    if target.startswith(("//", "#")) or re.match(r"^[A-Za-z][A-Za-z0-9+.-]*:", target):
         return None
     return unquote(target.split("#", 1)[0].split("?", 1)[0]) or None
 
@@ -188,6 +161,128 @@ def check_links(files, issues):
                 if not destination.exists():
                     add_issue(issues, relative, number, "links", f"相对链接目标不存在：{path_text}")
     return checked
+
+
+def safe_relative_path(value):
+    if not isinstance(value, str) or not value or "\\" in value:
+        return False
+    path = PurePosixPath(value)
+    return (not path.is_absolute() and ":" not in value
+            and not any(part in ("", ".", "..") for part in value.split("/")))
+
+
+def check_runtime_manifest(issues, root=None):
+    """运行安装包由显式清单定义，不递归收集开发目录里的 SKILL。"""
+    root = (root or ROOT).resolve()
+    manifest = root / "runtime-files.json"
+    try:
+        payload = json.loads(manifest.read_text(encoding="utf-8"))
+    except (OSError, UnicodeError, ValueError) as exc:
+        add_issue(issues, "runtime-files.json", "-", "runtime", f"无法读取运行清单：{exc}")
+        return 0
+    entries = payload.get("files") if isinstance(payload, dict) else None
+    if not isinstance(entries, list) or not entries:
+        add_issue(issues, "runtime-files.json", "-", "runtime", "files 必须是非空数组")
+        return 0
+    paths = {}
+    for relative in entries:
+        if not safe_relative_path(relative):
+            add_issue(issues, "runtime-files.json", "-", "runtime", f"不安全的相对路径：{relative!r}")
+            continue
+        if relative in paths:
+            add_issue(issues, "runtime-files.json", "-", "runtime", f"重复文件：{relative}")
+            continue
+        path = PurePosixPath(relative)
+        if relative != "SKILL.md" and (path.parts[0] != "references" or path.name.lower() == "skill.md"):
+            add_issue(issues, "runtime-files.json", "-", "runtime", f"运行包只允许根 SKILL.md 与 references 资料：{relative}")
+        candidate = root / relative
+        paths[relative] = candidate
+        try:
+            candidate.resolve().relative_to(root)
+        except (ValueError, OSError, RuntimeError):
+            add_issue(issues, relative, "-", "runtime", "运行文件通过符号链接越出仓库")
+            continue
+        if not candidate.is_file():
+            add_issue(issues, relative, "-", "runtime", "清单文件不存在或不是普通文件")
+        elif candidate.resolve() != candidate.absolute():
+            add_issue(issues, relative, "-", "runtime", "运行文件及其父目录不能通过符号链接加载资料")
+    if "SKILL.md" not in paths:
+        add_issue(issues, "runtime-files.json", "-", "runtime", "清单必须包含根 SKILL.md 入口")
+    references = root / "references"
+    if references.is_symlink() or (references.exists() and not references.is_dir()):
+        add_issue(issues, "references", "-", "runtime", "references 必须是仓库内的真实目录")
+    if references.exists():
+        for candidate in references.rglob("*"):
+            relative = candidate.relative_to(root).as_posix()
+            if candidate.is_symlink() and candidate.is_dir():
+                add_issue(issues, relative, "-", "runtime", "references 不能通过目录符号链接隐式加载资料")
+            elif candidate.is_file() or candidate.is_symlink():
+                if relative not in paths:
+                    add_issue(issues, relative, "-", "runtime", "references 文件未列入运行清单")
+    for relative, candidate in paths.items():
+        try:
+            candidate.resolve().relative_to(root)
+            if candidate.suffix.lower() != ".md" or not candidate.is_file():
+                continue
+        except (OSError, ValueError, RuntimeError):
+            continue  # 上面的文件检查已报告路径失败。
+        try:
+            text = candidate.read_text(encoding="utf-8")
+        except (OSError, UnicodeError) as exc:
+            add_issue(issues, relative, "-", "runtime", f"运行文件无法读取：{exc}")
+            continue
+        in_fence = False
+        for number, raw_line in enumerate(text.splitlines(), 1):
+            if re.match(r"^\s*(```|~~~)", raw_line):
+                in_fence = not in_fence
+                continue
+            if in_fence:
+                continue
+            line = strip_inline_code(raw_line)
+            targets = [match.group(1) for match in LINK_RE.finditer(line)]
+            targets += [match.group(1) for match in HTML_LINK_RE.finditer(line)]
+            targets += [match.group(1) for match in REFERENCE_LINK_RE.finditer(line)]
+            for target in targets:
+                local = local_target(target)
+                if local is None:
+                    continue
+                destination = candidate.parent / local
+                try:
+                    packaged = destination.resolve().relative_to(root).as_posix()
+                except (ValueError, OSError, RuntimeError):
+                    packaged = None
+                # 按实际目标核对，不能用 symlink 别名绕进开发目录。
+                if packaged not in paths or not destination.is_file():
+                    add_issue(issues, relative, number, "runtime", f"相对链接没有闭合到运行包：{target}")
+    return len(paths)
+
+
+def check_legacy_sources(issues):
+    """历史基线只校验冻结字节，不约束新运行规则的文件结构。"""
+    relative = "evals/legacy-v2.4.1/source-hashes.json"
+    text = read_text(relative, issues, "legacy")
+    if text is None:
+        return
+    try:
+        hashes = json.loads(text)
+    except ValueError as exc:
+        add_issue(issues, relative, "-", "legacy", f"哈希清单无法解析：{exc}")
+        return
+    if not isinstance(hashes, dict) or not hashes:
+        add_issue(issues, relative, "-", "legacy", "历史哈希清单必须是非空 object")
+        return
+    for source, expected in hashes.items():
+        if not safe_relative_path(source) or not isinstance(expected, str) or not re.fullmatch(r"[0-9a-f]{64}", expected):
+            add_issue(issues, relative, "-", "legacy", f"历史哈希条目无效：{source!r}")
+            continue
+        snapshot = ROOT / "evals/legacy-v2.4.1" / (source + ".txt")
+        try:
+            actual = hashlib.sha256(snapshot.read_bytes()).hexdigest()
+        except OSError as exc:
+            add_issue(issues, relative, "-", "legacy", f"历史文件无法读取：{source}: {exc}")
+            continue
+        if actual != expected:
+            add_issue(issues, relative, "-", "legacy", f"冻结历史字节已变化：{source}")
 
 
 def check_case_ids(files, case_matches, rs_matches, issues):
@@ -356,11 +451,8 @@ def check_human_corpus(issues):
     return len(active)
 
 
-# hard_metrics.py 里的词表是判据的脚本实现，references/structures.md 的正文是同一
-# 判据的规则真源。两边各自维护，改一边忘另一边就会静默漂移——v2.3.0 新增的借喻场
-# 和名词化空动词都是硬编码在脚本里的枚举，属于高风险项。
-# 分级对待：正文明说是完整枚举的（借喻「常见 N 套」、名词化空动词）双向核对；正文
-# 按「清单是举例不是边界」写的（连词），只查正文列到的词脚本里有，不反向要求穷举。
+# hard_metrics.py 的 residual 词表只服务历史统计，与冻结的旧规则对照。
+# 新 skill 的运行结构和编辑质量不由这些历史词表约束。
 def load_hard_metrics(issues):
     """直接编译源码取词表，不走 importlib 的字节码缓存。
 
@@ -400,11 +492,11 @@ def code_span_terms(line):
 
 def check_rule_tables(issues):
     module = load_hard_metrics(issues)
-    text = read_text("references/structures.md", issues, "rule-tables")
+    relative = "evals/legacy-v2.4.1/references/structures.md.txt"
+    text = read_text(relative, issues, "rule-tables")
     if module is None or text is None:
         return 0
 
-    relative = "references/structures.md"
     checked = 0
 
     # 第 25 条借喻场：正文「常见 N 套：A、B、……」与 METAPHOR_FIELDS 双向一致，
@@ -491,6 +583,8 @@ def main():
     links = check_links(files, issues)
     check_case_ids(files, case_matches, rs_matches, issues)
     check_meta(issues)
+    runtime = check_runtime_manifest(issues)
+    check_legacy_sources(issues)
     human = check_human_corpus(issues)
     tables = check_rule_tables(issues)
 
@@ -500,7 +594,7 @@ def main():
         return 1
     total = sf + snf
     human_text = f" / HUMAN {human} 篇" if human else ""
-    print(f"check_repo: OK（{total} 用例 / {len(rs_matches)} 样本{human_text} / {anchors} 锚点 / {links} 链接 / {tables} 词表）")
+    print(f"check_repo: OK（{total} 用例 / {len(rs_matches)} 样本{human_text} / {anchors} badge 计数 / {links} 链接 / {runtime} 运行文件 / {tables} 历史词表）")
     return 0
 
 

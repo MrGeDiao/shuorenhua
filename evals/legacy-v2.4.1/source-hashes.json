@@ -1,0 +1,15 @@
+{
+  "SKILL.md": "de4135fcb88547439f8146d7bea706cfa1abbad586e49371362ec17b77089c5b",
+  "references/boundary-cases.md": "ced39bcc6e36aaf8589a52e43e3555ee80a62a38f5a3e05aeb1eb01f4d1c90fc",
+  "references/examples.md": "b7ad297a6dd6db80f3e120452756a789e0afcf9cfc7b7ee51e2442eb2c6b905a",
+  "references/operation-manual.md": "03c86ccbe7b2501f42c73a4a4e321b2419f6c07a544ed216f6ccec9abe7b8099",
+  "references/phrases-en.md": "b4d526a5178249c1ec9552eddd7ea7293c38f9d177425b1a7a5c2bf18b7b8639",
+  "references/phrases-zh.md": "6492337be391218433c6edc0a01c397ac1980c172327f7242323230517382afd",
+  "references/positive-style.md": "8f387cb0af92c543c341145829b80e03deb009865bb7f84929ae4ebcb349a242",
+  "references/protected-spans.md": "fd7bbde385d755b06b71ac6b07aa4720514bdc484c31e2dc467ef93a24d0afc7",
+  "references/scene-guardrails.md": "56703a71ac88cbd9911d50a71bf4bfc56f5c59f23359701f8ae94372a5788bbe",
+  "references/scene-packs.md": "f065aa6ed629367be5696013b84647a08230c1b21e2091b23999d2e9e2f8dfee",
+  "references/severity.md": "c0142f8c2994654295b3069f2373750113ac090aa4a5c63cd3d3e3f67ed29554",
+  "references/structures.md": "e51b1525e18c6b0b7b329d6818442356effbbe5755b2bbd611e40f6ab2d4684b",
+  "automation/eval/rewrite-prompt.md": "332f34f0d44ee50f803b187e672d71f863abf4ac4009c3e5728c7c0d3f38985b"
+}

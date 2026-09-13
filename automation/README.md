@@ -1,95 +1,27 @@
-# Community Sample Intake — 运行说明
+# 维护工具
 
-> 维护者本地工具的运行入口。
-> 协议规范（什么是 intake、为什么做）见 `./intake.md`，prompt 本体见 `./intake-prompt.md`。
-> 这份 README 只解决"具体怎么跑一次"。
+## 仓库检查
 
-## 仓库完整性硬检查
+在仓库根目录运行 `python3 automation/check_repo.py`，检查用例与编号、盲测同步、相对链接、版本元数据、HUMAN 语料元数据，以及运行清单的文件与链接闭合。README badge 存在时校验其数字，不要求固定宣传文案。
 
-`check_repo.py` 只检查仓库结构有没有漂移，不判断文本有没有 AI 味。在仓库根目录运行：
+旧词表的统计检查读取冻结历史副本并核验哈希，不约束新版运行规则。脚本检查仓库结构与元数据，不判定文章质量或来源真伪。
 
-```bash
-python3 automation/check_repo.py
-```
+## 编辑评测
 
-- `blind-sync`：确认 benchmark 与两份盲测生成物同步。
-- `counts`：核对 README、评测文档和批次表里的计数锚点。
-- `links`：检查 Markdown 和 README HTML 中的相对链接目标是否存在。
-- `case-ids`：检查正文引用的 SF、SNF、RS 编号是否存在。
-- `meta`：检查 skill frontmatter 必填字段、plugin JSON 结构，以及 plugin / marketplace 版本一致性。
-- `human-corpus`：v2.3.1 发布检查要求 HUMAN manifest，并校验公开再分发许可/许可证据、归属、固定 revision/UTC 时间、AI 依据、哈希、长度、句数、作者/时代/原始语言分层与 benchmark 隔离；`docs / public-writing / status` 的代表性只计 direct，proxy 不顶数。
-- `rule-tables`：核对 residual 脚本和结构规则正文里的名词化、连词、借喻场枚举。
+见 [eval/README.md](eval/README.md)。新版使用薄 runner 与逐题 JSON，保留输入、输出、失败与复核证据；历史 Markdown 指标脚本另留作复查。
 
-## Star 曲线自绘
+## 社区反馈
 
-`gen_star_history.py` 拉本仓库 stargazer 时间戳，重绘 README 里的 star 增长曲线。产物不进 main：`.github/workflows/star-history.yml` 每天 09:41（北京时间）生成并提交到 `star-data` 分支，README 引用该分支的 raw 链接。本地手动跑（依赖已登录的 gh CLI）：
+把原文、用户要求、实际输出与来源说明保存在 `tasks/current/intake/`，按 [intake.md](intake.md) 整理。可使用 [提示模板](intake-prompt.md)，只处理本次提供的材料；不自动创建周期任务。
+
+整理产物和过程笔记放在 gitignored 的 `tasks/`。先确认具体失败，再决定补回归或改编辑边界，不默认扩词表。
+
+## Star 曲线
+
+`gen_star_history.py` 读取本仓库公开 stargazer 时间戳生成 SVG；现有 GitHub workflow 将曲线更新到 `star-data` 分支。它与改写运行包和质量评测无关。手动运行方式：
 
 ```bash
 python3 automation/gen_star_history.py /tmp/star-growth.svg
 ```
 
-换掉 star-history.com 外链的原因：其后端拉 GitHub 数据高峰期超时（HTTP 500，2026-07-22 实测连 cli/cli 都渲染失败），外加新增的 URL 小写化 301 跳转，裂图不可控。发版标注写死在脚本 `EVENTS` 里，大版本发布后记得补一条。
-
-## 什么时候跑
-
-- 公开讨论（X / Linux.do / V2EX / 知乎 / Reddit 等）出现一批新的 AI 姿态链
-- 怀疑现有词表可能没收住，但又不确定是变体还是新模式
-- 触发条件全集见 `CONTRIBUTING.md` 「维护者：Community Observation Intake」一节
-
-## 文件约定
-
-工具本体（committed）：
-
-| 角色 | 路径 |
-|------|------|
-| 协议规范 | `automation/intake.md` |
-| Prompt 本体 | `automation/intake-prompt.md` |
-| 运行说明 | `automation/README.md`（本文件） |
-
-运行实例（local-only，`tasks/` 在 `.gitignore` 内）：
-
-| 角色 | 路径 |
-|------|------|
-| 输入（本轮样本批次） | `tasks/current/intake/inbox/<YYYY-MM-DD>.md` |
-| 输出（本轮 intake 报告） | `tasks/current/intake/reports/<YYYY-MM-DD>-intake.md` |
-
-输入文件每条样本带"来源 / 原文 / 提交者备注"三栏，越接近原始观察越好。dryrun 参考样本和 expected baseline 见仓库内 commit 历史里 v1.8.2 的相关引用。
-
-## 一条命令跑完
-
-在仓库根目录执行（替换日期）：
-
-```bash
-codex exec -C . -s read-only --ephemeral \
-  -o tasks/current/intake/reports/2026-05-01-intake.md \
-  '你正在执行说人话仓库的 intake automation。
-
-请完整读取 ./automation/intake-prompt.md，按其中 text 代码块里的 prompt 行事。该 prompt 已固定：要先读哪些 reference、如何按"已覆盖 / 变体归并 / 候选新模式"三档归类、强约束（默认不要建议加词条；不要把被讨论词、引用词、真人具体叙事误判成 AI 腔），以及最终输出格式。
-
-本轮样本批次在 ./tasks/current/intake/inbox/2026-05-01.md。
-
-请直接输出最终的 intake 报告，按 prompt 推荐的格式（本轮样本数 / 已覆盖 / 变体归并 / 候选新模式 / 建议动作 / 一句总判断），不要附加任何过程叙述或 meta 评论。'
-```
-
-关键参数说明：
-
-- `-C .` — 让 codex 把仓库根作为工作目录，prompt 里的相对路径才能解析
-- `-s read-only` — 沙箱锁死成只读，强约束"不自动改仓库"用沙箱兜一次底
-- `--ephemeral` — 不持久化 session，单次任务即跑即弃
-- `-o <报告路径>` — 直接把模型最终输出落到 reports 目录，不依赖 stdout 复制粘贴
-
-> `tasks/current/intake/inbox/` 和 `reports/` 这两个目录在 `.gitignore` 内，第一次用前手动 `mkdir -p` 一次即可。
-
-## 跑完之后
-
-报告里只会出现四类建议动作：`无动作 / 补 benchmark / 补 operation-manual / 考虑新增词条或结构`。
-
-- 默认假设：本轮**不需要**直接改仓库
-- 如果建议是 `补 benchmark`：人工评估后再去改 `evals/benchmark.md`
-- 如果建议是 `补 operation-manual`：人工评估后再去改 `references/operation-manual.md`
-- 如果建议是 `考虑新增词条或结构`：先观察 2-3 轮，确认是否反复出现，再考虑入库
-- 任何动作都**不应该**由 intake 自动完成；这一层是建议，不是落库
-
-## Prompt 调坏了怎么办
-
-如果哪天改 `intake-prompt.md` 让报告偏离 spec 推荐格式（6 段都缺、问题族归类乱、被讨论词被误判成 AI 腔），就说明 prompt 调坏了——回滚或重新校准。校准时建议先准备一份覆盖三档结论 + 两类陷阱（被讨论词、技术语境放行）的合成样本批次作为 expected baseline，跑完比对。
+需要已登录的 gh CLI。新版本尚未发布时，不提前增加发版标记。

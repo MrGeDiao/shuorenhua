@@ -8,4 +8,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - run: python3 -m unittest discover -s automation/eval -p 'test_*.py'
+      - run: python3 -m unittest discover -s automation -p 'test_check_runtime.py'
       - run: python3 automation/check_repo.py

@@ -1,19 +1,23 @@
 # Codex 安装 / 使用
 
+手动升级时先用新的空目录收集运行文件，核对本地定制后再切换旧安装；仅覆盖入口会留下旧参考文件。下方复制命令面向首次安装或空目录。
+
+本页对应 2.5.0 开发候选，尚未发布。远程安装入口仍提供已发布版本；测试候选时，请从本地候选源码目录复制文件。
+
 ## mini / lite / full 怎么选
 
-- `mini`：只把 `dist/shuorenhua-mini.md` 作为一次性 prompt。适合上下文很紧、较弱模型或只清明显模板感；它不是完整 skill。
+- `mini`：只把 `dist/shuorenhua-mini.md` 作为一次性 prompt。适合上下文很紧或临时粘贴使用；它不是完整 skill。
 - `lite`：只加载 `SKILL.md`。适合单次临时改写、上下文紧张、只想先压掉明显模板感的场景。
-- `full`：加载 `SKILL.md` + `references/`。适合长期项目、README / release note / issue 回复、技术文档和需要误杀防护的场景。
+- `full`：加载 `SKILL.md`、`references/editing-guide.md`、`references/examples.md` 三个文件。适合长期项目、README / release note / issue 回复、技术文档和需要查看编辑边界与改写对照的任务。
 
 ## 方式 1：项目内长期使用（推荐）
 
 把 skill 文件放进项目：
 
 ```bash
-mkdir -p shuorenhua
+mkdir -p shuorenhua/references
 cp SKILL.md shuorenhua/
-cp -r references shuorenhua/
+cp references/editing-guide.md references/examples.md shuorenhua/references/
 ```
 
 这是 full 用法，也是项目内长期使用的默认建议。
@@ -36,7 +40,7 @@ cp -r references shuorenhua/
 codex exec -C . "读取 ./SKILL.md，按其中规则改写以下文本：..."
 ```
 
-不需要修改项目文件，适合临时使用。这是 lite 用法；如果要处理公开文本、技术边界或 Scene Packs，建议同时让 Codex 读取 `references/` 下的相关文件。
+不需要修改项目文件，适合临时使用。这是 lite 用法；如果要处理复杂的语义边界或需要对照改写例子，建议同时让 Codex 读取 `references/` 下的相关文件。
 
 如果当前上下文放不下完整规则，可以改读 mini：
 
@@ -61,12 +65,12 @@ codex exec -C . "读取 ./SKILL.md，只按 annotation mode 标出下面这段�
 先把完整规则放到本地 skill 目录：
 
 ```bash
-mkdir -p ~/.codex/skills/shuorenhua
+mkdir -p ~/.codex/skills/shuorenhua/references
 cp SKILL.md ~/.codex/skills/shuorenhua/
-cp -r references ~/.codex/skills/shuorenhua/
+cp references/editing-guide.md references/examples.md ~/.codex/skills/shuorenhua/references/
 ```
 
-这是 full 用法。只复制 `SKILL.md` 也能用，但误杀防护和场景细分会弱一些。
+这是 full 用法。只复制 `SKILL.md` 是 lite；两份参考文件只在需要时读取。
 
 再在全局 `AGENTS.md` 里写触发入口：
 
@@ -84,20 +88,24 @@ EOF
 
 "装了 skill"不等于 Codex 会无条件自动套用全部规则。你需要给它一个清楚的触发入口（`AGENTS.md`、项目提示，或在单次任务里明确要求读取 `SKILL.md`），它才会按规则处理。
 
-## 长文改写的三档 scope
+## 编辑范围
 
-长文（约 1000 字以上的 `public-writing`）改写时，可以指定三档 scope，和力度档位正交：
+默认做最小必要修改；中文公开长文约 1000 字以上默认保留句段结构。可以直接指定：
 
-- `structural`：自由删句、并句、重排，去味最彻底，但长度不可控（实测同一篇可能 -18% 到 -39%）
-- `bounded`（长文默认）：实句只做句内清理；整句空话不直接删，列成「建议删除（待确认）」清单交你拍板
-- `in-place`：一句都不删，只做句内降调，适合“完全原样”的要求
+程序代码块（包括注释和文档字符串）默认逐字保留；只有用户明确点名修改注释或说明文字时才编辑相应部分，且不改程序行为。代码围栏里的普通文案仍可按用户要求编辑。
 
-在指令里直接说就行，例如：「用 bounded scope 改写，整句空话列出来给我确认、别直接删。」
+- `structural`：允许删、并、重排，仍须保留有效信息与作者意图。
+- `bounded`：不直接删整句、不并句、不重排。纯空句可列“建议删除（待确认）”，正文暂时保留。
+- `in-place`：不删句、不并句、不重排，只在句内替换或删修饰；要求保句数时也不拆句。
 
-## 验证
+例如：“按 bounded 改，删除建议放在正文后。”这些范围不因编辑力度或来源处理方式而放宽。
+
+## 手动检查
+
+提交正文后，确认保留原文语言、事实、条件与作者立场。正常原文应完整返回，不只回复“保留原文”；只标问题时不应附替换全文。以下提示可用来检查是否加载，但不能代替效果评测。
 
 ```text
-用说人话规则改写：在当今快速发展的人工智能时代，如何打造一个真正赋能开发者的工具，已经成为业界不容忽视的关键议题。
+用说人话规则改写：值得注意的是，接口超时从 30 秒改为 60 秒。
 ```
 
-输出去掉了 `打造 / 赋能 / 不容忽视 / 关键议题`，但没把信息改空，说明接上了。
+可以去掉“值得注意的是”，但必须保留接口超时及 30 秒改为 60 秒的关系。

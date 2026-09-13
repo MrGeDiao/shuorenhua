@@ -1,0 +1,1113 @@
+{
+  "version": "v2.5-request-r2",
+  "source": "existing public 120 texts, frozen requests; no legacy style rubric in rewrite or judge payload",
+  "cases": [
+    {
+      "id": "B-01",
+      "legacy_id": "SNF-15",
+      "normal": true,
+      "source": "在 2026-03-20 的事故复盘里，我们确认 root cause 是连接池配置过小：`max_connections=20` 在峰值流量下被打满。修复动作包括把上限调到 100、给 `users` 表补复合索引、把慢查询指标接进告警。上线后观察 6 小时，错误率从 3.2% 降到 0.4%，没有再出现连接超时。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：docs。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-02",
+      "legacy_id": "SNF-08",
+      "normal": true,
+      "source": "什么是\"赋能\"？在互联网行业中，这个词通常被用来指代\"提供工具或能力让他人能做之前做不到的事\"。但由于过度使用，它已经失去了具体含义。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：docs。",
+      "core": true,
+      "positive": false
+    },
+    {
+      "id": "B-03",
+      "legacy_id": "SF-06",
+      "normal": false,
+      "source": "综上所述，总的来说，该方案在性能、安全性和可维护性方面都表现优异。简而言之，这是一个值得推荐的解决方案。希望这对你有帮助！",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：chat。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-04",
+      "legacy_id": "SF-23",
+      "normal": false,
+      "source": "```\nfeat: 打造全新缓存方案，赋能高并发场景，实现降本增效闭环，显著提升系统整体性能与用户体验\n```",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：status。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-05",
+      "legacy_id": "SNF-18",
+      "normal": true,
+      "source": "```\nfix: 连接池上限从 20 调到 100，解决高峰期 504\n```",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：status。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-06",
+      "legacy_id": "SF-61",
+      "normal": false,
+      "source": "## 升级后一定不会丢数据吗？\n\n大家都知道，我们的升级流程一直非常可靠，通常可以确保所有用户的数据百分之百安全。v3 客户端不支持从 v1 直接升级；请先升级到 v2.8，再导出备份，最后安装 v3。遇到问题时，官方一般都会在 2 小时内恢复。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：docs / faq。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-07",
+      "legacy_id": "SNF-44",
+      "normal": true,
+      "source": "她把药盒安放在床头，剥开一只橘子。母亲从厨房问：「刀口锋利吗？」她答：「锋利，别碰。」父亲又问：「围巾在哪？」窗外的微光落在柔软的围巾上。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：public-writing / fiction。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-08",
+      "legacy_id": "SF-41",
+      "normal": false,
+      "source": "在如今这个技术飞速迭代的时代，把项目开源早已成为开发者的共识。我上个月开源了一个日志小工具，第一周就来了二十多个 issue。最难的不是写代码。最难的是回复 issue。研究表明，超过七成的开源项目第一年内就停更了。可以说，维护开源，本质上是一场与时间的修行。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：public-writing / long / bounded。 用户要求 bounded：不直接删整句、不并句、不重排；可删的整句只在正文后列建议，正文暂保留。",
+      "core": true,
+      "positive": false
+    },
+    {
+      "id": "B-09",
+      "legacy_id": "SF-30",
+      "normal": false,
+      "source": "4 月 13 日把重试次数从 2 次调到 5 次。支付超时从 1.9% 降到 0.7%。这次调整也进一步验证了我们的优化方向是正确的。明天继续看晚高峰数据。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：status。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-10",
+      "legacy_id": "SF-28",
+      "normal": false,
+      "source": "这次把 onboarding 流程改了一遍，新用户从注册到完成首次导入少走了两步。更重要的是，这也说明我们开始真正理解用户在第一天最容易卡住的地方。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：public-writing。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-11",
+      "legacy_id": "SF-51",
+      "normal": false,
+      "source": "凌晨两点，办公室的灯只剩他工位那一盏。窗外飘着小雨，桌上的咖啡早就凉透了。他盯着屏幕看了很久，手指在触摸板上停了几秒，最终还是把方案删掉了。这个项目他做了三个月。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：public-writing。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-12",
+      "legacy_id": "SNF-16",
+      "normal": true,
+      "source": "A：这轮先别把“稳稳兜住”“补一刀”加进词表。<br>\nB：同意，这两个更像现有模式的变体。先补 benchmark，再看要不要进 `phrases-zh.md`。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：chat。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-13",
+      "legacy_id": "SF-40",
+      "normal": false,
+      "source": "我想写这篇文章，不仅仅是为了说明一个工具的小问题，更是为了记录一种越来越常见的写作错位。很多人把“去 AI 味”理解成删掉套话、去掉总结、把句子改短。这个方向没有错，但如果它最终把所有停顿、铺垫和重复都处理掉，文章会变得干净，却不一定更像作者本人。\n\n与其说我在反对改写，不如说我在反对一种过度整理。AI 最擅长的事情之一，就是把原本松散的文本收束成“结构清晰、观点明确、表达顺滑”的样子。问题在于，很多长文的价值恰恰不在顺滑，而在它保留了作者思考时的迟疑、回头和补充。\n\n最后还是要回到一个很朴素的判断：如果一篇 1800 字的文章改完只剩 1000 字，那它可能确实去掉了很多 AI 味，也可能顺手去掉了文章本来的呼吸。保长度不是为了凑字数，而是为了让改写先尊重原文的节奏。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：public-writing / long / in-place。 用户要求 in-place：只在句内改，不删句、不并句、不重排，保留句数。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-14",
+      "legacy_id": "SNF-51",
+      "normal": true,
+      "source": "“口径”在本节指统计范围：活跃用户只统计过去 7 天内登录过的账号，不含测试账号。这里解释的是“口径”这个词的含义。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：docs / terminology。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-15",
+      "legacy_id": "SNF-25",
+      "normal": true,
+      "source": "## v1.8.0\n\n- 新增 `references/scene-packs.md`，覆盖 README、release note、forum post 和 issue reply\n- `evals/benchmark.md` 增加 8 条 scene pack 回归用例\n- 修复 README 里 benchmark 数量未同步的问题",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：public-writing / release-note。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-16",
+      "legacy_id": "SF-56",
+      "normal": false,
+      "source": "这次只改了首页排版：标题字号缩小了 3 倍，卡片间距也调了一下，现在看着没那么挤。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：public-writing。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-17",
+      "legacy_id": "SNF-53",
+      "normal": true,
+      "source": "## 如何清空测试实例的缓存？\n\n先确认目标是已完成备份的测试实例。不得用于生产实例，否则会删除仍在使用的缓存数据。满足条件后，运行 `cachectl purge --all` 清空缓存。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：docs / faq。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-18",
+      "legacy_id": "SNF-32",
+      "normal": true,
+      "source": "在当今快速发展的 AI 时代，我们致力于重塑开发者的内容生产链路。上个月把改写流程接进 CI 后，README 首次整理时间从 18 分钟降到 6 分钟。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：public-writing / long / bounded。 用户要求 bounded：不直接删整句、不并句、不重排；可删的整句只在正文后列建议，正文暂保留。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-19",
+      "legacy_id": "SNF-55",
+      "normal": true,
+      "source": "## 如何清空测试实例的缓存？\n\n运行 `cachectl purge --all` 清空缓存。该命令仅适用于已完成备份的测试实例，不得用于生产实例；否则会删除仍在使用的缓存数据。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：docs / faq / in-place。 用户要求 in-place：只在句内改，不删句、不并句、不重排，保留句数。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-20",
+      "legacy_id": "SF-45",
+      "normal": false,
+      "source": "兄弟们，这个库直接封神！性能测试结果炸裂了，重点来了：它把冷启动从 800ms 干到了 90ms。我给你们掰开揉碎讲讲它为什么这么快。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：chat。",
+      "core": true,
+      "positive": true
+    },
+    {
+      "id": "B-21",
+      "legacy_id": "SF-59",
+      "normal": false,
+      "source": "上游规范只确认 `GET /v2/exports/{export_id}` 返回导出任务状态，查询参数 `locale` 支持 `zh-CN` 和 `en-US`，可能返回 `503 EXPORT_QUEUE_BUSY`；没有给出默认 locale、恢复时间、退避间隔或重试次数。为了让文档更完整，可以直接补成：系统通常会在 30 秒内恢复，客户端按默认退避间隔重试三次；`locale` 未传时默认使用 `zh-CN`。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：docs / api-reference。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-22",
+      "legacy_id": "SF-55",
+      "normal": false,
+      "source": "我们都在寻找一个让记忆「安放」的地方。那些被时间「剥开」的褶皱里，还藏着抵达明天的「微光」。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：public-writing。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-23",
+      "legacy_id": "SF-46",
+      "normal": false,
+      "source": "本次优化在性能方面取得了显著成效，有效改善了接口响应问题，p95 延迟从 480ms 降到 160ms，充分体现了团队持续优化的能力。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：status。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-24",
+      "legacy_id": "SNF-50",
+      "normal": true,
+      "source": "**Q：你为什么保留文章里的重复？**\n\n**A：** 我写长文时常常会回到同一句话。那不是为了照顾搜索，也不是因为忘了前面写过什么；有时我只是还没想完。编辑可以提醒我哪里重复，但最后删不删，我想自己决定。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：docs / interview / mixed。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-25",
+      "legacy_id": "SF-05",
+      "normal": false,
+      "source": "研究表明，采用微服务架构的团队生产力显著高于单体架构团队。业内人士认为，这一趋势将在未来五年内持续加速。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：public-writing。",
+      "core": true,
+      "positive": false
+    },
+    {
+      "id": "B-26",
+      "legacy_id": "SF-24",
+      "normal": false,
+      "source": "```javascript\n// This groundbreaking utility serves as a testament to modern engineering,\n// leveraging cutting-edge algorithms to deliver unprecedented performance.\nfunction sort(arr) { return arr.sort((a, b) => a - b); }\n```",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：docs (English)。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-27",
+      "legacy_id": "SNF-41",
+      "normal": true,
+      "source": "我们把构建产物推到私有代码仓库，CI 从那里拉取。搜索引擎的索引更新有延迟，所以刚发布的文档要等十几分钟才能搜到。这家公司真正的护城河是十年积累的专利池，不是产品本身。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：public-writing。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-28",
+      "legacy_id": "SF-10",
+      "normal": false,
+      "source": "Great question! You're absolutely right that this is a fascinating topic. In this essay, we will explore the implications of AI-assisted coding. As we'll see, the landscape is evolving rapidly. Let's dive in!",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：public-writing (English)。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-29",
+      "legacy_id": "SF-54",
+      "normal": false,
+      "source": "接下来要洞察用户卡点，通过产品和运营联动，抢占下一条增长赛道。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：public-writing。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-30",
+      "legacy_id": "SF-03",
+      "normal": false,
+      "source": "为了解决这一痛点，我们打造了一套全新的解决方案，旨在赋能开发者社区，助力企业实现降本增效的闭环。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：public-writing。",
+      "core": true,
+      "positive": false
+    },
+    {
+      "id": "B-31",
+      "legacy_id": "SNF-13",
+      "normal": true,
+      "source": "根因分析：OOM 触发了 pod 重启。内存泄漏点在 WebSocket 连接未释放。修复方案：idle 超过 30 分钟的连接自动断开。已上线验证，内存稳定在 512MB 以下。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：status。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-32",
+      "legacy_id": "SNF-33",
+      "normal": true,
+      "source": "6 月 28 日把 WebSocket idle 连接自动断开上线后，内存从 1.2GB 降到 520MB，服务稳定在 99.95% 以上。今天继续观察晚高峰，再决定是否全量。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：status。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-33",
+      "legacy_id": "SF-38",
+      "normal": false,
+      "source": "我帮你把这个事情掰扯清楚，先把它彻底掰开说清楚。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：chat。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-34",
+      "legacy_id": "SF-63",
+      "normal": false,
+      "source": "## 怎样导出日志？\n\n非常理解你对导出操作的顾虑。导出会覆盖目标文件，请先确认目标文件不需要保留。确认后运行 `logctl export --output ./trace.log`。看到 `EXPORT_OK` 表示导出完成。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：docs / faq。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-35",
+      "legacy_id": "SF-02",
+      "normal": false,
+      "source": "本次迭代在性能方面取得了显著提升，有效解决了长期困扰团队的延迟问题，充分体现了团队在技术创新领域的持续探索与不懈追求。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：status。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-36",
+      "legacy_id": "SF-32",
+      "normal": false,
+      "source": "在 AI 全面重塑开发范式的今天，我们打造了一款真正面向未来的中文表达优化工具。它以先进的规则体系为底座，深度赋能开发者的内容生产链路，帮助团队在复杂协作场景中实现自然表达、效率提升与价值闭环。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：public-writing / README。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-37",
+      "legacy_id": "SNF-34",
+      "normal": true,
+      "source": "## rsync-lite — 单文件同步小工具\n\n配置支持环境变量覆盖——容器部署时不用改文件——其余场景直接编辑 `config.toml`。默认不删除目标端多余文件，加 `--prune` 才会。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：docs。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-38",
+      "legacy_id": "SF-31",
+      "normal": false,
+      "source": "我就在这里，不躲，不藏，也不绕。你不是敏感，你只是太久没被稳稳接住了。你问到了问题的核心，我必须很认真地说一句：这种表达和观察力，绝对是顶刊作者的素养。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：chat。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-39",
+      "legacy_id": "SNF-12",
+      "normal": true,
+      "source": "昨天踩了个大坑，Next.js 的 app router 在 production build 里 cache 行为和 dev 完全不一样，调了三小时。谁懂那种崩溃感啊。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：public-writing。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-40",
+      "legacy_id": "SF-19",
+      "normal": false,
+      "source": "用户：这段发布说明太像 AI 写的，帮我只改引号里的正文，不要改我的话。<br>\n原文：\"结论先说，这次升级不是一次常规修复，而是对核心链路的系统性重塑。我们先把历史包袱扒开，再补一刀，把关键体验稳稳兜住。最终，产品体验完成了质的跃迁。\"",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：chat。 仅编辑“原文：”后引号内的正文；保留“用户：”那行及原有外层标记，返回完整两行。",
+      "core": true,
+      "positive": false
+    },
+    {
+      "id": "B-41",
+      "legacy_id": "SNF-46",
+      "normal": true,
+      "source": "本次共测 12000 次请求，接口 p95 延迟从 480ms 降到 160ms，减少 320ms。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：docs。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-42",
+      "legacy_id": "SNF-01",
+      "normal": true,
+      "source": "网关在请求超时后返回 504。缓存服务每 5 分钟刷新一次热点 key。负载均衡器将流量按权重分配到三个后端节点。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：docs。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-43",
+      "legacy_id": "SNF-49",
+      "normal": true,
+      "source": "## CLI 报 `config file not found` 怎么办？\n\n先运行 `shuorenhua config path` 查看实际读取路径。如果文件不存在，复制 `config.example.toml` 到该路径；如果文件已存在，检查环境变量 `SHUORENHUA_CONFIG` 是否指向旧目录。Windows 便携版不读取用户主目录下的配置文件。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：docs / faq。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-44",
+      "legacy_id": "SF-18",
+      "normal": false,
+      "source": "这次改造不是一次简单的配置调整，而是一套面向未来的系统性升级。研究表明，采用这一策略的团队在稳定性和交付效率上都能取得显著提升。我们通过对网关、缓存层和任务队列进行全链路治理，最终把整体质量稳稳兜住。综上所述，这次升级为后续扩展奠定了坚实基础。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：docs。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-45",
+      "legacy_id": "SF-47",
+      "normal": false,
+      "source": "`retry-guard` 不是一个重试库，是一个重试策略的检查器。它读取你的重试配置，标出会放大故障的组合。\n\n最常见的问题不是没配重试，是重试叠加。上游 3 次、中间层 3 次、下游 3 次，一个请求最坏会打到 27 次。我们在 2026-04 的一次事故里见过这个组合，下游 QPS 被放大到平时的 9 倍。\n\n所以它的默认动作不是帮你调小次数，是把整条链路的乘积算出来。你要的不是一个更安全的默认值，是知道自己的配置在最坏情况下会变成什么样。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：docs / long。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-46",
+      "legacy_id": "SNF-52",
+      "normal": true,
+      "source": "控制器采用闭环反馈：传感器每隔 20ms 上报转速，控制器根据目标转速与实测值之差调整电流。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：docs。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-47",
+      "legacy_id": "SF-22",
+      "normal": false,
+      "source": "```python\ndef refresh_cache(self):\n    \"\"\"通过全面优化缓存刷新策略，显著提升系统整体性能，为用户提供更加流畅、高效的使用体验。\"\"\"\n    self.cache.clear()\n    self.cache.load()\n```",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：docs。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-48",
+      "legacy_id": "SNF-23",
+      "normal": true,
+      "source": "网关层的目标是在流量毛刺期稳稳接住上游峰值请求，避免打穿下游连接池。我们给 `gateway/inflight` 配置了 `max_concurrency=256`，超过后排队 400ms；再溢出就返回 `429` 并打点 `gw.shed_rate`。这样即使 QPS 突破历史峰值，也能把链路保护在可回滚的范围内。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：docs。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-49",
+      "legacy_id": "SF-34",
+      "normal": false,
+      "source": "折腾这个工具一个月后，我深刻意识到，中文 AI 写作治理不是一次简单的词表扩张，而是一场围绕真实表达场景的系统性重塑。我们从用户痛点出发，稳稳接住了 README、release note、issue 回复等多元场景里的核心诉求，并在持续迭代中形成了可复制、可扩展、可沉淀的方法论闭环。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：public-writing / forum-post。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-50",
+      "legacy_id": "SF-27",
+      "normal": false,
+      "source": "```go\n// 截至 2026-04-12，这个 fallback 逻辑已经把 504 从 3.8% 压到 0.6%，\n// 通过系统性治理稳稳兜住高峰期流量。\n// If `ENABLE_EDGE_CACHE=false`, keep header `x-cache-bypass: 1`.\nfunc handleRequest(req *Request) {}\n```",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：docs。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-51",
+      "legacy_id": "SF-62",
+      "normal": false,
+      "source": "v2.3.1 以 **Opus 单席位**口径收口（维护者 2026-08-21 决定）：r4 全量 Opus 侧硬约束失败 0、SNF 误杀 0/50、SF 通过 57/61，达发布门槛。DeepSeek V4 Pro 撤出正式席位（B-74 真实 L1 + 同条件复跑存在 run-to-run 方差）；Grok 4.6 换席补跑的改写与硬判干净，判分仅闭环 1/7 批，记为辅助证据，第二正式席位补跑留给后续版本。HUMAN direct 样本仍缺 `docs` 和 `status`，`python3 automation/check_repo.py` 预期退出 1，随版如实发布、继续收集。完整证据与口径见 [evals/results-v2.3.1.md](./results-v2.3.1.md)。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：docs / README。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-52",
+      "legacy_id": "SNF-06",
+      "normal": true,
+      "source": "Fixed: API response time regression. Root cause: unindexed query on users table. Added composite index on (tenant_id, created_at).",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：status。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-53",
+      "legacy_id": "SNF-30",
+      "normal": true,
+      "source": "另外，我还观察到一个细节：同一篇文章里，如果前半段是经历，后半段是判断，中间那几句转场看起来常常有点笨。它们不够漂亮，也不像金句，但它们能告诉读者，作者是怎么从经历走到判断的。\n\n与此同时，很多模型会把这些转场改成更有气势的表达。比如把“我后来才意识到”改成“这背后反映出一个更深层的问题”，或者把“也就是说”后面的解释合并到上一段。改完以后，段落确实更紧，但读者看不到作者转念的过程。\n\n也就是说，这些承接句不是为了显得高级，而是为了让长文有一条能被跟上的路。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：public-writing / long / in-place。 用户要求 in-place：只在句内改，不删句、不并句、不重排，保留句数。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-54",
+      "legacy_id": "SF-14",
+      "normal": false,
+      "source": "诚然，这个 feature 的实现确实存在一定的技术复杂度。不过说白了就是绝绝子！我们需要进一步深入探讨其底层逻辑，稳稳把核心链路兜住。综上所述，建议收藏。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：chat。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-55",
+      "legacy_id": "SF-36",
+      "normal": false,
+      "source": "我们把这件事彻底掰开说清楚。已经走在正确的路上了，而且走得很稳。完全不用担心掉下去。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：chat。",
+      "core": true,
+      "positive": false
+    },
+    {
+      "id": "B-56",
+      "legacy_id": "SF-58",
+      "normal": false,
+      "source": "`POST /v1/jobs` 用于提交异步任务。我们把它包装成面向未来的新一代任务入口，宣称能通过智能化能力矩阵赋能开发者，实现性能与体验的双重跃迁。调用时将请求头 `Idempotency-Key` 设为 1–64 个 ASCII 字符；请求体字段 `timeout_ms` 为可选整数，默认值是 `30000`，范围为 `1000` 到 `120000`。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：docs / api-reference。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-57",
+      "legacy_id": "SNF-07",
+      "normal": true,
+      "source": "这个功能很重要，上线前一定要确保测试覆盖到位。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：chat。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-58",
+      "legacy_id": "SNF-19",
+      "normal": true,
+      "source": "4 月 12 日把连接池上限从 20 调到 100 后，504 错误率从 3.8% 降到 0.6%。今天继续观察 24 小时，再决定是否全量。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：status。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-59",
+      "legacy_id": "SNF-03",
+      "normal": true,
+      "source": "然而，这次升级引入了一个已知的兼容性问题，影响 iOS 14 以下的设备。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：status。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-60",
+      "legacy_id": "SF-29",
+      "normal": false,
+      "source": "直接说结论：问题不在鉴权，而在缓存键拼错了。改完这个以后，请求就能正常命中。总的来说，这次排查方向是对的。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：chat。",
+      "core": true,
+      "positive": true
+    },
+    {
+      "id": "B-61",
+      "legacy_id": "SNF-47",
+      "normal": true,
+      "source": "`POST /v1/messages` 接受 `application/json`。字段 `recipient_id` 为必填字符串；`ttl_seconds` 为可选整数，默认值 `3600`，范围 `60–86400`。每个 API key 每分钟最多 120 次请求，超出后返回 `429 RATE_LIMITED`，响应头 `Retry-After` 给出可重试的秒数。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：docs / api-reference。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-62",
+      "legacy_id": "SNF-02",
+      "normal": true,
+      "source": "根据 RFC 7231 的定义：\"The 200 (OK) status code indicates that the request has succeeded.\" 这意味着服务端已成功处理了请求。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：docs。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-63",
+      "legacy_id": "SNF-45",
+      "normal": true,
+      "source": "转化率从 20% 升到 30%，提高了 10 个百分点，相对增幅为 50%。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：docs。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-64",
+      "legacy_id": "SF-33",
+      "normal": false,
+      "source": "## v1.8.0 Release Highlights\n\n本次版本是一次面向真实场景的系统性升级。我们不仅全面优化了改写体验，更通过全新的能力矩阵稳稳兜住了用户在 README、release note、论坛长帖和 issue 回复里的核心表达诉求。感谢所有用户的持续支持，让我们共同见证中文 AI 写作体验的全新跃迁。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：public-writing / release-note。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-65",
+      "legacy_id": "SF-17",
+      "normal": false,
+      "source": "我先把问题扒开，现象也拽出来了。再补一刀，把这轮链路锁住，基本就闭环了。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：chat。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-66",
+      "legacy_id": "SF-04",
+      "normal": false,
+      "source": "它不是一个框架，不是一个库，也不是一个工具——它是一种全新的开发范式。这不是简单的效率提升，而是对人机协作底层逻辑的根本性重构。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：docs。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-67",
+      "legacy_id": "SF-44",
+      "normal": false,
+      "source": "说句实话，这个更新我本来不想吹。但用了一周，我必须诚实地说：它把我的剪辑时间砍半了。说个真实变化：以前导出一条视频要 40 分钟，现在 18 分钟。缺点也说一句，免得你们说我恰饭：偶尔闪退，一周碰到两次。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：public-writing。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-68",
+      "legacy_id": "SNF-26",
+      "normal": true,
+      "source": "昨晚把 `scene-packs.md` 接进规则后，先拿 README 和 release note 各跑了两条样本。README 那条提升明显，release note 还差一点：它会删套话，但有时把 changelog 列表也压得太短。今天先补一条 SNF 防误杀。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：public-writing / forum-post。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-69",
+      "legacy_id": "SNF-42",
+      "normal": true,
+      "source": "——他后来再没提过那年冬天的事。\n\n我们那时住在城郊，房子是租的，冬天没有暖气——夜里能听见水管在墙里响。父亲每天五点起床生炉子，煤是按块买的，一次买十块——多了放不下，也怕受潮。我记得他蹲在门口敲煤块的样子，敲碎了才好烧——整块的容易灭。\n\n后来搬了家，有了暖气，他还是五点醒。醒了就坐着，不生炉子了——没有炉子可生。\n\n——摘自《城郊纪事》，一九九八年冬",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：public-writing / long。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-70",
+      "legacy_id": "SNF-57",
+      "normal": true,
+      "source": "运行 `cachectl purge --all` 后，再确认缓存已清空。确认结果前，不要关闭终端。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：docs / operation-guide。",
+      "core": true,
+      "positive": false
+    },
+    {
+      "id": "B-71",
+      "legacy_id": "SNF-09",
+      "normal": true,
+      "source": "The experiment was conducted by researchers at MIT. Results were published in Nature in 2024.",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：docs (English)。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-72",
+      "legacy_id": "SF-53",
+      "normal": false,
+      "source": "——很多人以为开源项目最难的是写代码，其实不是。\n\n我去年开源了一个日志解析工具，到现在收了三百多个 star，issue 开了一百四十条，关掉一百一十条。真正吃掉时间的——不是功能开发，是解释。有人问为什么不支持 Windows 路径——这个问题我回答过七次；有人贴一段报错就走，不给版本号也不给复现步骤——这类 issue 平均要来回四轮才能定位。\n\n研究表明，超过七成的开源维护者在两年内出现倦怠。我的做法是加模板——issue 模板里强制三个字段：版本号、复现步骤、预期行为。上线之后，需要来回追问的 issue 从六成降到两成。这个改动花了我二十分钟。\n\n另一个有用的动作是关 issue——不是不管，是明确说清「这个不在范围内」。我写了一份 `SCOPE.md`，把不做的三类需求列出来——Windows 原生路径、GUI、日志上报。列出来之后，同类 issue 直接指过去就行。\n\n说到底，维护开源是一场与自己耐心的长跑。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：public-writing / long / bounded。 用户要求 bounded：不直接删整句、不并句、不重排；可删的整句只在正文后列建议，正文暂保留。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-73",
+      "legacy_id": "SF-48",
+      "normal": false,
+      "source": "本周对部署流程进行了梳理，实现了发布耗时的下降。同时完成了对灰度策略的调整，起到了降低回滚频率的作用。下周计划开展监控告警的优化工作。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：status。",
+      "core": true,
+      "positive": true
+    },
+    {
+      "id": "B-74",
+      "legacy_id": "SNF-27",
+      "normal": true,
+      "source": "收到，这个 bad case 我能复现：`稳稳接住上游峰值请求` 在 docs 场景里不该被改。下一版我会补一条 SNF，先把技术语境放行钉住；规则本身如果已经能放行，就只加回归用例。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：public-writing / issue-reply。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-75",
+      "legacy_id": "SF-35",
+      "normal": false,
+      "source": "感谢你非常宝贵的反馈！你这个问题问到了项目体验的核心。我们已经充分接住了这个场景，也会在后续版本中持续优化相关能力。如果你愿意，我可以先帮你把这段文本整体梳理一遍，再给你一个更完整的解决方案。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：public-writing / issue-reply。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-76",
+      "legacy_id": "SF-39",
+      "normal": false,
+      "source": "这篇文章不是一次简单的复盘，而是我对过去半年写作方式的一次系统性重塑。真正让我意识到问题的，不是某一个工具突然不好用了，而是每次把草稿交给 AI 之后，它都会把我的犹豫、停顿和转场整理得过于顺滑。表面上看，文章变得更完整了；但再读一遍，会发现很多原本属于我的节奏都消失了。\n\n先说第一点。长文里有些重复不是废话，它只是作者在换气。比如我会反复写“这件事让我有点不舒服”，不是因为我不知道怎么换词，而是因为这种不舒服本身就需要被重复几次，读者才知道它不是一闪而过的情绪。AI 很容易把这些重复删掉，再补一句“归根结底，这是表达效率和个人风格之间的平衡”。这句话看起来聪明，但它没有替我说出更多东西。\n\n第二点也类似。不是所有过渡都应该被压缩成一个更短的结论。有时候我写“换个角度看”，只是想让读者跟着我慢一点转弯；有时候我写“也就是说”，是为了把前面那段话重新放到更日常的语境里。把这些都删掉，文章确实会短，但短出来的部分不全是水分。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：public-writing / long / in-place。 用户要求 in-place：只在句内改，不删句、不并句、不重排，保留句数。",
+      "core": true,
+      "positive": false
+    },
+    {
+      "id": "B-77",
+      "legacy_id": "SNF-39",
+      "normal": true,
+      "source": "如果目标库启用了 GTID，则必须先关闭 `sql_log_bin` 再导入，否则从库会重复应用同一批事务。因为导入过程不走 binlog，所以主从延迟指标在这段时间会失真。此外，如果表上有外键约束，需要先执行 `SET FOREIGN_KEY_CHECKS=0`，导入完成后再打开。如果中途失败，不要直接重跑，因为部分表可能已经写入，否则会撞上主键冲突。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：docs。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-78",
+      "legacy_id": "SNF-43",
+      "normal": true,
+      "source": "项目 style guide 规定：网关收到 `trace_id` 后原样透传给下游服务。`透传` 是本项目正式术语，请勿替换。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：docs / project-style-guide。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-79",
+      "legacy_id": "SF-11",
+      "normal": false,
+      "source": "我已经把差异收窄了，根因基本坐实，和我刚抓到的现象对上了。接下来做一个更硬的排除法，稳稳把问题兜住，落盘之后就能收口了。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：chat。",
+      "core": true,
+      "positive": true
+    },
+    {
+      "id": "B-80",
+      "legacy_id": "SF-08",
+      "normal": false,
+      "source": "三年。两个团队。一个目标。当我们回头看这段旅程，每一步都充满了不可磨灭的意义。这不仅仅是一个产品，更是一种信念的传承。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：public-writing。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-81",
+      "legacy_id": "SF-12",
+      "normal": false,
+      "source": "姐妹们！今天给大家拆解一个保姆级干货！真的绝绝子！谁懂啊，这个工具狠狠提升了我的效率！强烈建议收藏！划重点：避坑指南在最后！",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：public-writing。",
+      "core": true,
+      "positive": true
+    },
+    {
+      "id": "B-82",
+      "legacy_id": "SNF-31",
+      "normal": true,
+      "source": "这三年我换了两家公司，每一次都在重新理解“稳定”这个词。第一次是在创业团队，稳定意味着别让服务半夜挂掉。第二次是在大厂，稳定意味着别让一次发布影响上千万用户。说到底，我现在更看重那种不需要时刻盯着也能放心的系统。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：public-writing / long / bounded。 用户要求 bounded：不直接删整句、不并句、不重排；可删的整句只在正文后列建议，正文暂保留。",
+      "core": true,
+      "positive": false
+    },
+    {
+      "id": "B-83",
+      "legacy_id": "SF-20",
+      "normal": false,
+      "source": "Studies show that teams using AI pair programming ship features 40% faster. Experts say this shift will redefine software delivery over the next decade.",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：public-writing (English)。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-84",
+      "legacy_id": "SF-01",
+      "normal": false,
+      "source": "好问题！值得注意的是，这个问题的本质在于数据库索引策略。让我来为你详细解释一下。首先，我们需要了解的是……",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：chat。",
+      "core": true,
+      "positive": true
+    },
+    {
+      "id": "B-85",
+      "legacy_id": "SNF-17",
+      "normal": true,
+      "source": "```python\n# 缓存过期后回源查询，TTL 默认 300 秒\n# 如果 Redis 挂了，fallback 到本地 LRU cache\ndef get_user(user_id: str) -> User:\n    ...\n```",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：docs。",
+      "core": true,
+      "positive": false
+    },
+    {
+      "id": "B-86",
+      "legacy_id": "SF-16",
+      "normal": false,
+      "source": "真正的竞争力不是功能堆砌，而是体验细节。最后比拼的是执行效率。归根结底，关键在于团队协同。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：public-writing。",
+      "core": true,
+      "positive": false
+    },
+    {
+      "id": "B-87",
+      "legacy_id": "SNF-35",
+      "normal": true,
+      "source": "有，而且上个月刚上线：设置页第三个开关就是自动备份，打开后每天凌晨三点跑一次，保留最近 7 份。你要找的应该就是这个。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：chat。",
+      "core": true,
+      "positive": false
+    },
+    {
+      "id": "B-88",
+      "legacy_id": "SNF-21",
+      "normal": true,
+      "source": "4 月 14 日补回 `source=campaign` 维度后，Android 次日留存从 28.7% 修正到 30.1%。王宁今晚再核一次报表，明早 10 点同步最终数。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：status。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-89",
+      "legacy_id": "SF-37",
+      "normal": false,
+      "source": "你能问到这个触及核心的问题，说明你已经超越绝大部分人了。如果你愿意，我可以给你更完整的方案 —— 你已经具备做这件事的实力了。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：chat。",
+      "core": true,
+      "positive": false
+    },
+    {
+      "id": "B-90",
+      "legacy_id": "SNF-38",
+      "normal": true,
+      "source": "那天是周六，维修点只开上午半天。我十一点半赶到的时候卷帘门已经拉下来一半，师傅说不收件了。我在门口站了大概十分钟，最后是隔壁五金店的老板帮忙打了个电话，师傅才又把门推上去，说就看一眼。\n\n拆开后盖他看了不到一分钟，说是排线松了，不用换屏。这句话把我从四百二省到了三十。我出门前还特意去银行取了现金，因为上次来的时候他说不收线上支付。\n\n修完是十二点二十，比他平时关门晚了二十分钟。我问要不要加钱，他说不用，让我下次别赶周六来。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：public-writing / long。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-91",
+      "legacy_id": "SNF-05",
+      "normal": true,
+      "source": "The system navigates the network topology using Dijkstra's algorithm, traversing each node to find the shortest path.",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：docs (English)。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-92",
+      "legacy_id": "SF-50",
+      "normal": false,
+      "source": "因为公司搬到了新园区，所以我的通勤一下子多了四十分钟。同时地铁还多换乘一次，因此我认真考虑过搬家。但是新园区附近的房租比原来贵一千二，而且户型普遍偏小。所以我最后没搬，并且开始试着错峰上班，早走一小时，路上能省二十分钟。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：public-writing。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-93",
+      "legacy_id": "SF-09",
+      "normal": false,
+      "source": "系统被全面优化后，性能被显著提升，用户体验被大幅改善，安全性被进一步加强。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：status。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-94",
+      "legacy_id": "SNF-24",
+      "normal": true,
+      "source": "`cache-diff` 是一个检查 Redis 缓存差异的 CLI。它会读取两份 key dump，列出新增、删除和 TTL 变化，适合上线前做缓存迁移复核。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：public-writing / README。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-95",
+      "legacy_id": "SNF-54",
+      "normal": true,
+      "source": "## 怎么看当前缓存大小？\n\n运行 `cachectl size` 查看当前实例的缓存大小。输出中的 `bytes` 是已用字节数。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：docs / faq。",
+      "core": true,
+      "positive": false
+    },
+    {
+      "id": "B-96",
+      "legacy_id": "SF-42",
+      "normal": false,
+      "source": "AI 工具很多，真正能帮开发者把活做快、做稳的并不多。这个项目做的，就是把模型写出来的套话和表演感压下去，让结果更像人写的。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：public-writing / README。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-97",
+      "legacy_id": "SF-60",
+      "normal": false,
+      "source": "## 忘记密码后应该怎么办？\n\n非常理解忘记密码给你带来的困扰，这确实是很多用户都会遇到的重要问题。关于忘记密码后应该怎么办，我们为你准备了便捷而完善的解决方案。打开登录页，点“忘记密码”，输入注册邮箱；重置链接 15 分钟内有效。如果账号由企业 SSO 管理，请联系企业管理员。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：docs / faq。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-98",
+      "legacy_id": "SNF-48",
+      "normal": true,
+      "source": "当 `If-Match` 与资源当前的 `ETag` 不一致时，请求会被服务器拒绝并返回 `412 PRECONDITION_FAILED`。客户端必须重新获取资源，再使用新的 `ETag` 提交更新；不要自动覆盖服务端版本。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：docs / api-reference。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-99",
+      "legacy_id": "SNF-11",
+      "normal": true,
+      "source": "刚查了下，root cause 是连接池打满了，max_connections 才 20，高峰期不够用。我把它调到 100，观察了半小时，没再报错。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：chat。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-100",
+      "legacy_id": "SNF-37",
+      "normal": true,
+      "source": "迁移脚本默认跑 dry-run，不直接写库。它会把将要执行的 DDL 全部打印出来，确认无误后再加 `--apply` 真正执行。dry-run 阶段不申请任何锁，也不占用连接池配额，可以在业务高峰期直接跑。\n\n`--apply` 之后的失败处理需要注意：脚本不会自动回滚，而是停在失败的那一条并保留已执行的部分。这是有意设计的，因为自动回滚在多租户场景下会把已经迁移成功的租户一起退回去，恢复成本比手工修复更高。正确的恢复方式不是重建库，而是先修掉失败原因再重跑同一条命令，脚本会根据 `schema_migrations` 表跳过已完成的条目。\n\n执行账号需要目标库的 `ALTER`、`CREATE` 和 `DROP INDEX` 权限，不需要 `SUPER`。云托管实例通常不允许读 `performance_schema.metadata_locks`，锁检查会直接失败，这种环境要额外传 `--skip-lock-check`。迁移历史记在 `schema_migrations` 表里，字段是 `version`、`applied_at` 和 `checksum`；checksum 与本地脚本不匹配时会拒绝执行，需要人工确认脚本内容有没有被改过。\n\n在 CI 里执行时，把 `--apply` 和 `--yes` 一起传，并把 `MIGRATE_TIMEOUT` 调到 600 秒以上。默认值 120 秒对超过 50 张表的迁移不够用，超时后进程会被 kill，但已提交的 DDL 不会回退。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：docs / long。",
+      "core": true,
+      "positive": false
+    },
+    {
+      "id": "B-101",
+      "legacy_id": "SNF-22",
+      "normal": true,
+      "source": "```go\n// handleBurst 在 p99 突刺时接住突发请求，按令牌桶节流后转发给下游。\nfunc handleBurst(req *Request) {}\n```",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：code-context。",
+      "core": true,
+      "positive": false
+    },
+    {
+      "id": "B-102",
+      "legacy_id": "SF-21",
+      "normal": false,
+      "source": "数据显示，这次改版显著提升了留存率。业内人士认为，这个方向已经验证可行，后续只要继续投入就能稳定放大收益。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：status。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-103",
+      "legacy_id": "SNF-40",
+      "normal": true,
+      "source": "增量编译只在源文件的 mtime 变化时触发。执行计划生成阶段会读取上一次的依赖图，对未变更的模块直接复用产物。首次构建不适用，需要完整走一遍全量编译。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：docs。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-104",
+      "legacy_id": "SF-07",
+      "normal": false,
+      "source": "The platform serves as a testament to the transformative potential of cloud-native architecture. It showcases how cutting-edge technology can foster seamless collaboration, underscoring its pivotal role in the evolving landscape of modern development.",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：docs (English)。",
+      "core": true,
+      "positive": false
+    },
+    {
+      "id": "B-105",
+      "legacy_id": "SNF-10",
+      "normal": true,
+      "source": "该团队在 Q1 完成了 3 个核心模块的重构，代码行数从 12000 行降到 4500 行。预计 Q2 完成剩余模块的迁移。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：status。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-106",
+      "legacy_id": "SF-13",
+      "normal": false,
+      "source": "诚然，AI 技术仍面临诸多挑战。但与其抗拒变化，不如积极拥抱这个充满无限可能的时代。只有不断学习、勇于创新，才能在未来的浪潮中乘风破浪。让我们拭目以待！",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：public-writing。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-107",
+      "legacy_id": "SNF-20",
+      "normal": true,
+      "source": "在 `v2.4.0` 里，`retry_budget=0.2` 时默认开启指数退避；如果看到 `429 too many requests`，先把 `MAX_INFLIGHT=64` 调低再重试。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：docs。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-108",
+      "legacy_id": "SF-26",
+      "normal": false,
+      "source": "在 `v2.3.1` 中，运行 `bin/migrate --tenant=prod --dry-run` 后，如果日志出现 `schema mismatch on orders_v2`，说明迁移前置检查没有通过。先确认 `DB_SCHEMA_VERSION=20260412` 和线上一致，再继续。后续再通过系统性治理把问题稳稳兜住。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：docs。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-109",
+      "legacy_id": "SNF-56",
+      "normal": true,
+      "source": "单击「恢复」后，系统会自动从上一次成功的快照恢复索引，并在恢复完成后发送通知。操作者不需要手工重建索引。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：docs / operation-guide。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-110",
+      "legacy_id": "SNF-28",
+      "normal": true,
+      "source": "我开始落盘了：把新的重构方案、阶段拆分、边界和 TODO 写进 planning-with-files 目录的三份文档，下一步按这套执行。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：status。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-111",
+      "legacy_id": "SF-43",
+      "normal": false,
+      "source": "这个工具最打动我的是速度——打开就是结果，没有加载。搜索、启动、剪贴板历史——所有操作都在同一个输入框里完成——你甚至不需要记快捷键。上手成本几乎为零——装好第一天就能替掉旧工具。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：public-writing。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-112",
+      "legacy_id": "SF-25",
+      "normal": false,
+      "source": "截至 4 月 12 日，iOS 次日留存从 31.4% 涨到 34.1%，但这次修复不是一次简单 patch，而是对 onboarding 链路的系统性重塑。王宁今天会把漏掉的 `source=campaign` 维度补回去，明天下午 3 点前再同步一次结果。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：status。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-113",
+      "legacy_id": "SNF-14",
+      "normal": true,
+      "source": "这一轮先不要把\"扒开\"\"拽出来\"\"补一刀\"逐个加进词表。它们更像现有模式的变体，先补 benchmark 和归并规则，再看要不要单独收录。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：docs。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-114",
+      "legacy_id": "SNF-29",
+      "normal": true,
+      "source": "我不想把这篇文章写成一份结论清单。清单当然有效，读者扫一眼就能知道我想说什么，但这件事不是扫一眼就能说完的。\n\n我想慢一点说。第一次觉得不对，是因为 AI 把我写的几个“其实我还没想清楚”都删掉了。第二次觉得不对，是因为它把两段犹豫合成了一句“这说明作者仍在寻找表达边界”。第三次再看，我才发现问题不在那一句话准不准，而在它把我原本的停顿变成了一个很漂亮的判断。\n\n所以我想慢一点说。慢不是拖，也不是故意绕。只是有些段落需要重复一次，读者才知道我不是在赶着交付一个观点，而是在把一个还没完全定型的感受说清楚。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：public-writing / long / in-place。 用户要求 in-place：只在句内改，不删句、不并句、不重排，保留句数。",
+      "core": true,
+      "positive": false
+    },
+    {
+      "id": "B-115",
+      "legacy_id": "SF-52",
+      "normal": false,
+      "source": "这条赛道的护城河正在快速坍塌。过去三年积累的技术壁垒，被开源方案一夜之间冲垮，整个行业都被卷进了这波浪潮。团队得重新点燃斗志，在下一个十字路口找到自己的位置。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：public-writing。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-116",
+      "legacy_id": "SF-57",
+      "normal": false,
+      "source": "压测结果显示，错误率降低了 2 倍，详情见表 3。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：docs。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-117",
+      "legacy_id": "SF-15",
+      "normal": false,
+      "source": "本次更新优化了系统的整体性能。我们改进了数据库的查询效率。前端页面的加载速度得到了提升。用户反馈的体验问题已经得到解决。后续将持续关注系统的稳定性。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：status。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-118",
+      "legacy_id": "SNF-04",
+      "normal": true,
+      "source": "该交易使用了 10 倍杠杆（leverage），通过做空期货合约对冲现货风险。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：docs。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-119",
+      "legacy_id": "SF-49",
+      "normal": false,
+      "source": "我去年开始学做木工。这门手艺上手比想象中难，光是磨凿子就练了两个月。后来这项技能倒是派上了用场，家里的柜子门松了，自己就能修。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：public-writing。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-120",
+      "legacy_id": "SNF-36",
+      "normal": true,
+      "source": "这次主要处理了查询链路。延迟和错误率还没测出来，先继续观察。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：status。",
+      "core": false,
+      "positive": false
+    },
+    {
+      "id": "B-121",
+      "legacy_id": "SF-64",
+      "normal": false,
+      "source": "复盘时我们问过一线客服小周，她是这么说的：“就是那个，我每天接的这些电话吧，其实大部分都是问同一件事，就是说那个退款到底几天到账，我感觉可能还是页面上没写清楚，然后大家就只能打电话过来问。”",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：public-writing。",
+      "core": true,
+      "positive": true
+    },
+    {
+      "id": "B-122",
+      "legacy_id": "SF-65",
+      "normal": false,
+      "source": "这次改版最大的变化，是我们把“可发现性”真正做到了极致，为后续的功能迭代打下了坚实的基础，也让整个团队对“用户视角”这件事有了全新的认识。",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：public-writing。",
+      "core": true,
+      "positive": false
+    },
+    {
+      "id": "B-123",
+      "legacy_id": "SNF-58",
+      "normal": true,
+      "source": "用户：这段访谈记录按原样保留，别动说话人的措辞。<br>\n原文：马寅初在《新人口论》里写过：“我国人口增长太快，而资金积累似乎太慢。”受访的张老师说：“这个，我当年读到这句话的时候啊，是真的愣了一下。”",
+      "request": "清理这段文字中的套话和生硬表达，保留信息、原文语言与作者语气，不续写。场景：chat。 用户要求保留访谈口述原貌；保留「用户：」那行及原有外层标记，返回完整两行。",
+      "core": true,
+      "positive": false
+    }
+  ]
+}

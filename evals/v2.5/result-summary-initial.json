@@ -1,0 +1,240 @@
+{
+  "candidate_hash": "a64bd46dd6dc6814130c429128672fa70c2b4f485b2585c91999e04656a327a5",
+  "status": "not_release_ready",
+  "method": "Root evidence adjudication. Original CLI judgments and independent reviews retained separately; no human consensus claim.",
+  "groups": {
+    "claude-full-01": {
+      "raw_summary": {
+        "total": 15,
+        "fidelity": {
+          "pass": 14,
+          "fail": 1,
+          "review": 0
+        },
+        "task": {
+          "pass": 15,
+          "fail": 0,
+          "review": 0
+        },
+        "quality": {
+          "better": 10,
+          "same": 4,
+          "worse": 1,
+          "review": 0
+        },
+        "fidelity_fail_ids": [
+          "B-40"
+        ],
+        "review_ids": []
+      },
+      "adjudicated_summary": {
+        "total": 15,
+        "fidelity": {
+          "pass": 13,
+          "fail": 1,
+          "review": 1
+        },
+        "task": {
+          "pass": 15,
+          "fail": 0,
+          "review": 0
+        },
+        "quality": {
+          "better": 8,
+          "same": 5,
+          "worse": 1,
+          "review": 1
+        },
+        "fidelity_fail_ids": [
+          "B-40"
+        ],
+        "review_ids": [
+          "B-79"
+        ]
+      },
+      "hard_failure_ids": [
+        "B-40"
+      ],
+      "unresolved_ids": [
+        "B-79"
+      ]
+    },
+    "grok-full-01": {
+      "raw_summary": {
+        "total": 15,
+        "fidelity": {
+          "pass": 12,
+          "fail": 1,
+          "review": 2
+        },
+        "task": {
+          "pass": 14,
+          "fail": 0,
+          "review": 1
+        },
+        "quality": {
+          "better": 9,
+          "same": 4,
+          "worse": 2,
+          "review": 0
+        },
+        "fidelity_fail_ids": [
+          "B-20"
+        ],
+        "review_ids": [
+          "B-40",
+          "B-30",
+          "B-81"
+        ]
+      },
+      "adjudicated_summary": {
+        "total": 15,
+        "fidelity": {
+          "pass": 13,
+          "fail": 1,
+          "review": 1
+        },
+        "task": {
+          "pass": 14,
+          "fail": 1,
+          "review": 0
+        },
+        "quality": {
+          "better": 8,
+          "same": 4,
+          "worse": 2,
+          "review": 1
+        },
+        "fidelity_fail_ids": [
+          "B-20"
+        ],
+        "review_ids": [
+          "B-30"
+        ]
+      },
+      "hard_failure_ids": [
+        "B-40",
+        "B-20"
+      ],
+      "unresolved_ids": [
+        "B-30"
+      ]
+    },
+    "claude-modes-holdout": {
+      "raw_summary": {
+        "total": 13,
+        "fidelity": {
+          "pass": 13,
+          "fail": 0,
+          "review": 0
+        },
+        "task": {
+          "pass": 13,
+          "fail": 0,
+          "review": 0
+        },
+        "quality": {
+          "better": 8,
+          "same": 5,
+          "worse": 0,
+          "review": 0
+        },
+        "fidelity_fail_ids": [],
+        "review_ids": []
+      },
+      "adjudicated_summary": {
+        "total": 13,
+        "fidelity": {
+          "pass": 11,
+          "fail": 2,
+          "review": 0
+        },
+        "task": {
+          "pass": 13,
+          "fail": 0,
+          "review": 0
+        },
+        "quality": {
+          "better": 6,
+          "same": 5,
+          "worse": 2,
+          "review": 0
+        },
+        "fidelity_fail_ids": [
+          "M-01",
+          "H25-02"
+        ],
+        "review_ids": []
+      },
+      "hard_failure_ids": [
+        "M-01",
+        "H25-02"
+      ],
+      "unresolved_ids": []
+    },
+    "grok-modes-holdout": {
+      "raw_summary": {
+        "total": 13,
+        "fidelity": {
+          "pass": 12,
+          "fail": 0,
+          "review": 1
+        },
+        "task": {
+          "pass": 13,
+          "fail": 0,
+          "review": 0
+        },
+        "quality": {
+          "better": 7,
+          "same": 6,
+          "worse": 0,
+          "review": 0
+        },
+        "fidelity_fail_ids": [],
+        "review_ids": [
+          "H25-02"
+        ]
+      },
+      "adjudicated_summary": {
+        "total": 13,
+        "fidelity": {
+          "pass": 13,
+          "fail": 0,
+          "review": 0
+        },
+        "task": {
+          "pass": 13,
+          "fail": 0,
+          "review": 0
+        },
+        "quality": {
+          "better": 7,
+          "same": 6,
+          "worse": 0,
+          "review": 0
+        },
+        "fidelity_fail_ids": [],
+        "review_ids": []
+      },
+      "hard_failure_ids": [],
+      "unresolved_ids": []
+    }
+  },
+  "coverage": {
+    "public_main_per_model": 15,
+    "public_main_expected": 120,
+    "remaining_not_run_per_model": 105,
+    "synthetic_modes_per_model": 7,
+    "heldout_per_model": 6,
+    "heldout_real_long_texts_per_model": 2,
+    "mini_claude_cases": 7,
+    "top_level_cli_calls": 36
+  },
+  "stop_reason": "最终首批与留出集均有确认的保真/任务失败，按两轮语义修订后的停止条件不再扩主集或追加例外。没有发生发布。",
+  "runtime_source_hashes": {
+    "SKILL.md": "8808c1a29fbdbb1e2cac0a0bce8f107cbe56689aa44b6faa5ec514122f891eda",
+    "references/editing-guide.md": "838cf824e7089bf5925b11bd387fa4b961a1e6a99ae5414cca022364d637efcd",
+    "references/examples.md": "da78a717c1095e28e88dbc5e7387babe710241cc55b27b0364a9b9fd1c54db17"
+  }
+}

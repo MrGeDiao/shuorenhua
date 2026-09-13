@@ -1,10 +1,14 @@
 # Cursor / Windsurf 安装
 
+手动升级时先用新的空目录收集运行文件，核对本地定制后再切换旧安装；仅覆盖入口会留下旧参考文件。下方复制命令面向首次安装或空目录。
+
+本页对应 2.5.0 开发候选，尚未发布。远程安装入口仍提供已发布版本；测试候选时，请从本地候选源码目录复制文件。
+
 ## mini / lite / full 怎么选
 
-- `mini`：把 `dist/shuorenhua-mini.md` 粘贴进单次聊天或临时 Rule。适合上下文很紧、较弱模型或只清明显模板感。
+- `mini`：把 `dist/shuorenhua-mini.md` 粘贴进单次聊天或临时 Rule。适合上下文很紧或临时粘贴使用。
 - `lite`：只加载 `SKILL.md`。适合临时改写和上下文紧张的编辑任务。
-- `full`：加载 `SKILL.md` + `references/`。适合长期 rules、公开文本、技术文档和需要误杀防护的场景。
+- `full`：加载 `SKILL.md`、`references/editing-guide.md`、`references/examples.md` 三个文件。适合长期 rules、公开文本、技术文档和需要查看编辑边界与改写对照的任务。
 
 ## 方式 1：项目 Rules
 
@@ -18,14 +22,16 @@ mkdir -p .windsurf/rules
 cp SKILL.md .windsurf/rules/shuorenhua.md
 ```
 
-上面是 lite 用法。如果需要参考文件（词表、结构反模式等），在对应目录下创建 `references/` 并复制进去，升级为 full 用法：
+上面是 lite 用法。如果需要编辑边界与改写对照，在对应目录下创建 `references/` 并复制进去，升级为 full 用法：
 
 ```bash
 # Cursor
-cp -r references .cursor/rules/
+mkdir -p .cursor/rules/references
+cp references/editing-guide.md references/examples.md .cursor/rules/references/
 
 # Windsurf
-cp -r references .windsurf/rules/
+mkdir -p .windsurf/rules/references
+cp references/editing-guide.md references/examples.md .windsurf/rules/references/
 ```
 
 ## 方式 2：全局 Rules
@@ -58,24 +64,28 @@ Rules 文件会加载到上下文，但不等于会自动对所有输出套用�
 用说人话规则改写这段文本，无源引用按 audit-only 处理。
 ```
 
-三种模式：`rewrite-safe`（默认用于 chat/public-writing，直接删无证据权威铺垫）、`audit-only`（默认用于 docs/status，只标缺来源）、`rewrite-with-placeholder`（保留结构但暴露缺来源）。不指定时按场景默认值走。
+默认保留无源论断及其归属，必要时在正文外提示缺来源。只有明确指定 `rewrite-safe` 或要求删除无源论断，才允许整条删除；`bounded` 只列删除建议，`in-place` 保留原句并提示。`audit-only` 标出来源缺口，其他内容照常编辑；`rewrite-with-placeholder` 按用户要求保留论证结构、标待补来源，不编出处。
 
-极短上下文用 mini，普通临时任务用 lite；需要精细改写、Scene Packs 或误杀防护时用 full。
+极短上下文用 mini，普通临时任务用 lite；需要查看边界或例子时用 full，两份参考文件按需读取。
 
-## 长文改写的三档 scope
+## 编辑范围
 
-长文（约 1000 字以上的 `public-writing`）改写时，可以指定三档 scope，和力度档位正交：
+默认做最小必要修改；中文公开长文约 1000 字以上默认保留句段结构。可以直接指定：
 
-- `structural`：自由删句、并句、重排，去味最彻底，但长度不可控（实测同一篇可能 -18% 到 -39%）
-- `bounded`（长文默认）：实句只做句内清理；整句空话不直接删，列成「建议删除（待确认）」清单交你拍板
-- `in-place`：一句都不删，只做句内降调，适合“完全原样”的要求
+程序代码块（包括注释和文档字符串）默认逐字保留；只有用户明确点名修改注释或说明文字时才编辑相应部分，且不改程序行为。代码围栏里的普通文案仍可按用户要求编辑。
 
-在指令里直接说就行，例如：「用 bounded scope 改写，整句空话列出来给我确认、别直接删。」
+- `structural`：允许删、并、重排，仍须保留有效信息与作者意图。
+- `bounded`：不直接删整句、不并句、不重排。纯空句可列“建议删除（待确认）”，正文暂时保留。
+- `in-place`：不删句、不并句、不重排，只在句内替换或删修饰；要求保句数时也不拆句。
 
-## 验证
+例如：“按 bounded 改，删除建议放在正文后。”这些范围不因编辑力度或来源处理方式而放宽。
+
+## 手动检查
+
+提交正文后，确认保留原文语言、事实、条件与作者立场。正常原文应完整返回，不只回复“保留原文”；只标问题时不应附替换全文。以下提示可用来检查是否加载，但不能代替效果评测。
 
 ```text
-用说人话规则改写这段文本：在当今快速发展的人工智能时代，如何打造一个真正赋能开发者的工具，已经成为业界不容忽视的关键议题。
+用说人话规则改写这段文本：值得注意的是，接口超时从 30 秒改为 60 秒。
 ```
 
-输出不再保留 `打造 / 赋能 / 不容忽视 / 关键议题`，且信息没有改散，说明接好了。
+可以去掉“值得注意的是”，但必须保留接口超时及 30 秒改为 60 秒的关系。

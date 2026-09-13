@@ -1,0 +1,1556 @@
+{
+  "candidate_hash": "9042fa65d84ad414ef7355d7eb5f7eb8dbc3bf932876cff7ee6a7045c4f95958",
+  "status": "release_ready",
+  "runtime_source_hashes": {
+    "SKILL.md": "56a156045d2ac25ebf8210768b6c2608a42c37ac7ee4979d746cde7b026012db",
+    "references/editing-guide.md": "c4ce2a4b43f967fc18f688b486908751563c0503263a28ea7a5b65bfe04d94b6",
+    "references/examples.md": "ef6c9e19edd8f0addf6a95335adab1a0f6344bbebdc3f15981fd4182b0e6c29c"
+  },
+  "runtime_bytes": 17422,
+  "scope": {
+    "main": 123,
+    "needs_improvement": 65,
+    "normal": 58,
+    "modes": 7,
+    "existing_independent_texts": 6,
+    "positive": 7,
+    "minimum_positive_better": 5
+  },
+  "checks": {
+    "unit_tests": 99,
+    "check_repo": "pass",
+    "quick_validate": "pass",
+    "temporary_runtime_copy": "pass: final rc17 runtime, frozen snapshot and ZIP bytes match; 4 relative links resolve; LICENSE included",
+    "plugin_layout_install": "pass on earlier identical three-file layout; current bytes independently checked",
+    "remote_ci": "not run",
+    "global_install": "not updated",
+    "runtime_snapshot_match": "pass: rc17",
+    "original_workspaces": "both heads and all14 pre-existing dirty file hashes unchanged",
+    "eval_tests": 87,
+    "runtime_tests": 12
+  },
+  "blockers": [],
+  "prior_candidate_findings": {
+    "rc5": "single-case B36 background omission confirmed; batching alone did not solve fidelity",
+    "rc7": "B104 evolving background omission confirmed; B108 effect type review",
+    "rc8": "B18 developing background omission confirmed; first16 passed including four independent reviews; later 4 CLI quota failures; no release conclusion",
+    "rc9": "Grok16条有效，其中B26/B47改程序注释，task fail；未扩50。",
+    "rc10": "静态准备未调用，annotation输出冲突在rc11修正。",
+    "rc12": "Claude87/Grok15 stopped: Claude B10/B64/B75 fidelity failures and B38 output-task failure; preserved separately.",
+    "rc11": "Grok50 passed; Claude16 revealed B18/B36 omissions.",
+    "rc13": "Claude108/Grok16 then stopped: B56 future positioning and B97 importance/solution claims omitted.",
+    "rc14": "Claude8: B97 omission persisted.",
+    "rc15": "Claude8 hard items passed; superseded after static scope alignment.",
+    "rc16": "Claude28 hard items passed; only4/7 positive better, below5/7."
+  },
+  "adjudication_correction": {
+    "initial_H25-02": "original fail preserved in initial report; contextual re-review finds gateway as example of delayed delivery can reasonably imply uses delayed delivery, so no longer a confirmed hard failure",
+    "rc17_claude_B-08": "Initial independent review retained. Final pass/same based on the full context: discourse introduction before a concluding metaphor; strong assertion retained. Not general permission to remove uncertainty."
+  },
+  "history": "result-summary-initial.json",
+  "evidence": "local tasks/current/v2.5-release-ready-20260911/rc17; immutable CLI artifacts retained; no mixed-candidate pass rate",
+  "current_adjudicated_cases": {
+    "claude": [
+      {
+        "id": "B-01",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "全文逐字相同；用户要求改写，未要求必须改动，返回完整原文未新增或删除信息，也未越过编辑范围。原有主体、关系、数值、条件和作者语气完整。",
+        "independent_record": "claude-next51-independent.json"
+      },
+      {
+        "id": "B-02",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "better",
+        "evidence": "仅把引号外“通常被用来指代”简化为“通常用来指”；被定义词及完整定义引语逐字保留，未扩大通常的范围，也未改变过度使用导致失去具体含义的判断。句法更直接。",
+        "independent_record": "claude-next51-independent.json"
+      },
+      {
+        "id": "B-03",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "better",
+        "evidence": "去掉多层总结提示和无具体内容的祝愿，合并短句；性能/安全性/可维护性三项表现优异与值得推荐的作者判断均保留。用户未要求bounded或in-place，合句未越界。",
+        "independent_record": "claude-next51-independent.json"
+      },
+      {
+        "id": "B-04",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "Full source compared. Exact protected text or minimal function-word/syntax edit; B40 keeps systemic reconstruction and qualitative change within authorized quote only. B47 technical retry is valid and character-identical; original malformed response retained separately."
+      },
+      {
+        "id": "B-05",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "Full source compared. Exact protected text or minimal function-word/syntax edit; B40 keeps systemic reconstruction and qualitative change within authorized quote only. B47 technical retry is valid and character-identical; original malformed response retained separately."
+      },
+      {
+        "id": "B-06",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "正文逐字保留，额外来源提示在正文外，不把可靠性或两小时恢复说法改成虚假/已证实。升级限制、先到v2.8再备份再装v3的顺序及所有数值完整；来源提示没有构成正文编辑收益。",
+        "independent_record": "claude-next51-independent.json"
+      },
+      {
+        "id": "B-07",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "全文逐字相同；用户要求改写，未要求必须改动，返回完整原文未新增或删除信息，也未越过编辑范围。原有主体、关系、数值、条件和作者语气完整。",
+        "independent_record": "claude-next51-independent.json"
+      },
+      {
+        "id": "B-08",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "整合复核：本句用“可以说”引出前文经历后的总结比喻，仍明确断言“本质上是一场与时间的修行”；此处没有把可能发生的事件改成必然发生，作者比喻和判断完整。按行文引入清理裁决pass，保守记same；独立review原判保留，不泛化为可删除所有“可以说”。",
+        "independent_record": "claude-next51-independent.json",
+        "original_review": "fidelity=review; quality=review"
+      },
+      {
+        "id": "B-09",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "全文逐字相同；用户要求改写，未要求必须改动，返回完整原文未新增或删除信息，也未越过编辑范围。原有主体、关系、数值、条件和作者语气完整。",
+        "independent_record": "claude-next51-independent.json"
+      },
+      {
+        "id": "B-10",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "Full source/request/output compared. Only certification, thanks, content-free preview or redundant function wording changed; content assessments, positioning, time, modality and protected spans kept."
+      },
+      {
+        "id": "B-100",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "完整原文逐字符返回；原文不是要求只标问题的任务，不修改是允许交付。数值、条件、原有措辞与结构全部保留。"
+      },
+      {
+        "id": "B-101",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "完整原文逐字符返回；原文不是要求只标问题的任务，不修改是允许交付。数值、条件、原有措辞与结构全部保留。"
+      },
+      {
+        "id": "B-102",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "正文完整保留；仅在正文外指出数据/人士来源未明确，没有推断不存在、删除归属或撤回原判断。"
+      },
+      {
+        "id": "B-103",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "完整原文逐字符返回；原文不是要求只标问题的任务，不修改是允许交付。数值、条件、原有措辞与结构全部保留。"
+      },
+      {
+        "id": "B-104",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "Full source/request/output compared. Only certification, thanks, content-free preview or redundant function wording changed; content assessments, positioning, time, modality and protected spans kept."
+      },
+      {
+        "id": "B-105",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "完整原文逐字符返回；原文不是要求只标问题的任务，不修改是允许交付。数值、条件、原有措辞与结构全部保留。"
+      },
+      {
+        "id": "B-106",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "完整原文逐字符返回；原文不是要求只标问题的任务，不修改是允许交付。数值、条件、原有措辞与结构全部保留。"
+      },
+      {
+        "id": "B-107",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "完整原文逐字符返回；原文不是要求只标问题的任务，不修改是允许交付。数值、条件、原有措辞与结构全部保留。"
+      },
+      {
+        "id": "B-108",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "Full source compared. Exact protected text or minimal function-word/syntax edit; B40 keeps systemic reconstruction and qualitative change within authorized quote only. B47 technical retry is valid and character-identical; original malformed response retained separately."
+      },
+      {
+        "id": "B-109",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "完整原文逐字符返回；原文不是要求只标问题的任务，不修改是允许交付。数值、条件、原有措辞与结构全部保留。"
+      },
+      {
+        "id": "B-11",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "全文逐字相同；用户要求改写，未要求必须改动，返回完整原文未新增或删除信息，也未越过编辑范围。原有主体、关系、数值、条件和作者语气完整。",
+        "independent_record": "claude-next51-independent.json"
+      },
+      {
+        "id": "B-110",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "完整原文逐字符返回；原文不是要求只标问题的任务，不修改是允许交付。数值、条件、原有措辞与结构全部保留。"
+      },
+      {
+        "id": "B-111",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "只把反复破折号换成冒号/逗号；速度、无加载、三个操作/同一输入框、不必记快捷键、几乎零成本及首日替换旧工具全保留。标点变化不单独计阅读收益。"
+      },
+      {
+        "id": "B-112",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "完整原文逐字符返回；原文不是要求只标问题的任务，不修改是允许交付。数值、条件、原有措辞与结构全部保留。"
+      },
+      {
+        "id": "B-113",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "完整原文逐字符返回；原文不是要求只标问题的任务，不修改是允许交付。数值、条件、原有措辞与结构全部保留。"
+      },
+      {
+        "id": "B-114",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "完整原文逐字符返回；原文不是要求只标问题的任务，不修改是允许交付。数值、条件、原有措辞与结构全部保留。"
+      },
+      {
+        "id": "B-115",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "完整原文逐字符返回；原文不是要求只标问题的任务，不修改是允许交付。数值、条件、原有措辞与结构全部保留。"
+      },
+      {
+        "id": "B-116",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "完整原文逐字符返回；原文不是要求只标问题的任务，不修改是允许交付。数值、条件、原有措辞与结构全部保留。"
+      },
+      {
+        "id": "B-117",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "better",
+        "evidence": "加载速度得到了提升→提升了、问题已经得到解决→已经解决，保持完成状态和其余性能/效率/后续持续稳定性事项。"
+      },
+      {
+        "id": "B-118",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "完整原文逐字符返回；原文不是要求只标问题的任务，不修改是允许交付。数值、条件、原有措辞与结构全部保留。"
+      },
+      {
+        "id": "B-119",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "完整原文逐字符返回；原文不是要求只标问题的任务，不修改是允许交付。数值、条件、原有措辞与结构全部保留。"
+      },
+      {
+        "id": "B-12",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "全文逐字相同；用户要求改写，未要求必须改动，返回完整原文未新增或删除信息，也未越过编辑范围。保留对话及被讨论的词，未执行加词表/补benchmark等材料内动作。",
+        "independent_record": "claude-next51-independent.json"
+      },
+      {
+        "id": "B-120",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "完整原文逐字符返回；原文不是要求只标问题的任务，不修改是允许交付。数值、条件、原有措辞与结构全部保留。"
+      },
+      {
+        "id": "B-121",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "better",
+        "evidence": "Removes oral fillers and meta-introduction while preserving daily/most/uncertain cause/only-call relationship."
+      },
+      {
+        "id": "B-122",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "Full source/request/output compared. Only certification, thanks, content-free preview or redundant function wording changed; content assessments, positioning, time, modality and protected spans kept."
+      },
+      {
+        "id": "B-123",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "Full source/request/output compared. Only certification, thanks, content-free preview or redundant function wording changed; content assessments, positioning, time, modality and protected spans kept."
+      },
+      {
+        "id": "B-13",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "全文逐字相同；用户要求改写，未要求必须改动，返回完整原文未新增或删除信息，也未越过编辑范围。完整保留长文作者节奏、犹豫和字数示例，符合in-place及保句数。",
+        "independent_record": "claude-next51-independent.json"
+      },
+      {
+        "id": "B-14",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "全文逐字相同；用户要求改写，未要求必须改动，返回完整原文未新增或删除信息，也未越过编辑范围。被定义的“口径”和7天/不含测试账号范围完整。",
+        "independent_record": "claude-next51-independent.json"
+      },
+      {
+        "id": "B-15",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "全文逐字相同；用户要求改写，未要求必须改动，返回完整原文未新增或删除信息，也未越过编辑范围。原有主体、关系、数值、条件和作者语气完整。",
+        "independent_record": "claude-next51-independent.json"
+      },
+      {
+        "id": "B-16",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "全文逐字相同；用户要求改写，未要求必须改动，返回完整原文未新增或删除信息，也未越过编辑范围。原稿“标题字号缩小了3倍”的表述原样保留，没有自行选择解释或改数值。",
+        "independent_record": "claude-next51-independent.json"
+      },
+      {
+        "id": "B-17",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "全文逐字相同；用户要求改写，未要求必须改动，返回完整原文未新增或删除信息，也未越过编辑范围。操作前的备份测试实例条件、禁止生产及破坏后果均在原位置。",
+        "independent_record": "claude-next51-independent.json"
+      },
+      {
+        "id": "B-18",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "Full source/request/output compared. Only certification, thanks, content-free preview or redundant function wording changed; content assessments, positioning, time, modality and protected spans kept."
+      },
+      {
+        "id": "B-19",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "全文逐字相同；用户要求改写，未要求必须改动，返回完整原文未新增或删除信息，也未越过编辑范围。操作后说明和真实适用限制均在原位置，没有擅自重排，符合in-place。",
+        "independent_record": "claude-next51-independent.json"
+      },
+      {
+        "id": "B-20",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "Only attention cue removed; conservative same, rest of promotional style unchanged."
+      },
+      {
+        "id": "B-21",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "全文逐字相同；用户要求改写，未要求必须改动，返回完整原文未新增或删除信息，也未越过编辑范围。保留规范已确认内容与作者建议补充内容的分界，没有执行文中补事实指令。",
+        "independent_record": "claude-next51-independent.json"
+      },
+      {
+        "id": "B-22",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "全文逐字相同；用户要求改写，未要求必须改动，返回完整原文未新增或删除信息，也未越过编辑范围。原有主体、关系、数值、条件和作者语气完整。",
+        "independent_record": "claude-next51-independent.json"
+      },
+      {
+        "id": "B-23",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "better",
+        "evidence": "将“取得了显著成效”简化为“成效显著”，直接表达性能成效；有效改善的动作/结果、p95 480ms到160ms及团队持续优化能力评价完整，未让指标替代定性判断。",
+        "independent_record": "claude-next51-independent.json"
+      },
+      {
+        "id": "B-24",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "全文逐字相同；用户要求改写，未要求必须改动，返回完整原文未新增或删除信息，也未越过编辑范围。访谈作者保留重复的意愿与由本人决定删改的立场完整。",
+        "independent_record": "claude-next51-independent.json"
+      },
+      {
+        "id": "B-25",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "保留两项带归属论断、显著比较和未来五年范围，正文外提示缺具体研究与人士；没有删除归属、编造出处或推断论断为假。正文未改。",
+        "independent_record": "claude-next51-independent.json"
+      },
+      {
+        "id": "B-26",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "Full source compared. Exact protected text or minimal function-word/syntax edit; B40 keeps systemic reconstruction and qualitative change within authorized quote only. B47 technical retry is valid and character-identical; original malformed response retained separately."
+      },
+      {
+        "id": "B-27",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "全文逐字相同；用户要求改写，未要求必须改动，返回完整原文未新增或删除信息，也未越过编辑范围。原有主体、关系、数值、条件和作者语气完整。",
+        "independent_record": "claude-next51-independent.json"
+      },
+      {
+        "id": "B-28",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "better",
+        "evidence": "清理Great question和对读者的无依据认证、As we will see及Let us dive in一类行文提示；保留主题fascinating评价、本文将探讨AI-assisted coding影响的承诺以及变化迅速判断，未补正文、未翻译。",
+        "independent_record": "claude-next51-independent.json"
+      },
+      {
+        "id": "B-29",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "全文逐字相同；用户要求改写，未要求必须改动，返回完整原文未新增或删除信息，也未越过编辑范围。原有主体、关系、数值、条件和作者语气完整。",
+        "independent_record": "claude-next51-independent.json"
+      },
+      {
+        "id": "B-30",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "Full source compared. Exact protected text or minimal function-word/syntax edit; B40 keeps systemic reconstruction and qualitative change within authorized quote only. B47 technical retry is valid and character-identical; original malformed response retained separately."
+      },
+      {
+        "id": "B-31",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "全文逐字相同；用户要求改写，未要求必须改动，返回完整原文未新增或删除信息，也未越过编辑范围。原有主体、关系、数值、条件和作者语气完整。",
+        "independent_record": "claude-next51-independent.json"
+      },
+      {
+        "id": "B-32",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "全文逐字相同；用户要求改写，未要求必须改动，返回完整原文未新增或删除信息，也未越过编辑范围。原有主体、关系、数值、条件和作者语气完整。",
+        "independent_record": "claude-next51-independent.json"
+      },
+      {
+        "id": "B-33",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "better",
+        "evidence": "原文只有重复的解释预告，没有具体主题或解释内容。输出简短说明删去后无剩余正文，未续写不存在的回答，符合空内容交付方式。",
+        "independent_record": "claude-next51-independent.json"
+      },
+      {
+        "id": "B-34",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "全文逐字相同；用户要求改写，未要求必须改动，返回完整原文未新增或删除信息，也未越过编辑范围。导出覆盖风险、确认条件、命令及完成标志完整；没有执行命令。",
+        "independent_record": "claude-next51-independent.json"
+      },
+      {
+        "id": "B-35",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "better",
+        "evidence": "把“在性能方面取得了显著提升”改为“性能显著提升”，简化名词化和领域套层；保留显著强度、有效解决长期延迟、团队持续探索与不懈追求的独立评价。",
+        "independent_record": "claude-next51-independent.json"
+      },
+      {
+        "id": "B-36",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "Full source/request/output compared. Only certification, thanks, content-free preview or redundant function wording changed; content assessments, positioning, time, modality and protected spans kept."
+      },
+      {
+        "id": "B-37",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "全文逐字相同；用户要求改写，未要求必须改动，返回完整原文未新增或删除信息，也未越过编辑范围。原有主体、关系、数值、条件和作者语气完整。",
+        "independent_record": "claude-next51-independent.json"
+      },
+      {
+        "id": "B-38",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "better",
+        "evidence": "Full source/request/output compared. Only certification, thanks, content-free preview or redundant function wording changed; content assessments, positioning, time, modality and protected spans kept."
+      },
+      {
+        "id": "B-39",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "全文逐字相同；用户要求改写，未要求必须改动，返回完整原文未新增或删除信息，也未越过编辑范围。原有主体、关系、数值、条件和作者语气完整。",
+        "independent_record": "claude-next51-independent.json"
+      },
+      {
+        "id": "B-40",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "Full source compared. Exact protected text or minimal function-word/syntax edit; B40 keeps systemic reconstruction and qualitative change within authorized quote only. B47 technical retry is valid and character-identical; original malformed response retained separately."
+      },
+      {
+        "id": "B-41",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "全文逐字相同；用户要求改写，未要求必须改动，返回完整原文未新增或删除信息，也未越过编辑范围。原有主体、关系、数值、条件和作者语气完整。",
+        "independent_record": "claude-next51-independent.json"
+      },
+      {
+        "id": "B-42",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "全文逐字相同；用户要求改写，未要求必须改动，返回完整原文未新增或删除信息，也未越过编辑范围。原有主体、关系、数值、条件和作者语气完整。",
+        "independent_record": "claude-next51-independent.json"
+      },
+      {
+        "id": "B-43",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "全文逐字相同；用户要求改写，未要求必须改动，返回完整原文未新增或删除信息，也未越过编辑范围。原有主体、关系、数值、条件和作者语气完整。",
+        "independent_record": "claude-next51-independent.json"
+      },
+      {
+        "id": "B-44",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "better",
+        "evidence": "简化“通过对……进行”名词化并删总结提示；非简单配置调整/面向未来/系统性升级、研究归属与稳定性及交付效率两项改善、三组件全链路治理、最终质量与坚实扩展基础均在。缺研究来源仅在正文外指出。",
+        "independent_record": "claude-next51-independent.json"
+      },
+      {
+        "id": "B-45",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "全文逐字相同；用户要求改写，未要求必须改动，返回完整原文未新增或删除信息，也未越过编辑范围。原有主体、关系、数值、条件和作者语气完整。",
+        "independent_record": "claude-next51-independent.json"
+      },
+      {
+        "id": "B-46",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "全文逐字相同；用户要求改写，未要求必须改动，返回完整原文未新增或删除信息，也未越过编辑范围。原有主体、关系、数值、条件和作者语气完整。",
+        "independent_record": "claude-next51-independent.json"
+      },
+      {
+        "id": "B-47",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "Full source compared. Exact protected text or minimal function-word/syntax edit; B40 keeps systemic reconstruction and qualitative change within authorized quote only. B47 technical retry is valid and character-identical; original malformed response retained separately."
+      },
+      {
+        "id": "B-48",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "全文逐字相同；用户要求改写，未要求必须改动，返回完整原文未新增或删除信息，也未越过编辑范围。原有主体、关系、数值、条件和作者语气完整。",
+        "independent_record": "claude-next51-independent.json"
+      },
+      {
+        "id": "B-49",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "Full source compared. Exact protected text or minimal function-word/syntax edit; B40 keeps systemic reconstruction and qualitative change within authorized quote only. B47 technical retry is valid and character-identical; original malformed response retained separately."
+      },
+      {
+        "id": "B-50",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "完整原文逐字符返回；原文不是要求只标问题的任务，不修改是允许交付。数值、条件、原有措辞与结构全部保留。"
+      },
+      {
+        "id": "B-51",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "全文逐字相同；用户要求改写，未要求必须改动，返回完整原文未新增或删除信息，也未越过编辑范围。版本口径、各模型证据范围、历史计数、缺口与预期退出码逐字保留。",
+        "independent_record": "claude-next51-independent.json"
+      },
+      {
+        "id": "B-52",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "全文逐字相同；用户要求改写，未要求必须改动，返回完整原文未新增或删除信息，也未越过编辑范围。原有主体、关系、数值、条件和作者语气完整。",
+        "independent_record": "claude-next51-independent.json"
+      },
+      {
+        "id": "B-53",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "全文逐字相同；用户要求改写，未要求必须改动，返回完整原文未新增或删除信息，也未越过编辑范围。完整保留必要转场与被讨论的改写例子，符合in-place和保句数要求。",
+        "independent_record": "claude-next51-independent.json"
+      },
+      {
+        "id": "B-54",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "去总结提示、简化存在/其；一定复杂度、强烈赞许、进一步深入探讨底层逻辑/保护核心链路和收藏建议未变。仍混合多种语域，保守记same。"
+      },
+      {
+        "id": "B-55",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "Full source/request/output compared. Only certification, thanks, content-free preview or redundant function wording changed; content assessments, positioning, time, modality and protected spans kept."
+      },
+      {
+        "id": "B-56",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "Full source/request/output compared. Only certification, thanks, content-free preview or redundant function wording changed; content assessments, positioning, time, modality and protected spans kept."
+      },
+      {
+        "id": "B-57",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "全文逐字相同；用户要求改写，未要求必须改动，返回完整原文未新增或删除信息，也未越过编辑范围。原有主体、关系、数值、条件和作者语气完整。",
+        "independent_record": "claude-next51-independent.json"
+      },
+      {
+        "id": "B-58",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "全文逐字相同；用户要求改写，未要求必须改动，返回完整原文未新增或删除信息，也未越过编辑范围。原有主体、关系、数值、条件和作者语气完整。",
+        "independent_record": "claude-next51-independent.json"
+      },
+      {
+        "id": "B-59",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "全文逐字相同；用户要求改写，未要求必须改动，返回完整原文未新增或删除信息，也未越过编辑范围。原有主体、关系、数值、条件和作者语气完整。",
+        "independent_record": "claude-next51-independent.json"
+      },
+      {
+        "id": "B-60",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "better",
+        "evidence": "Both writing-process wrappers removed; cause, conditional cache result and author direction assessment preserved as three clear sentences."
+      },
+      {
+        "id": "B-61",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "完整原文逐字符返回；原文不是要求只标问题的任务，不修改是允许交付。数值、条件、原有措辞与结构全部保留。"
+      },
+      {
+        "id": "B-62",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "依据引语及RFC编号逐字不变，只删中文解释中的“了”；“已成功”仍表达完成状态。无保真或任务问题，但单字删改不足以形成实际阅读收益。",
+        "independent_record": "claude-next51-independent.json"
+      },
+      {
+        "id": "B-63",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "全文逐字相同；用户要求改写，未要求必须改动，返回完整原文未新增或删除信息，也未越过编辑范围。原有主体、关系、数值、条件和作者语气完整。",
+        "independent_record": "claude-next51-independent.json"
+      },
+      {
+        "id": "B-64",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "better",
+        "evidence": "Full source/request/output compared. Only certification, thanks, content-free preview or redundant function wording changed; content assessments, positioning, time, modality and protected spans kept."
+      },
+      {
+        "id": "B-65",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "全文逐字相同；用户要求改写，未要求必须改动，返回完整原文未新增或删除信息，也未越过编辑范围。原有主体、关系、数值、条件和作者语气完整。",
+        "independent_record": "claude-next51-independent.json"
+      },
+      {
+        "id": "B-66",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "better",
+        "evidence": "去重复量词并将根本性重构动词化；三个否定对象、全新开发范式、非简单效率提升和根本程度均保留。"
+      },
+      {
+        "id": "B-67",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "better",
+        "evidence": "去掉开头真实性提示及“说个真实变化”引导，保留作者本来不想吹的立场、使用一周、剪辑时间减半、导出40到18分钟的配对、偶发闪退一周两次和对广告质疑的顾虑。正文减少反复自证，未删除经历或评价。",
+        "independent_record": "claude-next51-independent.json"
+      },
+      {
+        "id": "B-68",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "全文逐字相同；用户要求改写，未要求必须改动，返回完整原文未新增或删除信息，也未越过编辑范围。原有主体、关系、数值、条件和作者语气完整。",
+        "independent_record": "claude-next51-independent.json"
+      },
+      {
+        "id": "B-69",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "全文逐字相同；用户要求改写，未要求必须改动，返回完整原文未新增或删除信息，也未越过编辑范围。文学叙述、引用归属和原有破折号节奏完整保留。",
+        "independent_record": "claude-next51-independent.json"
+      },
+      {
+        "id": "B-70",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "完整原文逐字符返回；原文不是要求只标问题的任务，不修改是允许交付。数值、条件、原有措辞与结构全部保留。"
+      },
+      {
+        "id": "B-71",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "全文逐字符保留。"
+      },
+      {
+        "id": "B-72",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "正文逐字保留并在正文外说明研究缺出处；星标/issue数量、七次/四轮、两年七成、六成到两成、二十分钟和三类范围均未改变。未删并句或重排，符合bounded；编辑收益为same。",
+        "independent_record": "claude-next51-independent.json"
+      },
+      {
+        "id": "B-73",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "better",
+        "evidence": "Full source/output compared: nominalized wording or pure interaction/preview removed, facts, effects and future plan retained."
+      },
+      {
+        "id": "B-74",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "仅删开头“收到”，复现能力、被讨论的技术原词、下一版承诺、先处理的事项及规则已放行则只加回归的条件完整；局部删词未产生明显阅读收益。",
+        "independent_record": "claude-next51-independent.json"
+      },
+      {
+        "id": "B-75",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "better",
+        "evidence": "Full source/request/output compared. Only certification, thanks, content-free preview or redundant function wording changed; content assessments, positioning, time, modality and protected spans kept."
+      },
+      {
+        "id": "B-76",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "完整原文逐字符返回；原文不是要求只标问题的任务，不修改是允许交付。数值、条件、原有措辞与结构全部保留。"
+      },
+      {
+        "id": "B-77",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "B77将“否则”的指代明示为“直接重跑”，部分表已写入导致重跑撞主键的关系未变，其他条件和顺序原样保留。"
+      },
+      {
+        "id": "B-78",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "全文逐字符保留。"
+      },
+      {
+        "id": "B-79",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "Full source unchanged."
+      },
+      {
+        "id": "B-80",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "Full source/request/output compared. Only certification, thanks, content-free preview or redundant function wording changed; content assessments, positioning, time, modality and protected spans kept."
+      },
+      {
+        "id": "B-81",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "better",
+        "evidence": "Full source/output compared: nominalized wording or pure interaction/preview removed, facts, effects and future plan retained."
+      },
+      {
+        "id": "B-82",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "全文逐字符保留。"
+      },
+      {
+        "id": "B-83",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "英文正文逐字保留，包括归属、40%和未来十年；附加来源提示用中文回应中文请求，未翻译或替换原英文正文。用户未要求所有辅助说明也仅用英文。"
+      },
+      {
+        "id": "B-84",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "better",
+        "evidence": "Full source/output compared: nominalized wording or pure interaction/preview removed, facts, effects and future plan retained."
+      },
+      {
+        "id": "B-85",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "完整原文逐字符返回；原文不是要求只标问题的任务，不修改是允许交付。数值、条件、原有措辞与结构全部保留。"
+      },
+      {
+        "id": "B-86",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "全文逐字符保留。"
+      },
+      {
+        "id": "B-87",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "完整原文逐字符返回；原文不是要求只标问题的任务，不修改是允许交付。数值、条件、原有措辞与结构全部保留。"
+      },
+      {
+        "id": "B-88",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "完整原文逐字符返回；原文不是要求只标问题的任务，不修改是允许交付。数值、条件、原有措辞与结构全部保留。"
+      },
+      {
+        "id": "B-89",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "better",
+        "evidence": "Full source/request/output compared. Only certification, thanks, content-free preview or redundant function wording changed; content assessments, positioning, time, modality and protected spans kept."
+      },
+      {
+        "id": "B-90",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "完整原文逐字符返回；原文不是要求只标问题的任务，不修改是允许交付。数值、条件、原有措辞与结构全部保留。"
+      },
+      {
+        "id": "B-91",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "完整原文逐字符返回；原文不是要求只标问题的任务，不修改是允许交付。数值、条件、原有措辞与结构全部保留。"
+      },
+      {
+        "id": "B-92",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "better",
+        "evidence": "精简重复连接词、合并同因并列事实；搬园区、通勤多40分钟/多换乘一次、房租贵1200/户型小、未搬家、错峰早一小时省20分钟及因果关系都保留。"
+      },
+      {
+        "id": "B-93",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "better",
+        "evidence": "去四处生硬被动，系统全面优化及性能显著提升、体验大幅改善、安全性进一步加强的配对和程度不变。"
+      },
+      {
+        "id": "B-94",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "完整原文逐字符返回；原文不是要求只标问题的任务，不修改是允许交付。数值、条件、原有措辞与结构全部保留。"
+      },
+      {
+        "id": "B-95",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "完整原文逐字符返回；原文不是要求只标问题的任务，不修改是允许交付。数值、条件、原有措辞与结构全部保留。"
+      },
+      {
+        "id": "B-96",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "完整原文逐字符返回；原文不是要求只标问题的任务，不修改是允许交付。数值、条件、原有措辞与结构全部保留。"
+      },
+      {
+        "id": "B-97",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "Keeps prevalence/importance and convenient/comprehensive solution claims, removes duplicated question-topic preface."
+      },
+      {
+        "id": "B-98",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "完整原文逐字符返回；原文不是要求只标问题的任务，不修改是允许交付。数值、条件、原有措辞与结构全部保留。"
+      },
+      {
+        "id": "B-99",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "完整原文逐字符返回；原文不是要求只标问题的任务，不修改是允许交付。数值、条件、原有措辞与结构全部保留。"
+      },
+      {
+        "id": "H25-01",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "better",
+        "evidence": "删除开场提示后直接说明原因；仍排除找不到入口而保留门禁停用，决定条件没有降为普通影响。周四18:00前回复、周五上午、可以安排一次试送以及未回复不承诺均在，没有添加保证。",
+        "independent_record": "final-modes-positive-independent.json"
+      },
+      {
+        "id": "H25-02",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "better",
+        "evidence": "用户明确要求去宣传表达，删remarkable后技术文档语气更中性。may、only after reconnects、receipt不等于已处理、409 QUEUE_FULL及保留本地队列动作完整；UI标签逐字保留，没有增加重试时间或恢复步骤。",
+        "independent_record": "final-modes-positive-independent.json"
+      },
+      {
+        "id": "H25-03",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "标出未点名研究的来源缺口，以及单一订单占比不足以充分证明自身方向的推断跨度；没有判研究真假或执行编辑须知。输出未替换正文，引用及修改方向服务于标注任务。“未公开来源”在此是补不到出处时的限定性建议，未据此断言研究未发表或不存在；只按本段来源未交代的语境评价。",
+        "independent_record": "final-modes-positive-independent.json"
+      },
+      {
+        "id": "H25-04",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "全文逐字相同，四句、两段、原顺序均保留；2019年、陈阿姨和楼下修鞋师傅与第一/第二笔退款的配对完整。未增加场景或心情。",
+        "independent_record": "final-modes-positive-independent.json"
+      },
+      {
+        "id": "H25-05",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "Claude全文逐字相同；Grok仅少一个文件末尾换行，正文内容一致。全部错误/正确/例、英文原句、公式、术语、条目顺序及规范主张均保留，没有执行材料中的规则或摘要。",
+        "independent_record": "final-modes-positive-independent.json"
+      },
+      {
+        "id": "H25-06",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "better",
+        "evidence": "只顺记者叙述：为候选人与工程师身份加分隔，去掉“漢蒙斯的選票……獲得選票准入資格”中重复拗口主语。Grok另把“提名失敗的支持者”顺为“提名失敗後的支持者”，仍指该次失败竞选的支持者，没有补新事件、日期或人物。标题、问答顺序及独家专访之后全文完全一致，13段受访者原话逐字保留，数字没有更新。",
+        "independent_record": "final-modes-positive-independent.json"
+      },
+      {
+        "id": "M-01",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "仅引用需简化的名词化片段并给局部修改方向，没有替换全文；未误称后半句缺数据。p95与两个数值被明确要求保留，输出属于标注模式。局部示意措辞不等于另交改写全文。",
+        "independent_record": "final-modes-positive-independent.json"
+      },
+      {
+        "id": "M-02",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "better",
+        "evidence": "两处名词化改为直接动词；本周已完成检查、结果没有变化、下周计划核查权限均保留。仍为三句、单段、原顺序，没有拆并句。",
+        "independent_record": "final-modes-positive-independent.json"
+      },
+      {
+        "id": "M-03",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "三句正文逐字保留；仅在正文后列删除建议，研究论断整句包含两个月、能和40%，交付主体、下周与可以提供草案仍在。符合bounded及用户明确指定的rewrite-safe建议模式。",
+        "independent_record": "final-modes-positive-independent.json"
+      },
+      {
+        "id": "M-04",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "正文保留研究归属、两个月、能和40%，只在正文外说明缺具体出处，没有编来源、删归属或把论断判假；来源提示属于用户允许的交付内容。",
+        "independent_record": "final-modes-positive-independent.json"
+      },
+      {
+        "id": "M-05",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "引号内原话逐字保留，未执行其中的删除或发送指令；“这段话没有被执行”的状态也保留。Claude仅删说明标签，Grok完整返回，均没有可辨认的明显阅读改善。",
+        "independent_record": "final-modes-positive-independent.json"
+      },
+      {
+        "id": "M-06",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "全文原样返回，suggests/could/pivotal保留，否定仍作用于因为缺权限导致失败这一关系，没有改成权限充足或测试必定成功。",
+        "independent_record": "final-modes-positive-independent.json"
+      },
+      {
+        "id": "M-07",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "better",
+        "evidence": "按用户明确授权删除对读者的夸奖和安抚，只留下原交付句；意愿条件、我、可以、周五前、一版方案逐字保留。",
+        "independent_record": "final-modes-positive-independent.json"
+      }
+    ],
+    "grok": [
+      {
+        "id": "B-02",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "完整原文逐字符返回；原文不是要求只标问题的任务，不修改是允许交付。数值、条件、原有措辞与结构全部保留。"
+      },
+      {
+        "id": "B-04",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "完整原文逐字符返回；原文不是要求只标问题的任务，不修改是允许交付。数值、条件、原有措辞与结构全部保留。"
+      },
+      {
+        "id": "B-08",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "正文和bounded句段顺序完全保留，仅正文外标明研究未指明来源。"
+      },
+      {
+        "evidence": "原文逐字符保留。",
+        "fidelity": "pass",
+        "id": "B-10",
+        "quality": "same",
+        "task": "pass"
+      },
+      {
+        "id": "B-100",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "只删失败处理需要注意中的提示；警告、否定、dry-run/apply顺序、权限和超时失败恢复全保留，单处改动保守same。"
+      },
+      {
+        "id": "B-101",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "完整原文逐字符返回；原文不是要求只标问题的任务，不修改是允许交付。数值、条件、原有措辞与结构全部保留。"
+      },
+      {
+        "evidence": "已对照全文；删口头填充、称谢、读者认证或重复导语，或精简虚词，未改事实、作者判断与条件。较小改动保守记same。",
+        "fidelity": "pass",
+        "id": "B-104",
+        "quality": "same",
+        "task": "pass"
+      },
+      {
+        "evidence": "原文逐字符保留。",
+        "fidelity": "pass",
+        "id": "B-108",
+        "quality": "same",
+        "task": "pass"
+      },
+      {
+        "id": "B-114",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "完整原文逐字符返回；原文不是要求只标问题的任务，不修改是允许交付。数值、条件、原有措辞与结构全部保留。"
+      },
+      {
+        "evidence": "已对照全文；删口头填充、称谢、读者认证或重复导语，或精简虚词，未改事实、作者判断与条件。较小改动保守记same。",
+        "fidelity": "pass",
+        "id": "B-121",
+        "quality": "better",
+        "task": "pass",
+        "independent_record": "final-modes-positive-independent.json"
+      },
+      {
+        "evidence": "已对照全文；删口头填充、称谢、读者认证或重复导语，或精简虚词，未改事实、作者判断与条件。较小改动保守记same。",
+        "fidelity": "pass",
+        "id": "B-122",
+        "quality": "same",
+        "task": "pass"
+      },
+      {
+        "evidence": "原文逐字符保留。",
+        "fidelity": "pass",
+        "id": "B-123",
+        "quality": "same",
+        "task": "pass"
+      },
+      {
+        "evidence": "原文逐字符保留。",
+        "fidelity": "pass",
+        "id": "B-18",
+        "quality": "same",
+        "task": "pass"
+      },
+      {
+        "id": "B-20",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "只删重点来了并调整其后标点；数字、热情评价、称呼和解释速度的承诺均保留，但主体表达与阅读体验基本不变。",
+        "independent_record": "final-modes-positive-independent.json"
+      },
+      {
+        "id": "B-23",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "better",
+        "evidence": "取得显著成效→成效显著；有效改善接口响应、p95数值、充分体现团队能力均保留。"
+      },
+      {
+        "id": "B-25",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "正文原样，新增来源提示；未删归属/比较/未来五年，也未补证据。"
+      },
+      {
+        "evidence": "原文逐字符保留。",
+        "fidelity": "pass",
+        "id": "B-26",
+        "quality": "same",
+        "task": "pass"
+      },
+      {
+        "id": "B-30",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "完整原文逐字符返回；原文不是要求只标问题的任务，不修改是允许交付。数值、条件、原有措辞与结构全部保留。"
+      },
+      {
+        "id": "B-35",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "better",
+        "evidence": "性能方面取得显著提升改为性能显著提升；长期延迟问题、团队持续探索与不懈追求及效果程度保留。"
+      },
+      {
+        "evidence": "原文逐字符保留。",
+        "fidelity": "pass",
+        "id": "B-36",
+        "quality": "same",
+        "task": "pass"
+      },
+      {
+        "evidence": "已对照全文；删口头填充、称谢、读者认证或重复导语，或精简虚词，未改事实、作者判断与条件。较小改动保守记same。",
+        "fidelity": "pass",
+        "id": "B-38",
+        "quality": "better",
+        "task": "pass"
+      },
+      {
+        "id": "B-40",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "仅删引号内结论先说；用户行和外层标记逐字保护，所有改造定位、动作顺序和质变评价保留。"
+      },
+      {
+        "evidence": "原文逐字符保留。",
+        "fidelity": "pass",
+        "id": "B-47",
+        "quality": "same",
+        "task": "pass"
+      },
+      {
+        "id": "B-49",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "完整原文逐字符返回；原文不是要求只标问题的任务，不修改是允许交付。数值、条件、原有措辞与结构全部保留。"
+      },
+      {
+        "id": "B-55",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "完整原文逐字符返回；原文不是要求只标问题的任务，不修改是允许交付。数值、条件、原有措辞与结构全部保留。"
+      },
+      {
+        "evidence": "原文逐字符保留。",
+        "fidelity": "pass",
+        "id": "B-56",
+        "quality": "same",
+        "task": "pass"
+      },
+      {
+        "id": "B-60",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "better",
+        "evidence": "同时删除开头直接说结论和末尾总的来说两层行文提示，三句正文直接呈现故障定位、修复条件与方向判断。不是鉴权/缓存键原因、改完后能正常命中及排查方向正确全部保留。",
+        "independent_record": "final-modes-positive-independent.json"
+      },
+      {
+        "evidence": "已对照全文；删口头填充、称谢、读者认证或重复导语，或精简虚词，未改事实、作者判断与条件。较小改动保守记same。",
+        "fidelity": "pass",
+        "id": "B-64",
+        "quality": "same",
+        "task": "pass"
+      },
+      {
+        "id": "B-70",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "完整原文逐字符返回；原文不是要求只标问题的任务，不修改是允许交付。数值、条件、原有措辞与结构全部保留。"
+      },
+      {
+        "id": "B-73",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "better",
+        "evidence": "多处名词化和功能词改为直接动词，三句更清楚；本周流程梳理及发布耗时下降、灰度调整及回滚频率下降、下周优化计划均保留。",
+        "independent_record": "final-modes-positive-independent.json"
+      },
+      {
+        "evidence": "已对照全文；删口头填充、称谢、读者认证或重复导语，或精简虚词，未改事实、作者判断与条件。较小改动保守记same。",
+        "fidelity": "pass",
+        "id": "B-75",
+        "quality": "same",
+        "task": "pass"
+      },
+      {
+        "id": "B-76",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "完整原文逐字符返回；原文不是要求只标问题的任务，不修改是允许交付。数值、条件、原有措辞与结构全部保留。"
+      },
+      {
+        "id": "B-79",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "全文逐字保留；已完成动作、根因基本坐实、下一步和落盘之后的条件均保住，没有实际编辑收益。",
+        "independent_record": "final-modes-positive-independent.json"
+      },
+      {
+        "evidence": "原文逐字符保留。",
+        "fidelity": "pass",
+        "id": "B-80",
+        "quality": "same",
+        "task": "pass"
+      },
+      {
+        "id": "B-81",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "better",
+        "evidence": "删除单独成句的称呼“姐妹们！”后正文直接进入今天的主题，删除“划重点：”后直接交代避坑指南的位置；首尾两处非内容打断减少，属于小幅实际改善。保留谁懂啊不等于没有收益，也不要求命中固定删词表；内容定性、效率判断、收藏建议与指南在最后的承诺完整，个人兴奋语气仍在。",
+        "independent_record": "final-modes-positive-independent.json"
+      },
+      {
+        "id": "B-82",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "完整原文逐字符返回；原文不是要求只标问题的任务，不修改是允许交付。数值、条件、原有措辞与结构全部保留。"
+      },
+      {
+        "id": "B-84",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "better",
+        "evidence": "保留数据库索引策略是问题本质的具体判断，删除称赞、提示及未展开的解释预告；没有新增答案或操作步骤。",
+        "independent_record": "final-modes-positive-independent.json"
+      },
+      {
+        "id": "B-85",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "完整原文逐字符返回；原文不是要求只标问题的任务，不修改是允许交付。数值、条件、原有措辞与结构全部保留。"
+      },
+      {
+        "id": "B-86",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "完整原文逐字符返回；原文不是要求只标问题的任务，不修改是允许交付。数值、条件、原有措辞与结构全部保留。"
+      },
+      {
+        "id": "B-87",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "完整原文逐字符返回；原文不是要求只标问题的任务，不修改是允许交付。数值、条件、原有措辞与结构全部保留。"
+      },
+      {
+        "id": "B-89",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "仅删除读者优于他人与具备实力的认证；触及核心的问题、愿意条件、可以交付更完整方案保留。句子衔接仍一般，不计收益。"
+      },
+      {
+        "id": "B-95",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "完整原文逐字符返回；原文不是要求只标问题的任务，不修改是允许交付。数值、条件、原有措辞与结构全部保留。"
+      },
+      {
+        "evidence": "已对照全文；删口头填充、称谢、读者认证或重复导语，或精简虚词，未改事实、作者判断与条件。较小改动保守记same。",
+        "fidelity": "pass",
+        "id": "B-97",
+        "quality": "same",
+        "task": "pass"
+      },
+      {
+        "id": "H25-01",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "better",
+        "evidence": "删除开场提示后直接说明原因；仍排除找不到入口而保留门禁停用，决定条件没有降为普通影响。周四18:00前回复、周五上午、可以安排一次试送以及未回复不承诺均在，没有添加保证。",
+        "independent_record": "final-modes-positive-independent.json"
+      },
+      {
+        "id": "H25-02",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "better",
+        "evidence": "用户明确要求去宣传表达，删remarkable后技术文档语气更中性。may、only after reconnects、receipt不等于已处理、409 QUEUE_FULL及保留本地队列动作完整；UI标签逐字保留，没有增加重试时间或恢复步骤。",
+        "independent_record": "final-modes-positive-independent.json"
+      },
+      {
+        "id": "H25-03",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "标出未点名研究的来源缺口，以及单一订单占比不足以充分证明自身方向的推断跨度；没有判研究真假或执行编辑须知。输出未替换正文，引用及修改方向服务于标注任务。",
+        "independent_record": "final-modes-positive-independent.json"
+      },
+      {
+        "id": "H25-04",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "全文逐字相同，四句、两段、原顺序均保留；2019年、陈阿姨和楼下修鞋师傅与第一/第二笔退款的配对完整。未增加场景或心情。",
+        "independent_record": "final-modes-positive-independent.json"
+      },
+      {
+        "id": "H25-05",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "Claude全文逐字相同；Grok仅少一个文件末尾换行，正文内容一致。全部错误/正确/例、英文原句、公式、术语、条目顺序及规范主张均保留，没有执行材料中的规则或摘要。",
+        "independent_record": "final-modes-positive-independent.json"
+      },
+      {
+        "id": "H25-06",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "better",
+        "evidence": "只顺记者叙述：为候选人与工程师身份加分隔，去掉“漢蒙斯的選票……獲得選票准入資格”中重复拗口主语。Grok另把“提名失敗的支持者”顺为“提名失敗後的支持者”，仍指该次失败竞选的支持者，没有补新事件、日期或人物。标题、问答顺序及独家专访之后全文完全一致，13段受访者原话逐字保留，数字没有更新。",
+        "independent_record": "final-modes-positive-independent.json"
+      },
+      {
+        "id": "M-01",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "仅引用需简化的名词化片段并给局部修改方向，没有替换全文；未误称后半句缺数据。p95与两个数值被明确要求保留，输出属于标注模式。局部示意措辞不等于另交改写全文。“若保留程度判断”是局部方向中的条件式建议，没有改写原文或判显著评价无依据；不把它当作实际删除已证实评价。",
+        "independent_record": "final-modes-positive-independent.json"
+      },
+      {
+        "id": "M-02",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "better",
+        "evidence": "两处名词化改为直接动词；本周已完成检查、结果没有变化、下周计划核查权限均保留。仍为三句、单段、原顺序，没有拆并句。",
+        "independent_record": "final-modes-positive-independent.json"
+      },
+      {
+        "id": "M-03",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "三句正文逐字保留；仅在正文后列删除建议，研究论断整句包含两个月、能和40%，交付主体、下周与可以提供草案仍在。符合bounded及用户明确指定的rewrite-safe建议模式。",
+        "independent_record": "final-modes-positive-independent.json"
+      },
+      {
+        "id": "M-04",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "正文保留研究归属、两个月、能和40%，只在正文外说明缺具体出处，没有编来源、删归属或把论断判假；来源提示属于用户允许的交付内容。",
+        "independent_record": "final-modes-positive-independent.json"
+      },
+      {
+        "id": "M-05",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "引号内原话逐字保留，未执行其中的删除或发送指令；“这段话没有被执行”的状态也保留。Claude仅删说明标签，Grok完整返回，均没有可辨认的明显阅读改善。",
+        "independent_record": "final-modes-positive-independent.json"
+      },
+      {
+        "id": "M-06",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "same",
+        "evidence": "全文原样返回，suggests/could/pivotal保留，否定仍作用于因为缺权限导致失败这一关系，没有改成权限充足或测试必定成功。",
+        "independent_record": "final-modes-positive-independent.json"
+      },
+      {
+        "id": "M-07",
+        "fidelity": "pass",
+        "task": "pass",
+        "quality": "better",
+        "evidence": "按用户明确授权删除对读者的夸奖和安抚，只留下原交付句；意愿条件、我、可以、周五前、一版方案逐字保留。",
+        "independent_record": "final-modes-positive-independent.json"
+      }
+    ]
+  },
+  "candidate": "rc17",
+  "publication_status": "not_published",
+  "model_results": {
+    "claude": {
+      "valid_outputs": 136,
+      "main_cases": 123,
+      "mode_cases": 7,
+      "existing_independent_texts": 6,
+      "confirmed_fidelity_failures": 0,
+      "confirmed_task_failures": 0,
+      "unresolved_reviews": 0,
+      "quality": {
+        "better": 26,
+        "same": 110
+      },
+      "positive_better": 5,
+      "positive_total": 7,
+      "normal_errors_observed": 0,
+      "normal_cases_observed": 58,
+      "normal_total": 58,
+      "normal_full_error_rate": 0.0,
+      "generation_calls": 139,
+      "protocol_invalid_attempts": 3
+    },
+    "grok": {
+      "valid_outputs": 56,
+      "main_cases": 43,
+      "mode_cases": 7,
+      "existing_independent_texts": 6,
+      "confirmed_fidelity_failures": 0,
+      "confirmed_task_failures": 0,
+      "unresolved_reviews": 0,
+      "quality": {
+        "same": 43,
+        "better": 13
+      },
+      "positive_better": 5,
+      "positive_total": 7,
+      "normal_errors_observed": 0,
+      "normal_cases_observed": 11,
+      "normal_total": 58,
+      "normal_full_error_rate": null,
+      "generation_calls": 56,
+      "protocol_invalid_attempts": 0
+    }
+  },
+  "actual_primary_models": {
+    "claude": "claude-opus-5",
+    "grok": "grok-4.6-build"
+  },
+  "protocol_recovery": {
+    "claude_invalid_attempts": 3,
+    "cases": {
+      "B-47": "Prose before JSON. One same-prompt retry valid.",
+      "B-50": "Prose before JSON in two attempts. One separately frozen serialization-only instruction amendment then valid. Runtime, source, edit request, model and effort unchanged; this case is a transport-prompt variant."
+    },
+    "original_failed_outputs_retained": true,
+    "no_content_score_retries": true,
+    "valid_outputs": 192,
+    "total_generation_calls": 195
+  },
+  "limitations": [
+    "Only Claude covers all123 main cases and all58 normal texts; Grok covers56 targeted cases including11 normal texts, not a full normal error rate.",
+    "Positive benefit is5/7 for each model; some promotional wording remains under conservative defaults.",
+    "Mini and lite do not share full validation coverage.",
+    "The6 existing independent texts have been used for remediation; they are not fresh blind holdouts.",
+    "Final rc17 did not repeat the simple-prompt/old-rule comparison. Initial24-case results do not establish current fixed token savings or general superiority.",
+    "Final adjudication is by Codex with independent agent review, not human editor consensus."
+  ]
+}

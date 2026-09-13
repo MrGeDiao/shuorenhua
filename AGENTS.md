@@ -18,5 +18,5 @@
 ## 协作
 
 - 提交一律以仓库所有者名义，不加 AI 署名行（不写 `Co-Authored-By`），这是既定约定。
-- 文档类工作直接做；功能类工作的常规流程是把自包含的规格写进 `tasks/current/`，交给更便宜的模型执行。
-- 已安装的 Claude Code skill `~/.claude/skills/shuorenhua` 是指向本仓库的软链：在这里改 `SKILL.md` 会立即改变线上 skill，升级走 `git pull`——永远不要往 skills 目录拷贝文件。
+- 本仓库是开发源；运行安装包位于 `~/.codex/skills/shuorenhua`，`~/.agents/skills/shuorenhua` 与 `~/.claude/skills/shuorenhua` 链接到该安装包。修改源文件不会自动上线。
+- 发布时只同步运行所需的 `SKILL.md`、参考资料、样例与元数据，并检查相对引用；不要将整个开发仓库链接到 Skills 扫描目录，避免把 `tasks/` 下的历史评测快照加载成多个同名 Skill。安装包可有明确记录的本地入口精简，升级前先核对差异。

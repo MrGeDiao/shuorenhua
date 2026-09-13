@@ -1,56 +1,48 @@
 # ChatGPT / 通用 LLM 安装
 
+本页对应 2.5.0 开发候选，尚未发布。现有公开 GPT 未随本地文件自动更新；测试候选时，请自行加载本地文件。
+
 ## mini / lite / full 怎么选
 
-- `mini`：只加载 [`dist/shuorenhua-mini.md`](../dist/shuorenhua-mini.md)。适合 Custom Instructions、直接贴对话、较弱模型或只想先清明显模板感的场景。
-- `lite`：只加载 `SKILL.md`。适合 API system prompt、临时项目和需要完整保真合同的改写。
-- `full`：加载 `SKILL.md` + `references/`。适合 Custom GPT、Project、公开文本、技术文档和需要误杀防护的场景。
-
-ChatGPT / 通用 LLM 临时使用可以从 mini 开始；只要涉及公开文本、技术边界、长文或反误杀，就用 lite 或 full。mini 是压缩子集，不替代完整规则。
+- `mini`：粘贴 [`dist/shuorenhua-mini.md`](../dist/shuorenhua-mini.md)，适合一次性使用或输入空间有限的地方。
+- `lite`：只加载 `SKILL.md`，包含主要编辑边界和交付要求。
+- `full`：加载 `SKILL.md`、`references/editing-guide.md`、`references/examples.md` 三个文件；两份参考文件按需查阅。
 
 ## ChatGPT
 
-### 方案一：Custom GPT（推荐）
+### 方案一：Custom GPT
 
-`SKILL.md` 有 12,000+ 字符，超过 Custom Instructions 当前所有档位的上限。用 Custom GPT 可以加载完整规则，不用删减。
+可以使用现有的[说人话 GPT](https://chatgpt.com/g/g-6a5829b1163481919e1e45851f6bc709-shuo-ren-hua)。它的线上版本与本地候选分开维护。
 
-**直接使用：** [说人话 GPT](https://chatgpt.com/g/g-6a5829b1163481919e1e45851f6bc709-shuo-ren-hua)（需要 ChatGPT Plus / Pro）
+自建时沿用以下方式：
 
-如果你想自建一个，步骤如下：
+1. 打开 [GPT Editor](https://chatgpt.com/gpts/editor)，新建 GPT。
+2. 名称填“说人话”，描述填“去 AI 味的中英文改写助手”。
+3. 把 [Custom GPT Instructions](chatgpt-gpt-instructions.md) 分隔线以下的内容放进 Instructions。
+4. 在 Knowledge Files 中上传 `SKILL.md`、`references/editing-guide.md`、`references/examples.md`。
+5. 保存，并按自己的使用范围选择可见性。
 
-1. 打开 [ChatGPT GPT Editor](https://chatgpt.com/gpts/editor)，新建一个 GPT
-2. 名称填"说人话"，描述填"去 AI 味的中英文改写助手"
-3. 将 [`install/chatgpt-gpt-instructions.md`](chatgpt-gpt-instructions.md) 中分隔线以下的内容粘贴到 Instructions
-4. 上传 Knowledge Files：`SKILL.md` + `references/` 目录下所有 `.md` 文件（full 用法）
-5. 保存，发布为 "Only me" 或 "Anyone with a link"
-
-用的时候直接打开这个 GPT 对话就行。
+上传文件不等于每次都会读取全部内容；入口要求以 `SKILL.md` 为准，遇到边界问题再查两份参考文件。
 
 ### 方案二：Projects
 
-如果你有 ChatGPT Plus / Pro，也可以用 Projects：
+1. 新建 Project。
+2. 将上述三个文件上传到 Project Files；临时使用也可以只放 `SKILL.md`。
+3. 在 Project Instructions 中写：`按照项目文件中 SKILL.md 的规则编辑用户提供的文本。遇到语义边界或需要例子时，再查 editing-guide.md 和 examples.md。`
 
-1. 新建一个 Project
-2. 把 `SKILL.md` 和需要的 `references/` 文件上传到 Project Files；长期使用建议走 full，临时项目可以先只放 `SKILL.md`
-3. Project Instructions 里写一句：`按照项目文件中 SKILL.md 的规则改写用户提供的文本。`
+### 方案三：直接贴对话
 
-Projects 的文件没有严格字符限制，效果和 Custom GPT 类似。
+在对话开头贴 mini 的内容，再提供原文和编辑要求。也可以直接贴 `SKILL.md` 使用 lite。
 
-### 方案三：直接贴对话（mini）
+### 方案四：Custom Instructions
 
-不想建 GPT 也不想建 Project，直接在对话开头贴 `dist/shuorenhua-mini.md` 的内容。适合偶尔用一次、上下文紧张或较弱模型。
-
-如果需要完整保真合同，可以改贴 `SKILL.md`，这是 lite 用法。
-
-### 方案四：Custom Instructions（mini）
-
-把 `dist/shuorenhua-mini.md` 粘贴到 Settings > Personalization > Custom Instructions。按 [OpenAI 当前官方说明](https://help.openai.com/en/articles/8096356-custom-instructions-for-chatgpt)，Free / Go 上限是 1,500 字符，Plus / Pro / Enterprise / Business / Education 上限是 5,000 字符；约 1,000 字符的 mini 两边都放得下，完整 `SKILL.md` 两边都放不下。
+将 mini 粘贴到 Settings > Personalization > Custom Instructions。mini 控制在 1,500 字符以内；实际输入限制以界面提示为准。完整入口和参考文件可用上面的 GPT 或 Project 文件方式加载。
 
 ## Claude（Web / Project）
 
-1. 创建一个 Project
-2. 将 `SKILL.md` 内容添加到 Project Instructions
-3. 需要更稳的误杀防护时，再把相关 `references/` 文件加入 Project Knowledge
+1. 创建 Project。
+2. 将 `SKILL.md` 内容放入 Project Instructions。
+3. 将 `references/editing-guide.md` 和 `references/examples.md` 放入 Project Knowledge，按需查阅。
 
 ## API / System Prompt
 
@@ -61,45 +53,22 @@ messages = [
 ]
 ```
 
-如果已有主 system prompt，把 `SKILL.md` 当成一个风格模块拼进去，不要整段覆盖。
+已有主 system prompt 时，把入口作为编辑规则补入，不覆盖其他任务要求。两份参考文件可在需要时一起提供；没有文件访问能力的模型不会因为文本里写了路径就自动读取文件。
 
-## 使用提示
+## 使用要求
 
-如果你想先判断"哪里像 AI"，不要直接改稿，在对话里说：
+直接说“轻改，保留作者口气”，或“只标问题，不改写”。后一种是 `annotation mode`：只引用问题片段并给修改方向，不交替换全文。默认保持原文语言；无须修改时，完整返回原文。
 
-```text
-先不要改写，只按 annotation mode 标出下面这段文字里的问题：...
-```
+默认保留来源不明的论断及其归属，必要时在正文外提示缺来源。只有用户明确指定 `rewrite-safe` 或要求删除无源论断，才允许整条删除；`bounded` 只列删除建议，`in-place` 保留原句并提示缺来源。`audit-only` 标出来源缺口，其他内容照常编辑；`rewrite-with-placeholder` 按用户要求保留论证结构、标待补来源，不编出处。
 
-适合这几类场景：
+## 编辑范围
 
-- 你想先看这段话该不该改
-- 你要做审稿或 review，不想直接替作者重写
-- 你怀疑有无源引用、语域混搭或工程师腔，但还不想动正文
+默认做最小必要修改；中文公开长文约 1000 字以上默认保留句段结构。可指定：
 
-处理无源引用时，可以指定模式：
+程序代码块（包括注释和文档字符串）默认逐字保留；只有用户明确点名修改注释或说明文字时才编辑相应部分，且不改程序行为。代码围栏里的普通文案仍可按用户要求编辑。
 
-```text
-用说人话规则改写这段文本，无源引用按 audit-only 处理。
-```
+- `structural`：允许删、并、重排，保留有效信息与作者意图。
+- `bounded`：不直接删整句、不并句、不重排；纯空句列“建议删除（待确认）”，正文暂保留。
+- `in-place`：不删句、不并句、不重排，只在句内替换或删修饰；要求保句数时也不拆句。
 
-三种模式：`rewrite-safe`（默认用于 chat/public-writing，直接删无证据权威铺垫）、`audit-only`（默认用于 docs/status，只标缺来源）、`rewrite-with-placeholder`（保留结构但暴露缺来源）。不指定时按场景默认值走。
-
-## 长文改写的三档 scope
-
-长文（约 1000 字以上的 `public-writing`）改写时，可以指定三档 scope，和力度档位正交：
-
-- `structural`：自由删句、并句、重排，去味最彻底，但长度不可控（实测同一篇可能 -18% 到 -39%）
-- `bounded`（长文默认）：实句只做句内清理；整句空话不直接删，列成「建议删除（待确认）」清单交你拍板
-- `in-place`：一句都不删，只做句内降调，适合“完全原样”的要求
-
-在指令里直接说就行，例如：「用 bounded scope 改写，整句空话列出来给我确认、别直接删。」
-
-## 什么时候需要补 `references/`
-
-- AI 腔很重，普通去词表改写效果不够
-- 中英文混合，需要精细场景判断
-- 技术文案，担心误杀术语
-- 需要处理结构问题，不只是删词
-
-优先补：`structures.md` / `severity.md` / `operation-manual.md` / `boundary-cases.md`
+这些范围不会因编辑力度或来源处理方式而放宽。需要进一步判断时，查 `editing-guide.md`；需要看改写对照时，查 `examples.md`。
