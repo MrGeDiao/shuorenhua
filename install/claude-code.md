@@ -1,6 +1,6 @@
 # Claude Code 安装
 
-本页对应 2.5.0 开发候选，尚未发布。远程安装入口仍提供已发布版本；测试候选时，请从本地候选源码目录复制文件。
+本页对应 v2.5.0。升级时请核对本地定制，并用新的运行文件替换旧安装。
 
 ## 方式 1：plugin 一键安装（推荐）
 
@@ -13,7 +13,7 @@
 
 Git 插件会下载源仓库，其中实际运行规则是 `SKILL.md`、`references/editing-guide.md`、`references/examples.md` 三个文件；它不是只含三个文件的归档。评测和历史材料不由入口加载。只需要独立运行目录时，使用下方手动复制方式。
 
-这种根目录单 SKILL 插件布局要求 Claude Code v2.1.142 或以上，见[官方插件说明](https://code.claude.com/docs/en/plugins-reference)。本地候选已在 Claude Code 2.1.268 上用隔离的 `CLAUDE_CONFIG_DIR` 完成 `marketplace add` → `plugin install` → `plugin details` → `plugin uninstall` 验收：能发现 1 个 `shuorenhua` skill，卸载后恢复为空。GitHub 远程安装路径仍需发布后另行复测。已有手动安装时，先备份并核对本地定制，再切换到一种安装方式，避免重复发现。
+这种根目录单 SKILL 插件布局要求 Claude Code v2.1.142 或以上，见[官方插件说明](https://code.claude.com/docs/en/plugins-reference)。本地候选已在 Claude Code 2.1.268 上用隔离的 `CLAUDE_CONFIG_DIR` 完成 `marketplace add` → `plugin install` → `plugin details` → `plugin uninstall` 验收：能发现 1 个 `shuorenhua` skill，卸载后恢复为空。已有手动安装时，先备份并核对本地定制，再切换到一种安装方式，避免重复发现。
 
 ## mini / lite / full 怎么选（手动使用时）
 
@@ -23,7 +23,7 @@ Git 插件会下载源仓库，其中实际运行规则是 `SKILL.md`、`referen
 
 Claude Code 会基于 `SKILL.md` 开头的 description 自动发现并触发 skills 目录里的 skill，装好即用。
 
-手动升级时先在新的空目录中放入三个文件，核对本地定制后再切换旧安装；不要直接覆盖一个仍含旧词表的目录。以下复制命令面向首次安装或空目录，在本地 2.5 候选源码目录执行。
+手动升级时先在新的空目录中放入三个文件，核对本地定制后再切换旧安装；不要直接覆盖一个仍含旧词表的目录。以下复制命令面向首次安装或空目录，在v2.5 源码目录执行。
 
 ## 方式 2：项目级
 

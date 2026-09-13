@@ -19,7 +19,7 @@
 
 适合改 README、Release Note、工作同步、issue 回复和个人文章，也支持英文与只标问题。它不判断文章是不是 AI 写的，不提供“AI 含量”或规避检测的保证。
 
-**v2.5.0 重构已完成本地发布验收，尚未发布。** v2.4.1 的修复并入本版。Claude Opus 5 完成 136 条、Grok 4.6 完成 56 条定向验收；范围、结果与限制见[评测记录](evals/results-v2.5.0.md)。
+**v2.5.0 已发布。** v2.4.1 的修复并入本版。Claude Opus 5 完成 136 条、Grok 4.6 完成 56 条定向验收；范围、结果与限制见[评测记录](evals/results-v2.5.0.md)。
 
 ## 怎么用
 
@@ -69,7 +69,7 @@
 
 ## 安装
 
-本地加载当前候选时，full 只复制 [runtime-files.json](runtime-files.json) 列出的三个文件，保持相对目录。不要把 `evals/` 和 `tasks/` 放进 skill 扫描目录。仓库开发文件不会自动更新已安装副本。
+安装 full 时 只复制 [runtime-files.json](runtime-files.json) 列出的三个文件，保持相对目录。不要把 `evals/` 和 `tasks/` 放进 skill 扫描目录。仓库开发文件不会自动更新已安装副本。
 
 | 用法 | 文件 |
 |---|---|
@@ -77,7 +77,7 @@
 | lite | 只读 `SKILL.md`，遇到细节边界时可补参考 |
 | full | `SKILL.md` 与两份参考文件 |
 
-已有安装入口见 [Codex](install/codex.md)、[Claude Code](install/claude-code.md)、[Cursor / Windsurf](install/cursor.md)、[OpenClaw](install/openclaw.md)、[ChatGPT](install/chatgpt.md)。从远端安装取得的是远端版本，不会取得本地未发布候选。
+已有安装入口见 [Codex](install/codex.md)、[Claude Code](install/claude-code.md)、[Cursor / Windsurf](install/cursor.md)、[OpenClaw](install/openclaw.md)、[ChatGPT](install/chatgpt.md)。请按对应工具的说明安装；升级前先核对本地定制。
 
 ## 怎么验证
 
@@ -101,7 +101,7 @@
 
 ## English
 
-**shuorenhua** is a Chinese-first editing skill. It removes unnecessary wording while preserving facts, conditions, modality, attribution, and the writer’s voice. It also supports English and review-only requests. This branch contains the **unreleased v2.5.0 rebuild**; local release acceptance is complete; coverage and limitations are recorded separately. It is not an AI authorship detector.
+**shuorenhua** is a Chinese-first editing skill. It removes unnecessary wording while preserving facts, conditions, modality, attribution, and the writer’s voice. It also supports English and review-only requests. Version **2.5.0** rebuilds the editing rules; validation coverage and limitations are recorded separately. It is not an AI authorship detector.
 
 ## 相关项目
 

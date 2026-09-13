@@ -1485,7 +1485,7 @@
     ]
   },
   "candidate": "rc17",
-  "publication_status": "not_published",
+  "publication_status": "published",
   "model_results": {
     "claude": {
       "valid_outputs": 136,
@@ -1552,5 +1552,6 @@
     "The6 existing independent texts have been used for remediation; they are not fresh blind holdouts.",
     "Final rc17 did not repeat the simple-prompt/old-rule comparison. Initial24-case results do not establish current fixed token savings or general superiority.",
     "Final adjudication is by Codex with independent agent review, not human editor consensus."
-  ]
+  ],
+  "release_tag": "v2.5.0"
 }

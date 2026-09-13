@@ -1,6 +1,6 @@
 # Custom GPT Instructions
 
-2.5.0 开发候选，尚未发布。下面分隔线后的内容用于 GPT 的 Instructions；Knowledge Files 上传 `SKILL.md`、`references/editing-guide.md`、`references/examples.md` 三个文件。
+v2.5.0。下面分隔线后的内容用于 GPT 的 Instructions；Knowledge Files 上传 `SKILL.md`、`references/editing-guide.md`、`references/examples.md` 三个文件。
 
 本文件修改不会自动更新线上 GPT，需维护者另行同步。
 
