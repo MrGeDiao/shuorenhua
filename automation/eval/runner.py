@@ -18,8 +18,10 @@ import json
 import os
 from pathlib import Path
 import re
+import shutil
 import subprocess
 import sys
+import tempfile
 from urllib.parse import quote
 
 import protocol
@@ -33,6 +35,10 @@ STRIPPED_ENV = (
     "CLAUDE_CODE_ENTRYPOINT", "CLAUDE_CODE_SESSION_ID", "CLAUDE_CODE_CHILD_SESSION",
     "CLAUDE_AGENT_SDK_VERSION", "CLAUDE_CODE_SDK_HAS_OAUTH_REFRESH", "CLAUDE_EFFORT",
 )
+# grok 1.0.41：`--tools ""` 不限制任何工具（25 个全在），白名单不能为空，且 MCP 元工具
+# search_tool/use_tool 默认保留。先把白名单收窄到一个工具，再用内部 ID 全部移除，工具定义
+# 才真正为空（2026-09-26 实测）。`--deny *` 保留为兜底：工具即使出现也无法执行。
+GROK_NO_TOOLS = ("--tools", "read_file", "--disallowed-tools", "read_file,search_tool,use_tool", "--deny", "*")
 EVIDENCE_FILES = ("invocation.json", "prompt.txt", "output.json", "completion.json", "transcript.jsonl", "origin.json", "signals.json")
 
 
@@ -79,6 +85,18 @@ def save_matching(path, data):
 def child_env(source=None):
     """订阅 CLI 使用本机登录；不继承 API key 或宿主 provider 路由。"""
     return {key: value for key, value in (os.environ if source is None else source).items() if key not in STRIPPED_ENV}
+
+
+def grok_env(fake_home, source=None):
+    """Grok 会把 $HOME 下 .agents/.claude/.grok 的技能列表注入会话，请求里一出现技能名就去读本机
+    skill，判分因出现工具调用而作废。临时 HOME 只放一个指向真实 Grok 目录的 .grok 软链；
+    GROK_HOME 必须是真实路径（沙箱拒绝软链形式），会话仍落在 persisted_paths 查找的位置。"""
+    env = child_env(source)
+    real = Path(env.get("GROK_HOME") or Path(env.get("HOME") or Path.home()) / ".grok").resolve()
+    (Path(fake_home) / ".grok").symlink_to(real)
+    env["HOME"] = str(fake_home)
+    env["GROK_HOME"] = str(real)
+    return env
 
 
 def validate_plan(value):
@@ -383,7 +401,7 @@ def attempts_for(run_dir, batch):
 def command_for(plan, attempt):
     if plan["provider"] == "claude":
         return ["claude", "-p", "--model", plan["model"], "--safe-mode", "--strict-mcp-config", "--tools", "", "--effort", plan["effort"], "--output-format", "json", "--system-prompt", FRAME]
-    return ["grok", "--model", plan["model"], "--verbatim", "--disable-web-search", "--no-subagents", "--sandbox", "read-only", "--tools", "", "--deny", "*", "--system-prompt-override", FRAME, "--output-format", "json", "--prompt-file", str(attempt / "prompt.txt")]
+    return ["grok", "--model", plan["model"], "--verbatim", "--disable-web-search", "--no-subagents", "--sandbox", "read-only", *GROK_NO_TOOLS, "--system-prompt-override", FRAME, "--output-format", "json", "--prompt-file", str(attempt / "prompt.txt")]
 
 
 def reserve_attempt(run_dir, plan, manifest, batch, retry_failed, mode):
@@ -438,15 +456,21 @@ def execute(run_dir, retry_failed=False, batch_number=None, max_new_calls=None):
             new_calls += 1
             command = command_for(plan, attempt)
             completion = dict(exit_code=None, timed_out=False)
+            fake_home = tempfile.mkdtemp(prefix="shuorenhua-grok-home-") if plan["provider"] == "grok" else None
             try:
+                env = grok_env(fake_home) if fake_home else child_env()
                 with (attempt / "output.json").open("xb") as out, (attempt / "stderr.log").open("xb") as err:
                     proc = subprocess.run(command, cwd=attempt, input=(attempt / "prompt.txt").read_bytes() if plan["provider"] == "claude" else b"",
-                                          stdout=out, stderr=err, timeout=plan["timeout_seconds"], env=child_env())
+                                          stdout=out, stderr=err, timeout=plan["timeout_seconds"], env=env)
                 completion["exit_code"] = proc.returncode
             except subprocess.TimeoutExpired:
                 completion["timed_out"] = True
             except OSError as exc:
                 completion["error"] = type(exc).__name__
+            finally:
+                if fake_home:
+                    # rmtree 只删除 .grok 软链本身，不进入真实 Grok 目录。
+                    shutil.rmtree(fake_home, ignore_errors=True)
             completion["ended_at"] = datetime.datetime.now(datetime.timezone.utc).isoformat()
             save_new(attempt / "completion.json", completion)
             valid = validate_attempt(run_dir, plan, manifest, batch, attempt)

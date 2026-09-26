@@ -382,6 +382,71 @@ class RunnerTests(unittest.TestCase):
         env = runner.child_env({"PATH": "/bin", "ANTHROPIC_API_KEY": "secret", "XAI_API_KEY": "secret", "CLAUDECODE": "host"})
         self.assertEqual(env, {"PATH": "/bin"})
 
+    def test_grok_command_removes_every_tool(self):
+        self.prepare(provider="grok", model="grok-4.7")
+        plan, _ = runner.load_run(self.run)
+        command = runner.command_for(plan, self.run)
+        # `--tools ""` 在 grok 1.0.41 不限制任何工具；必须收窄后再按内部 ID 全部移除，并保留 deny 兜底。
+        self.assertNotIn("", command)
+        self.assertEqual(command[command.index("--tools") + 1], "read_file")
+        removed = command[command.index("--disallowed-tools") + 1].split(",")
+        self.assertEqual(set(removed), {"read_file", "search_tool", "use_tool"})
+        self.assertEqual(command[command.index("--deny") + 1], "*")
+
+    def test_grok_env_hides_skills_and_keeps_real_grok_home(self):
+        real = self.root / "real-grok"
+        real.mkdir()
+        link = self.root / "grok-link"
+        link.symlink_to(real)
+        fake = self.root / "fake-home"
+        fake.mkdir()
+        env = runner.grok_env(fake, {"PATH": "/bin", "HOME": "/Users/x", "GROK_HOME": str(link), "XAI_API_KEY": "secret"})
+        self.assertEqual(env["HOME"], str(fake))
+        # 沙箱拒绝软链形式的 GROK_HOME，必须解析成真实路径。
+        self.assertEqual(env["GROK_HOME"], str(real.resolve()))
+        self.assertNotIn("XAI_API_KEY", env)
+        self.assertEqual((fake / ".grok").resolve(), real.resolve())
+
+    def test_grok_env_defaults_to_home_dot_grok(self):
+        home = self.root / "home"
+        (home / ".grok").mkdir(parents=True)
+        fake = self.root / "fake-home"
+        fake.mkdir()
+        env = runner.grok_env(fake, {"HOME": str(home)})
+        self.assertEqual(env["GROK_HOME"], str((home / ".grok").resolve()))
+
+    def test_grok_execution_runs_with_isolated_home_and_cleans_it_up(self):
+        self.prepare(provider="grok", model="grok-4.7")
+        real = self.root / "real-grok"
+        (real / "sessions").mkdir(parents=True)
+        seen = {}
+
+        def fake_grok(command, *, cwd, env, **kwargs):
+            seen.update(home=env["HOME"], grok_home=env["GROK_HOME"])
+            self.assertTrue((Path(env["HOME"]) / ".grok").is_symlink())
+            return subprocess.CompletedProcess(command, 1)
+
+        with mock.patch.dict(runner.os.environ, {"GROK_HOME": str(real)}), \
+                mock.patch.object(runner.subprocess, "run", side_effect=fake_grok):
+            runner.execute(self.run)
+        self.assertNotEqual(seen["home"], str(Path.home()))
+        self.assertEqual(seen["grok_home"], str(real.resolve()))
+        self.assertFalse(Path(seen["home"]).exists(), "临时 HOME 必须清理")
+        # 清理只删软链，不能进入真实 Grok 目录。
+        self.assertTrue((real / "sessions").is_dir())
+
+    def test_claude_execution_keeps_the_real_home(self):
+        seen = {}
+
+        def fake_claude(command, *, env, **kwargs):
+            seen["home"] = env.get("HOME")
+            return subprocess.CompletedProcess(command, 1)
+
+        self.prepare()
+        with mock.patch.object(runner.subprocess, "run", side_effect=fake_claude):
+            runner.execute(self.run)
+        self.assertEqual(seen["home"], runner.os.environ.get("HOME"))
+
 
 if __name__ == "__main__":
     unittest.main()
