@@ -5,13 +5,13 @@
   },
   "metadata": {
     "description": "说人话官方 marketplace。",
-    "version": "2.5.0"
+    "version": "2.5.1"
   },
   "plugins": [
     {
       "name": "shuorenhua",
       "description": "按用户要求编辑中英文文本，保留事实与作者立场。",
-      "version": "2.5.0",
+      "version": "2.5.1",
       "author": {
         "name": "MrGeDiao"
       },

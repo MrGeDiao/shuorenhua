@@ -19,7 +19,7 @@
 
 适合改 README、Release Note、工作同步、issue 回复和个人文章，也支持英文与只标问题。它不判断文章是不是 AI 写的，不提供“AI 含量”或规避检测的保证。
 
-**v2.5.0 已发布。** v2.4.1 的修复并入本版。Claude Opus 5 完成 136 条、Grok 4.6 完成 56 条定向验收；范围、结果与限制见[评测记录](evals/results-v2.5.0.md)。
+**v2.5.1 已发布。** 本版是保养更新，改写规则与 v2.5.0 相同，已安装 2.5.0 的不用升级。v2.5.0 重建了编辑规则，Claude Opus 5 完成 136 条、Grok 4.6 完成 56 条定向验收；范围、结果与限制见[评测记录](evals/results-v2.5.0.md)。
 
 ## 怎么用
 
@@ -103,7 +103,7 @@
 
 ## English
 
-**shuorenhua** is a Chinese-first editing skill. It removes unnecessary wording while preserving facts, conditions, modality, attribution, and the writer’s voice. It also supports English and review-only requests. Version **2.5.0** rebuilds the editing rules; validation coverage and limitations are recorded separately. It is not an AI authorship detector.
+**shuorenhua** is a Chinese-first editing skill. It removes unnecessary wording while preserving facts, conditions, modality, attribution, and the writer’s voice. It also supports English and review-only requests. Version **2.5.1** is a maintenance release that keeps the editing rules rebuilt in 2.5.0; validation coverage and limitations are recorded separately. It is not an AI authorship detector.
 
 ## 相关项目
 

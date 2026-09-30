@@ -10,7 +10,7 @@ assignees: ""
 
 ## 版本与使用方式
 
-- 说人话版本：（如 2.5.0；不确定就写安装日期或下载来源）
+- 说人话版本：（如 2.5.1；不确定就写安装日期或下载来源）
 - 工具和模型：（如 Claude Code + Claude Opus 5、Codex + GPT 6 Sol、ChatGPT 自定义 GPT）
 - 加载方式：mini（`dist/shuorenhua-mini.md`）/ lite（只加载 `SKILL.md`）/ full（`SKILL.md` + `references/`）/ 不确定
 
