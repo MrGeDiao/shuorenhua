@@ -19,7 +19,7 @@
 
 适合改 README、Release Note、工作同步、issue 回复和个人文章，也支持英文与只标问题。它不判断文章是不是 AI 写的，不提供“AI 含量”或规避检测的保证。
 
-**v2.5.1 已发布。** 本版是保养更新，改写规则与 v2.5.0 相同，已安装 2.5.0 的不用升级。v2.5.0 重建了编辑规则，Claude Opus 5 完成 136 条、Grok 4.6 完成 56 条定向验收；范围、结果与限制见[评测记录](evals/results-v2.5.0.md)。
+**v2.6.0 已发布。** 新增[写平实](#写平实v26)：明确说「别吹」「写平实点」时，可以降掉「完美」「极致」「前所未有」这类夸饰，删掉「无需妥协」这类口号，承诺、首次、数字和术语照样保留。默认编辑规则与 2.5 相同；范围、结果与限制见[评测记录](evals/results-v2.6.0.md)。
 
 ## 怎么用
 
@@ -28,6 +28,7 @@
 ```text
 把这段去掉套话，保留信息和我的口气：……
 只在句内改，不删句、不并句：……
+别吹，写平实点：……
 只标问题，不改写：……
 ```
 
@@ -42,6 +43,20 @@
 > 本次调整了重试策略，重复请求从 24 次降到 7 次。
 
 但“得到批准后，我可以周五前交一版草案”里的条件、“可以”和交付动作都要留下，不能顺手改成确定承诺。更多对照见[示例](references/examples.md)。
+
+## 写平实（v2.6）
+
+明确要求去掉宣传、吹捧的语气时，比如说「别吹」「写平实点」「去掉营销味」，会额外做两件事：把只表示程度的夸饰降成平常说法，删掉不交代任何内容的口号。
+
+> 这款记账软件采用全新一代同步引擎，带来极致流畅的体验，真正做到无需妥协。它是国内首个支持离线多人协作的记账工具，导入旧数据无需手动整理，同步速度提升了 3 倍。
+
+改成：
+
+> 这款记账软件采用新一代同步引擎，用起来很流畅。它是国内首个支持离线多人协作的记账工具，导入旧数据无需手动整理，同步速度提升了 3 倍。
+
+听起来很强、但带着内容的说法照样保留：承诺（「无需修改代码」）、可核查的「首个」「最常见」、效果幅度（「大幅降低成本」）、上下文事实撑得住的程度、作者在论证和叙述里的评价，以及引语和术语。只许降调，不许加强。只说「去 AI 味」「改狠一点」不会打开这项。
+
+已知局限：Claude 偶尔会把正常叙述里的评价词一起弱化，测试中把新闻里的「慷慨捐助」改成了「捐助」；紧挨着具体声明的「无缝」常被保留。
 
 ## v2.5 改了什么
 
@@ -91,7 +106,7 @@
 
 **还会误改吗？** 会。尤其要核对否定范围、可能与承诺、作者判断和长文中的结构限制。欢迎附脱敏原文、请求与实际输出反馈。
 
-**长文为什么改得很少？** 这是已知缺口。在较长的公开文章里，2.5 对黑话和叠用比喻清理得偏少，常常只修了语病和标点。我们试过放宽清理范围，但会出现改动作者判断强度或作者自己术语的情况，还没达到发布标准，所以暂不发布，经过见 [#16](https://github.com/MrGeDiao/shuorenhua/issues/16)。2.4.x 清理得多一些，但也可能改变原意，如果使用，请逐处核对修订。如果在 2.5 里明确要求「彻底清理，黑话都换成大白话」，它会多改一些，但会把部分说法换成它猜测的意思而不作标记，也会改动判断强度（比如把「完美融合」改成「配合得很好」），同样请逐处核对。我们测试过一个会原位标出猜测的「彻底清理」模式：改得更多、错得更少，但仍会改动判断强度，暂不发布。
+**长文为什么改得很少？** 这是已知缺口。在较长的公开文章里，2.5 对黑话和叠用比喻清理得偏少，常常只修了语病和标点。我们试过放宽清理范围，但会出现改动作者判断强度或作者自己术语的情况，还没达到发布标准，所以暂不发布，经过见 [#16](https://github.com/MrGeDiao/shuorenhua/issues/16)。2.4.x 清理得多一些，但也可能改变原意，如果使用，请逐处核对修订。如果在 2.5 里明确要求「彻底清理，黑话都换成大白话」，它会多改一些，但会把部分说法换成它猜测的意思而不作标记，也会改动判断强度（比如把「完美融合」改成「配合得很好」），同样请逐处核对。我们测试过一个会原位标出猜测的「彻底清理」模式：改得更多、错得更少，但仍会改动判断强度，暂不发布。如果只是想去掉宣传口气，可以用 2.6 的[写平实](#写平实v26)，它不处理黑话。
 
 **英文能用吗？** 可以。默认保留原文语言，重点仍是中文。不会为了避开某个英文词而改换事实。
 
@@ -103,7 +118,7 @@
 
 ## English
 
-**shuorenhua** is a Chinese-first editing skill. It removes unnecessary wording while preserving facts, conditions, modality, attribution, and the writer’s voice. It also supports English and review-only requests. Version **2.5.1** is a maintenance release that keeps the editing rules rebuilt in 2.5.0; validation coverage and limitations are recorded separately. It is not an AI authorship detector.
+**shuorenhua** is a Chinese-first editing skill. It removes unnecessary wording while preserving facts, conditions, modality, attribution, and the writer’s voice. It also supports English and review-only requests. Version **2.6.0** adds an opt-in plain-tone mode: when the user explicitly asks to drop the hype, it may tone down pure intensifiers and delete empty slogans, while keeping claims, firsts, numbers and terms. Default editing rules are unchanged from 2.5; validation coverage and limitations are recorded separately. It is not an AI authorship detector.
 
 ## 相关项目
 
