@@ -19,12 +19,13 @@ OPEN_DATE = date(2026, 3, 22)  # 开源日
 EVENTS = [  # 曲线上的发版标注，日期以 GitHub releases 为准
     (date(2026, 6, 18), "v1.9 · Eval Harness"),
     (date(2026, 7, 15), "v2.0 · Plugin 一键安装"),
+    (date(2026, 9, 13), "v2.5 · 编辑规则重构"),
 ]
 
-PANEL, BORDER = "#FBF9F5", "#E6E1D6"
-INK, MUTED = "#14161B", "#76716A"
-GRID, BASELINE = "#E9E4DB", "#B9B2A5"
-ACCENT, AREA = "#C5402E", "#B9B2A5"
+PANEL, BORDER = "#F7F8F5", "#D7DCE2"
+INK, MUTED = "#101318", "#66707C"
+GRID, BASELINE = "#E6E9ED", "#929AA5"
+ACCENT, AREA = "#246BFD", "#246BFD"
 
 X0, X1, Y0, PLOT_H = 88, 1150, 340, 210  # 绘图区
 SANS = "-apple-system, 'SF Pro Text', 'PingFang SC', 'Segoe UI', 'Microsoft YaHei', sans-serif"
@@ -85,6 +86,9 @@ def main():
     m = OPEN_DATE.month % 12 + 1
     year = OPEN_DATE.year + (OPEN_DATE.month == 12)
     while date(year, m, 1) <= today:
+        if xs(date(year, m, 1)) - X0 < 60:  # 离开源日太近会和起点标签重叠
+            year, m = (year + 1, 1) if m == 12 else (year, m + 1)
+            continue
         xticks.append(f'<text x="{xs(date(year, m, 1)):.1f}" y="365">{m}月</text>')
         year, m = (year + 1, 1) if m == 12 else (year, m + 1)
 
@@ -98,7 +102,8 @@ def main():
             f'  <text x="{ex-10:.1f}" y="{ey-15:.1f}" font-family="{SANS}" font-size="12" fill="{MUTED}" text-anchor="end">{label}</text>')
 
     svg = f'''<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="390" viewBox="0 0 1200 390" role="img" aria-label="说人话 star 增长曲线：开源 {span} 天，0 到 {total} stars，数据截至 {today}">
-  <rect x="1" y="1" width="1198" height="388" rx="16" fill="{PANEL}" stroke="{BORDER}" stroke-width="1.5"/>
+  <rect x="1" y="1" width="1198" height="388" fill="{PANEL}" stroke="{BORDER}" stroke-width="1.5"/>
+  <rect x="0" y="0" width="1200" height="4" fill="{ACCENT}"/>
 
   <text x="40" y="37" font-family="{MONO}" font-size="11.5" letter-spacing="1" fill="{ACCENT}">STAR 记录 / 每日更新</text>
   <text x="40" y="73" font-family="{SANS}" font-size="25" font-weight="700" fill="{INK}">开源以来</text>
@@ -118,8 +123,8 @@ def main():
     {''.join(xticks)}
   </g>
 
-  <path d="{area}" fill="{AREA}" fill-opacity="0.10"/>
-  <path d="{line}" fill="none" stroke="{INK}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="{area}" fill="{AREA}" fill-opacity="0.07"/>
+  <path d="{line}" fill="none" stroke="{ACCENT}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
 
   {''.join(events_svg)}
 

@@ -1,29 +1,64 @@
-<h1 align="center">说人话：中文 AI 味清理 skill</h1>
-
 <p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/banner-dark.svg">
-    <img src="assets/banner-light.svg" alt="说人话：中文 AI 味清理 skill — 先保信息，再谈风格" width="100%">
-  </picture>
+  <img src="assets/readme/hero.svg" alt="说人话：把 AI 腔改成能直接发出去的话。删掉套话和重复铺垫，数字、条件、承诺和你的口气原样留下。" width="100%">
 </p>
 
 <p align="center">
-  <a href="https://github.com/MrGeDiao/shuorenhua/stargazers"><img src="https://img.shields.io/github/stars/MrGeDiao/shuorenhua?style=for-the-badge&amp;label=stars" alt="GitHub stars"></a>
-  <a href="https://github.com/MrGeDiao/shuorenhua/releases"><img src="https://img.shields.io/github/v/release/MrGeDiao/shuorenhua?style=for-the-badge&amp;label=release" alt="GitHub release"></a>
-  <a href="evals/benchmark.md"><img src="https://img.shields.io/badge/benchmark-123%20cases-2563eb?style=for-the-badge" alt="Benchmark: 123 cases"></a>
-  <a href="evals/real-samples.md"><img src="https://img.shields.io/badge/scenario%20samples-20-16a34a?style=for-the-badge" alt="Scenario samples: 20"></a>
-  <a href="LICENSE"><img src="https://img.shields.io/github/license/MrGeDiao/shuorenhua?style=for-the-badge" alt="License"></a>
+  <a href="https://github.com/MrGeDiao/shuorenhua/stargazers"><img src="https://img.shields.io/github/stars/MrGeDiao/shuorenhua?style=flat-square&amp;label=stars&amp;color=246BFD&amp;labelColor=101318" alt="GitHub stars"></a>
+  <a href="https://github.com/MrGeDiao/shuorenhua/releases"><img src="https://img.shields.io/github/v/release/MrGeDiao/shuorenhua?style=flat-square&amp;label=release&amp;color=246BFD&amp;labelColor=101318" alt="GitHub release"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/MrGeDiao/shuorenhua?style=flat-square&amp;color=246BFD&amp;labelColor=101318" alt="License"></a>
 </p>
 
-`说人话`是一个中文优先的文字编辑 skill，用来清理套话、重复铺垫和生硬句式。数字、条件、承诺和作者本来的意思要保留；正常文字可以不改。
+说人话是一份装进 Claude Code、Codex、ChatGPT 等工具里的改稿规则（skill）。把写好的文字交给它，它会删掉套话、重复铺垫和生硬句式，交回一版能直接用的稿子。数字、条件、承诺和你的口气保持原样，本来就没问题的文字不动。
 
-适合改 README、Release Note、工作同步、issue 回复和个人文章，也支持英文与只标问题。它不判断文章是不是 AI 写的，不提供“AI 含量”或规避检测的保证。
+一行命令装好，Claude Code、Codex、Cursor 都能用，其他方式见[安装](#安装)：
 
-**v2.6.0 已发布。** 新增[写平实](#写平实v26)：明确说「别吹」「写平实点」时，可以降掉「完美」「极致」「前所未有」这类夸饰，删掉「无需妥协」这类口号，承诺、首次、数字和术语照样保留。默认编辑规则与 2.5 相同；范围、结果与限制见[评测记录](evals/results-v2.6.0.md)。
+```bash
+npx skills add MrGeDiao/shuorenhua
+```
+
+<p align="center">
+  <img src="assets/readme/demo.svg" alt="改写对照：一段 130 字的工作同步改成 56 字，删掉开头的招呼和预告、重复的一句和结尾的致谢，保留每天 24 次降到 7 次和周五前的条件。" width="100%">
+</p>
+
+<details>
+<summary>看不清图？这里是文字版，可以复制去试</summary>
+
+原文：
+
+> 大家好，下面我来给大家详细汇报一下本周的进展情况。本周我们完成了对重试策略的调整工作。重试策略已经调整过了。值得注意的是，调整之后，重复请求从每天 24 次降到了 7 次。如果周五前没有出现新的报错，我们会把这个改动合进主分支。以上就是本周的全部进展，感谢大家的关注！
+
+改后：
+
+> 本周我们调整了重试策略，重复请求从每天 24 次降到了 7 次。如果周五前没有出现新的报错，我们会把这个改动合进主分支。
+
+请求是「把这段去掉套话，保留信息和我的口气」，由 GPT-6.1-sol 加载 v2.6.0 跑出，输出没有手改。同一段交给 Claude Opus 5.5，结果只多留了「调整之后，」。
+
+</details>
+
+## 安装
+
+**Claude Code**
+
+```text
+/plugin marketplace add MrGeDiao/shuorenhua
+/plugin install shuorenhua@shuorenhua
+```
+
+**Codex、Cursor 和其他支持 skills 的工具**
+
+```bash
+npx skills add MrGeDiao/shuorenhua
+```
+
+运行后选择要装到哪些工具。加 `--global` 装到用户目录，所有项目都能用。
+
+**ChatGPT**：直接用[说人话 GPT](https://chatgpt.com/g/g-6a5829b1163481919e1e45851f6bc709-shuo-ren-hua)，不用安装。
+
+想手动复制文件、装到 OpenClaw，或只想贴一段提示词，见[安装说明](install/)。
 
 ## 怎么用
 
-把原文交给支持加载 skill 的工具，然后说明要求：
+装好后不用记命令，在对话里贴上原文、说一句要求，工具会自己调用；想确保用上，可以在要求里点名「用说人话」。
 
 ```text
 把这段去掉套话，保留信息和我的口气：……
@@ -32,21 +67,36 @@
 只标问题，不改写：……
 ```
 
-默认交完整改写稿，不附判定链和评分。不需要修改时返回原文；来源提示和删除建议放在正文后。
+默认只交改好的全文，不附评分和解释。原文没问题时原样返回。中文为主，英文也能改。
 
-例如，原文是：
+## 改什么，留什么
 
-> 本次完成了对重试策略的调整。重试策略已经调整过了。重复请求从 24 次降到 7 次。
+| 会清理 | 会保留 |
+|---|---|
+| 没有内容的招呼、预告和致谢 | 数字、日期、版本号 |
+| 「值得注意的是」这类提示语 | 条件、承诺和分寸：「如果」「得到批准后」「可能」 |
+| 「完成了对……的调整工作」这类绕弯的说法 | 引语、术语、代码块 |
+| 同一件事说两遍 | 你的判断和口气，默认连像宣传的评价也留着 |
 
-可以改成：
+它不判断文章是不是 AI 写的，也不保证能通过 AI 检测。
 
-> 本次调整了重试策略，重复请求从 24 次降到 7 次。
+<details>
+<summary>控制改动范围</summary>
 
-但“得到批准后，我可以周五前交一版草案”里的条件、“可以”和交付动作都要留下，不能顺手改成确定承诺。更多对照见[示例](references/examples.md)。
+| 要求 | 改动范围 |
+|---|---|
+| 自由调整 / `structural` | 可删、并、重排，保留有效信息和作者意图 |
+| 保留结构 / `bounded` | 只在句内清理；整句删除只提建议，不并句、不重排 |
+| 只在原位改 / `in-place` | 不删句、不并句、不重排；要求保句数时也不拆句 |
 
-## 写平实（v2.6）
+你的要求优先。约 1000 字以上的中文公开长文，默认保留原来的段落和句子结构。
 
-明确要求去掉宣传、吹捧的语气时，比如说「别吹」「写平实点」「去掉营销味」，会额外做两件事：把只表示程度的夸饰降成平常说法，删掉不交代任何内容的口号。
+</details>
+
+<details>
+<summary>写平实：去掉宣传腔（v2.6）</summary>
+
+只有你说了「别吹」「写平实点」「去掉营销味」，它才会多做一步：把只表示程度的夸张词（「极致」「完美」）换成平常说法，删掉不交代内容的口号：
 
 > 这款记账软件采用全新一代同步引擎，带来极致流畅的体验，真正做到无需妥协。它是国内首个支持离线多人协作的记账工具，导入旧数据无需手动整理，同步速度提升了 3 倍。
 
@@ -54,82 +104,45 @@
 
 > 这款记账软件采用新一代同步引擎，用起来很流畅。它是国内首个支持离线多人协作的记账工具，导入旧数据无需手动整理，同步速度提升了 3 倍。
 
-听起来很强、但带着内容的说法照样保留：承诺（「无需修改代码」）、可核查的「首个」「最常见」、效果幅度（「大幅降低成本」）、上下文事实撑得住的程度、作者在论证和叙述里的评价，以及引语和术语。只许降调，不许加强。只说「去 AI 味」「改狠一点」不会打开这项。
+承诺、可核查的「首个」、数字和术语照样保留。只降调，不加强。只说「去 AI 味」「改狠一点」不会打开。
 
-已知局限：Claude 偶尔会把正常叙述里的评价词一起弱化，测试中把新闻里的「慷慨捐助」改成了「捐助」；紧挨着具体声明的「无缝」常被保留。
+</details>
 
-## v2.5 改了什么
+## 效果怎么验证
 
-运行规则收为三个文件：[入口](SKILL.md)、[编辑边界](references/editing-guide.md)、[示例](references/examples.md)。两份参考按需读取。旧词表、场景包和固定多步流程退出运行包，完整快照留在[历史目录](evals/legacy-v2.4.1/)。
+每次发版前跑一套 123 条的测试：65 条需要清理，58 条本来就没问题、不该改。另有 7 条专门看「改完是不是更好读」。改写结果按事先写好的判据逐条判，先看事实和请求有没有被违背，再看是不是更好读。
 
-编辑按内容判断，不按词语命中次数替换。“闭环控制”、引用中的“赋能”、有意重复和真实对比都可以保留。原文只谈潜力或目标时，也不要求模型补出具体实现。
+v2.6.0 的结果：没问题的 58 条一条都没被改坏；7 条里 5 条改完更好读；123 条里有 1 条丢了信息（B-33，见下）。
 
-程序代码块（包括注释和文档字符串）默认逐字保留；只有用户明确点名修改注释或说明文字时才编辑相应部分，且不改程序行为。代码围栏里的普通文案仍可按要求清理。
+详细记录见 [v2.6.0 评测](evals/results-v2.6.0.md)、[主集用例](evals/benchmark.md)和[编辑质量判据](evals/v2.5/criteria.md)。
 
-来源处理有一项明确变化：“研究表明”没有附出处时，默认保留归属与论断，必要时在正文外提示缺来源。用户明确要求删除无源论断或指定 `rewrite-safe`，才按允许的范围处理；不能只删“研究表明”，把结论变成已核实的事实。
+## 已知局限
 
-引号按用途判断：作为依据的原话、文献、规范、界面文字、正在定义的词，以及书名号里的标题和名称按原文保留。叙述中的讲话可以清理口头填充和重复，保留说话人的事实、判断和“可能”“我觉得”等情态；用户要求保留口述原貌时不改。
+- **默认改得保守。** 「为后续发展奠定了坚实的基础」这类评价算作者的判断，默认会留着；想去掉宣传腔要明确说「别吹」。不同模型差别也不小：另一段测试里，GPT 按规则留下了这类评价，Claude 整句删了。
+- **长文改得偏少。** 较长的公开文章里，黑话和叠用的比喻清理不够。放宽规则后，它会把作者的话说轻或说重，还没找到稳妥的办法，讨论见 [#16](https://github.com/MrGeDiao/shuorenhua/issues/16)。
+- **写平实偶尔误降正常评价。** 测试中把新闻里的「慷慨捐助」改成了「捐助」。
+- **只有预告的句子可能被整句删掉（B-33）。** 「我帮你把这个事情掰扯清楚，先把它彻底掰开说清楚。」被当成没有内容的预告删掉了，但前半句是交付承诺。
 
-默认改写较保守：清理赘语和句法，保留背景、定位、程度与作者评价。心理、感受和安抚类陈述也先保留；明确要求删去这类内容时再处理。审稿模式可以指出问题，但不会替作者撤回判断。
+## 反馈
 
-## 控制改动范围
+改坏了或者改得不够，请用 [Bad Case 模板](.github/ISSUE_TEMPLATE/bad-case.md)贴出原文、你的请求和实际输出。不要贴未授权的聊天记录、密钥或个人信息。想参与改规则，先看[贡献说明](CONTRIBUTING.md)。
 
-| 要求 | 改动范围 |
-|---|---|
-| 自由调整 / `structural` | 可删、并、重排，保留有效信息和作者意图 |
-| 保留结构 / `bounded` | 句内清理；整句删除只提建议，正文保留，不并句、不重排 |
-| 只在原位改 / `in-place` | 不删句、不并句、不重排；要求保句数时也不拆句 |
-
-用户要求优先。中文公开长文约 1000 字以上默认保留句段结构。`minimal / standard / aggressive` 仍可使用，不放宽保真要求；2.5 里三档还没有分开的规则，实际效果接近。
-
-## 安装
-
-安装 full 时只复制 [runtime-files.json](runtime-files.json) 列出的三个文件，保持相对目录。不要把 `evals/` 和 `tasks/` 放进 skill 扫描目录。仓库开发文件不会自动更新已安装副本。
-
-| 用法 | 文件 |
-|---|---|
-| mini | [自包含短版](dist/shuorenhua-mini.md)，适合粘贴到单次对话 |
-| lite | 只读 `SKILL.md`，遇到细节边界时可补参考 |
-| full | `SKILL.md` 与两份参考文件 |
-
-已有安装入口见 [Codex](install/codex.md)、[Claude Code](install/claude-code.md)、[Cursor / Windsurf](install/cursor.md)、[OpenClaw](install/openclaw.md)、[ChatGPT](install/chatgpt.md)。请按对应工具的说明安装；升级前先核对本地定制。
-
-## 怎么验证
-
-评测先看保真与任务是否完成，再看编辑是否有阅读收益。判据独立于 skill 文案，也不指定某个模型必须当判官。
-
-主集 123 条，其中 65 条待改善文本、58 条正常文本；新增 3 条按引号用途判断的用例。已完成 Claude Opus 5 的 136 条和 Grok 4.6 的 56 条定向验收。信息与任务硬失败均为零，正向样本各有 5/7 条改善、2 条持平。Claude 正常文本误改为 0/58；Grok 只覆盖其中 11 条，未发现误改，不代表完整误改率。20 条场景样本与 10 篇 HUMAN 长文各自记录，不相加。新版使用冻结的中性请求和[编辑质量判据](evals/v2.5/criteria.md)，不要求模型删除某个指定句式。
-
-发布要求包括信息与任务硬失败为零、正常文本误改率低于 10%，以及 7 条正向编辑样本至少 5 条有收益。脚本通过只证明结构和证据校验通过，不证明改写质量达标。
-
-## 常见问题
-
-**还会误改吗？** 会。尤其要核对否定范围、可能与承诺、作者判断和长文中的结构限制。欢迎附脱敏原文、请求与实际输出反馈。
-
-**长文为什么改得很少？** 这是已知缺口。在较长的公开文章里，2.5 对黑话和叠用比喻清理得偏少，常常只修了语病和标点。我们试过放宽清理范围，但会出现改动作者判断强度或作者自己术语的情况，还没达到发布标准，所以暂不发布，经过见 [#16](https://github.com/MrGeDiao/shuorenhua/issues/16)。2.4.x 清理得多一些，但也可能改变原意，如果使用，请逐处核对修订。如果在 2.5 里明确要求「彻底清理，黑话都换成大白话」，它会多改一些，但会把部分说法换成它猜测的意思而不作标记，也会改动判断强度（比如把「完美融合」改成「配合得很好」），同样请逐处核对。我们测试过一个会原位标出猜测的「彻底清理」模式：改得更多、错得更少，但仍会改动判断强度，暂不发布。如果只是想去掉宣传口气，可以用 2.6 的[写平实](#写平实v26)，它不处理黑话。
-
-**英文能用吗？** 可以。默认保留原文语言，重点仍是中文。不会为了避开某个英文词而改换事实。
-
-**能模仿某个人的文风吗？** 本项目主要清理多余表达，保留原有口气。它没有针对特定作者做风格训练。
-
-## 参与贡献
-
-请用 [Bad Case 模板](.github/ISSUE_TEMPLATE/bad-case.md) 提供具体原文、编辑要求和输出；避免提交未授权聊天、密钥或个人隐私。新问题优先补可复现案例，是否需要加规则再看证据，见[贡献说明](CONTRIBUTING.md)。
-
-## English
-
-**shuorenhua** is a Chinese-first editing skill. It removes unnecessary wording while preserving facts, conditions, modality, attribution, and the writer’s voice. It also supports English and review-only requests. Version **2.6.0** adds an opt-in plain-tone mode: when the user explicitly asks to drop the hype, it may tone down pure intensifiers and delete empty slogans, while keeping claims, firsts, numbers and terms. Default editing rules are unchanged from 2.5; validation coverage and limitations are recorded separately. It is not an AI authorship detector.
+历次改动见 [CHANGELOG](CHANGELOG.md)。
 
 ## 相关项目
 
-- [stop-slop](https://github.com/hardikpandya/stop-slop) — 英文冗余表达规则
-- [humanizer](https://github.com/blader/humanizer) — 英文写作模式整理
-- [avoid-ai-writing](https://github.com/conorbronsdon/avoid-ai-writing) — AI 写作问题分类
-- [speak-human-tw](https://github.com/Raymondhou0917/speak-human-tw) — 繁体中文编辑规则
+- [stop-slop](https://github.com/hardikpandya/stop-slop)：英文冗余表达规则
+- [humanizer](https://github.com/blader/humanizer)：英文 AI 写作模式整理
+- [avoid-ai-writing](https://github.com/conorbronsdon/avoid-ai-writing)：AI 写作问题分类
+- [speak-human-tw](https://github.com/Raymondhou0917/speak-human-tw)：繁体中文编辑规则
 
 ## Star 增长
 
 [![说人话 star 增长曲线](https://raw.githubusercontent.com/MrGeDiao/shuorenhua/star-data/star-growth.svg)](https://github.com/MrGeDiao/shuorenhua/stargazers)
+
+## English
+
+**shuorenhua** is a Chinese-first editing skill for Claude Code, Codex, Cursor and ChatGPT. It cuts filler, repetition and stiff phrasing while keeping facts, conditions, commitments and the writer's voice. It also handles English and review-only requests. It is not an AI-authorship detector. Install with `npx skills add MrGeDiao/shuorenhua`.
 
 ## 许可
 
