@@ -22,7 +22,7 @@ protected spans 粗核只报警不判死，缺失留给 judge 复核（粗核是
     python3 automation/eval/hard_metrics.py --stdin <原文本文件>
         # 原文本从文件读，改后文本从 stdin 读；输出可读结果
     python3 automation/eval/hard_metrics.py --pair A.md B.md --report-json
-        # 输出单行 JSON，供 automation/eval/README.md 的管道用法拼接 judge 输入
+        # 输出单行 JSON，供拼接 judge 输入
     python3 automation/eval/hard_metrics.py --human-stats evals/human-corpus.jsonl
         # 严格校验 HUMAN manifest 与正文，并输出不含正文的 residual 分布
     python3 automation/eval/hard_metrics.py --calibrate
@@ -157,6 +157,7 @@ def extract_blocks(text):
     lines = text.splitlines()
     blocks = {}
     pending_id = None
+    seen_ids = set()
     in_result = False
     buf = []
     for line in lines:
@@ -165,6 +166,11 @@ def extract_blocks(text):
         # 兼容两代标题：盲测 B-xx 与旧口径 SF-xx / SNF-xx（v1.9.2 回放）
         m = re.match(r"^## (B-\d+|SF-\d+|SNF-\d+)$", line_stripped)
         if m:
+            cid = m.group(1)
+            if cid in seen_ids:
+                print(f"hard_metrics: 输出中重复用例编号：{cid}", file=sys.stderr)
+                sys.exit(2)
+            seen_ids.add(cid)
             if pending_id is not None and buf:
                 blocks.setdefault(pending_id, []).extend(buf)
             pending_id = m.group(1)
@@ -789,10 +795,14 @@ def analyze_run(root, run_dir):
             target_ids = actual_ids
         else:
             target_ids = expected
+        unknown_ids = sorted((target_ids | actual_ids) - by_id.keys())
+        if unknown_ids:
+            print(f"hard_metrics: {path} 引用了语料中不存在的用例编号：{', '.join(unknown_ids)}", file=sys.stderr)
+            sys.exit(2)
         ignored = sorted(actual_ids - target_ids)
         results = []
         for cid in sorted(target_ids):
-            scene, quote = by_id.get(cid, ("", ""))
+            scene, quote = by_id[cid]
             output_text = blocks.get(cid, "")
             if not output_text:
                 results.append({
