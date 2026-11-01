@@ -63,7 +63,7 @@ Grok 另需 `--signals signals.json`。只有原始 CLI JSON、退出记录和�
 
 ```bash
 python3 -m unittest discover -s automation/eval -p 'test_*.py'
-python3 -m unittest discover -s automation -p 'test_check_runtime.py'
+python3 -m unittest discover -s automation -p 'test_*.py'
 python3 automation/check_repo.py
 ```
 
