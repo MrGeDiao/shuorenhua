@@ -734,6 +734,34 @@ class RunInputTests(unittest.TestCase):
                 analyze.assert_not_called()
                 self.assert_no_report()
 
+    def test_unknown_case_headings_without_output_are_fatal(self):
+        valid = "## B-01\n处理结果：\n今天完成发布。\n"
+        for name in ("rewrite-B01.md", "rewrite-targeted.md"):
+            for unknown in ("## B-99\n", "## B-99\n处理结果：\n"):
+                for text in (valid + unknown, unknown + valid):
+                    with self.subTest(name=name, text=text):
+                        path = self.write_run(name, text)
+                        stderr = io.StringIO()
+                        with mock.patch("sys.stderr", stderr), mock.patch("sys.stdout", io.StringIO()):
+                            with self.assertRaises(SystemExit) as error:
+                                hard_metrics.analyze_run(self.root, path)
+                        self.assertEqual(error.exception.code, 2)
+                        self.assertIn("语料中不存在的用例编号：B-99", stderr.getvalue())
+                        self.assert_no_report()
+
+    def test_known_case_headings_without_output_remain_missing(self):
+        for name in ("rewrite-B01.md", "rewrite-targeted.md"):
+            for text in ("## B-01\n", "## B-01\n处理结果：\n"):
+                with self.subTest(name=name, text=text):
+                    path = self.write_run(name, text)
+                    with mock.patch("sys.stdout", io.StringIO()):
+                        code = hard_metrics.analyze_run(self.root, path)
+                    self.assertEqual(code, 2)
+                    report = json.loads((self.root / "hard-metrics.json").read_text(encoding="utf-8"))
+                    self.assertEqual(report["reports"][name]["total_cases"], 1)
+                    self.assertEqual(report["reports"][name]["missing_output"], ["B-01"])
+                    self.assertTrue(report["cases"][name][0]["missing_output"])
+
     def test_duplicate_case_headings_are_fatal(self):
         for cid in ("B-01", "SF-1", "SNF-1"):
             for first in ("", "处理结果：第一份答案。\n"):

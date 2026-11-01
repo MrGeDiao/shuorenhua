@@ -152,7 +152,7 @@ def extract_blocks(text):
 
     返回 {盲测编号: 正文}。B-xx 标题后的「处理结果：」以下到下一个
     B-xx 标题之间的内容都算正文；处理结果内的 Markdown 标题是被测
-    文本的一部分，必须保留。
+    文本的一部分，必须保留。没有正文的用例也保留编号，正文记为空字符串。
     """
     lines = text.splitlines()
     blocks = {}
@@ -173,6 +173,7 @@ def extract_blocks(text):
             seen_ids.add(cid)
             if pending_id is not None and buf:
                 blocks.setdefault(pending_id, []).extend(buf)
+            blocks[cid] = []
             pending_id = m.group(1)
             in_result = False
             buf = []
