@@ -10,6 +10,14 @@
 - `lite`：只加载 `SKILL.md`。适合临时改写和上下文紧张的编辑任务。
 - `full`：加载 `SKILL.md`、`references/editing-guide.md`、`references/examples.md` 三个文件。适合长期 rules、公开文本、技术文档和需要查看编辑边界与改写对照的任务。
 
+## 方式 0：一行安装
+
+```bash
+npx skills add MrGeDiao/shuorenhua
+```
+
+先试这条；需要按下面方式把文件放进 Rules 目录、或要核对本地定制时，再用手动复制。
+
 ## 方式 1：项目 Rules
 
 ```bash

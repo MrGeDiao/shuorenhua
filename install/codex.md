@@ -10,6 +10,14 @@
 - `lite`：只加载 `SKILL.md`。适合单次临时改写、上下文紧张、只想先压掉明显模板感的场景。
 - `full`：加载 `SKILL.md`、`references/editing-guide.md`、`references/examples.md` 三个文件。适合长期项目、README / release note / issue 回复、技术文档和需要查看编辑边界与改写对照的任务。
 
+## 方式 0：一行安装
+
+```bash
+npx skills add MrGeDiao/shuorenhua
+```
+
+先试这条；需要把运行文件放进指定目录、或要核对本地定制时，再用下面的手动复制方式。
+
 ## 方式 1：项目内长期使用（推荐）
 
 把 skill 文件放进项目：
