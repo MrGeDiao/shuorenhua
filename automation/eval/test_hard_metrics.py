@@ -693,6 +693,134 @@ class HumanCorpusTests(unittest.TestCase):
         self.assertNotIn("B-02", blocks["B-01"])
 
 
+class RunInputTests(unittest.TestCase):
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.root = Path(self.tmp.name)
+        (self.root / "evals").mkdir()
+        (self.root / "evals" / "benchmark-blind.md").write_text(
+            "### B-01 | docs long in-place\n\n> 今天完成发布。\n", encoding="utf-8"
+        )
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    def write_run(self, name, text):
+        path = self.root / name
+        path.write_text(text, encoding="utf-8")
+        return path
+
+    def assert_no_report(self):
+        self.assertFalse((self.root / "hard-metrics.json").exists())
+        self.assertFalse((self.root / "hard-metrics.md").exists())
+
+    def test_unknown_case_ids_are_fatal_before_analysis(self):
+        for name, text in (
+            ("rewrite-targeted.md", "## B-98\n处理结果：未知。\n## B-99\n处理结果：未知。\n"),
+            ("rewrite-B98-99.md", ""),
+            ("rewrite-B01.md", "## B-99\n处理结果：区间外未知。\n"),
+        ):
+            with self.subTest(name=name):
+                path = self.write_run(name, text)
+                stderr = io.StringIO()
+                with mock.patch("sys.stderr", stderr), mock.patch.object(hard_metrics, "analyze_case") as analyze:
+                    with self.assertRaises(SystemExit) as error:
+                        hard_metrics.analyze_run(self.root, path)
+                self.assertEqual(error.exception.code, 2)
+                self.assertIn("hard_metrics:", stderr.getvalue())
+                self.assertIn("B-99", stderr.getvalue())
+                if name != "rewrite-B01.md":
+                    self.assertIn("B-98", stderr.getvalue())
+                analyze.assert_not_called()
+                self.assert_no_report()
+
+    def test_unknown_case_headings_without_output_are_fatal(self):
+        valid = "## B-01\n处理结果：\n今天完成发布。\n"
+        for name in ("rewrite-B01.md", "rewrite-targeted.md"):
+            for unknown in ("## B-99\n", "## B-99\n处理结果：\n"):
+                for text in (valid + unknown, unknown + valid):
+                    with self.subTest(name=name, text=text):
+                        path = self.write_run(name, text)
+                        stderr = io.StringIO()
+                        with mock.patch("sys.stderr", stderr), mock.patch("sys.stdout", io.StringIO()):
+                            with self.assertRaises(SystemExit) as error:
+                                hard_metrics.analyze_run(self.root, path)
+                        self.assertEqual(error.exception.code, 2)
+                        self.assertIn("语料中不存在的用例编号：B-99", stderr.getvalue())
+                        self.assert_no_report()
+
+    def test_known_case_headings_without_output_remain_missing(self):
+        for name in ("rewrite-B01.md", "rewrite-targeted.md"):
+            for text in ("## B-01\n", "## B-01\n处理结果：\n"):
+                with self.subTest(name=name, text=text):
+                    path = self.write_run(name, text)
+                    with mock.patch("sys.stdout", io.StringIO()):
+                        code = hard_metrics.analyze_run(self.root, path)
+                    self.assertEqual(code, 2)
+                    report = json.loads((self.root / "hard-metrics.json").read_text(encoding="utf-8"))
+                    self.assertEqual(report["reports"][name]["total_cases"], 1)
+                    self.assertEqual(report["reports"][name]["missing_output"], ["B-01"])
+                    self.assertTrue(report["cases"][name][0]["missing_output"])
+
+    def test_duplicate_case_headings_are_fatal(self):
+        for cid in ("B-01", "SF-1", "SNF-1"):
+            for first in ("", "处理结果：第一份答案。\n"):
+                with self.subTest(cid=cid, first=first):
+                    text = f"## {cid}\n{first}> ## {cid}\n处理结果：第二份答案。\n"
+                    stderr = io.StringIO()
+                    with mock.patch("sys.stderr", stderr):
+                        with self.assertRaises(SystemExit) as error:
+                            hard_metrics.extract_blocks(text)
+                    self.assertEqual(error.exception.code, 2)
+                    self.assertIn(f"hard_metrics: 输出中重复用例编号：{cid}", stderr.getvalue())
+
+    def test_duplicate_run_does_not_write_report(self):
+        path = self.write_run(
+            "rewrite-B01.md", "## B-01\n处理结果：第一份。\n## B-01\n处理结果：第二份。\n"
+        )
+        with mock.patch("sys.stderr", io.StringIO()):
+            with self.assertRaises(SystemExit) as error:
+                hard_metrics.analyze_run(self.root, path)
+        self.assertEqual(error.exception.code, 2)
+        self.assert_no_report()
+
+    def test_valid_run_matches_existing_metrics(self):
+        path = self.write_run("rewrite-B01.md", "## B-01\n处理结果：\n今天完成发布。\n")
+        with mock.patch("sys.stdout", io.StringIO()):
+            code = hard_metrics.analyze_run(self.root, path)
+        self.assertEqual(code, 0)
+        report = json.loads((self.root / "hard-metrics.json").read_text(encoding="utf-8"))
+        # 固定修复前此输入的完整 JSON 结果，防止有效输入的指标口径变化。
+        self.assertEqual(report, {'reports': {'rewrite-B01.md': {'batch': 'B01',
+                                        'total_cases': 1,
+                                        'ignored_out_of_range': [],
+                                        'missing_output': [],
+                                        'long_form': {'cases': 1, 'warn': [], 'fail': []},
+                                        'dash_dense': [],
+                                        'protected_missing': []}},
+         'cases': {'rewrite-B01.md': [{'case': 'B-01',
+                                       'scene': 'docs long in-place',
+                                       'is_long': True,
+                                       'retention': {'original_chars': 7,
+                                                     'output_chars': 7,
+                                                     'ratio': 1.0,
+                                                     'target': 0.9,
+                                                     'floor': 0.85,
+                                                     'status': 'ok',
+                                                     'noop_unverified': False},
+                                       'dashes': {'dense': False,
+                                                  'original_segments': 1,
+                                                  'output_segments': 1,
+                                                  'original_per_segment': [0],
+                                                  'output_per_segment': [0],
+                                                  'output_total_dashes': 0,
+                                                  'original_first_sentence_starts_with_dash': False,
+                                                  'output_first_sentence_starts_with_dash': False},
+                                       'protected': {'total': 0, 'hit': 0, 'missing': []},
+                                       'noop': False,
+                                       'noop_unverified': False}]}})
+
+
 class ParagraphMetricsTests(unittest.TestCase):
     def test_counts_paragraphs_and_reports_longest(self):
         text = "第一段写了两句话。这是第二句。\n\n第二段只有一句。"
