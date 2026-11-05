@@ -14,6 +14,7 @@ from urllib.parse import unquote
 
 
 ROOT = Path(__file__).resolve().parents[1]
+RUNTIME_DIR = "skills/shuorenhua"
 SKIP_DIRS = {".git", "tasks", "assets"}
 SKIP_FILES = {"evals/run-manifest.md", "CHANGELOG.md"}
 
@@ -193,8 +194,9 @@ def check_runtime_manifest(issues, root=None):
             add_issue(issues, "runtime-files.json", "-", "runtime", f"重复文件：{relative}")
             continue
         path = PurePosixPath(relative)
-        if relative != "SKILL.md" and (path.parts[0] != "references" or path.name.lower() == "skill.md"):
-            add_issue(issues, "runtime-files.json", "-", "runtime", f"运行包只允许根 SKILL.md 与 references 资料：{relative}")
+        in_references = relative.startswith(f"{RUNTIME_DIR}/references/") and path.name.lower() != "skill.md"
+        if relative != f"{RUNTIME_DIR}/SKILL.md" and not in_references:
+            add_issue(issues, "runtime-files.json", "-", "runtime", f"运行包只允许 {RUNTIME_DIR} 下的 SKILL.md 与 references 资料：{relative}")
         candidate = root / relative
         paths[relative] = candidate
         try:
@@ -206,9 +208,12 @@ def check_runtime_manifest(issues, root=None):
             add_issue(issues, relative, "-", "runtime", "清单文件不存在或不是普通文件")
         elif candidate.resolve() != candidate.absolute():
             add_issue(issues, relative, "-", "runtime", "运行文件及其父目录不能通过符号链接加载资料")
-    if "SKILL.md" not in paths:
-        add_issue(issues, "runtime-files.json", "-", "runtime", "清单必须包含根 SKILL.md 入口")
-    references = root / "references"
+    if f"{RUNTIME_DIR}/SKILL.md" not in paths:
+        add_issue(issues, "runtime-files.json", "-", "runtime", f"清单必须包含 {RUNTIME_DIR}/SKILL.md 入口")
+    # 根目录一旦有 SKILL.md，npx skills 会把整个开发仓库当 skill 安装。
+    if (root / "SKILL.md").exists() or (root / "SKILL.md").is_symlink():
+        add_issue(issues, "SKILL.md", "-", "runtime", "根目录不能有 SKILL.md，否则会安装整个开发仓库")
+    references = root / RUNTIME_DIR / "references"
     if references.is_symlink() or (references.exists() and not references.is_dir()):
         add_issue(issues, "references", "-", "runtime", "references 必须是仓库内的真实目录")
     if references.exists():
@@ -307,11 +312,12 @@ def check_case_ids(files, case_matches, rs_matches, issues):
 
 
 def check_meta(issues):
-    skill = read_text("SKILL.md", issues, "meta")
+    skill_path = f"{RUNTIME_DIR}/SKILL.md"
+    skill = read_text(skill_path, issues, "meta")
     if skill is not None:
         lines = skill.splitlines()
         if not lines or lines[0] != "---" or "---" not in lines[1:]:
-            add_issue(issues, "SKILL.md", 1, "meta", "frontmatter 不存在或未闭合")
+            add_issue(issues, skill_path, 1, "meta", "frontmatter 不存在或未闭合")
         else:
             end = lines[1:].index("---") + 1
             metadata = {}
@@ -322,7 +328,7 @@ def check_meta(issues):
             for key in ("name", "description"):
                 value, number = metadata.get(key, ("", 1))
                 if not value:
-                    add_issue(issues, "SKILL.md", number, "meta", f"frontmatter 的 {key} 不能为空")
+                    add_issue(issues, skill_path, number, "meta", f"frontmatter 的 {key} 不能为空")
 
     payloads = {}
     for relative in (".claude-plugin/plugin.json", ".claude-plugin/marketplace.json"):

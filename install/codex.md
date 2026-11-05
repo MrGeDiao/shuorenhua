@@ -2,7 +2,7 @@
 
 手动升级时先用新的空目录收集运行文件，核对本地定制后再切换旧安装；仅覆盖入口会留下旧参考文件。下方复制命令面向首次安装或空目录。
 
-本页对应 v2.6.0。升级时请核对本地定制，并用新的运行文件替换旧安装。
+本页对应 v2.6.1。升级时请核对本地定制，并用新的运行文件替换旧安装。
 
 ## mini / lite / full 怎么选
 
@@ -24,8 +24,8 @@ npx skills add MrGeDiao/shuorenhua
 
 ```bash
 mkdir -p shuorenhua/references
-cp SKILL.md shuorenhua/
-cp references/editing-guide.md references/examples.md shuorenhua/references/
+cp skills/shuorenhua/SKILL.md shuorenhua/
+cp skills/shuorenhua/references/editing-guide.md skills/shuorenhua/references/examples.md shuorenhua/references/
 ```
 
 这是 full 用法，也是项目内长期使用的默认建议。
@@ -42,13 +42,13 @@ cp references/editing-guide.md references/examples.md shuorenhua/references/
 
 ## 方式 2：单次改写
 
-在仓库根目录运行，让 Codex 先读取 `SKILL.md` 再改写：
+在仓库根目录运行，让 Codex 先读取 `skills/shuorenhua/SKILL.md` 再改写：
 
 ```bash
-codex exec -C . "读取 ./SKILL.md，按其中规则改写以下文本：..."
+codex exec -C . "读取 ./skills/shuorenhua/SKILL.md，按其中规则改写以下文本：..."
 ```
 
-不需要修改项目文件，适合临时使用。这是 lite 用法；如果要处理复杂的语义边界或需要对照改写例子，建议同时让 Codex 读取 `references/` 下的相关文件。
+不需要修改项目文件，适合临时使用。这是 lite 用法；如果要处理复杂的语义边界或需要对照改写例子，建议同时让 Codex 读取 `skills/shuorenhua/references/` 下的相关文件。
 
 如果当前上下文放不下完整规则，可以改读 mini：
 
@@ -59,7 +59,7 @@ codex exec -C . "读取 ./dist/shuorenhua-mini.md，按其中规则改写以下�
 如果你想先判断“哪里像 AI”，不要直接改稿，可以这样用：
 
 ```bash
-codex exec -C . "读取 ./SKILL.md，只按 annotation mode 标出下面这段文字里的问题：..."
+codex exec -C . "读取 ./skills/shuorenhua/SKILL.md，只按 annotation mode 标出下面这段文字里的问题：..."
 ```
 
 适合这几类场景：
@@ -74,8 +74,8 @@ codex exec -C . "读取 ./SKILL.md，只按 annotation mode 标出下面这段�
 
 ```bash
 mkdir -p ~/.codex/skills/shuorenhua/references
-cp SKILL.md ~/.codex/skills/shuorenhua/
-cp references/editing-guide.md references/examples.md ~/.codex/skills/shuorenhua/references/
+cp skills/shuorenhua/SKILL.md ~/.codex/skills/shuorenhua/
+cp skills/shuorenhua/references/editing-guide.md skills/shuorenhua/references/examples.md ~/.codex/skills/shuorenhua/references/
 ```
 
 这是 full 用法。只复制 `SKILL.md` 是 lite；两份参考文件只在需要时读取。

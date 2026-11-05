@@ -4,4 +4,4 @@
 
 这是开发与评测材料，不随运行包安装，不由新 skill 加载。入口使用 `SKILL.md.txt`，避免扫描成第二个同名 skill。原文中的相对链接是历史路径，不代表现行指令。
 
-v2.4.1 没有独立发布；当前运行入口见 [SKILL.md](../../SKILL.md)，v2.5 判据见 [criteria.md](../v2.5/criteria.md)。
+v2.4.1 没有独立发布；当前运行入口见 [SKILL.md](../../skills/shuorenhua/SKILL.md)，v2.5 判据见 [criteria.md](../v2.5/criteria.md)。

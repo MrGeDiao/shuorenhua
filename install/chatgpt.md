@@ -1,6 +1,8 @@
 # ChatGPT / 通用 LLM 安装
 
-本页对应 v2.6.0。现有公开 GPT 不会随仓库发布自动更新；使用本版时，请自行加载对应文件。
+本页对应 v2.6.1。运行文件在仓库的 `skills/shuorenhua/` 目录下。
+
+OpenAI 计划在 2026-12-11 停用 Custom GPT，原来的说人话 GPT 届时不能再用，请改用下面的方式。
 
 ## mini / lite / full 怎么选
 
@@ -10,33 +12,19 @@
 
 ## ChatGPT
 
-### 方案一：Custom GPT
-
-可以使用现有的[说人话 GPT](https://chatgpt.com/g/g-6a5829b1163481919e1e45851f6bc709-shuo-ren-hua)。它的线上版本与仓库版本分开维护。
-
-自建时沿用以下方式：
-
-1. 打开 [GPT Editor](https://chatgpt.com/gpts/editor)，新建 GPT。
-2. 名称填“说人话”，描述填“去 AI 味的中英文改写助手”。
-3. 把 [Custom GPT Instructions](chatgpt-gpt-instructions.md) 分隔线以下的内容放进 Instructions。
-4. 在 Knowledge Files 中上传 `SKILL.md`、`references/editing-guide.md`、`references/examples.md`。
-5. 保存，并按自己的使用范围选择可见性。
-
-上传文件不等于每次都会读取全部内容；入口要求以 `SKILL.md` 为准，遇到边界问题再查两份参考文件。
-
-### 方案二：Projects
+### 方案一：Projects
 
 1. 新建 Project。
-2. 将上述三个文件上传到 Project Files；临时使用也可以只放 `SKILL.md`。
+2. 将 `SKILL.md`、`references/editing-guide.md`、`references/examples.md` 三个文件（都在 `skills/shuorenhua/` 下）上传到 Project Files；临时使用也可以只放 `SKILL.md`。
 3. 在 Project Instructions 中写：`按照项目文件中 SKILL.md 的规则编辑用户提供的文本。遇到语义边界或需要例子时，再查 editing-guide.md 和 examples.md。`
 
-### 方案三：直接贴对话
+### 方案二：直接贴对话
 
 在对话开头贴 mini 的内容，再提供原文和编辑要求。也可以直接贴 `SKILL.md` 使用 lite。
 
-### 方案四：Custom Instructions
+### 方案三：Custom Instructions
 
-将 mini 粘贴到 Settings > Personalization > Custom Instructions。mini 控制在 1,500 字符以内；实际输入限制以界面提示为准。完整入口和参考文件可用上面的 GPT 或 Project 文件方式加载。
+将 mini 粘贴到 Settings > Personalization > Custom Instructions。mini 控制在 1,500 字符以内；实际输入限制以界面提示为准。完整入口和参考文件可用上面的 Project 文件方式加载。
 
 ## Claude（Web / Project）
 
@@ -48,7 +36,7 @@
 
 ```python
 messages = [
-    {"role": "system", "content": open("SKILL.md").read()},
+    {"role": "system", "content": open("skills/shuorenhua/SKILL.md").read()},
     {"role": "user", "content": "改写以下文本：..."}
 ]
 ```

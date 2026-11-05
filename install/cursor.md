@@ -2,7 +2,7 @@
 
 手动升级时先用新的空目录收集运行文件，核对本地定制后再切换旧安装；仅覆盖入口会留下旧参考文件。下方复制命令面向首次安装或空目录。
 
-本页对应 v2.6.0。升级时请核对本地定制，并用新的运行文件替换旧安装。
+本页对应 v2.6.1。升级时请核对本地定制，并用新的运行文件替换旧安装。
 
 ## mini / lite / full 怎么选
 
@@ -23,11 +23,11 @@ npx skills add MrGeDiao/shuorenhua
 ```bash
 # Cursor
 mkdir -p .cursor/rules
-cp SKILL.md .cursor/rules/shuorenhua.md
+cp skills/shuorenhua/SKILL.md .cursor/rules/shuorenhua.md
 
 # Windsurf
 mkdir -p .windsurf/rules
-cp SKILL.md .windsurf/rules/shuorenhua.md
+cp skills/shuorenhua/SKILL.md .windsurf/rules/shuorenhua.md
 ```
 
 上面是 lite 用法。如果需要编辑边界与改写对照，在对应目录下创建 `references/` 并复制进去，升级为 full 用法：
@@ -35,11 +35,11 @@ cp SKILL.md .windsurf/rules/shuorenhua.md
 ```bash
 # Cursor
 mkdir -p .cursor/rules/references
-cp references/editing-guide.md references/examples.md .cursor/rules/references/
+cp skills/shuorenhua/references/editing-guide.md skills/shuorenhua/references/examples.md .cursor/rules/references/
 
 # Windsurf
 mkdir -p .windsurf/rules/references
-cp references/editing-guide.md references/examples.md .windsurf/rules/references/
+cp skills/shuorenhua/references/editing-guide.md skills/shuorenhua/references/examples.md .windsurf/rules/references/
 ```
 
 ## 方式 2：全局 Rules

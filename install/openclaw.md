@@ -2,7 +2,7 @@
 
 手动升级时先用新的空目录收集运行文件，核对本地定制后再切换旧安装；仅覆盖入口会留下旧参考文件。下方复制命令面向首次安装或空目录。
 
-本页对应 v2.6.0。升级时请核对本地定制，并用新的运行文件替换旧安装。
+本页对应 v2.6.1。升级时请核对本地定制，并用新的运行文件替换旧安装。
 
 ## mini / lite / full 怎么选
 
@@ -14,8 +14,8 @@
 
 ```bash
 mkdir -p workspace/skills/shuorenhua/references
-cp SKILL.md workspace/skills/shuorenhua/
-cp references/editing-guide.md references/examples.md workspace/skills/shuorenhua/references/
+cp skills/shuorenhua/SKILL.md workspace/skills/shuorenhua/
+cp skills/shuorenhua/references/editing-guide.md skills/shuorenhua/references/examples.md workspace/skills/shuorenhua/references/
 ```
 
 上面是 full 用法。token 紧张时只放 `SKILL.md` 也能完成基础改写；两份参考文件用于查看编辑边界与改写对照，按需读取。

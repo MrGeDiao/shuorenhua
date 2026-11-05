@@ -1,8 +1,8 @@
 {
   "files": [
-    "SKILL.md",
-    "references/editing-guide.md",
-    "references/examples.md"
+    "skills/shuorenhua/SKILL.md",
+    "skills/shuorenhua/references/editing-guide.md",
+    "skills/shuorenhua/references/examples.md"
   ],
   "description": "Only these files form the full runtime skill. evals and legacy snapshots are development-only."
 }

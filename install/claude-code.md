@@ -1,6 +1,6 @@
 # Claude Code 安装
 
-本页对应 v2.6.0。升级时请核对本地定制，并用新的运行文件替换旧安装。
+本页对应 v2.6.1。升级时请核对本地定制，并用新的运行文件替换旧安装。
 
 ## 方式 1：plugin 一键安装（推荐）
 
@@ -11,9 +11,7 @@
 
 在 Claude Code 对话里执行这两条命令即可，skill 自动发现和触发。升级用 `/plugin` 面板或 `claude plugin update shuorenhua`。
 
-Git 插件会下载源仓库，其中实际运行规则是 `SKILL.md`、`references/editing-guide.md`、`references/examples.md` 三个文件；它不是只含三个文件的归档。评测和历史材料不由入口加载。只需要独立运行目录时，使用下方手动复制方式。
-
-这种根目录单 SKILL 插件布局要求 Claude Code v2.1.142 或以上，见[官方插件说明](https://code.claude.com/docs/en/plugins-reference)。本地候选已在 Claude Code 2.1.268 上用隔离的 `CLAUDE_CONFIG_DIR` 完成 `marketplace add` → `plugin install` → `plugin details` → `plugin uninstall` 验收：能发现 1 个 `shuorenhua` skill，卸载后恢复为空。已有手动安装时，先备份并核对本地定制，再切换到一种安装方式，避免重复发现。
+Git 插件会下载整个源仓库，但只加载 `skills/shuorenhua/` 里的三个运行文件，评测和历史材料不会被加载。只需要独立运行目录时，使用下方手动复制方式。
 
 ## mini / lite / full 怎么选（手动使用时）
 
@@ -29,8 +27,8 @@ Claude Code 会基于 `SKILL.md` 开头的 description 自动发现并触发 ski
 
 ```bash
 mkdir -p .claude/skills/shuorenhua/references
-cp SKILL.md .claude/skills/shuorenhua/
-cp references/editing-guide.md references/examples.md .claude/skills/shuorenhua/references/
+cp skills/shuorenhua/SKILL.md .claude/skills/shuorenhua/
+cp skills/shuorenhua/references/editing-guide.md skills/shuorenhua/references/examples.md .claude/skills/shuorenhua/references/
 ```
 
 这是 full 用法，也是项目级安装的默认建议。规则跟项目一起进版本管理，团队成员 clone 即用。
@@ -39,8 +37,8 @@ cp references/editing-guide.md references/examples.md .claude/skills/shuorenhua/
 
 ```bash
 mkdir -p ~/.claude/skills/shuorenhua/references
-cp SKILL.md ~/.claude/skills/shuorenhua/
-cp references/editing-guide.md references/examples.md ~/.claude/skills/shuorenhua/references/
+cp skills/shuorenhua/SKILL.md ~/.claude/skills/shuorenhua/
+cp skills/shuorenhua/references/editing-guide.md skills/shuorenhua/references/examples.md ~/.claude/skills/shuorenhua/references/
 ```
 
 只复制这三个运行文件。不要把含评测与历史快照的整个开发仓库放进 skills 扫描目录；lite 只复制 `SKILL.md`。
@@ -49,8 +47,8 @@ cp references/editing-guide.md references/examples.md ~/.claude/skills/shuorenhu
 
 ```bash
 mkdir -p ../shuorenhua-runtime/references
-cp SKILL.md ../shuorenhua-runtime/
-cp references/editing-guide.md references/examples.md ../shuorenhua-runtime/references/
+cp skills/shuorenhua/SKILL.md ../shuorenhua-runtime/
+cp skills/shuorenhua/references/editing-guide.md skills/shuorenhua/references/examples.md ../shuorenhua-runtime/references/
 mkdir -p ~/.claude/skills
 ln -s "$PWD/../shuorenhua-runtime" ~/.claude/skills/shuorenhua
 ```

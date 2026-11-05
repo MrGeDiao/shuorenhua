@@ -1,14 +1,14 @@
 # 贡献指南 | Contributing
 
-当前版本是 2.6.0。欢迎提交具体的改写问题、误改案例和文档修正。
+当前版本是 2.6.1。欢迎提交具体的改写问题、误改案例和文档修正。
 
 ## 运行文件
 
 完整 skill 只有三个文件：
 
-- [SKILL.md](SKILL.md)：主要编辑边界和交付要求，单独使用即 lite。
-- [references/editing-guide.md](references/editing-guide.md)：容易误改的语义边界，按需查阅。
-- [references/examples.md](references/examples.md)：改写对照，按需查阅。
+- [SKILL.md](skills/shuorenhua/SKILL.md)：主要编辑边界和交付要求，单独使用即 lite。
+- [references/editing-guide.md](skills/shuorenhua/references/editing-guide.md)：容易误改的语义边界，按需查阅。
+- [references/examples.md](skills/shuorenhua/references/examples.md)：改写对照，按需查阅。
 
 [mini](dist/shuorenhua-mini.md) 是 1,500 字符以内的自包含压缩版，不参与 skill 自动发现。评测、历史记录和开发脚本不属于运行规则。
 

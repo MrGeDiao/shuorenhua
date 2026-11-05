@@ -52,7 +52,7 @@ npx skills add MrGeDiao/shuorenhua
 
 运行后选择要装到哪些工具。加 `--global` 装到用户目录，所有项目都能用。
 
-**ChatGPT**：直接用[说人话 GPT](https://chatgpt.com/g/g-6a5829b1163481919e1e45851f6bc709-shuo-ren-hua)，不用安装。
+**ChatGPT**：把三个运行文件放进一个 Project，见 [ChatGPT 安装说明](install/chatgpt.md)。原来的说人话 GPT 会随 OpenAI 停用 Custom GPT 在 2026-12-11 失效。
 
 想手动复制文件、装到 OpenClaw，或只想贴一段提示词，见[安装说明](install/)。
 

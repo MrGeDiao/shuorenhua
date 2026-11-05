@@ -1,7 +1,7 @@
 # 社区样本整理提示
 
 ```text
-整理本次提供的写作样本。读取 SKILL.md、按需读取 references/editing-guide.md，并以 evals/v2.5/criteria.md 判断编辑结果；旧词表和历史样例不作为新规则。
+整理本次提供的写作样本。读取 skills/shuorenhua/SKILL.md、按需读取 skills/shuorenhua/references/editing-guide.md，并以 evals/v2.5/criteria.md 判断编辑结果；旧词表和历史样例不作为新规则。
 
 保留原句、用户要求和实际输出，注明来源与转写疑点。逐条说明是信息改变、任务越界、缺少编辑收益、正常表达误改，还是证据不足；引用对应片段。
 
