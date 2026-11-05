@@ -3,7 +3,7 @@
 ## [2.6.1] - 2026-11-06 — 安装只带运行文件，ChatGPT 改用 Project
 
 - 改写规则不变：三个运行文件与 2.6.0 逐字相同，只是从仓库根目录移到了 `skills/shuorenhua/`。已安装 2.6.0 的不用为规则升级。
-- `npx skills add` 现在只安装三个运行文件（28K），不再把评测、脚本和历史材料一起复制进 skills 目录（之前是 110 个文件、3.3MB）。这些开发脚本也是 skills.sh 安全审计给出 Warn 的原因。
+- `npx skills add` 现在只安装三个运行文件（28K），不再把评测、脚本和历史材料一起复制进 skills 目录（之前是 100 多个文件、3.3MB）。这些开发脚本也是 skills.sh 安全审计给出 Warn 的原因。
 - OpenAI 计划在 2026-12-11 停用 Custom GPT。README 和安装页不再指向说人话 GPT，改为 ChatGPT Project 的安装方法；删除 `install/chatgpt-gpt-instructions.md`。
 - 路径变化：`SKILL.md` 现在是 `skills/shuorenhua/SKILL.md`，`references/` 同样移入。手动复制的命令已更新；指向旧路径的站外链接会失效。
 - 一并发布 2.6.0 之后已合并的改动：README 重写、安装页补一行安装命令、评测运行清单、`hard_metrics` 对未知或重复用例编号报错、`check_repo` 单元测试。`check_repo` 新增检查：根目录不能有 `SKILL.md`。

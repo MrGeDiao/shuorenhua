@@ -8,7 +8,7 @@
   <a href="LICENSE"><img src="https://img.shields.io/github/license/MrGeDiao/shuorenhua?style=flat-square&amp;color=246BFD&amp;labelColor=101318" alt="License"></a>
 </p>
 
-说人话是一份装进 Claude Code、Codex、ChatGPT 等工具里的改稿规则（skill）。把写好的文字交给它，它会删掉套话、重复铺垫和生硬句式，交回一版能直接用的稿子。数字、条件、承诺和你的口气保持原样，本来就没问题的文字不动。
+说人话是一份给中文去 AI 味的改稿规则（skill），装进 Claude Code、Codex、ChatGPT 等工具就能用。把写好的文字交给它，它会删掉套话、重复铺垫和生硬句式，交回一版能直接用的稿子。数字、条件、承诺和你的口气默认都留着，本来就没问题的文字不动。
 
 一行命令装好，Claude Code、Codex、Cursor 都能用，其他方式见[安装](#安装)：
 
@@ -50,9 +50,9 @@ npx skills add MrGeDiao/shuorenhua
 npx skills add MrGeDiao/shuorenhua
 ```
 
-运行后选择要装到哪些工具。加 `--global` 装到用户目录，所有项目都能用。
+运行后选择要装到哪些工具，一共只装三个文件。默认只对当前项目生效，加 `--global` 后所有项目都能用。
 
-**ChatGPT**：把三个运行文件放进一个 Project，见 [ChatGPT 安装说明](install/chatgpt.md)。原来的说人话 GPT 会随 OpenAI 停用 Custom GPT 在 2026-12-11 失效。
+**ChatGPT**：新建一个 Project，传入三个文件，[步骤在这里](install/chatgpt.md)。用过说人话 GPT 的话也要换：OpenAI 计划在 2026 年 12 月 11 日停用 Custom GPT。
 
 想手动复制文件、装到 OpenClaw，或只想贴一段提示词，见[安装说明](install/)。
 
@@ -112,7 +112,7 @@ npx skills add MrGeDiao/shuorenhua
 
 每次发版前跑一套 123 条的测试：65 条需要清理，58 条本来就没问题、不该改。另有 7 条专门看「改完是不是更好读」。改写结果按事先写好的判据逐条判，先看事实和请求有没有被违背，再看是不是更好读。
 
-v2.6.0 的结果：没问题的 58 条一条都没被改坏；7 条里 5 条改完更好读；123 条里有 1 条丢了信息（B-33，见下）。
+v2.6.0 的结果（v2.6.1 规则没变）：没问题的 58 条一条都没被改坏；7 条里 5 条改完更好读；123 条里有 1 条丢了信息（B-33，见下）。
 
 详细记录见 [v2.6.0 评测](evals/results-v2.6.0.md)、[主集用例](evals/benchmark.md)和[编辑质量判据](evals/v2.5/criteria.md)。
 
@@ -142,7 +142,7 @@ v2.6.0 的结果：没问题的 58 条一条都没被改坏；7 条里 5 条改�
 
 ## English
 
-**shuorenhua** is a Chinese-first editing skill for Claude Code, Codex, Cursor and ChatGPT. It cuts filler, repetition and stiff phrasing while keeping facts, conditions, commitments and the writer's voice. It also handles English and review-only requests. It is not an AI-authorship detector. Install with `npx skills add MrGeDiao/shuorenhua`.
+**shuorenhua** is a Chinese-first editing skill (instructions your AI tool loads) for Claude Code, Codex, Cursor and ChatGPT. It removes AI-sounding filler, repetition and stiff phrasing while keeping facts, conditions, commitments and the writer's voice. It also handles English, and can point out problems without rewriting. It is not an AI-authorship detector. Install with `npx skills add MrGeDiao/shuorenhua`.
 
 ## 许可
 

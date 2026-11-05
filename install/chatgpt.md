@@ -1,6 +1,6 @@
 # ChatGPT / 通用 LLM 安装
 
-本页对应 v2.6.1。运行文件在仓库的 `skills/shuorenhua/` 目录下。
+本页对应 v2.6.1。
 
 OpenAI 计划在 2026-12-11 停用 Custom GPT，原来的说人话 GPT 届时不能再用，请改用下面的方式。
 
@@ -15,7 +15,7 @@ OpenAI 计划在 2026-12-11 停用 Custom GPT，原来的说人话 GPT 届时不
 ### 方案一：Projects
 
 1. 新建 Project。
-2. 将 `SKILL.md`、`references/editing-guide.md`、`references/examples.md` 三个文件（都在 `skills/shuorenhua/` 下）上传到 Project Files；临时使用也可以只放 `SKILL.md`。
+2. 下载 [`SKILL.md`](../skills/shuorenhua/SKILL.md)、[`editing-guide.md`](../skills/shuorenhua/references/editing-guide.md)、[`examples.md`](../skills/shuorenhua/references/examples.md) 三个文件，上传到 Project Files；临时使用也可以只放 `SKILL.md`。
 3. 在 Project Instructions 中写：`按照项目文件中 SKILL.md 的规则编辑用户提供的文本。遇到语义边界或需要例子时，再查 editing-guide.md 和 examples.md。`
 
 ### 方案二：直接贴对话
