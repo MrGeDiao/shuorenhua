@@ -1,6 +1,6 @@
 # ChatGPT / 通用 LLM 安装
 
-本页对应 v2.6.1。
+本页对应 v2.7.0。
 
 OpenAI 计划在 2026-12-11 停用 Custom GPT，原来的说人话 GPT 届时不能再用，请改用下面的方式。
 
@@ -8,15 +8,15 @@ OpenAI 计划在 2026-12-11 停用 Custom GPT，原来的说人话 GPT 届时不
 
 - `mini`：粘贴 [`dist/shuorenhua-mini.md`](../dist/shuorenhua-mini.md)，适合一次性使用或输入空间有限的地方。
 - `lite`：只加载 `SKILL.md`，包含主要编辑边界和交付要求。
-- `full`：加载 `SKILL.md`、`references/editing-guide.md`、`references/examples.md` 三个文件；两份参考文件按需查阅。
+- `full`：加载 `SKILL.md`、`references/editing-guide.md`、`references/examples.md`、`references/revision.md` 四个文件；参考文件按需查阅。修订稿需要 `revision.md`，lite 和 mini 没有这个模式，也没有在 ChatGPT 上验证过。
 
 ## ChatGPT
 
 ### 方案一：Projects
 
 1. 新建 Project。
-2. 下载 [`SKILL.md`](../skills/shuorenhua/SKILL.md)、[`editing-guide.md`](../skills/shuorenhua/references/editing-guide.md)、[`examples.md`](../skills/shuorenhua/references/examples.md) 三个文件，上传到 Project Files；临时使用也可以只放 `SKILL.md`。
-3. 在 Project Instructions 中写：`按照项目文件中 SKILL.md 的规则编辑用户提供的文本。遇到语义边界或需要例子时，再查 editing-guide.md 和 examples.md。`
+2. 下载 [`SKILL.md`](../skills/shuorenhua/SKILL.md)、[`editing-guide.md`](../skills/shuorenhua/references/editing-guide.md)、[`examples.md`](../skills/shuorenhua/references/examples.md)、[`revision.md`](../skills/shuorenhua/references/revision.md) 四个文件，上传到 Project Files；临时使用也可以只放 `SKILL.md`。
+3. 在 Project Instructions 中写：`按照项目文件中 SKILL.md 的规则编辑用户提供的文本。遇到语义边界或需要例子时，再查 editing-guide.md 和 examples.md。用户要修订稿时，先读 revision.md。`
 
 ### 方案二：直接贴对话
 
@@ -30,7 +30,7 @@ OpenAI 计划在 2026-12-11 停用 Custom GPT，原来的说人话 GPT 届时不
 
 1. 创建 Project。
 2. 将 `SKILL.md` 内容放入 Project Instructions。
-3. 将 `references/editing-guide.md` 和 `references/examples.md` 放入 Project Knowledge，按需查阅。
+3. 将 `references/editing-guide.md`、`references/examples.md` 和 `references/revision.md` 放入 Project Knowledge，按需查阅。
 
 ## API / System Prompt
 
@@ -41,7 +41,7 @@ messages = [
 ]
 ```
 
-已有主 system prompt 时，把入口作为编辑规则补入，不覆盖其他任务要求。两份参考文件可在需要时一起提供；没有文件访问能力的模型不会因为文本里写了路径就自动读取文件。
+已有主 system prompt 时，把入口作为编辑规则补入，不覆盖其他任务要求。参考文件可在需要时一起提供；没有文件访问能力的模型不会因为文本里写了路径就自动读取文件。
 
 ## 使用要求
 

@@ -2,23 +2,23 @@
 
 手动升级时先用新的空目录收集运行文件，核对本地定制后再切换旧安装；仅覆盖入口会留下旧参考文件。下方复制命令面向首次安装或空目录。
 
-本页对应 v2.6.1。升级时请核对本地定制，并用新的运行文件替换旧安装。
+本页对应 v2.7.0。升级时请核对本地定制，并用新的运行文件替换旧安装。
 
 ## mini / lite / full 怎么选
 
 - `mini`：把 `dist/shuorenhua-mini.md` 放进一次性 prompt 或 `SOUL.md` 的风格段；它没有 skill 元数据，不应冒充可自动发现的 skill。
 - `lite`：只放 `SKILL.md`。适合 token 紧张或只做基础改写。
-- `full`：放 `SKILL.md`、`references/editing-guide.md`、`references/examples.md` 三个文件。适合长期 workspace、对外文本、技术文档和需要查看编辑边界与改写对照的任务。
+- `full`：放 `SKILL.md`、`references/editing-guide.md`、`references/examples.md`、`references/revision.md` 四个文件。适合长期 workspace、对外文本、技术文档和需要查看编辑边界与改写对照的任务。修订稿需要 `revision.md`，lite 和 mini 没有这个模式。
 
 ## 1. 把 skill 放进 workspace
 
 ```bash
 mkdir -p workspace/skills/shuorenhua/references
 cp skills/shuorenhua/SKILL.md workspace/skills/shuorenhua/
-cp skills/shuorenhua/references/editing-guide.md skills/shuorenhua/references/examples.md workspace/skills/shuorenhua/references/
+cp skills/shuorenhua/references/editing-guide.md skills/shuorenhua/references/examples.md skills/shuorenhua/references/revision.md workspace/skills/shuorenhua/references/
 ```
 
-上面是 full 用法。token 紧张时只放 `SKILL.md` 也能完成基础改写；两份参考文件用于查看编辑边界与改写对照，按需读取。
+上面是 full 用法。token 紧张时只放 `SKILL.md` 也能完成基础改写；参考文件用于查看编辑边界、改写对照和修订稿格式，按需读取。
 
 ## 2. 触发方式选一个
 

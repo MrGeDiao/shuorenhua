@@ -1,6 +1,6 @@
 # Claude Code 安装
 
-本页对应 v2.6.1。升级时请核对本地定制，并用新的运行文件替换旧安装。
+本页对应 v2.7.0。升级时请核对本地定制，并用新的运行文件替换旧安装。
 
 ## 方式 1：plugin 一键安装（推荐）
 
@@ -11,24 +11,24 @@
 
 在 Claude Code 对话里执行这两条命令即可，skill 自动发现和触发。升级用 `/plugin` 面板或 `claude plugin update shuorenhua`。
 
-Git 插件会下载整个源仓库，但只加载 `skills/shuorenhua/` 里的三个运行文件，评测和历史材料不会被加载。只需要独立运行目录时，使用下方手动复制方式。
+Git 插件会下载整个源仓库，但只加载 `skills/shuorenhua/` 里的四个运行文件，评测和历史材料不会被加载。只需要独立运行目录时，使用下方手动复制方式。
 
 ## mini / lite / full 怎么选（手动使用时）
 
 - `mini`：只把 `dist/shuorenhua-mini.md` 贴进单次会话。适合上下文很紧；它不参与 skill 自动发现。
 - `lite`：只加载 `SKILL.md`。适合临时改写和轻量审稿。
-- `full`：加载 `SKILL.md`、`references/editing-guide.md`、`references/examples.md` 三个文件。适合项目级安装、公开文本、技术文档和需要查看编辑边界与改写对照的任务。
+- `full`：加载 `SKILL.md`、`references/editing-guide.md`、`references/examples.md`、`references/revision.md` 四个文件。适合项目级安装、公开文本、技术文档和需要查看编辑边界与改写对照的任务。修订稿需要 `revision.md`，lite 和 mini 没有这个模式。
 
 Claude Code 会基于 `SKILL.md` 开头的 description 自动发现并触发 skills 目录里的 skill，装好即用。
 
-手动升级时先在新的空目录中放入三个文件，核对本地定制后再切换旧安装；不要直接覆盖一个仍含旧词表的目录。以下复制命令面向首次安装或空目录，在源码目录执行。
+手动升级时先在新的空目录中放入四个文件，核对本地定制后再切换旧安装；不要直接覆盖一个仍含旧词表的目录。以下复制命令面向首次安装或空目录，在源码目录执行。
 
 ## 方式 2：项目级
 
 ```bash
 mkdir -p .claude/skills/shuorenhua/references
 cp skills/shuorenhua/SKILL.md .claude/skills/shuorenhua/
-cp skills/shuorenhua/references/editing-guide.md skills/shuorenhua/references/examples.md .claude/skills/shuorenhua/references/
+cp skills/shuorenhua/references/editing-guide.md skills/shuorenhua/references/examples.md skills/shuorenhua/references/revision.md .claude/skills/shuorenhua/references/
 ```
 
 这是 full 用法，也是项目级安装的默认建议。规则跟项目一起进版本管理，团队成员 clone 即用。
@@ -38,22 +38,22 @@ cp skills/shuorenhua/references/editing-guide.md skills/shuorenhua/references/ex
 ```bash
 mkdir -p ~/.claude/skills/shuorenhua/references
 cp skills/shuorenhua/SKILL.md ~/.claude/skills/shuorenhua/
-cp skills/shuorenhua/references/editing-guide.md skills/shuorenhua/references/examples.md ~/.claude/skills/shuorenhua/references/
+cp skills/shuorenhua/references/editing-guide.md skills/shuorenhua/references/examples.md skills/shuorenhua/references/revision.md ~/.claude/skills/shuorenhua/references/
 ```
 
-只复制这三个运行文件。不要把含评测与历史快照的整个开发仓库放进 skills 扫描目录；lite 只复制 `SKILL.md`。
+只复制这四个运行文件。不要把含评测与历史快照的整个开发仓库放进 skills 扫描目录；lite 只复制 `SKILL.md`。
 
 ## 方式 4：跟随更新
 
 ```bash
 mkdir -p ../shuorenhua-runtime/references
 cp skills/shuorenhua/SKILL.md ../shuorenhua-runtime/
-cp skills/shuorenhua/references/editing-guide.md skills/shuorenhua/references/examples.md ../shuorenhua-runtime/references/
+cp skills/shuorenhua/references/editing-guide.md skills/shuorenhua/references/examples.md skills/shuorenhua/references/revision.md ../shuorenhua-runtime/references/
 mkdir -p ~/.claude/skills
 ln -s "$PWD/../shuorenhua-runtime" ~/.claude/skills/shuorenhua
 ```
 
-软链接指向源码目录旁单独的运行目录。源码更新并核对差异后，再重复两条 `cp` 命令同步三个文件；不要把软链接改为整个开发仓库。
+软链接指向源码目录旁单独的运行目录。源码更新并核对差异后，再重复两条 `cp` 命令同步四个文件；不要把软链接改为整个开发仓库。
 
 ## 触发说明（可选）
 

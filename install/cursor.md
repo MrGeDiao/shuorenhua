@@ -2,13 +2,13 @@
 
 手动升级时先用新的空目录收集运行文件，核对本地定制后再切换旧安装；仅覆盖入口会留下旧参考文件。下方复制命令面向首次安装或空目录。
 
-本页对应 v2.6.1。升级时请核对本地定制，并用新的运行文件替换旧安装。
+本页对应 v2.7.0。升级时请核对本地定制，并用新的运行文件替换旧安装。
 
 ## mini / lite / full 怎么选
 
 - `mini`：把 `dist/shuorenhua-mini.md` 粘贴进单次聊天或临时 Rule。适合上下文很紧或临时粘贴使用。
 - `lite`：只加载 `SKILL.md`。适合临时改写和上下文紧张的编辑任务。
-- `full`：加载 `SKILL.md`、`references/editing-guide.md`、`references/examples.md` 三个文件。适合长期 rules、公开文本、技术文档和需要查看编辑边界与改写对照的任务。
+- `full`：加载 `SKILL.md`、`references/editing-guide.md`、`references/examples.md`、`references/revision.md` 四个文件。适合长期 rules、公开文本、技术文档和需要查看编辑边界与改写对照的任务。修订稿需要 `revision.md`，lite 和 mini 没有这个模式。
 
 ## 方式 0：一行安装
 
@@ -35,11 +35,11 @@ cp skills/shuorenhua/SKILL.md .windsurf/rules/shuorenhua.md
 ```bash
 # Cursor
 mkdir -p .cursor/rules/references
-cp skills/shuorenhua/references/editing-guide.md skills/shuorenhua/references/examples.md .cursor/rules/references/
+cp skills/shuorenhua/references/editing-guide.md skills/shuorenhua/references/examples.md skills/shuorenhua/references/revision.md .cursor/rules/references/
 
 # Windsurf
 mkdir -p .windsurf/rules/references
-cp skills/shuorenhua/references/editing-guide.md skills/shuorenhua/references/examples.md .windsurf/rules/references/
+cp skills/shuorenhua/references/editing-guide.md skills/shuorenhua/references/examples.md skills/shuorenhua/references/revision.md .windsurf/rules/references/
 ```
 
 ## 方式 2：全局 Rules
@@ -74,7 +74,7 @@ Rules 文件会加载到上下文，但不等于会自动对所有输出套用�
 
 默认保留无源论断及其归属，必要时在正文外提示缺来源。只有明确指定 `rewrite-safe` 或要求删除无源论断，才允许整条删除；`bounded` 只列删除建议，`in-place` 保留原句并提示。`audit-only` 标出来源缺口，其他内容照常编辑；`rewrite-with-placeholder` 按用户要求保留论证结构、标待补来源，不编出处。
 
-极短上下文用 mini，普通临时任务用 lite；需要查看边界或例子时用 full，两份参考文件按需读取。
+极短上下文用 mini，普通临时任务用 lite；需要查看边界或例子时用 full，参考文件按需读取。
 
 ## 编辑范围
 

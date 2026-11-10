@@ -2,13 +2,13 @@
 
 手动升级时先用新的空目录收集运行文件，核对本地定制后再切换旧安装；仅覆盖入口会留下旧参考文件。下方复制命令面向首次安装或空目录。
 
-本页对应 v2.6.1。升级时请核对本地定制，并用新的运行文件替换旧安装。
+本页对应 v2.7.0。升级时请核对本地定制，并用新的运行文件替换旧安装。
 
 ## mini / lite / full 怎么选
 
 - `mini`：只把 `dist/shuorenhua-mini.md` 作为一次性 prompt。适合上下文很紧或临时粘贴使用；它不是完整 skill。
 - `lite`：只加载 `SKILL.md`。适合单次临时改写、上下文紧张、只想先压掉明显模板感的场景。
-- `full`：加载 `SKILL.md`、`references/editing-guide.md`、`references/examples.md` 三个文件。适合长期项目、README / release note / issue 回复、技术文档和需要查看编辑边界与改写对照的任务。
+- `full`：加载 `SKILL.md`、`references/editing-guide.md`、`references/examples.md`、`references/revision.md` 四个文件。适合长期项目、README / release note / issue 回复、技术文档和需要查看编辑边界与改写对照的任务。修订稿需要 `revision.md`，lite 和 mini 没有这个模式。
 
 ## 方式 0：一行安装
 
@@ -25,7 +25,7 @@ npx skills add MrGeDiao/shuorenhua
 ```bash
 mkdir -p shuorenhua/references
 cp skills/shuorenhua/SKILL.md shuorenhua/
-cp skills/shuorenhua/references/editing-guide.md skills/shuorenhua/references/examples.md shuorenhua/references/
+cp skills/shuorenhua/references/editing-guide.md skills/shuorenhua/references/examples.md skills/shuorenhua/references/revision.md shuorenhua/references/
 ```
 
 这是 full 用法，也是项目内长期使用的默认建议。
@@ -75,10 +75,10 @@ codex exec -C . "读取 ./skills/shuorenhua/SKILL.md，只按 annotation mode �
 ```bash
 mkdir -p ~/.codex/skills/shuorenhua/references
 cp skills/shuorenhua/SKILL.md ~/.codex/skills/shuorenhua/
-cp skills/shuorenhua/references/editing-guide.md skills/shuorenhua/references/examples.md ~/.codex/skills/shuorenhua/references/
+cp skills/shuorenhua/references/editing-guide.md skills/shuorenhua/references/examples.md skills/shuorenhua/references/revision.md ~/.codex/skills/shuorenhua/references/
 ```
 
-这是 full 用法。只复制 `SKILL.md` 是 lite；两份参考文件只在需要时读取。
+这是 full 用法。只复制 `SKILL.md` 是 lite；三份参考文件只在需要时读取。
 
 再在全局 `AGENTS.md` 里写触发入口：
 
