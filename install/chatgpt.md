@@ -1,62 +1,56 @@
 # ChatGPT / 通用 LLM 安装
 
-本页对应 v2.7.0。
+本页对应 v2.7.1。
 
 OpenAI 计划在 2026-12-11 停用 Custom GPT，原来的说人话 GPT 届时不能再用，请改用下面的方式。
 
 ## mini / lite / full 怎么选
 
-- `mini`：粘贴 [`dist/shuorenhua-mini.md`](../dist/shuorenhua-mini.md)，适合一次性使用或输入空间有限的地方。
-- `lite`：只加载 `SKILL.md`，包含主要编辑边界和交付要求。
-- `full`：加载 `SKILL.md`、`references/editing-guide.md`、`references/examples.md`、`references/revision.md` 四个文件；参考文件按需查阅。修订稿需要 `revision.md`，lite 和 mini 没有这个模式，也没有在 ChatGPT 上验证过。
+- `mini`：粘贴 [`dist/shuorenhua-mini.md`](../dist/shuorenhua-mini.md)，适合一次性使用或字数限制严的输入框（1,500 字符以内，不含修订稿）。
+- `lite`：只加载 [`SKILL.md`](../skills/shuorenhua/SKILL.md)，包含核心保真边界、写平实和交付要求（不含修订稿）。
+- `full`：加载 [`SKILL.md`](../skills/shuorenhua/SKILL.md)、[`editing-guide.md`](../skills/shuorenhua/references/editing-guide.md)、[`examples.md`](../skills/shuorenhua/references/examples.md)、[`revision.md`](../skills/shuorenhua/references/revision.md) 四个文件。修订稿依赖 `revision.md`，目前尚未在 ChatGPT 上实测验证，使用时请核对改动清单与原文。
 
 ## ChatGPT
 
-### 方案一：Projects
+### 方案一：Projects（推荐长期使用）
 
 1. 新建 Project。
-2. 下载 [`SKILL.md`](../skills/shuorenhua/SKILL.md)、[`editing-guide.md`](../skills/shuorenhua/references/editing-guide.md)、[`examples.md`](../skills/shuorenhua/references/examples.md)、[`revision.md`](../skills/shuorenhua/references/revision.md) 四个文件，上传到 Project Files；临时使用也可以只放 `SKILL.md`。
-3. 在 Project Instructions 中写：`按照项目文件中 SKILL.md 的规则编辑用户提供的文本。遇到语义边界或需要例子时，再查 editing-guide.md 和 examples.md。用户要修订稿时，先读 revision.md。`
+2. 下载上面 `full` 的四个文件，上传到 Project Files；临时使用也可只放 `SKILL.md`。
+3. 在 Project Instructions 中填入：
 
-### 方案二：直接贴对话
+```text
+按照项目文件中 SKILL.md 的规则编辑用户提供的文本。遇到语义边界或需要例子时，查阅 editing-guide.md 和 examples.md。用户要修订稿或要求彻底清理黑话时，先读 revision.md 并按其中格式交付。
+```
 
-在对话开头贴 mini 的内容，再提供原文和编辑要求。也可以直接贴 `SKILL.md` 使用 lite。
+### 方案二：直接贴进单次对话
+
+在对话开头贴 [`dist/shuorenhua-mini.md`](../dist/shuorenhua-mini.md) 或 [`SKILL.md`](../skills/shuorenhua/SKILL.md) 的内容，再附上原文和编辑要求。
 
 ### 方案三：Custom Instructions
 
-将 mini 粘贴到 Settings > Personalization > Custom Instructions。mini 控制在 1,500 字符以内；实际输入限制以界面提示为准。完整入口和参考文件可用上面的 Project 文件方式加载。
+将 `mini` 粘贴到 Settings > Personalization > Custom Instructions（以界面实际字数上限为准）。
 
 ## Claude（Web / Project）
 
-1. 创建 Project。
-2. 将 `SKILL.md` 内容放入 Project Instructions。
-3. 将 `references/editing-guide.md`、`references/examples.md` 和 `references/revision.md` 放入 Project Knowledge，按需查阅。
+1. 创建 Project，将 `SKILL.md` 内容放入 Project Instructions。
+2. 将 `editing-guide.md`、`examples.md`、`revision.md` 放入 Project Knowledge，按需查阅。
 
 ## API / System Prompt
 
 ```python
 messages = [
     {"role": "system", "content": open("skills/shuorenhua/SKILL.md").read()},
-    {"role": "user", "content": "改写以下文本：..."}
+    {"role": "user", "content": "把这段去掉套话，保留信息和我的口气：..."}
 ]
 ```
 
-已有主 system prompt 时，把入口作为编辑规则补入，不覆盖其他任务要求。参考文件可在需要时一起提供；没有文件访问能力的模型不会因为文本里写了路径就自动读取文件。
+没有文件读取工具的 API 调用不会自动加载路径指向的文件；若要用修订稿或参考边界，需将对应文件内容一并拼入上下文。
 
-## 使用要求
+## 常用说法与范围控制
 
-直接说“轻改，保留作者口气”，或“只标问题，不改写”。后一种是 `annotation mode`：只引用问题片段并给修改方向，不交替换全文。默认保持原文语言；无须修改时，完整返回原文。
-
-默认保留来源不明的论断及其归属，必要时在正文外提示缺来源。只有用户明确指定 `rewrite-safe` 或要求删除无源论断，才允许整条删除；`bounded` 只列删除建议，`in-place` 保留原句并提示缺来源。`audit-only` 标出来源缺口，其他内容照常编辑；`rewrite-with-placeholder` 按用户要求保留论证结构、标待补来源，不编出处。
-
-## 编辑范围
-
-默认做最小必要修改；中文公开长文约 1000 字以上默认保留句段结构。可指定：
-
-程序代码块（包括注释和文档字符串）默认逐字保留；只有用户明确点名修改注释或说明文字时才编辑相应部分，且不改程序行为。代码围栏里的普通文案仍可按用户要求编辑。
-
-- `structural`：允许删、并、重排，保留有效信息与作者意图。
-- `bounded`：不直接删整句、不并句、不重排；纯空句列“建议删除（待确认）”，正文暂保留。
-- `in-place`：不删句、不并句、不重排，只在句内替换或删修饰；要求保句数时也不拆句。
-
-这些范围不会因编辑力度或来源处理方式而放宽。需要进一步判断时，查 `editing-guide.md`；需要看改写对照时，查 `examples.md`。
+- **日常直改（默认）**：`把这段去掉套话，保留信息和我的口气：……`（默认只交正文；正常原文完整返回；程序代码块含注释默认逐字保护）
+- **去掉吹捧腔**：`别吹，写平实点：……`（降掉只表示程度的夸饰、删空口号，保留承诺、首次和数字）
+- **长文修订稿（需 full）**：`彻底清理，黑话都换成大白话：……` 或 `给我一份修订稿，逐条列出改动，我来决定留哪些：……`（只说后者时改动较少；交付后可回复 `撤销 2、5`、`撤销所有猜的`、`全部撤销`、`全收`、`再过一遍`）
+- **只审稿不改写**：`只标问题，不改写：……`（`annotation mode`，只指出问题片段和修改方向，不交替换全文）
+- **控制改动范围**：约 1000 字以上的中文长文默认保留句段结构；也可点名 `structural`（可删并重排）、`bounded`（句内改，整句删除只列文后建议）、`in-place`（不删并重排，要求保句数时也不拆句）。
+- **无源论断**：「研究表明」等缺出处的说法默认连归属一起保留并在文后提示；明确指定 `rewrite-safe` 才允许按范围删减，或用 `audit-only` 只标缺口。

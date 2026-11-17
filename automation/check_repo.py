@@ -17,6 +17,7 @@ ROOT = Path(__file__).resolve().parents[1]
 RUNTIME_DIR = "skills/shuorenhua"
 SKIP_DIRS = {".git", "tasks", "assets"}
 SKIP_FILES = {"evals/run-manifest.md", "CHANGELOG.md"}
+LEGACY_RESULT_RE = re.compile(r"^evals/results-v(?:1\.|2\.[0-4]\.).*\.md$")
 
 # 展示形式不属于数据契约：README 可以删 badge；存在时数字须来自语料。
 BADGE_COUNTS = (
@@ -31,8 +32,8 @@ CN_NUM = {"一": 1, "二": 2, "三": 3, "四": 4, "五": 5, "六": 6, "七": 7, 
 LINK_RE = re.compile(r"!?\[[^\]\n]*\]\(\s*(<[^>\n]+>|[^)\s]+)")
 HTML_LINK_RE = re.compile(r'(?:href|src)="([^"]+)"')
 REFERENCE_LINK_RE = re.compile(r"^\s*\[[^\]\n]+\]:\s*(<[^>\n]+>|\S+)")
-CASE_ID_RE = re.compile(r"\b(?:SF|SNF|RS)-\d+\b")
-FUTURE_ID_RE = re.compile(r"新增从\s+((?:SF|SNF|RS)-\d+)\s+起")
+CASE_ID_RE = re.compile(r"(?<![A-Za-z0-9_-])(?:SF|SNF|RS|B)-\d+(?![A-Za-z0-9_])")
+FUTURE_ID_RE = re.compile(r"新增从\s+((?:SF|SNF|RS|B)-\d+)\s+起")
 
 
 def line_number(text, offset):
@@ -107,6 +108,11 @@ def check_counts(issues):
     return case_matches, rs_matches, sf, snf, anchor_count
 
 
+def is_skipped_markdown(relative_text: str) -> bool:
+    """v2.4 及更早的结果页属冻结历史记录，v2.5 起的结果页纳入链接与用例编号检查。"""
+    return relative_text in SKIP_FILES or bool(LEGACY_RESULT_RE.match(relative_text))
+
+
 def markdown_files(issues):
     files = []
     for path in ROOT.rglob("*.md"):
@@ -114,9 +120,7 @@ def markdown_files(issues):
         relative_text = relative.as_posix()
         if any(part in SKIP_DIRS for part in relative.parts):
             continue
-        if relative_text in SKIP_FILES or (
-            relative.parent.as_posix() == "evals" and relative.name.startswith("results-")
-        ):
+        if is_skipped_markdown(relative_text):
             continue
         try:
             files.append((relative_text, path.read_text(encoding="utf-8")))
@@ -290,25 +294,38 @@ def check_legacy_sources(issues):
             add_issue(issues, relative, "-", "legacy", f"冻结历史字节已变化：{source}")
 
 
+def unknown_case_ids(text: str, valid: set[str]) -> list[tuple[int, str]]:
+    """找出文本中不在有效集合内的 SF/SNF/RS/B 编号（跳过“新增从 X 起”这类下一起点说明）。"""
+    future_spans = {match.span(1) for match in FUTURE_ID_RE.finditer(text)}
+    return [
+        (match.start(), match.group(0))
+        for match in CASE_ID_RE.finditer(text)
+        if match.span() not in future_spans and match.group(0) not in valid
+    ]
+
+
 def check_case_ids(files, case_matches, rs_matches, issues):
     if case_matches is None or rs_matches is None:
         return
+    blind = read_text("evals/benchmark-blind.md", issues, "case-ids")
+    if blind is None:
+        return
+    blind_ids = re.findall(r"^### (B-\d+) \|", blind, re.MULTILINE)
+    if not blind_ids:
+        add_issue(issues, "evals/benchmark-blind.md", "-", "case-ids", "没有解析到 B 盲测用例标题")
+        return
     valid = {match.group(1) for match in case_matches}
     valid.update(match.group(1) for match in rs_matches)
+    valid.update(blind_ids)
     for relative, text in files:
-        # “新增从 RS-20 起”描述的是下一个可用编号，不是对现有用例的引用。
-        future_spans = {match.span(1) for match in FUTURE_ID_RE.finditer(text)}
-        for match in CASE_ID_RE.finditer(text):
-            if match.span() in future_spans:
-                continue
-            if match.group(0) not in valid:
-                add_issue(
-                    issues,
-                    relative,
-                    line_number(text, match.start()),
-                    "case-ids",
-                    f"用例编号不存在：{match.group(0)}",
-                )
+        for offset, case_id in unknown_case_ids(text, valid):
+            add_issue(
+                issues,
+                relative,
+                line_number(text, offset),
+                "case-ids",
+                f"用例编号不存在：{case_id}",
+            )
 
 
 def check_meta(issues):

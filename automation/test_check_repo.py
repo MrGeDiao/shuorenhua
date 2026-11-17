@@ -175,5 +175,34 @@ class HumanBenchmarkDuplicatesTests(unittest.TestCase):
                          [(record, ["SF-1"])])
 
 
+class IsSkippedMarkdownTests(unittest.TestCase):
+    def test_skips_explicit_files_and_pre_v25_result_archives(self):
+        for path in ("CHANGELOG.md", "evals/run-manifest.md",
+                     "evals/results-v1.3.0.md", "evals/results-v2.0.0.md",
+                     "evals/results-v2.4.0.md", "evals/results-v2.4.1.md"):
+            with self.subTest(path=path):
+                self.assertTrue(check_repo.is_skipped_markdown(path))
+
+    def test_checks_v25_and_newer_result_pages_and_normal_docs(self):
+        for path in ("README.md", "evals/results-v2.5.0.md",
+                     "evals/results-v2.5.0-initial.md", "evals/results-v2.6.0.md",
+                     "evals/results-v2.7.0.md", "evals/results-v2.7.1.md",
+                     "evals/results-v3.0.0.md"):
+            with self.subTest(path=path):
+                self.assertFalse(check_repo.is_skipped_markdown(path))
+
+
+class UnknownCaseIdsTests(unittest.TestCase):
+    def test_accepts_known_sf_snf_rs_and_b_ids_and_reports_unknown_ones(self):
+        valid = {"SF-01", "SNF-02", "RS-03", "B-33"}
+        text = "已测 SF-01、SNF-02、RS-03、B-33；误写仅B-999的与 SF-77，忽略 XSF-99 和 foo-B-88。"
+        found = [cid for _, cid in check_repo.unknown_case_ids(text, valid)]
+        self.assertEqual(found, ["B-999", "SF-77"])
+
+    def test_ignores_next_available_id_declarations(self):
+        text = "新增从 RS-21 起；盲测新增从 B-124 起。"
+        self.assertEqual(check_repo.unknown_case_ids(text, set()), [])
+
+
 if __name__ == "__main__":
     unittest.main()

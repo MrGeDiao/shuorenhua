@@ -1,6 +1,6 @@
 # 贡献指南 | Contributing
 
-当前版本是 2.7.0。欢迎提交具体的改写问题、误改案例和文档修正。
+当前版本是 2.7.1。欢迎提交具体的改写问题、误改案例和文档修正。
 
 ## 运行文件
 
@@ -48,7 +48,7 @@
 1. 说明具体问题和修改后的行为，附必要的正反例。
 2. 同步受影响的入口、参考文件、安装说明或 mini；不要改无关文件。
 3. 规则或判分改动按当前评测合同验证，并记录实际候选、模型、范围与结果。未验证的内容明确标出。
-4. 提交前运行 `python3 automation/check_repo.py`；改脚本时再运行 `python3 -m unittest discover -s automation/eval -p 'test_*.py'`。
+4. 提交前运行 `python3 automation/check_repo.py`；改脚本时再运行 `python3 -m unittest discover -s automation -p 'test_*.py'` 和 `python3 -m unittest discover -s automation/eval -p 'test_*.py'`。
 5. 更新 CHANGELOG，区分未发布候选与已经发布的版本。
 
 过程文档、原始模型输出和临时方案只放在 gitignored 的 `tasks/`。安装包只同步运行文件，不将开发仓库整体放进 skills 扫描目录。提交不加 AI 署名行。

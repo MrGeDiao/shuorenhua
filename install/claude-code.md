@@ -1,6 +1,6 @@
 # Claude Code 安装
 
-本页对应 v2.7.0。升级时请核对本地定制，并用新的运行文件替换旧安装。
+本页对应 v2.7.1。升级时请核对本地定制，并用新的运行文件替换旧安装。
 
 ## 方式 1：plugin 一键安装（推荐）
 
@@ -9,21 +9,21 @@
 /plugin install shuorenhua@shuorenhua
 ```
 
-在 Claude Code 对话里执行这两条命令即可，skill 自动发现和触发。升级用 `/plugin` 面板或 `claude plugin update shuorenhua`。
+在 Claude Code 对话里执行这两条命令即可自动发现并按需触发。升级可在 `/plugin` 面板操作或运行 `claude plugin update shuorenhua`。
 
-Git 插件会下载整个源仓库，但只加载 `skills/shuorenhua/` 里的四个运行文件，评测和历史材料不会被加载。只需要独立运行目录时，使用下方手动复制方式。
+Git 插件会拉取源仓库，但只加载 `skills/shuorenhua/` 下的四个运行文件，评测和历史材料不会被加载。只需要独立运行目录时，用下面的手动复制方式。
 
 ## mini / lite / full 怎么选（手动使用时）
 
-- `mini`：只把 `dist/shuorenhua-mini.md` 贴进单次会话。适合上下文很紧；它不参与 skill 自动发现。
-- `lite`：只加载 `SKILL.md`。适合临时改写和轻量审稿。
-- `full`：加载 `SKILL.md`、`references/editing-guide.md`、`references/examples.md`、`references/revision.md` 四个文件。适合项目级安装、公开文本、技术文档和需要查看编辑边界与改写对照的任务。修订稿需要 `revision.md`，lite 和 mini 没有这个模式。
+- `mini`：把 [`dist/shuorenhua-mini.md`](../dist/shuorenhua-mini.md) 贴进单次会话，适合上下文很紧时临时用（不参与自动发现，不含修订稿）。
+- `lite`：只放 [`SKILL.md`](../skills/shuorenhua/SKILL.md)，适合轻量改写和审稿（不含修订稿）。
+- `full`：放 `SKILL.md`、`references/editing-guide.md`、`references/examples.md`、`references/revision.md` 四个文件。修订稿已在 Claude Code（Opus 5.5）实测通过；lite 和 mini 没有这个模式。
 
-Claude Code 会基于 `SKILL.md` 开头的 description 自动发现并触发 skills 目录里的 skill，装好即用。
+手动升级时先用空目录收集四个运行文件，核对本地定制后再替换旧目录，避免残留旧版词表文件。
 
-手动升级时先在新的空目录中放入四个文件，核对本地定制后再切换旧安装；不要直接覆盖一个仍含旧词表的目录。以下复制命令面向首次安装或空目录，在源码目录执行。
+## 方式 2：项目级或全局手动复制
 
-## 方式 2：项目级
+先克隆本仓库，在源码目录执行。项目级（随项目进版本管理，团队共享）：
 
 ```bash
 mkdir -p .claude/skills/shuorenhua/references
@@ -31,9 +31,7 @@ cp skills/shuorenhua/SKILL.md .claude/skills/shuorenhua/
 cp skills/shuorenhua/references/editing-guide.md skills/shuorenhua/references/examples.md skills/shuorenhua/references/revision.md .claude/skills/shuorenhua/references/
 ```
 
-这是 full 用法，也是项目级安装的默认建议。规则跟项目一起进版本管理，团队成员 clone 即用。
-
-## 方式 3：全局
+全局（当前机器所有项目可用）：
 
 ```bash
 mkdir -p ~/.claude/skills/shuorenhua/references
@@ -41,23 +39,9 @@ cp skills/shuorenhua/SKILL.md ~/.claude/skills/shuorenhua/
 cp skills/shuorenhua/references/editing-guide.md skills/shuorenhua/references/examples.md skills/shuorenhua/references/revision.md ~/.claude/skills/shuorenhua/references/
 ```
 
-只复制这四个运行文件。不要把含评测与历史快照的整个开发仓库放进 skills 扫描目录；lite 只复制 `SKILL.md`。
+若用软链接跟随本地源码更新，请链接到单独抽取的运行目录（仅含这四个文件），**不要把整个开发仓库软链接进 skills 扫描目录**。
 
-## 方式 4：跟随更新
-
-```bash
-mkdir -p ../shuorenhua-runtime/references
-cp skills/shuorenhua/SKILL.md ../shuorenhua-runtime/
-cp skills/shuorenhua/references/editing-guide.md skills/shuorenhua/references/examples.md skills/shuorenhua/references/revision.md ../shuorenhua-runtime/references/
-mkdir -p ~/.claude/skills
-ln -s "$PWD/../shuorenhua-runtime" ~/.claude/skills/shuorenhua
-```
-
-软链接指向源码目录旁单独的运行目录。源码更新并核对差异后，再重复两条 `cp` 命令同步四个文件；不要把软链接改为整个开发仓库。
-
-## 触发说明（可选）
-
-Claude Code 会基于 SKILL.md 开头的 description 自动触发这个 skill。如果你想在长期项目里提高命中稳定性、或限定它只处理对外文本，可以在项目的 `CLAUDE.md` 里补一段触发说明（可选，不是必需）：
+可选：若想在项目里限定只对外部文案触发，可在项目 `CLAUDE.md` 补一段说明：
 
 ```markdown
 ## 写作风格
@@ -65,58 +49,26 @@ Claude Code 会基于 SKILL.md 开头的 description 自动触发这个 skill。
 对外文本优先按它处理；代码、日志、配置和命令输出不套这个 skill。
 ```
 
-## 使用
+## 常用说法与范围控制
 
-对话里直接说：
-
-```text
-用说人话规则改写这段文本。
-```
-
-或者更具体：
+对话里直接贴原文并说要求（想确保触发可点名「用说人话」）：
 
 ```text
-把这段进展说明按说人话规则轻改，保留术语和系统主语，不要改成口语闲聊体。
+把这段去掉套话，保留术语和我的口气：……
+别吹，写平实点：……
+彻底清理，黑话都换成大白话：……
+给我一份修订稿，逐条列出改动，我来决定留哪些：……
+只标问题，不改写：……
 ```
 
-如果你想先判断"哪里像 AI"，不要直接改稿：
-
-```text
-先不要改写，只按 annotation mode 标出下面这段文字里的问题：...
-```
-
-适合这几类场景：
-
-- 你想先看这段话该不该改
-- 你要做审稿或 review，不想直接替作者重写
-- 你怀疑有无源引用、语域混搭或工程师腔，但还不想动正文
-
-处理无源引用时，可以指定模式：
-
-```text
-用说人话规则改写这段文本，无源引用按 audit-only 处理。
-```
-
-默认保留无源论断及其归属，必要时在正文外提示缺来源。只有明确指定 `rewrite-safe` 或要求删除无源论断，才允许整条删除；`bounded` 只列删除建议，`in-place` 保留原句并提示。`audit-only` 标出来源缺口，其他内容照常编辑；`rewrite-with-placeholder` 按用户要求保留论证结构、标待补来源，不编出处。
-
-## 编辑范围
-
-默认做最小必要修改；中文公开长文约 1000 字以上默认保留句段结构。可以直接指定：
-
-程序代码块（包括注释和文档字符串）默认逐字保留；只有用户明确点名修改注释或说明文字时才编辑相应部分，且不改程序行为。代码围栏里的普通文案仍可按用户要求编辑。
-
-- `structural`：允许删、并、重排，仍须保留有效信息与作者意图。
-- `bounded`：不直接删整句、不并句、不重排。纯空句可列“建议删除（待确认）”，正文暂时保留。
-- `in-place`：不删句、不并句、不重排，只在句内替换或删修饰；要求保句数时也不拆句。
-
-例如：“按 bounded 改，删除建议放在正文后。”这些范围不因编辑力度或来源处理方式而放宽。
+- **修订稿与撤销**：说「彻底清理，黑话都换成大白话」或「给我一份修订稿……」都会进入修订稿（只说后者时改动较少，想多改请带上「彻底清理」）。拿到修订稿后，同一会话内可回复 `撤销 2、5`、`撤销所有猜的`、`全部撤销`、`全收` 或 `再过一遍`。
+- **范围控制**：程序代码块（含注释和文档字符串）默认逐字保留；约 1000 字以上的中文公开长文默认保留句段结构。也可指定 `structural`（可删并重排）、`bounded`（句内清理，整句删除只列文后建议）、`in-place`（只在原位改，要求保句数时不拆句）。
+- **无源论断**：缺出处的「研究表明」默认保留归属并在文后提示；指定 `rewrite-safe` 才按编辑范围删减，或用 `audit-only` 只标缺口。
 
 ## 手动检查
 
-提交正文后，确认保留原文语言、事实、条件与作者立场。正常原文应完整返回，不只回复“保留原文”；只标问题时不应附替换全文。以下提示可用来检查是否加载，但不能代替效果评测。
+用来确认规则已生效（应去掉「值得注意的是」，完整保留超时从 30 秒改为 60 秒的关系）：
 
 ```text
-值得注意的是，接口超时从 30 秒改为 60 秒。
+用说人话规则改写：值得注意的是，接口超时从 30 秒改为 60 秒。
 ```
-
-可以去掉“值得注意的是”，但必须保留接口超时及 30 秒改为 60 秒的关系。
